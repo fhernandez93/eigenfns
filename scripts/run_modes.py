@@ -14,9 +14,19 @@ densities for the requested window.
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 import time
 from pathlib import Path
+
+# Battle-tested GPU environment (see plans/ experiment log): on-demand async
+# allocation (desktop holds ~1-1.5 GB; BFC fragmentation OOMs), no cuBLASLt
+# autotune profiling (its scratch OOMs at 128^3). Must be set before jax import.
+os.environ.setdefault("XLA_PYTHON_CLIENT_PREALLOCATE", "false")
+os.environ.setdefault("XLA_PYTHON_CLIENT_MEM_FRACTION", "0.95")
+os.environ.setdefault("TF_GPU_ALLOCATOR", "cuda_malloc_async")
+os.environ.setdefault("XLA_FLAGS",
+                      "--xla_gpu_enable_cublaslt=false --xla_gpu_autotune_level=0")
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -47,8 +57,8 @@ def main() -> int:
     ap.add_argument("--grid", type=int, default=128)
     ap.add_argument("--band-lo", type=int, default=398)
     ap.add_argument("--band-hi", type=int, default=607)
-    ap.add_argument("--m", type=int, default=96)
-    ap.add_argument("--guard", type=int, default=32)
+    ap.add_argument("--m", type=int, default=40)
+    ap.add_argument("--guard", type=int, default=16)
     ap.add_argument("--tol", type=float, default=1e-4)
     ap.add_argument("--tag", default=None)
     ap.add_argument("--resume", action="store_true")
