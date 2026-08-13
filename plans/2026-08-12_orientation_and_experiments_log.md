@@ -182,6 +182,16 @@ spectrum, no out-of-order recoveries).
    XLA_PYTHON_CLIENT_MEM_FRACTION=0.90 (desktop holds ~1-1.5 GB; the default
    0.75 fraction caps the pool at 9.2 GB).
 
+## G3 disordered parity (64³, first 300 bands) — PASSED 2026-08-13
+
+MPB CLI: 300 bands, 64³, tol 1e-7, file-input protocol: 2h22m CPU. Our solver
+on MPB's exported grid (c64, tol 1e-4, m=40, host-streamed, CPU run): 33 min.
+**Parity over 298 bands: max Δω/ω = 8.95e-6, median 1.43e-6, q99 7.5e-6 — gate
+(≤1e-4 per band) passed 11×.** Worst bands are near-degenerate pairs (22/23,
+132/133), still <1e-5. Mode-overlap subspace checks: Phase-4 batch.
+Same-resolution calibration: MPB 300 bands = 2h22m CPU vs our 680 bands =
+15.7 min GPU.
+
 ## Environment / hazards
 
 - `stage_b_resumable.py` from the ML repo auto-resumes on boot and takes ~9 GB GPU for
