@@ -57,12 +57,25 @@ def combine(C, *blocks):
     return out
 
 
+_DEFLATE_CHUNK = 128
+
+
 def deflate(X, locked):
-    """Project out the locked subspace (single c64 pass)."""
+    """Project out the locked subspace (single c64 pass), in fixed-size chunks.
+
+    Chunking caps the transient GEMM workspace (a full-buffer gram conjugates
+    a copy of the whole locked set — 2.9 GB at 64^3/680 bands, the OOM that
+    killed three E3 runs) and keeps every kernel at one static shape. The
+    chunk loop is also the streamed-host-locked architecture needed at 128^3.
+    """
     if locked is None or locked.shape[0] == 0:
         return X
-    C = gram(locked, X)
-    return X - jnp.tensordot(C.T, locked, axes=(1, 0), precision=_HI)
+    n = locked.shape[0]
+    for s in range(0, n, _DEFLATE_CHUNK):
+        chunk = locked[s:s + _DEFLATE_CHUNK]
+        C = gram(chunk, X)
+        X = X - jnp.tensordot(C.T, chunk, axes=(1, 0), precision=_HI)
+    return X
 
 
 def ortho_block(X, passes=2, drop=_SVQB_DROP):
@@ -118,6 +131,7 @@ def lobpcg_blocks(
     # XLA recompile + late-run autotuning that OOMs once memory fills
     # (measured at 440/680, 64^3). Zero rows deflate to a no-op.
     cap = int(np.ceil(nev / max(m - guard, 1))) * (m - guard) + m
+    cap = int(np.ceil(cap / _DEFLATE_CHUNK)) * _DEFLATE_CHUNK
     locked_buf = jnp.zeros((cap,) + G3, jnp.complex64)
     n_locked_now = 0
     if initial_locked is not None:
@@ -172,7 +186,8 @@ def lobpcg_blocks(
             if log_every and it % log_every == 0:
                 leak = 0.0
                 if locked is not None:
-                    leak = float(jnp.abs(gram(locked, X)).max())
+                    leak = max(float(jnp.abs(gram(locked[s:s + _DEFLATE_CHUNK], X)).max())
+                               for s in range(0, locked.shape[0], _DEFLATE_CHUNK))
                 lo = np.sort(lam_h)
                 print(f"    it {it:3d}  lam[0,{n_lock-1},{m-1}] = {lo[0]:.4f} {lo[n_lock-1]:.4f} "
                       f"{lo[-1]:.4f}  res q50/q90 {np.quantile(rn,0.5):.1e}/{np.quantile(rn,0.9):.1e}"
