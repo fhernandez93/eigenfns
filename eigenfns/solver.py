@@ -82,8 +82,11 @@ def deflate(X, locked):
     if locked is None or locked.shape[0] == 0:
         return X
     n = locked.shape[0]
+    host = isinstance(locked, np.ndarray)
     for s in range(0, n, _DEFLATE_CHUNK):
         chunk = locked[s:s + _DEFLATE_CHUNK]
+        if host:
+            chunk = jnp.asarray(chunk)  # H2D stream (~0.5 GB per chunk at 128^3)
         C = gram(chunk, X)
         X = X - jnp.tensordot(C.T, chunk, axes=(1, 0), precision=_HI)
     return X
@@ -126,6 +129,7 @@ def lobpcg_blocks(
     initial_locked=None,
     initial_vals=None,
     on_block=None,
+    locked_storage: str = "auto",
 ):
     """Bottom-up deflated block LOBPCG. Returns (eigenvalues, locked_vectors, stats).
 
@@ -143,13 +147,23 @@ def lobpcg_blocks(
     # (measured at 440/680, 64^3). Zero rows deflate to a no-op.
     cap = int(np.ceil(nev / max(m - guard, 1))) * (m - guard) + m
     cap = int(np.ceil(cap / _DEFLATE_CHUNK)) * _DEFLATE_CHUNK
-    locked_buf = jnp.zeros((cap,) + G3, jnp.complex64)
+    bytes_locked = cap * 2 * op.grid_size**3 * 8
+    if locked_storage == "auto":
+        locked_storage = "gpu" if bytes_locked < 4e9 else "host"
+    if verbose:
+        print(f"  locked storage: {locked_storage} "
+              f"({bytes_locked/2**30:.1f} GiB capacity, {cap} rows)", flush=True)
+    if locked_storage == "gpu":
+        locked_buf = jnp.zeros((cap,) + G3, jnp.complex64)
+    else:
+        locked_buf = np.zeros((cap,) + G3, np.complex64)  # host, streamed
     n_locked_now = 0
     if initial_locked is not None:
-        init = jnp.asarray(initial_locked)
-        n_locked_now = int(init.shape[0])
-        locked_buf = _buf_update(locked_buf, init, 0)
-        del init
+        n_locked_now = int(np.asarray(initial_locked).shape[0])
+        if locked_storage == "gpu":
+            locked_buf = _buf_update(locked_buf, jnp.asarray(initial_locked), 0)
+        else:
+            locked_buf[:n_locked_now] = np.asarray(initial_locked)
     locked_vals = (np.empty((0,)) if initial_vals is None
                    else np.asarray(initial_vals, np.float64))
     stats = SolveStats()
@@ -279,7 +293,10 @@ def lobpcg_blocks(
         carry_idx = np.asarray(order[n_lock:])
         Xl = X[lock_idx]
         carry = X[carry_idx]
-        locked_buf = _buf_update(locked_buf, Xl, n_locked_now)
+        if locked_storage == "gpu":
+            locked_buf = _buf_update(locked_buf, Xl, n_locked_now)
+        else:
+            locked_buf[n_locked_now:n_locked_now + Xl.shape[0]] = np.asarray(Xl)
         n_locked_now += int(Xl.shape[0])
         locked_vals = np.concatenate([locked_vals, lam[lock_idx]])
         stats.rounds.append({
@@ -305,7 +322,10 @@ def lobpcg_blocks(
               f"must confirm the final count.", flush=True)
     order = np.argsort(locked_vals, kind="stable")
     locked_vals = locked_vals[order]
-    locked = locked_buf[:n_locked_now][np.asarray(order)]
+    if locked_storage == "gpu":
+        locked = locked_buf[:n_locked_now][np.asarray(order)]
+    else:
+        locked = locked_buf[:n_locked_now][np.asarray(order)]  # numpy fancy-index
     return locked_vals[:nev], locked, stats
 
 
