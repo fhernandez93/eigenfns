@@ -71,22 +71,26 @@ def _buf_update(buf, xl, start):
     return jax.lax.dynamic_update_slice_in_dim(buf, xl, start, axis=0)
 
 
-def deflate(X, locked):
-    """Project out the locked subspace (single c64 pass), in fixed-size chunks.
+def deflate_chunk_rows(grid_size: int, target_bytes: float = 0.75e9) -> int:
+    """Rows per deflation chunk sized to ~target_bytes of c64 data (min 16).
 
-    Chunking caps the transient GEMM workspace (a full-buffer gram conjugates
-    a copy of the whole locked set — 2.9 GB at 64^3/680 bands, the OOM that
-    killed three E3 runs) and keeps every kernel at one static shape. The
-    chunk loop is also the streamed-host-locked architecture needed at 128^3.
-    """
+    Chunking caps the transient GEMM workspace (a full-buffer gram conjugates a
+    copy of the whole locked set) and keeps kernels at one static shape; the
+    chunk must scale with resolution (128 rows = 4.3 GB at 128^3 — OOM)."""
+    bytes_per_vec = 2 * grid_size**3 * 8
+    return max(16, int(target_bytes // bytes_per_vec))
+
+
+def deflate(X, locked, chunk_rows=_DEFLATE_CHUNK):
+    """Project out the locked subspace (single c64 pass), in fixed-size chunks."""
     if locked is None or locked.shape[0] == 0:
         return X
     n = locked.shape[0]
     host = isinstance(locked, np.ndarray)
-    for s in range(0, n, _DEFLATE_CHUNK):
-        chunk = locked[s:s + _DEFLATE_CHUNK]
+    for s in range(0, n, chunk_rows):
+        chunk = locked[s:s + chunk_rows]
         if host:
-            chunk = jnp.asarray(chunk)  # H2D stream (~0.5 GB per chunk at 128^3)
+            chunk = jnp.asarray(chunk)  # H2D stream
         C = gram(chunk, X)
         X = X - jnp.tensordot(C.T, chunk, axes=(1, 0), precision=_HI)
     return X
@@ -145,8 +149,9 @@ def lobpcg_blocks(
     # growing locked array gives gram/deflate a NEW shape every block, forcing
     # XLA recompile + late-run autotuning that OOMs once memory fills
     # (measured at 440/680, 64^3). Zero rows deflate to a no-op.
+    chunk_rows = deflate_chunk_rows(op.grid_size)
     cap = int(np.ceil(nev / max(m - guard, 1))) * (m - guard) + m
-    cap = int(np.ceil(cap / _DEFLATE_CHUNK)) * _DEFLATE_CHUNK
+    cap = int(np.ceil(cap / chunk_rows)) * chunk_rows
     bytes_locked = cap * 2 * op.grid_size**3 * 8
     if locked_storage == "auto":
         locked_storage = "gpu" if bytes_locked < 4e9 else "host"
@@ -187,7 +192,7 @@ def lobpcg_blocks(
             X = jnp.concatenate([carry, rand_block(k2, m - carry.shape[0])], axis=0)
         else:
             X = rand_block(k2, m)
-        X = ortho_block(deflate(X, locked))
+        X = ortho_block(deflate(X, locked, chunk_rows))
         HX = op.theta(X); stats.theta_applications += m
         P = HP = None
         n_lock = min(m - guard, nev - locked_vals.size)
@@ -211,15 +216,15 @@ def lobpcg_blocks(
             if log_every and it % log_every == 0:
                 leak = 0.0
                 if locked is not None:
-                    leak = max(float(jnp.abs(gram(locked[s:s + _DEFLATE_CHUNK], X)).max())
-                               for s in range(0, locked.shape[0], _DEFLATE_CHUNK))
+                    leak = max(float(jnp.abs(gram(jnp.asarray(locked[s:s + chunk_rows]), X)).max())
+                               for s in range(0, locked.shape[0], chunk_rows))
                 lo = np.sort(lam_h)
                 print(f"    it {it:3d}  lam[0,{n_lock-1},{m-1}] = {lo[0]:.4f} {lo[n_lock-1]:.4f} "
                       f"{lo[-1]:.4f}  res q50/q90 {np.quantile(rn,0.5):.1e}/{np.quantile(rn,0.9):.1e}"
                       f"  leak {leak:.1e}", flush=True)
             W = op.precondition(R) * mask
             del R  # big block, no longer needed
-            W = deflate(W, locked)
+            W = deflate(W, locked, chunk_rows)
             for _ in range(2):
                 Cxw = gram(X, W)
                 W = W - jnp.tensordot(Cxw.T, X, axes=(1, 0), precision=_HI)
@@ -261,7 +266,7 @@ def lobpcg_blocks(
             wA, VA = np.linalg.eigh(A)
             C = jnp.asarray(VA[:, :m], jnp.complex64)
             Xn = combine(C, *blocks)
-            Xn = deflate(Xn, locked)
+            Xn = deflate(Xn, locked, chunk_rows)
             xs = 1.0 / jnp.maximum(jnp.linalg.norm(_flat(Xn), axis=1), 1e-20)
             Xn = Xn * xs[:, None, None, None, None]
             HXn = op.theta(Xn); stats.theta_applications += m
