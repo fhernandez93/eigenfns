@@ -34,17 +34,25 @@ def _flat(X):
 
 @jax.jit
 def gram(A, B):
-    """<A_i, B_j> Gram block in complex64 on device."""
-    return _flat(A).conj() @ _flat(B).T
+    """<A_i, B_j> Gram block, true fp32 accumulation.
+
+    precision=HIGHEST is load-bearing: XLA's default lets Ada GPUs run fp32
+    GEMMs in TF32 (10-bit mantissa), which floors Gram accuracy at ~1e-3 and
+    stalls convergence at rel-res ~1e-2 (measured at 64^3)."""
+    return jnp.matmul(_flat(A).conj(), _flat(B).T,
+                      precision=jax.lax.Precision.HIGHEST)
+
+
+_HI = jax.lax.Precision.HIGHEST
 
 
 def combine(C, *blocks):
     """Linear combination out_i = sum_j C[j, i] S_j over the concatenated blocks."""
     m = blocks[0].shape[0]
-    out = jnp.tensordot(C[:m].T, blocks[0], axes=(1, 0))
+    out = jnp.tensordot(C[:m].T, blocks[0], axes=(1, 0), precision=_HI)
     off = m
     for Bk in blocks[1:]:
-        out = out + jnp.tensordot(C[off:off + Bk.shape[0]].T, Bk, axes=(1, 0))
+        out = out + jnp.tensordot(C[off:off + Bk.shape[0]].T, Bk, axes=(1, 0), precision=_HI)
         off += Bk.shape[0]
     return out
 
@@ -54,7 +62,7 @@ def deflate(X, locked):
     if locked is None or locked.shape[0] == 0:
         return X
     C = gram(locked, X)
-    return X - jnp.tensordot(C.T, locked, axes=(1, 0))
+    return X - jnp.tensordot(C.T, locked, axes=(1, 0), precision=_HI)
 
 
 def ortho_block(X, passes=2, drop=_SVQB_DROP):
@@ -69,7 +77,7 @@ def ortho_block(X, passes=2, drop=_SVQB_DROP):
         keep = w > drop * max(w.max(), 1e-300)
         scale = np.where(keep, 1.0 / np.sqrt(np.where(keep, w, 1.0)), 0.0)
         C = jnp.asarray(V * scale[None, :], jnp.complex64)
-        X = jnp.tensordot(C.T, X, axes=(1, 0))
+        X = jnp.tensordot(C.T, X, axes=(1, 0), precision=_HI)
     return X
 
 
@@ -155,14 +163,14 @@ def lobpcg_blocks(
             W = deflate(W, locked)
             for _ in range(2):
                 Cxw = gram(X, W)
-                W = W - jnp.tensordot(Cxw.T, X, axes=(1, 0))
+                W = W - jnp.tensordot(Cxw.T, X, axes=(1, 0), precision=_HI)
             W = ortho_block(W)
             HW = op.theta(W); stats.theta_applications += m
             if P is not None:
                 for _ in range(2):
                     Cxp = gram(X, P); Cwp = gram(W, P)
-                    P = (P - jnp.tensordot(Cxp.T, X, axes=(1, 0))
-                           - jnp.tensordot(Cwp.T, W, axes=(1, 0)))
+                    P = (P - jnp.tensordot(Cxp.T, X, axes=(1, 0), precision=_HI)
+                           - jnp.tensordot(Cwp.T, W, axes=(1, 0), precision=_HI))
                 Gp = np.asarray(gram(P, P)).astype(np.complex128)
                 Gp = (Gp + Gp.conj().T) / 2
                 wp, Vp = np.linalg.eigh(Gp)
@@ -177,7 +185,7 @@ def lobpcg_blocks(
                     # idle, 22 CPU cores of compiler churn, ~no progress).
                     scale = np.where(keepp, 1.0 / np.sqrt(np.where(keepp, wp, 1.0)), 0.0)
                     Tp = jnp.asarray(Vp * scale[None, :], jnp.complex64)
-                    P = jnp.tensordot(Tp.T, P, axes=(1, 0))
+                    P = jnp.tensordot(Tp.T, P, axes=(1, 0), precision=_HI)
                     HP = op.theta(P); stats.theta_applications += int(P.shape[0])
             blocks = [X, W] if P is None else [X, W, P]
             hblocks = [HX, HW] if P is None else [HX, HW, HP]

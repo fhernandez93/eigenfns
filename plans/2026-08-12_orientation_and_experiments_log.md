@@ -124,6 +124,16 @@ agent's "r/a = 0.2554" is a different (unidentified) unit convention — at face
 value it gives a 2.9% gap (measured) and >50% ff, inconsistent with their own
 ff; our scan recovers their actual geometry. G2 gate material.
 
+## TF32 lesson (2026-08-13)
+
+On the RTX 4080 (Ada), XLA's default matmul precision runs fp32 GEMMs as TF32
+(10-bit mantissa). Consequence, measured at 64³ GPU: Gram/rotation accuracy
+floors at ~1e-3 and block residuals plateau at ~7e-3 — the 32³ parity run
+converged only because it ran on CPU (true fp32). Foreseen verbatim by the
+numerics survey ("Gram matrices in true fp32 — disable TF32"). Fix: every
+matmul/tensordot in the solver now carries precision=HIGHEST. FFTs (cuFFT) are
+unaffected by TF32.
+
 ## XLA fixed-shape lesson (2026-08-13, cost ~1 h of debugging)
 
 The solver's P-block whitening originally SHRANK P to its kept rank — a

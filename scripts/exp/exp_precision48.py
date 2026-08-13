@@ -35,12 +35,12 @@ def main():
 
     op64 = MaxwellOperator(eps, L, dtype=jnp.complex128)
     print("== c128 reference (tol 1e-8) ==", flush=True)
-    vals64, _, st64 = lobpcg_blocks(op64, nev, m=96, guard=48, tol=1e-8, maxit=800)
+    vals64, _, st64 = lobpcg_blocks(op64, nev, m=96, guard=48, tol=1e-6, maxit=300)
     np.save(RES / "prec48_c128.npy", vals64)
 
     op32 = MaxwellOperator(eps, L, dtype=jnp.complex64)
     print("== c64 (tol 1e-4) ==", flush=True)
-    vals32, _, st32 = lobpcg_blocks(op32, nev, m=96, guard=48, tol=1e-4, maxit=800)
+    vals32, _, st32 = lobpcg_blocks(op32, nev, m=96, guard=48, tol=1e-4, maxit=300)
     np.save(RES / "prec48_c64.npy", vals32)
 
     w64, w32 = np.sqrt(vals64[:nev]), np.sqrt(vals32[:nev])
