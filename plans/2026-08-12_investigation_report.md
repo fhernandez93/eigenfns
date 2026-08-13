@@ -34,34 +34,75 @@ adversarial verification.
 398→607. The generating pipeline is pinned by the user's statement + the parent
 notebook `20250903_create_h5_from_ends.ipynb`: a 256³ **binary** permittivity
 grid from an N=1000 LSU rod network (box L=11.44 µm), "pen-like" cylinders —
-circular radius 0.2252 µm in a z-unwarped space, global warp z=2.5·z′ giving
-elliptical cross-sections (minor 0.2252 µm in-plane, major 0.563 µm along z),
-ε_rod = 2.9275² = 8.5703, ε_bg = 1, flat caps, overlaps overwrite. **Measured
-ff at 256³ = 0.2172** — matches the stated "ff ~22%"; parameters confirmed.
+circular radius r=0.2252 µm in a z-unwarped space, global warp z=2.5·z′. The
+resulting cross-section ⊥ each rod has semi-axes r and r·√(cos²θ+s²sin²θ) (θ =
+rod angle from ẑ): horizontal rods get the full 0.2252×0.563 µm ellipse,
+near-vertical rods stay circular — exactly the DLW "laser-pen" Minkowski-sweep
+voxel model (adversarially verified, incl. measured cross-sections). ε_rod =
+2.9275² = 8.5703, ε_bg = 1, flat caps, overlaps overwrite. **Measured ff at
+256³ = 0.2172** — matches the stated "ff ~22%". (ff is one scalar: it rules
+out circular rods at r=0.2252 (~10–11%) but does not pin (r,s) jointly; the
+notebook's parameter cell is the primary evidence for r and s.)
+
+**Open item (pre-registered decision): ±2 band numbering.** MPB counts the two
+ω=0 Γ modes as bands 1–2; our transverse solver removes them exactly. If the
+original montage used MPB numbering, its "band 398" is our 396th nonzero mode.
+Not decidable from local artifacts. Decision: we emit **MPB-compatible
+numbering** (our nth nonzero mode is labeled band n+2 at Γ) in all outputs,
+flagged; the user can overturn with one flag if the original convention proves
+otherwise.
 
 **"non_ideal"** = the elongated (aspect-2.5) elliptical cross-section — the
 direct-laser-writing fabrication non-ideality — as opposed to an "ideal"
-circular-rod decoration. (Literature cross-check pending; the parameter trail
-in the notebook makes this reading concrete regardless.)
+circular-rod decoration. Literature-anchored: DLW-written network rods have
+elliptical cross-sections from the elongated laser voxel, long axis along z,
+aspect ≈ 2.8 (Muller, Haberko, Marichy, Scheffold, Optica 4, 361 (2017):
+210×580 nm silicon rods; Haberko et al. PRA 88, 043822 (2013) model the
+"laser-pen" voxel aspect ≈ 3); "ideal (lattice)" vs "nonidealities" is the
+vocabulary of Peng et al., ACS Photonics 3, 1131 (2016) for DLW gyroids. No
+published 3-D band-structure study with aspect-2–3 elliptical rods exists
+(agent-verified through 2026) — this computation is novel.
 
-**Band window arithmetic (measured).** Ideal srs crystal in its 8-vertex cubic
-cell (a = 11.44/5 µm, same ε, circular r=0.2252): complete PBG **between bands
-4 and 5** (MPB, ~9.9% at quick settings) → 0.5 bands per vertex → for N=1000:
-gap between bands **500|501**. The window 398–607 (210 bands) straddles it,
-and the montage's nearly-grey tiles cluster around rows 6–7 ≈ bands ~475–505 —
-consistent. The montage structure is an N=1000 network. [Literature
-confirmation of srs band counting pending.]
+**Band window arithmetic (measured + triple literature confirmation).** Ideal
+srs crystal in its 8-vertex cubic cell (a = 11.44/5 µm, same ε, circular
+r=0.2252): complete PBG **between bands 4 and 5** (MPB, ~9.9% at quick
+settings) → 0.5 bands per vertex → for N=1000: gap between bands **500|501**.
+Confirmed three independent ways: (i) Sellers SI verbatim: "a general N-vertex
+supercell has a PBG from bands N/2 to N/2+1" (216-vertex SNG: bands 108|109);
+(ii) Lu, Fu, Joannopoulos, Soljačić (Nat. Photonics 7, 294 (2013)): single
+gyroid's 32% gap lies between bands 2 and 3 of the 4-vertex bcc primitive
+cell; (iii) our MPB measurement above. The 398–607 window (210 bands)
+straddles 500|501, and the montage's nearly-grey tiles cluster at rows 6–7 ≈
+bands ~475–505 — consistent. The montage structure is an N=1000 network.
+General band-counting context: 2-D TM gap between bands N and N+1 with N =
+scatterers (Florescu PNAS 2009); 3-D tetravalent (diamond-family): 1 band per
+vertex (diamond gap bands 2|3, 2 vertices/primitive cell — Ho/Chan/Soukoulis
+PRL 65, 3152 (1990)); 3-D trivalent (srs-family): 0.5 bands per vertex.
 
-**k-point.** Γ of the supercell (standard for disordered supercells; a single
-k-point suffices for DOS/mode statistics at this supercell size — literature
-section pending). The Γ-point spectrum of the supercell operator is what we
-compute; the two ω=0 modes at Γ are removed exactly by the transverse basis.
+**k-point.** Γ of the supercell. Literature conventions vary by purpose: gap
+*measurement* papers use folded supercell paths (Sellers: Γ→X→M→R→Γ; Haberko
+2020: 8 points on Γ-R-X-M-Γ at 128³ resolution with ~1000 bands; Man 2013 2-D:
+full 64² BZ mesh for DOS) — but per-band *mode renders* are taken at a single
+k, Γ (Klatt PNAS 2019 renders "a mode at Γ in the highest dielectric band").
+The montage is a per-band sequence for one structure — a Γ-spectrum object; at
+N=1000 (L=5a) the BZ is folded 125×, so Γ sampling is dense in the underlying
+spectrum. We compute Γ (the two ω=0 modes removed exactly by the transverse
+basis); the solver supports arbitrary k (validated at k≠0 vs analytics), which
+the crystal-parity gate uses and which enables a folded-path gap check as a
+validation extra.
 
-**Field quantity.** Pending literature; hypothesis: electric energy density
-ε|E|² (the Joannopoulos-book convention for dielectric-band modes) rendered as
-volume/isosurface over the network wireframe. To be settled by comparing test
-renders of ε|E|², |E|², |H|² of a gap-edge mode against the montage's visual
-character during Phase 3.
+**Field quantity — settled (literature-verified 2026-08-12).** The standard
+rendered quantity for dielectric-band modes of 3-D networks is the
+**time-averaged electric energy density ε|E|² = E·D** — the Joannopoulos-book
+"dielectric band" convention, MPB's `output-dpwr`, and exactly what Klatt,
+Steinhardt & Torquato (PNAS 116, 23480 (2019)) render for network modes at Γ.
+Edagawa's PAD review states the physics the montage shows: E-field energy
+concentrates in the dielectric below the gap and is expelled above it; Imagawa
+et al. (PRB 82, 115116 (2010)) report rising inverse participation ratio
+(localized states) at the band edges — matching the montage's nearly-grey
+gap-region tiles with few bright spots. Default plot: ε|E|² per band at Γ
+(|H|² montage as an option); mode-character confirmation against the montage
+visual style happens at Phase-3 render time.
 
 ## 2. The permittivity distribution
 
@@ -88,15 +129,37 @@ removed. Measured: **2.7 ms/vector @128³** batched (m∈[8,32]), 28.6 ms @256³
 (m≤4 fits 12 GB).
 
 Solver candidates (kickoff Phase-1 item 4) — measured status:
-- (a) bottom-up deflated block LOBPCG: implemented (`eigenfns/solver.py`) with
-  seven fp32-hardening measures (experiment log). 32³ status: block 1 reaches
-  MPB parity 8e-4 on its converged bands; later blocks stalled from cold random
-  starts — **fix under test: warm-starting blocks with the previous block's
-  guard Ritz vectors**. MPB's own success with 11-band blocks + deflation shows
-  the approach is sound; remaining gap is convergence engineering.
-- (b) folded spectrum, (c) Chebyshev window filter + count check, (d)
-  shift-invert: to be costed after (a) is characterized; (c) is the fallback
-  if deflated bottom-up proves too slow at 128³+.
+- (a) **bottom-up deflated block LOBPCG — SELECTED (pending 64³/128³ scaling
+  confirmation)**: with MPB's transverse-projection preconditioner (JJ01 Eq. 14),
+  guard warm-starting, and the fp32-hardening list, blocks converge in 18–26
+  iterations and reproduce MPB to **Δω/ω ≤ 4.3e-6 over 148 bands at 32³** (judge
+  at tol 1e-9 fp64; ours c64 tol 1e-4). Scope (adversarial review): this is
+  *two-implementation parity on the identical discrete matrix* — it proves the
+  operator implementation, solver convergence, and completeness of the lowest
+  148 at 32³, with a magnitude independently predicted by Kato–Temple (~1.5e-6);
+  it says nothing about discretization adequacy, the rasterizer, or 128³
+  interior behavior (those have their own gates). Iteration counts are
+  MPB-grade, which cuts the methods-survey PCIe estimate for 128³ deflation
+  streaming from hours to ~tens of minutes; measured 64³/128³ numbers to be
+  inserted from E3. Value-vs-index split (review): rel-res 1e-4 guarantees
+  Δω/ω ≤ 5e-5 unconditionally (Weyl), but band-index attribution inside
+  sub-1e-4 clusters needs the completeness gate — redesigned as
+  **deflated-probe KPM** (count *missed* eigenvalues below λ_b, expected 0,
+  variance O(1)) plus the solver's monotonicity check on locked values.
+- (b) folded spectrum — rejected on the methods survey (condition-number
+  squaring + fp32 digit loss in the dense interior; MPB's own target_freq mode
+  carries the same caveat).
+- (c) Chebyshev filtered subspace iteration + KPM counting — implemented
+  (`eigenfns/chebyshev.py`); the designated route for 256³ (interior window
+  without storing 400 lower bands) and the source of the completeness check
+  (stochastic eigenvalue counting). Survey estimate: degree ~150–250, 30–90 min
+  at 128³ for 660 bands; kept as alternative and as the counting machinery.
+- (d) shift-invert with iterative inner solves — rejected (indefinite inner
+  systems, no matrix-free preconditioner; survey estimate 10³–10⁵ inner
+  iterations per shift on this hardware).
+- Survey verdict (2026-08-12 agent report): no published GPU/JAX 3-D supercell
+  interior-band Maxwell eigensolver exists (closest: FAME CUDA lowest-bands
+  solver; ChASE dense-agnostic ChebSI; MPB CPU-only) — this build is novel.
 
 Memory arithmetic @12 GB (measured per-vector sizes): 128³ c64 = 33.5 MiB →
 660-band locked set = 22 GB ⇒ locked vectors stream from host RAM (62 GB) for

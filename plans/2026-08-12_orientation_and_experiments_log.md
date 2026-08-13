@@ -64,7 +64,35 @@ Bugs found and fixed (keep these in the library version):
 7. Preconditioner: diagonal kinetic 1/(|k+G|²+σ). σ=median(λ) vs σ≈0 makes no difference
    to the block-2 stall (tested).
 
-**OPEN PROBLEM (was mid-diagnosis at crash):** with blocks of m=96 (lock 48, guard 48),
+**RESOLVED 2026-08-12 (post-crash): the stall was the preconditioner + two block
+hygiene bugs.** Three changes turned the stalled solver into an MPB-grade one:
+1. **MPB's transverse-projection ("fancy") preconditioner** (JJ01 Eq. 14, from
+   `maxwell_pre.c:maxwell_preconditioner2`): invert the diagonal curl (divide by
+   |k+G| with the 90° rotation structure), IFFT, **multiply by ε(r)**, FFT, invert
+   the curl again — same 6-FFT cost as Θ. Implemented as
+   `MaxwellOperator.precondition`; the old diagonal kinetic one kept as
+   `precondition_simple`.
+2. Warm-start each block with the previous block's guard Ritz vectors.
+3. Unit-normalize random block rows (norm-360 raw rows made SVQB's relative drop
+   threshold discard the unit-norm carries), and mask dead rows out of the
+   convergence/locking path (they report fake λ=0, res=0).
+
+**Result (32³, MPB's own grid, 160 bands, tol 1e-4, c64):** blocks converge in
+24/18/26/2 iterations; **parity vs MPB (tol 1e-9, fp64): max Δω/ω = 4.3e-6,
+median 8.6e-7 over 148 bands**; 108 s on CPU. Commit b6256cc+1.
+
+Key MPB-source facts (agent report, 2026-08-12): MPB 1.11.1 applies Kottke tensor
+smoothing to *geometric objects* regardless of mesh-size (true mesh-size-1 bypass
+only in MPB 1.12, PR#150, 2025-04); file input is scalar trilinear pixel-centered
+interpolation with edge clamping (not periodic wrap) — explains the 'data' ≠ file
+mismatch we measured; grid readback protocol remains the right judge design.
+Consider upgrading judge env to MPB ≥1.12 for exact binary-grid parity runs.
+MPB defaults: eigensolver-block-size -11, tolerance 1e-7, Fletcher-Reeves (PR
+needs nwork≥4), Moré-Thuente exact line search, deflation against all previous
+bands. Python ModeSolver: no MPI, no MaterialGrid; epsilon_input_file or callable
+default_material.
+
+**OLD open problem text (kept for the record; superseded above):** with blocks of m=96 (lock 48, guard 48),
 block 1 converges (res ~1e-2 at 250-400 iters; its lowest bands agree with MPB to 8e-4),
 but blocks 2+ stall at res ~0.9 with Ritz values far above the true continuation (e.g.
 block 2 at λ≈0.64-0.75 when MPB says bands 49-150 live at 0.13-0.23). Deflation-related;

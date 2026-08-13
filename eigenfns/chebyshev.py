@@ -25,8 +25,17 @@ from .operator import MaxwellOperator
 from .solver import _flat, gram, ortho_block, deflate, combine
 
 
-def lanczos_lambda_max(op: MaxwellOperator, iters: int = 24, seed: int = 0) -> float:
-    """Certified upper bound on λ_max: θ_max + ‖r‖ from a short Lanczos run."""
+def lanczos_lambda_max(op: MaxwellOperator, iters: int = 24, seed: int = 0,
+                       n_seeds: int = 2) -> float:
+    """Probable upper bound on λ_max: max over seeds of θ_max + ‖r‖.
+
+    NOT a certified bound (θ_max + β only brackets *some* eigenvalue); the
+    caller must add a safety margin — an underestimate makes the Chebyshev
+    filter and KPM diverge above the mapped interval. Multiple independent
+    seeds reduce the unlucky-start risk."""
+    if n_seeds > 1:
+        return max(lanczos_lambda_max(op, iters, seed + 1000 * s, n_seeds=1)
+                   for s in range(n_seeds))
     key = jax.random.PRNGKey(seed)
     G3 = (1, 2, op.grid_size, op.grid_size, op.grid_size)
     ka, kb = jax.random.split(key)
@@ -67,9 +76,18 @@ def _cheb_filter_chunk(op, X, degree: int, lam_c: float, lam_max: float):
     # Y = (A X - c X)/e ; T_{k+1} = 2/e (A - c) T_k - T_{k-1}
     Y = (op.theta(X) - c * X) / e
     Xk_prev, Xk = X, Y
-    for _ in range(degree - 1):
+    for j in range(degree - 1):
         Xn = (op.theta(Xk) - c * Xk) * (2.0 / e) - Xk_prev
         Xk_prev, Xk = Xk, Xn
+        # rescale periodically: T_p grows like cosh(p·arccosh(t0)) on wanted
+        # components and overflows fp32 within a few hundred degrees
+        if (j + 1) % 32 == 0:
+            s = jnp.max(jnp.abs(_flat(Xk)), axis=1)
+            sc = jnp.where(s > 1e30, 1.0 / jnp.maximum(s, 1e-30), 1.0)
+            sc = jnp.where(s > 1e30, sc, 1.0)
+            scale = sc[:, None, None, None, None]
+            Xk = Xk * scale
+            Xk_prev = Xk_prev * scale
     ns = 1.0 / jnp.maximum(jnp.linalg.norm(_flat(Xk), axis=1), 1e-30)
     return Xk * ns[:, None, None, None, None]
 
@@ -193,11 +211,19 @@ def chebsi_bottom_up(
 
 
 def kpm_count_below(op: MaxwellOperator, lam_b: float, lam_max: float,
-                    degree: int = 500, n_probe: int = 30, seed: int = 1) -> tuple[float, float]:
+                    degree: int = 500, n_probe: int = 30, seed: int = 1,
+                    locked=None) -> tuple[float, float]:
     """Stochastic estimate of #eigenvalues below λ_b (Jackson-damped KPM step trace).
 
     Returns (estimate, standard_error). Counts over the transverse space minus
-    the 2 zeroed Γ slots (those are excluded by the probe mask).
+    the 2 zeroed Γ slots (excluded by the probe mask).
+
+    **Completeness-gate mode**: pass `locked` (the converged eigenvectors with
+    λ < λ_b). Probes are then deflated against them, so the estimator counts
+    only *missed* eigenvalues below λ_b — expected 0 — and the stochastic
+    variance collapses from ~√(2·count) to ~O(1), making ±1 certification
+    feasible (plain-count mode is only a ±few-% sanity check; adversarial
+    review 2026-08-12).
     """
     G = op.grid_size
     n_dim = 2 * G**3 - 2
@@ -220,6 +246,9 @@ def kpm_count_below(op: MaxwellOperator, lam_b: float, lam_max: float,
     G3 = (n_probe, 2, G, G, G)
     kr, = jax.random.split(key, 1)
     Z = jnp.where(jax.random.bernoulli(kr, 0.5, G3), 1.0, -1.0).astype(jnp.complex64) * mask
+    if locked is not None:
+        Z = deflate(Z, locked)
+        Z = deflate(Z, locked)
     # three-term recurrence on the mapped operator B = (2A - lam_max)/lam_max
     def Bx(V):
         return (2.0 / lam_max) * op.theta(V) - V

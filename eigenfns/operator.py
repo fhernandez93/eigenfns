@@ -74,8 +74,8 @@ def make_basis(grid_size: int, box_size: float, k_frac=(0.0, 0.0, 0.0),
         grid_size=G,
         box_size=L,
         k_frac=tuple(float(x) for x in k_frac),
-        kn=jnp.asarray(kn, jnp.float32),
-        t=jnp.asarray(np.stack([t1, t2]), jnp.float32),
+        kn=jnp.asarray(kn, rdtype),
+        t=jnp.asarray(np.stack([t1, t2]), rdtype),
     )
 
 
@@ -112,8 +112,8 @@ def _precondition_fancy_block(Rs, kn, t, eps, floor):
     """
     a, b = Rs[:, 0], Rs[:, 1]
     knr = jnp.maximum(kn, floor)
-    # inverse of the curl map (c1,c2) = (-i kn b, i kn a):  a = -i c2/kn, b = i c1/kn
-    # applied to Rs treated as curl-image components:
+    # -K^-1 where K = kn·σ_y is the (Hermitian) curl block; the minus sign is
+    # applied identically at both ends and cancels: (-K^-1) M (-K^-1) = K^-1 M K^-1
     c1 = 1j * b / knr
     c2 = -1j * a / knr
     Ec = c1[:, None] * t[0][None] + c2[:, None] * t[1][None]
@@ -155,9 +155,10 @@ class MaxwellOperator:
         return _theta_block(Hs, self.basis.kn, self.basis.t, self.inv_eps)
 
     def precondition(self, Rs: jax.Array, target: float = 0.0) -> jax.Array:
-        """MPB's transverse-projection ('fancy') preconditioner (default)."""
+        """MPB's transverse-projection ('fancy') preconditioner (default; `target` unused)."""
+        rdtype = jnp.float64 if self.dtype == jnp.complex128 else jnp.float32
         return _precondition_fancy_block(Rs, self.basis.kn, self.basis.t,
-                                         self.eps_grid, jnp.float32(self.kn_floor))
+                                         self.eps_grid, rdtype(self.kn_floor))
 
     def precondition_simple(self, Rs: jax.Array, target: float = 0.0) -> jax.Array:
         """Diagonal kinetic preconditioner (fallback / comparison)."""

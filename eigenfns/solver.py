@@ -151,8 +151,7 @@ def lobpcg_blocks(
                 print(f"    it {it:3d}  lam[0,{n_lock-1},{m-1}] = {lo[0]:.4f} {lo[n_lock-1]:.4f} "
                       f"{lo[-1]:.4f}  res q50/q90 {np.quantile(rn,0.5):.1e}/{np.quantile(rn,0.9):.1e}"
                       f"  leak {leak:.1e}", flush=True)
-            shift = float(np.median(lam_h)) if precond_shift == "median" else 1e-3
-            W = op.precondition(R, target=shift) * mask
+            W = op.precondition(R) * mask
             W = deflate(W, locked)
             for _ in range(2):
                 Cxw = gram(X, W)
@@ -164,8 +163,6 @@ def lobpcg_blocks(
                     Cxp = gram(X, P); Cwp = gram(W, P)
                     P = (P - jnp.tensordot(Cxp.T, X, axes=(1, 0))
                            - jnp.tensordot(Cwp.T, W, axes=(1, 0)))
-                    HP = (HP - jnp.tensordot(Cxp.T, HX, axes=(1, 0))
-                             - jnp.tensordot(Cwp.T, HW, axes=(1, 0)))
                 Gp = np.asarray(gram(P, P)).astype(np.complex128)
                 Gp = (Gp + Gp.conj().T) / 2
                 wp, Vp = np.linalg.eigh(Gp)
@@ -185,7 +182,9 @@ def lobpcg_blocks(
             rownorm = np.concatenate(
                 [np.asarray(jnp.linalg.norm(_flat(Bk), axis=1)) for Bk in blocks])
             dead = rownorm < 0.5
-            A[np.diag_indices_from(A)] += np.where(dead, _RR_DEAD_PENALTY, 0.0)
+            # penalty must sit above anything the subspace can reach (S5)
+            penalty = max(_RR_DEAD_PENALTY, 100.0 * float(np.abs(np.diag(A)).max()))
+            A[np.diag_indices_from(A)] += np.where(dead, penalty, 0.0)
             wA, VA = np.linalg.eigh(A)
             C = jnp.asarray(VA[:, :m], jnp.complex64)
             Xn = combine(C, *blocks)
@@ -206,7 +205,16 @@ def lobpcg_blocks(
         Rf = HX - jnp.asarray(lam)[:, None, None, None, None] * X
         rn = np.asarray(jnp.linalg.norm(_flat(Rf), axis=1)
                         / jnp.maximum(jnp.linalg.norm(_flat(HX), axis=1), 1e-30))
+        # dead rows report fake lam=0, rn=0 — exclude them here too (S1 fix:
+        # a locked dead row would silently shift every subsequent band index)
+        xnorm = np.asarray(jnp.linalg.norm(_flat(X), axis=1))
+        lam = np.where(xnorm < 0.5, np.inf, lam)
+        rn = np.where(xnorm < 0.5, np.inf, rn)
         order = np.argsort(lam)
+        if not np.isfinite(lam[order[:n_lock]]).all():
+            raise RuntimeError(
+                f"block produced only {int(np.isfinite(lam).sum())} live Ritz "
+                f"pairs but needs {n_lock} to lock — rank collapse")
         lock_idx = np.asarray(order[:n_lock])
         carry_idx = np.asarray(order[n_lock:])
         Xl = X[lock_idx]
@@ -224,4 +232,15 @@ def lobpcg_blocks(
                   f"worst res {rn[lock_idx].max():.1e}  "
                   f"elapsed {time.perf_counter()-t0:6.1f}s", flush=True)
     stats.wall_seconds = time.perf_counter() - t0
+    # Band-index integrity: locked_vals must be monotone across blocks (a
+    # violation means a lower band was found late — a previously missed
+    # eigenvalue). Sort values+vectors and surface the event loudly.
+    if (np.diff(locked_vals) < -1e-6 * np.abs(locked_vals[1:])).any():
+        worst = float(np.min(np.diff(locked_vals)))
+        print(f"WARNING: locked eigenvalues non-monotone (worst step {worst:.3e}) — "
+              f"a band was recovered out of order; re-sorting. Completeness gate "
+              f"must confirm the final count.", flush=True)
+    order = np.argsort(locked_vals, kind="stable")
+    locked_vals = locked_vals[order]
+    locked = locked[np.asarray(order)]
     return locked_vals[:nev], locked, stats

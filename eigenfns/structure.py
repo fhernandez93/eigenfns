@@ -1,10 +1,17 @@
 """Structure loading and rasterization to permittivity grids.
 
 The rasterization reproduces `create_permittivity_grid_penlike` from the parent
-project's `20250903_create_h5_from_ends.ipynb` exactly (binary voxels, flat-capped
-cylinders, elliptical cross-section via a global z-warp), which is the convention
-the reference montage was computed with. A subpixel-smoothed variant is provided
-separately; its effect on eigenfrequencies is quantified in the validation report.
+project's `20250903_create_h5_from_ends.ipynb` algorithmically exactly (binary
+voxels, flat-capped cylinders, elliptical cross-section via a global z-warp) —
+the convention the reference montage was computed with. Two documented caveats
+(adversarial review 2026-08-12): (i) we compute membership in float64 where the
+notebook used float32, so boundary voxels within ~1e-6 relative of the rod
+surface may differ (O(tens) of voxels at 500³, 0–2 at 64³); (ii) like the
+notebook, rods are NOT periodically wrapped — a rod whose *radius* pokes
+through a face (endpoints inside) misses its wrap-image voxels, since the PBC
+duplicate rows in the *_ends.txt files cover only face-crossing segments. Both
+codes share this convention, so the grid is faithful to the montage; fixing it
+would be a new convention and belongs behind a flag with a re-validation.
 """
 from __future__ import annotations
 
@@ -53,10 +60,14 @@ def rasterize_penlike(
     """Binary 'pen-like' rasterization — the montage convention.
 
     Right circular cylinders of radius `minor_radius` are built in an unwarped
-    space (x, y, z' = z/aspect_ratio) and the global warp z = s·z' makes every
-    cross-section an ellipse with major/minor = s along z. Endpoints are given in
-    final (warped) world coordinates. Membership: axial clamp 0 ≤ t ≤ L (flat
-    caps) and circular radial test, both in unwarped space. Voxels are assigned
+    space (x, y, z' = z/aspect_ratio) and the global warp z = s·z' stretches
+    them along z. The cross-section ⊥ the final axis is the shadow of the
+    ellipsoid (r, r, s·r): semi-axes r and r·√(cos²θ + s²·sin²θ) where θ is the
+    rod's final angle from ẑ — i.e. rods ⊥ ẑ get the full r × s·r ellipse,
+    near-vertical rods stay circular (exactly the DLW 'laser-pen' Minkowski
+    sweep, up to flat vs ellipsoidal caps). Endpoints are given in final
+    (warped) world coordinates. Membership: axial clamp 0 ≤ t ≤ L (flat caps)
+    and circular radial test, both in unwarped space. Voxels are assigned
     eps_rod if their *center* is inside any rod (no averaging).
     """
     rods = np.asarray(rods, dtype=np.float64)
