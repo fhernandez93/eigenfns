@@ -1,10 +1,14 @@
 # Pre-registered plan — GPU Maxwell eigenmodes of disordered LSU networks
 
-**Status: DRAFT (to be frozen when E3/E4/srs-literature numbers land and the user
-approves or by default when building starts). Template: the ML project's
-2026-07-21 plan.** Date: 2026-08-13. Machine: RTX 4080 Laptop 12 GB, 62 GB RAM,
+**Status: FROZEN 2026-08-13 (E3/E4/srs numbers in; user may amend).** Template:
+the ML project's 2026-07-21 plan. Machine: RTX 4080 Laptop 12 GB, 62 GB RAM,
 32 threads. Envs: `lsu_ml` (JAX 0.10.0 cuda12), `mbpEnv` (MPB 1.11.1 CLI),
 `mpb_judge` (pymeep, py3.11).
+
+**E-numbers backing this plan** (experiment log): E3: 680 bands @64³ in 941.8 s
+(129,728 Θ applications), gap at MPB 500|501 as predicted (§2b PASSED), KPM
+counts consistent; E4: c64 error ≤ 2.4e-7 (gate G9 PASSED at 48³); srs scan:
+28.0% gap at optimum (G2 material); MPB parity 4.3e-6 @32³ (G1/G3 material).
 
 ## 0. What Phase 1 established (all adversarially verified 2026-08-12/13)
 
@@ -81,11 +85,14 @@ localized modes narrowing the clean gap is acceptable, a displaced gap is not.
 
 Full window (bottom-up to band ~620 + guard) for one N=1000 structure at 128³:
 **target ≤ 4 h wall-clock; hard cap 12 h** (beyond that the ChebSI fallback is
-triggered). Projection basis: [E3 64³ numbers to be inserted — blocks × iters ×
-(theta 2.7 ms/vec + gram/ortho overhead) + locked streaming]. Montage render:
-≤ 30 min for 210 tiles. Checkpoint/resume: after every locked block (locked
-vectors + values + RNG state to NVMe); auto-resume on restart; single-GPU
-discipline (refuse to start if nvidia-smi shows a heavy foreign job).
+triggered). Projection basis (measured E3): 941.8 s for 680 bands at 64³; the
+per-iteration cost is Θ-and-GEMM dominated, both O(G³ log G / G³) → ~8× at
+128³ ⇒ **~2.1 h projected** (locked storage: 680 × 33.5 MB = 22.8 GB exceeds
+VRAM ⇒ host-resident locked buffer streamed through the fixed 128-vector
+deflation chunks; PCIe adds ~0.2-0.5 s/iteration ≈ +25-50% ⇒ still ≤ 4 h).
+Montage render: ≤ 30 min for 210 tiles. Checkpoint/resume: after every locked
+block; auto-resume; single-GPU discipline (refuse to start over a foreign job).
+Allocation env: XLA_PYTHON_CLIENT_PREALLOCATE=false, MEM_FRACTION=0.90.
 
 ## 4. Deliverables & layout (mirrors the previous project)
 

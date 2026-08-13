@@ -1,7 +1,20 @@
-# Phase 1 — Investigation report (DRAFT; 3 of 4 literature agent reports pending)
+# Phase 1 — Investigation report
 
-Status: in progress 2026-08-12/13. Local-measurement sections are final pending
-adversarial verification.
+Status: **COMPLETE 2026-08-13.** All four literature agents reported; all
+Phase-1 experiments (E1 operator cost, E2 band counting, E3 full 64³ spectrum,
+E4 precision, srs literature scan, MPB parity) finished; one adversarial
+verification round (physics/numerics/code) applied — see
+`2026-08-12_adversarial_verification.md` and the experiment log for numbers.
+
+Headline experimental results:
+- E3 (64³, N=1000 gold structure, montage-convention ε): 680 bands in 941.8 s;
+  **largest interior gap between MPB bands 500|501 exactly as pre-registered**;
+  Δν/ν = 2.35% at 64³, ν_center 0.516 (a=2.288 µm); KPM count checks pass.
+- E4 (48³): c64 vs c128 max Δω/ω = 2.4e-7 over 96 bands — precision policy
+  confirmed with 400× margin.
+- Parity vs MPB (32³, identical grid): max Δω/ω = 4.3e-6 over 148 bands.
+- srs literature scan: gap optimum 28.0% at r/a≈0.12–0.13 (ff≈18%) —
+  reproduces Sellers's published 28.06% / 17.88%.
 
 ## 0. Sellers et al. 2017 ground truth (agent-verified from paper + SI, 2026-08-12)
 

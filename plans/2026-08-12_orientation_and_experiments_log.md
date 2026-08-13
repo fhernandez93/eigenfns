@@ -146,6 +146,42 @@ them). Rule for the library: **every jitted computation must see a fixed set
 of shapes across the whole run**; rank adaptivity is expressed by zero rows,
 never by shape changes.
 
+## E3 — full 64³ spectrum of the N=1000 gold structure (COMPLETE, 2026-08-13)
+
+680 bands, m=64, guard=24, tol 1e-4, c64 GPU: **941.8 s wall, 129,728 operator
+applications** (17 blocks, 21–51 iters each, all locked ≤ 1e-4; monotone
+spectrum, no out-of-order recoveries).
+
+- **The largest interior gap falls between solver bands 498|499 = MPB bands
+  500|501 — exactly as pre-registered** (λ 1.8831 → 1.9739; Δν/ν = 2.35% at
+  64³, ν_center ≈ 0.516 in a = 2.288 µm units). Third independent confirmation
+  of the band arithmetic, now on the actual disordered montage-convention ε.
+- Montage window MPB 398–607 ↔ ν 0.4509–0.5674 (a=2.288); gap ~2.4% wide at
+  64³ (vs crystal 28% — disorder + ε 8.57 + elongated rods narrow it heavily,
+  consistent with the montage's ~1.5 rows of grey tiles).
+- Low-band jumps (after solver bands 12, 36, 52, 64, 160: 37%, 18%, 11%, 6%,
+  6%) are real finite-size shell structure. **KPM verification: count below
+  λ=0.94 = 159.9 ± 0.8 vs 160 locked (exact); below λ=1.93 = 493 ± 3 vs 498
+  locked** (consistent: Jackson smearing width 0.18 > gap width 0.09 at degree
+  800 — sharp counts need the deflated-probe variant, as pre-registered).
+- E4 (48³): c64 tol 1e-4 vs c128 tol 1e-6 over 96 bands: **max Δω/ω =
+  2.4e-7, median 4.9e-8** — precision gate passed with 400× margin.
+
+## The 64³→680-band memory war (four real bugs, all now fixed)
+
+1. Temporaries' lifetimes (R, W, HW, block lists) → ~2× peak → OOM; fixed with
+   explicit del.
+2. Growing locked array → new gram/deflate shapes per block → XLA recompile +
+   late-run autotune scratch OOM at 440/680; fixed with fixed-capacity buffer.
+3. gram(full locked buffer, X) conjugates a full 2.9 GB copy per call; fixed
+   with chunked deflation (fixed 128-vector chunks — also the streamed-host
+   architecture 128³ needs).
+4. buf.at[].set() materializes a second full buffer copy per block; fixed with
+   a donated dynamic_update_slice (true in-place).
+   Allocation env for production: XLA_PYTHON_CLIENT_PREALLOCATE=false,
+   XLA_PYTHON_CLIENT_MEM_FRACTION=0.90 (desktop holds ~1-1.5 GB; the default
+   0.75 fraction caps the pool at 9.2 GB).
+
 ## Environment / hazards
 
 - `stage_b_resumable.py` from the ML repo auto-resumes on boot and takes ~9 GB GPU for
