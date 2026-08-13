@@ -110,7 +110,11 @@ def lobpcg_blocks(
         ka, kb = jax.random.split(k)
         Z = (jax.random.normal(ka, (n,) + G3, jnp.float32)
              + 1j * jax.random.normal(kb, (n,) + G3, jnp.float32))
-        return Z.astype(jnp.complex64) * mask
+        Z = Z.astype(jnp.complex64) * mask
+        # unit rows: mixed-norm blocks poison SVQB's relative drop threshold
+        # (norm-360 random rows made it drop the unit-norm warm-start carries)
+        ns = 1.0 / jnp.maximum(jnp.linalg.norm(_flat(Z), axis=1), 1e-30)
+        return Z * ns[:, None, None, None, None]
 
     while locked_vals.size < nev:
         key, k2 = jax.random.split(key)
@@ -130,6 +134,12 @@ def lobpcg_blocks(
             rn = np.asarray(jnp.linalg.norm(_flat(R), axis=1)
                             / jnp.maximum(jnp.linalg.norm(_flat(HX), axis=1), 1e-30))
             lam_h = np.asarray(lam)
+            # dead rows (rank-dropped: ~zero norm) report fake lam=0, rn=0 —
+            # push them to the end so they are never counted converged/locked
+            xnorm = np.asarray(jnp.linalg.norm(_flat(X), axis=1))
+            dead_rows = xnorm < 0.5
+            lam_h = np.where(dead_rows, np.inf, lam_h)
+            rn = np.where(dead_rows, np.inf, rn)
             order = np.argsort(lam_h)
             if (rn[order[:n_lock]] < tol).all():
                 break

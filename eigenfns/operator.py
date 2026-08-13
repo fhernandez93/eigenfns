@@ -41,7 +41,8 @@ class TransverseBasis:
         return 2 * self.grid_size**3
 
 
-def make_basis(grid_size: int, box_size: float, k_frac=(0.0, 0.0, 0.0)) -> TransverseBasis:
+def make_basis(grid_size: int, box_size: float, k_frac=(0.0, 0.0, 0.0),
+               rdtype=jnp.float32) -> TransverseBasis:
     G, L = int(grid_size), float(box_size)
     g1 = 2 * np.pi * np.fft.fftfreq(G, d=L / G)  # reciprocal grid, rad/µm
     k0 = 2 * np.pi * np.asarray(k_frac, np.float64) / L
@@ -96,29 +97,70 @@ def _theta_block(Hs, kn, t, inv_eps):
 
 @partial(jax.jit, static_argnames=())
 def _precondition_block(Rs, kn, scale):
-    """MPB-style kinetic preconditioner: divide by (|k+G|² + s) in the transverse basis."""
+    """Diagonal kinetic preconditioner: divide by (|k+G|² + s) in the transverse basis."""
     return Rs / (kn**2 + scale)
 
 
-class MaxwellOperator:
-    """Matrix-free Θ for a fixed ε(r) grid and k-point, batched over vectors."""
+@partial(jax.jit, static_argnames=())
+def _precondition_fancy_block(Rs, kn, t, eps, floor):
+    """MPB's transverse-projection preconditioner (Johnson&Joannopoulos 2001 Eq. 14).
 
-    def __init__(self, eps: np.ndarray, box_size: float, k_frac=(0.0, 0.0, 0.0)):
+    Ã = ∇× P_T ε⁻¹ P_T ∇×  inverted in O(N log N): invert the diagonal curl
+    (divide by |k+G|, with the same 90° rotation structure), go to real space,
+    multiply by ε(r), come back, invert the curl again. Mirrors `maxwell_pre.c:
+    maxwell_preconditioner2`. `floor` regularizes |k+G| ≈ 0.
+    """
+    a, b = Rs[:, 0], Rs[:, 1]
+    knr = jnp.maximum(kn, floor)
+    # inverse of the curl map (c1,c2) = (-i kn b, i kn a):  a = -i c2/kn, b = i c1/kn
+    # applied to Rs treated as curl-image components:
+    c1 = 1j * b / knr
+    c2 = -1j * a / knr
+    Ec = c1[:, None] * t[0][None] + c2[:, None] * t[1][None]
+    E = jnp.fft.ifftn(Ec, axes=(2, 3, 4))
+    D = eps * E
+    Dc = jnp.fft.fftn(D, axes=(2, 3, 4))
+    f1 = (t[0][None] * Dc).sum(1)
+    f2 = (t[1][None] * Dc).sum(1)
+    o1 = 1j * f2 / knr
+    o2 = -1j * f1 / knr
+    return jnp.stack([o1, o2], axis=1)
+
+
+class MaxwellOperator:
+    """Matrix-free Θ for a fixed ε(r) grid and k-point, batched over vectors.
+
+    dtype complex64 (default, GPU) or complex128 (CPU fp64 reference runs —
+    requires JAX_ENABLE_X64=1)."""
+
+    def __init__(self, eps: np.ndarray, box_size: float, k_frac=(0.0, 0.0, 0.0),
+                 dtype=jnp.complex64):
         eps = np.asarray(eps)
         if eps.ndim != 3 or len(set(eps.shape)) != 1:
             raise ValueError(f"eps must be a cube, got {eps.shape}")
+        self.dtype = dtype
+        rdtype = jnp.float64 if dtype == jnp.complex128 else jnp.float32
         self.grid_size = eps.shape[0]
         self.box_size = float(box_size)
-        self.basis = make_basis(self.grid_size, self.box_size, k_frac)
-        self.inv_eps = jnp.asarray(1.0 / eps, jnp.float32)
+        self.basis = make_basis(self.grid_size, self.box_size, k_frac, rdtype=rdtype)
+        self.inv_eps = jnp.asarray(1.0 / eps, rdtype)
+        self.eps_grid = jnp.asarray(eps, rdtype)
         self.eps_mean_inv = float(np.mean(1.0 / eps))
+        # |k+G| floor for the fancy preconditioner: half the smallest nonzero |k+G|
+        kn_np = np.asarray(self.basis.kn)
+        self.kn_floor = float(0.5 * kn_np[kn_np > 0].min())
 
     def theta(self, Hs: jax.Array) -> jax.Array:
         """Θ Hs for a block (m, 2, G, G, G) of spectral transverse fields."""
         return _theta_block(Hs, self.basis.kn, self.basis.t, self.inv_eps)
 
     def precondition(self, Rs: jax.Array, target: float = 0.0) -> jax.Array:
-        """Approximate (Θ − target)⁻¹ R via the diagonal kinetic term."""
+        """MPB's transverse-projection ('fancy') preconditioner (default)."""
+        return _precondition_fancy_block(Rs, self.basis.kn, self.basis.t,
+                                         self.eps_grid, jnp.float32(self.kn_floor))
+
+    def precondition_simple(self, Rs: jax.Array, target: float = 0.0) -> jax.Array:
+        """Diagonal kinetic preconditioner (fallback / comparison)."""
         scale = jnp.float32(max(target / self.eps_mean_inv, 1e-6) * self.eps_mean_inv + 1e-6)
         return _precondition_block(Rs, self.basis.kn, scale)
 
