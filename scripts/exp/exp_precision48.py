@@ -34,7 +34,7 @@ def main():
     print(f"48^3, ff={(eps != 1).mean():.4f}", flush=True)
 
     op64 = MaxwellOperator(eps, L, dtype=jnp.complex128)
-    print("== c128 reference (tol 1e-8) ==", flush=True)
+    print("== c128 reference (tol 1e-6) ==", flush=True)
     vals64, _, st64 = lobpcg_blocks(op64, nev, m=96, guard=48, tol=1e-6, maxit=300)
     np.save(RES / "prec48_c128.npy", vals64)
 

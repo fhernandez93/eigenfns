@@ -113,7 +113,18 @@ def lobpcg_blocks(
     key = jax.random.PRNGKey(seed)
     G3 = (2, op.grid_size, op.grid_size, op.grid_size)
     mask = (op.basis.kn > 0).astype(jnp.float32)[None, None]
-    locked = None if initial_locked is None else jnp.asarray(initial_locked)
+    # Locked storage is preallocated at full capacity with zero rows: a
+    # growing locked array gives gram/deflate a NEW shape every block, forcing
+    # XLA recompile + late-run autotuning that OOMs once memory fills
+    # (measured at 440/680, 64^3). Zero rows deflate to a no-op.
+    cap = int(np.ceil(nev / max(m - guard, 1))) * (m - guard) + m
+    locked_buf = jnp.zeros((cap,) + G3, jnp.complex64)
+    n_locked_now = 0
+    if initial_locked is not None:
+        init = jnp.asarray(initial_locked)
+        n_locked_now = int(init.shape[0])
+        locked_buf = locked_buf.at[:n_locked_now].set(init)
+        del init
     locked_vals = (np.empty((0,)) if initial_vals is None
                    else np.asarray(initial_vals, np.float64))
     stats = SolveStats()
@@ -131,6 +142,7 @@ def lobpcg_blocks(
         return Z * ns[:, None, None, None, None]
 
     while locked_vals.size < nev:
+        locked = locked_buf  # fixed-shape view; zero rows are inert in deflation
         key, k2 = jax.random.split(key)
         if carry is not None and carry.shape[0] > 0:
             X = jnp.concatenate([carry, rand_block(k2, m - carry.shape[0])], axis=0)
@@ -166,6 +178,7 @@ def lobpcg_blocks(
                       f"{lo[-1]:.4f}  res q50/q90 {np.quantile(rn,0.5):.1e}/{np.quantile(rn,0.9):.1e}"
                       f"  leak {leak:.1e}", flush=True)
             W = op.precondition(R) * mask
+            del R  # big block, no longer needed
             W = deflate(W, locked)
             for _ in range(2):
                 Cxw = gram(X, W)
@@ -215,6 +228,7 @@ def lobpcg_blocks(
             Cp = jnp.asarray(np.asarray(C).copy(), jnp.complex64).at[:m].set(0)
             P = combine(Cp, *blocks)
             HP = combine(Cp, *hblocks)
+            del blocks, hblocks, W, HW  # release before the next theta application
             ps = 1.0 / jnp.maximum(jnp.linalg.norm(_flat(P), axis=1), 1e-20)
             P = P * ps[:, None, None, None, None]
             HP = HP * ps[:, None, None, None, None]
@@ -239,7 +253,8 @@ def lobpcg_blocks(
         carry_idx = np.asarray(order[n_lock:])
         Xl = X[lock_idx]
         carry = X[carry_idx]
-        locked = Xl if locked is None else jnp.concatenate([locked, Xl], axis=0)
+        locked_buf = locked_buf.at[n_locked_now:n_locked_now + Xl.shape[0]].set(Xl)
+        n_locked_now += int(Xl.shape[0])
         locked_vals = np.concatenate([locked_vals, lam[lock_idx]])
         stats.rounds.append({
             "iters": it + 1,
@@ -264,7 +279,7 @@ def lobpcg_blocks(
               f"must confirm the final count.", flush=True)
     order = np.argsort(locked_vals, kind="stable")
     locked_vals = locked_vals[order]
-    locked = locked[np.asarray(order)]
+    locked = locked_buf[:n_locked_now][np.asarray(order)]
     return locked_vals[:nev], locked, stats
 
 
