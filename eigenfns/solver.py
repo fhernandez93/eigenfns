@@ -71,6 +71,17 @@ def _buf_update(buf, xl, start):
     return jax.lax.dynamic_update_slice_in_dim(buf, xl, start, axis=0)
 
 
+def apply_chunked(fn, X, rows: int):
+    """Apply a per-vector-independent operator in sub-chunks of `rows` vectors.
+
+    Θ's internal 3-component FFT temporaries are ~3x the block size; chunking
+    caps that transient (~3 GiB at m=32, 128^3 — the last OOM standing)."""
+    if X.shape[0] <= rows:
+        return fn(X)
+    outs = [fn(X[s:s + rows]) for s in range(0, X.shape[0], rows)]
+    return jnp.concatenate(outs, axis=0)
+
+
 def deflate_chunk_rows(grid_size: int, target_bytes: float = 0.75e9) -> int:
     """Rows per deflation chunk sized to ~target_bytes of c64 data (min 16).
 
@@ -134,6 +145,7 @@ def lobpcg_blocks(
     initial_vals=None,
     on_block=None,
     locked_storage: str = "auto",
+    theta_chunk: int = 0,
 ):
     """Bottom-up deflated block LOBPCG. Returns (eigenvalues, locked_vectors, stats).
 
@@ -150,6 +162,9 @@ def lobpcg_blocks(
     # XLA recompile + late-run autotuning that OOMs once memory fills
     # (measured at 440/680, 64^3). Zero rows deflate to a no-op.
     chunk_rows = deflate_chunk_rows(op.grid_size)
+    if theta_chunk <= 0:
+        # cap the 3-component operator transient at ~1 GB
+        theta_chunk = max(4, int(1e9 // (3 * op.grid_size**3 * 8)))
     cap = int(np.ceil(nev / max(m - guard, 1))) * (m - guard) + m
     cap = int(np.ceil(cap / chunk_rows)) * chunk_rows
     bytes_locked = cap * 2 * op.grid_size**3 * 8
@@ -175,26 +190,34 @@ def lobpcg_blocks(
     t0 = time.perf_counter()
     carry = None  # guard Ritz vectors from the previous block
 
-    def rand_block(k, n):
+    @jax.jit
+    def _rand_block_jit(k):
         ka, kb = jax.random.split(k)
-        Z = (jax.random.normal(ka, (n,) + G3, jnp.float32)
-             + 1j * jax.random.normal(kb, (n,) + G3, jnp.float32))
+        Z = (jax.random.normal(ka, (m,) + G3, jnp.float32)
+             + 1j * jax.random.normal(kb, (m,) + G3, jnp.float32))
         Z = Z.astype(jnp.complex64) * mask
         # unit rows: mixed-norm blocks poison SVQB's relative drop threshold
         # (norm-360 random rows made it drop the unit-norm warm-start carries)
         ns = 1.0 / jnp.maximum(jnp.linalg.norm(_flat(Z), axis=1), 1e-30)
         return Z * ns[:, None, None, None, None]
 
+    def rand_block(k, n):
+        # jitted at full size m (fusion keeps the transient peak ~1 block
+        # instead of ~2.5); slice down for partial fills
+        return _rand_block_jit(k)[:n]
+
     while locked_vals.size < nev:
-        locked = locked_buf  # fixed-shape view; zero rows are inert in deflation
+        # nothing locked yet -> skip deflation entirely (a zero buffer would
+        # deflate to a no-op at full streaming cost)
+        locked = locked_buf if n_locked_now > 0 else None
         key, k2 = jax.random.split(key)
         if carry is not None and carry.shape[0] > 0:
             X = jnp.concatenate([carry, rand_block(k2, m - carry.shape[0])], axis=0)
         else:
             X = rand_block(k2, m)
         X = ortho_block(deflate(X, locked, chunk_rows))
-        HX = op.theta(X); stats.theta_applications += m
-        P = HP = None
+        HX = apply_chunked(op.theta, X, theta_chunk); stats.theta_applications += m
+        P = None
         n_lock = min(m - guard, nev - locked_vals.size)
         it = 0
         rn = np.full(m, np.inf)
@@ -222,14 +245,13 @@ def lobpcg_blocks(
                 print(f"    it {it:3d}  lam[0,{n_lock-1},{m-1}] = {lo[0]:.4f} {lo[n_lock-1]:.4f} "
                       f"{lo[-1]:.4f}  res q50/q90 {np.quantile(rn,0.5):.1e}/{np.quantile(rn,0.9):.1e}"
                       f"  leak {leak:.1e}", flush=True)
-            W = op.precondition(R) * mask
+            W = apply_chunked(op.precondition, R, theta_chunk) * mask
             del R  # big block, no longer needed
             W = deflate(W, locked, chunk_rows)
             for _ in range(2):
                 Cxw = gram(X, W)
                 W = W - jnp.tensordot(Cxw.T, X, axes=(1, 0), precision=_HI)
             W = ortho_block(W)
-            HW = op.theta(W); stats.theta_applications += m
             if P is not None:
                 for _ in range(2):
                     Cxp = gram(X, P); Cwp = gram(W, P)
@@ -240,22 +262,32 @@ def lobpcg_blocks(
                 wp, Vp = np.linalg.eigh(Gp)
                 keepp = wp > _SVQB_DROP * max(wp.max(), 1e-300)
                 if not keepp.any():
-                    P = HP = None
+                    P = None
                 else:
-                    # FIXED-SHAPE whitening: dropped directions become zero
-                    # rows (handled by the dead-row penalty) instead of
-                    # shrinking P — a varying P shape forces XLA to recompile
-                    # every downstream kernel every iteration (measured: GPU
-                    # idle, 22 CPU cores of compiler churn, ~no progress).
+                    # FIXED-SHAPE whitening (zero rows for dropped directions —
+                    # varying shapes force per-iteration XLA recompilation)
                     scale = np.where(keepp, 1.0 / np.sqrt(np.where(keepp, wp, 1.0)), 0.0)
                     Tp = jnp.asarray(Vp * scale[None, :], jnp.complex64)
                     P = jnp.tensordot(Tp.T, P, axes=(1, 0), precision=_HI)
-                    HP = op.theta(P); stats.theta_applications += int(P.shape[0])
             blocks = [X, W] if P is None else [X, W, P]
-            hblocks = [HX, HW] if P is None else [HX, HW, HP]
-            A = np.asarray(
-                jnp.concatenate([jnp.concatenate([gram(a, hb) for hb in hblocks], axis=1)
-                                 for a in blocks], axis=0)).astype(np.complex128)
+            # Rayleigh-Ritz matrix assembled CHUNK-WISE: H(W), H(P) are applied
+            # in theta_chunk slices and discarded — storing full HW/HP blocks
+            # (2 x 1.07 GB at m=32, 128^3) was the difference between fitting
+            # and OOM on 12 GB. A[i,j] = <S_i, H S_j>; Hermitian.
+            nb = len(blocks) * m
+            A = np.zeros((nb, nb), np.complex128)
+            for bi, Bk in enumerate(blocks):
+                A[bi * m:(bi + 1) * m, 0:m] = np.asarray(gram(Bk, HX))
+            col = m
+            for Bsrc in blocks[1:]:
+                for s in range(0, m, theta_chunk):
+                    piece = Bsrc[s:s + theta_chunk]
+                    Hc = op.theta(piece); stats.theta_applications += int(piece.shape[0])
+                    for bi, Bk in enumerate(blocks):
+                        A[bi * m:(bi + 1) * m, col + s:col + s + piece.shape[0]] = (
+                            np.asarray(gram(Bk, Hc)))
+                    del Hc
+                col += m
             A = (A + A.conj().T) / 2
             rownorm = np.concatenate(
                 [np.asarray(jnp.linalg.norm(_flat(Bk), axis=1)) for Bk in blocks])
@@ -265,21 +297,20 @@ def lobpcg_blocks(
             A[np.diag_indices_from(A)] += np.where(dead, penalty, 0.0)
             wA, VA = np.linalg.eigh(A)
             C = jnp.asarray(VA[:, :m], jnp.complex64)
+            del HX
             Xn = combine(C, *blocks)
             Xn = deflate(Xn, locked, chunk_rows)
             xs = 1.0 / jnp.maximum(jnp.linalg.norm(_flat(Xn), axis=1), 1e-20)
             Xn = Xn * xs[:, None, None, None, None]
-            HXn = op.theta(Xn); stats.theta_applications += m
             Cp = jnp.asarray(np.asarray(C).copy(), jnp.complex64).at[:m].set(0)
             P = combine(Cp, *blocks)
-            HP = combine(Cp, *hblocks)
-            del blocks, hblocks, W, HW  # release before the next theta application
+            del blocks, W
             ps = 1.0 / jnp.maximum(jnp.linalg.norm(_flat(P), axis=1), 1e-20)
             P = P * ps[:, None, None, None, None]
-            HP = HP * ps[:, None, None, None, None]
-            X, HX = Xn, HXn
+            X = Xn
+            HX = apply_chunked(op.theta, X, theta_chunk); stats.theta_applications += m
         # honest final values with fresh HX
-        HX = op.theta(X); stats.theta_applications += m
+        HX = apply_chunked(op.theta, X, theta_chunk); stats.theta_applications += m
         lam = np.asarray(jnp.real(jnp.sum(_flat(X).conj() * _flat(HX), axis=1)))
         Rf = HX - jnp.asarray(lam)[:, None, None, None, None] * X
         rn = np.asarray(jnp.linalg.norm(_flat(Rf), axis=1)
