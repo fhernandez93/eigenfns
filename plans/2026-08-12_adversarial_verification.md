@@ -42,7 +42,7 @@ REFUTED = claim was wrong (as stated); FIXED = code changed in response.
 | C3: λ_max not certified | BUG-MINOR | FIXED (2 seeds + margin + docstring). |
 | S5: dead-row penalty not spectrum-scaled | SMELL | FIXED (scales with max diag(A)). |
 | S3/S4/C5: dead median-shift computation, discarded HP updates, unused n_dim | SMELL | FIXED (removed). |
-| T2: float64 vs the notebook's float32 boundary membership (O(tens) voxels at 500³) | BUG-MINOR | Documented in structure.py; "exact" claim softened to "algorithmically exact". |
+| T2: float64 vs the notebook's float32 boundary membership (O(tens) voxels at 500³) | BUG-MINOR | Documented in structure.py; "exact" claim softened to "algorithmically exact". **Quantified 2026-08-13 against the notebook's literal function: 0 differing voxels at 64³, 5 of 16.7M (3.0e-7) at 256³ — spectrally negligible.** Golden ff 0.21733856 (64³) now carries notebook provenance in the test. |
 | T3: radius-poking rods miss periodic wrap voxels — **shared with the parent notebook** | BUG-MINOR (convention) | Documented; deliberately NOT fixed (fidelity to the montage convention wins); any fix goes behind a flag + re-validation. |
 | S2 (carry not deflated), C1 (locked-prefix aliasing), O3/O4 (fft/meshgrid, per-k ref) | hypothesized, NOT bugs | Confirmed correct by trace. |
 | U2: no solver/chebyshev tests | GAP | Test vs dense operator added to the Phase-3 test plan (pre-registered). |
