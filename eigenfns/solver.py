@@ -59,6 +59,17 @@ def combine(C, *blocks):
 
 _DEFLATE_CHUNK = 128
 
+from functools import partial as _partial
+
+
+@_partial(jax.jit, donate_argnums=(0,))
+def _buf_update(buf, xl, start):
+    """In-place (donated) write of a locked block into the capacity buffer.
+
+    A plain buf.at[s:e].set(xl) materializes a second full-size copy of the
+    buffer (3 GB at 64^3/680) — the OOM that survived three other fixes."""
+    return jax.lax.dynamic_update_slice_in_dim(buf, xl, start, axis=0)
+
 
 def deflate(X, locked):
     """Project out the locked subspace (single c64 pass), in fixed-size chunks.
@@ -137,7 +148,7 @@ def lobpcg_blocks(
     if initial_locked is not None:
         init = jnp.asarray(initial_locked)
         n_locked_now = int(init.shape[0])
-        locked_buf = locked_buf.at[:n_locked_now].set(init)
+        locked_buf = _buf_update(locked_buf, init, 0)
         del init
     locked_vals = (np.empty((0,)) if initial_vals is None
                    else np.asarray(initial_vals, np.float64))
@@ -268,7 +279,7 @@ def lobpcg_blocks(
         carry_idx = np.asarray(order[n_lock:])
         Xl = X[lock_idx]
         carry = X[carry_idx]
-        locked_buf = locked_buf.at[n_locked_now:n_locked_now + Xl.shape[0]].set(Xl)
+        locked_buf = _buf_update(locked_buf, Xl, n_locked_now)
         n_locked_now += int(Xl.shape[0])
         locked_vals = np.concatenate([locked_vals, lam[lock_idx]])
         stats.rounds.append({
