@@ -99,17 +99,23 @@ def lobpcg_blocks(
     precond_shift: str = "median",
     verbose: bool = True,
     log_every: int = 0,
+    initial_locked=None,
+    initial_vals=None,
+    on_block=None,
 ):
     """Bottom-up deflated block LOBPCG. Returns (eigenvalues, locked_vectors, stats).
 
     Locks the lowest (m - guard) Ritz pairs of each block once their relative
     residuals pass `tol`; the guard Ritz vectors seed the next block.
+    `initial_locked`/`initial_vals` resume from a previous partial solve;
+    `on_block(block_idx, lam_block, X_block)` fires after each lock (numpy args).
     """
     key = jax.random.PRNGKey(seed)
     G3 = (2, op.grid_size, op.grid_size, op.grid_size)
     mask = (op.basis.kn > 0).astype(jnp.float32)[None, None]
-    locked = None
-    locked_vals = np.empty((0,))
+    locked = None if initial_locked is None else jnp.asarray(initial_locked)
+    locked_vals = (np.empty((0,)) if initial_vals is None
+                   else np.asarray(initial_vals, np.float64))
     stats = SolveStats()
     t0 = time.perf_counter()
     carry = None  # guard Ritz vectors from the previous block
@@ -240,6 +246,8 @@ def lobpcg_blocks(
             "locked": int(locked_vals.size),
             "max_res_locked": float(rn[lock_idx].max()),
         })
+        if on_block is not None:
+            on_block(int(locked_vals.size), lam[lock_idx], np.asarray(Xl))
         if verbose:
             print(f"  locked {locked_vals.size:4d}/{nev} (+{n_lock})  iters {it+1:3d}  "
                   f"lam [{lam[lock_idx][0]:.4f}..{lam[lock_idx][-1]:.4f}]  "
@@ -258,3 +266,32 @@ def lobpcg_blocks(
     locked_vals = locked_vals[order]
     locked = locked[np.asarray(order)]
     return locked_vals[:nev], locked, stats
+
+
+def lobpcg_blocks_resumable(op, nev, checkpointer=None, resume=False, **kw):
+    """`lobpcg_blocks` with per-block checkpointing and auto-resume.
+
+    Blocks are stored append-only via `eigenfns.io.BlockCheckpointer`; a
+    resumed run re-deflates against all previously locked vectors (the guard
+    warm-start of the interrupted block is lost — only that block repeats).
+    """
+    if checkpointer is None:
+        return lobpcg_blocks(op, nev, **kw)
+    init_vals = init_vecs = None
+    n_blocks = 0
+    if resume:
+        init_vals, init_vecs, n_blocks, _ = checkpointer.load()
+        if init_vals is not None:
+            print(f"  resuming: {len(init_vals)} bands from {n_blocks} "
+                  f"checkpointed blocks", flush=True)
+            if len(init_vals) >= nev:
+                return init_vals[:nev], jnp.asarray(init_vecs[:nev]), SolveStats()
+    state = {"i": n_blocks}
+
+    def on_block(n_locked_total, lam_block, X_block):
+        checkpointer.save_block(state["i"], lam_block, X_block,
+                                extra={"n_locked": n_locked_total})
+        state["i"] += 1
+
+    return lobpcg_blocks(op, nev, initial_locked=init_vecs, initial_vals=init_vals,
+                         on_block=on_block, **kw)
