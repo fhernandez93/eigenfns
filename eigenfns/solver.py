@@ -170,7 +170,13 @@ def lobpcg_blocks(
                 if not keepp.any():
                     P = HP = None
                 else:
-                    Tp = jnp.asarray(Vp[:, keepp] / np.sqrt(wp[keepp])[None, :], jnp.complex64)
+                    # FIXED-SHAPE whitening: dropped directions become zero
+                    # rows (handled by the dead-row penalty) instead of
+                    # shrinking P — a varying P shape forces XLA to recompile
+                    # every downstream kernel every iteration (measured: GPU
+                    # idle, 22 CPU cores of compiler churn, ~no progress).
+                    scale = np.where(keepp, 1.0 / np.sqrt(np.where(keepp, wp, 1.0)), 0.0)
+                    Tp = jnp.asarray(Vp * scale[None, :], jnp.complex64)
                     P = jnp.tensordot(Tp.T, P, axes=(1, 0))
                     HP = op.theta(P); stats.theta_applications += int(P.shape[0])
             blocks = [X, W] if P is None else [X, W, P]

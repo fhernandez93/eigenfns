@@ -105,6 +105,37 @@ guard policy. Alternatives if the stall resists: (a) MPB-style small blocks (~16
 deflation; (b) one full-width block (needs host streaming ≥128³); (c) Chebyshev filter
 for the window + count verification.
 
+## Literature-reproduction reference (srs, ε=13) — measured 2026-08-13
+
+MPB CLI, conventional 8-vertex cubic cell, cylinder rods, res 32, tol 1e-6,
+21-point k-sampling (quick settings): gap between bands 4|5 (=primitive 2|3):
+
+| r/a_c | gap Δω/ω |
+|---|---|
+| 0.090 | 21.2% |
+| 0.105 | 25.9% |
+| 0.117 | 27.8% |
+| 0.130 | **28.0%** |
+| 0.145 | 26.9% |
+
+Optimum ≈ 28.0% at r/a_c ≈ 0.12–0.13 — reproduces Sellers's published 28.06%
+(SNG, ε=13); r/a_c≈0.117 gives ff≈18% matching their 17.88%. The research
+agent's "r/a = 0.2554" is a different (unidentified) unit convention — at face
+value it gives a 2.9% gap (measured) and >50% ff, inconsistent with their own
+ff; our scan recovers their actual geometry. G2 gate material.
+
+## XLA fixed-shape lesson (2026-08-13, cost ~1 h of debugging)
+
+The solver's P-block whitening originally SHRANK P to its kept rank — a
+different array shape almost every iteration → XLA recompiled every downstream
+kernel every iteration: GPU idle at 0%, ~22 CPU cores of compiler churn,
+essentially zero progress at 64³ (the 32³ parity run escaped this only because
+CPU compilation is cheap). Fix: all block shapes are static — dropped
+directions become zero rows (the dead-row penalty machinery already handles
+them). Rule for the library: **every jitted computation must see a fixed set
+of shapes across the whole run**; rank adaptivity is expressed by zero rows,
+never by shape changes.
+
 ## Environment / hazards
 
 - `stage_b_resumable.py` from the ML repo auto-resumes on boot and takes ~9 GB GPU for
