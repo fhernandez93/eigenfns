@@ -14,6 +14,9 @@ from eigenfns.operator import MaxwellOperator
 from eigenfns.solver import lobpcg_blocks
 
 
+pytestmark = pytest.mark.slow  # ~18 min on CPU; run explicitly with -m slow
+
+
 @pytest.fixture(scope="module")
 def small_problem():
     rng = np.random.default_rng(3)
