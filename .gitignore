@@ -1,0 +1,9 @@
+results/
+Structures/
+*.h5
+*.npz
+*.npy
+__pycache__/
+.ipynb_checkpoints/
+*.png
+!band_montage_398_607_15_non_ideal.png
