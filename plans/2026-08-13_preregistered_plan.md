@@ -67,6 +67,16 @@ approves or by default when building starts). Template: the ML project's
 Rules: no gate weakening — a fail is reported as a fail with diagnosis; every
 gate's outcome goes through an adversarial pass before being claimed.
 
+## 2b. Pre-registered E3 expectation (written before E3 finished)
+
+At 64³ on the N=1000 gold structure, the largest spectral gap in the interior
+should fall between **solver bands 498|499** (= MPB bands 500|501). If it
+falls elsewhere by more than ±2, the band-arithmetic claim or the solver's
+completeness is wrong and Phase 2 does not freeze until resolved. Note the
+gold structure is a *well-annealed* network — Sellers's ensembles A–C show
+in-gap defect modes for poorly-annealed samples; a handful of near-gap
+localized modes narrowing the clean gap is acceptable, a displaced gap is not.
+
 ## 3. Performance target (pre-registered)
 
 Full window (bottom-up to band ~620 + guard) for one N=1000 structure at 128³:

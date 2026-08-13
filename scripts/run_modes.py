@@ -80,6 +80,7 @@ def main() -> int:
     ck = BlockCheckpointer(outdir, "solve", meta={
         "structure": str(args.structure), "grid": args.grid, "N": N, "L": L,
         "tol": args.tol, "m": args.m, "guard": args.guard, "nev": nev,
+        "band_lo": args.band_lo, "band_hi": args.band_hi,
         "band_numbering": "MPB (bands 1-2 are the omega=0 Gamma modes)",
     })
     t0 = time.perf_counter()
