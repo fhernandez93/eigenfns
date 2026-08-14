@@ -56,3 +56,27 @@ affected experiments (E3, E4) relaunched on fixed code. One pre-registration
 item was created (±2 numbering convention). The completeness gate was
 redesigned around deflated-probe KPM. All core physics claims survived
 refutation with independent derivations.
+
+## Final review round (2026-08-14) — gates + REPORT
+
+Independent recomputation CONFIRMED to all printed digits: G3w (3.5458e-5 max,
++2 alignment unique, index slip excluded at 235× margin), G8 (gap 500|501,
+Δν/ν 0.020755, runner-up margin 1.8×), G9 (2.441e-7), and the G5 attribution
+(band-500 spread = 55× the Weyl bound, 1800× the measured solver error —
+rasterization, not solver).
+
+REFUTED/OVERBROAD, all corrected in REPORT.md: §0 "all gates passed" (G5
+failed); "50×" headline (measured pairings: 4.3× CPU-matched / ~18× GPU
+time-to-300 / 34× full-window; tolerance+precision+threading confounds now
+stated); G1 presented as folded (in truth: not run; no k≠Γ validation
+exists — now stated); G4 scope (lowest-28 only — window clusters not
+field-compared — now stated); G6 "≡0" (0.21±0.02 is a 10.9σ smearing bias,
+inconsistent with a missed band — restated) and its scope narrowing
+(completeness proven below gap only — now stated); G7 orthonormality was
+intra-chunk only — **closed by new measurement**: full 210×210 window Gram
+worst |G−I| = 1.16e-5; window-vs-locked cross overlap ≤ 8.9e-8; "novel/firsts"
+→ "none found"; undisclosed gap-width non-monotonicity (2.35→1.93→2.08%) and
+the larger 114|115 shell jump at 96/128³ — both now disclosed; plan's
+inconsistent fallback triggers noted. Registered-but-unexecuted protocol
+recorded: G5's ω(tol) sweep and G=160 point; G9 absent from gate_results.json
+(numbers verified from the prec48 npy files).

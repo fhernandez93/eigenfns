@@ -20,9 +20,11 @@ vertices, periodic supercell, "non-ideal" DLW-style elliptical rods, ε = 8.57).
 
 - **Faithful**: band-by-band parity with MPB (fp64, tol 10⁻⁹) on identical
   discrete problems is **max Δω/ω = 3.5×10⁻⁵ over 658 bands** — the entire
-  montage window including the gap (median 1.4×10⁻⁶). All pre-registered gates
-  that have run have passed; one gate was amended (G6, below) with the
-  original failure honestly recorded.
+  montage window including the gap (median 1.4×10⁻⁶). Gate outcomes: seven
+  pass, one (G5 convergence) **ran and failed as registered** on the localized
+  gap-edge band and is reported as a finding; G1 as registered was not
+  executed (all production claims are Γ-point; no k≠Γ parity exists); G6 was
+  amended after a mis-designed first version, at a scope cost stated below.
 - **The physics**: the photonic band gap of the N=1000 supercell falls between
   **bands 500 and 501** — exactly the N/2|N/2+1 position pre-registered from
   three independent sources (our own srs-crystal measurement, Sellers et al.'s
@@ -32,13 +34,19 @@ vertices, periodic supercell, "non-ideal" DLW-style elliptical rods, ε = 8.57).
   montage's grey/bright row pattern mirrors the reference tile-for-tile in
   character.
 - **Fast**: one full window solve (611 bands at 128³ ≈ 4.2 M-dimensional
-  operator, ~130k operator applications) takes **5.5 h**; the same-resolution
-  MPB reference needs 2h22m for 300 bands at 64³ on this CPU — at matched
-  64³/300-band work our GPU path is ≈ **50× faster** (33 min CPU-JAX vs 2h22m
-  MPB per 300 bands; 941 s GPU for 680 bands).
-- **Novel**: no published solver does 3-D supercell interior bands on GPU in
-  JAX (methods survey, 2026-08-12), and no published band structure exists for
-  amorphous networks with aspect-ratio-2.5 elliptical rods — both are firsts.
+  operator, ~130k operator applications) takes **5.5 h**. Against MPB at
+  matched 300-band/64³ work: **~18×** (GPU, ~470 s from our own block logs, vs
+  8,545 s single-process fp64 MPB at tol 1e-7); ~34× comparing full windows
+  (941.8 s for 680 bands vs 31,973 s for 660). Confounds stated up front:
+  MPB delivered ~1e-7-class eigenvalues vs our ~1e-5-class (worth ~1.3–1.7×),
+  fp64 vs c64 (~2×), and single-process vs a 32-thread host — the
+  tolerance-matched, core-for-core advantage is likely single-digit; the win
+  is the GPU + the 12 GB engineering.
+- **Prior work**: our 2026-08-12 methods survey found no published 3-D
+  supercell interior-band Maxwell eigensolver on GPU (closest: FAME's CUDA
+  lowest-band solver; MPB is CPU-only), and no published band structure for
+  amorphous networks with aspect-ratio ~2.5 elliptical rods. Stated as "none
+  found", not proven firsts.
 
 ## 1. Problem and conventions (Phase 1 findings)
 
@@ -84,16 +92,16 @@ buffer pileup; stale cross-block references; functional-update buffer copies).
 
 | gate | result | measured |
 |---|---|---|
-| G1 crystal parity | folded into G3/G3w protocol (identical-grid design) | 32³ pilot: 4.3×10⁻⁶ over 148 bands |
+| G1 crystal parity | **NOT RUN as registered** | the srs-supercell/k≠Γ parity was never executed; production claims are Γ-only. The identical-grid protocol was validated on the disordered structure instead (G3/G3w). No k≠Γ validation exists in this project |
 | G2 literature reproduction | **PASS** | srs gap 28.0% at optimum (published 28.06%); ff at optimum ≈18% (published 17.88%) |
 | G3 disordered parity, 300 bands 64³ | **PASS** | max Δω/ω 9.0×10⁻⁶, median 1.4×10⁻⁶ (gate 10⁻⁴) |
 | G3w full-window parity, 660 bands 64³ | **PASS** | max Δω/ω 3.5×10⁻⁵, median 1.4×10⁻⁶ |
-| G4 degeneracy subspaces | **PASS** | 6 clusters (pairs+triples), min cos principal angle 0.999986 vs MPB H-fields (gate 0.99); +2 index offset empirically confirmed |
-| G5 convergence ω(G) | **FAIL as registered — reported, diagnosed** | 5/6 sampled bands monotone, Richardson residual ≤0.23% at 128³; band 500 (upper gap edge, localized) non-monotone with 0.27% spread across 2× resolution — binary re-rasterization is not a nested refinement, and gap-edge localized modes track interface-voxel changes. Finding: the binary-ε convention's discretization (~0.2–0.3%), not the solver (~10⁻⁵), limits gap-edge accuracy |
-| G6 completeness | **PASS (amended)** | monotone locking; deflated-probe KPM at mid-gap, degree 8000: 0.21 ± 0.02 missed (≡ 0) |
-| G7 residuals + orthonormality | **PASS** | worst rel-res 9.8×10⁻⁵ (tol 1.2×10⁻⁴); orthonormality 1.4×10⁻⁴ |
-| G8 montage | **PASS** (quantitative); qualitative match shown side-by-side | gap between bands 500|501 (pre-registered value); montage regenerated, layout + gap-row pattern match |
-| G9 precision (c64 vs c128) | **PASS** | max Δω/ω 2.4×10⁻⁷ over 96 bands (400× margin) |
+| G4 degeneracy subspaces | **PASS (scope-limited)** | 6 low-lying clusters (bands ≤30) at cos ≥0.999986 vs MPB H-fields; +2 offset confirmed. Window clusters (64% of adjacent window pairs qualify) were NOT field-compared — window degeneracy is certified only indirectly (eigenvalue parity 3.5×10⁻⁵ + full-window orthonormality 1.2×10⁻⁵) |
+| G5 convergence ω(G) | **FAIL as registered — reported, diagnosed; partially executed** | Executed 64/96/128³ (registered: 96/128/160 — 160³ not run; registered ω(tol) sweep not run, deferred). 5/6 bands monotone, Richardson residual ≤0.23% at 128³; band 500 (gap edge, localized) non-monotone, 0.27% spread. Attribution confirmed by review: spread is 55× the tol-1e-4 Weyl bound and 1800× the measured solver-vs-MPB error at that band — rasterization, not solver |
+| G6 completeness | **PASS below the gap (amended)** | monotone locking; deflated-probe KPM at mid-gap, degree 8000: 0.21 ± 0.02 — a small positive bias consistent with smearing-tail leakage and inconsistent with ≥1 missed band. Scope: completeness is *proven* below the gap only; above-gap (bands 501–613) rests on monotone locking + 64³ parity |
+| G7 residuals + orthonormality | **PASS** | worst rel-res 9.8×10⁻⁵ (registered tol 1×10⁻⁴); full 210×210 window Gram (all cross terms): worst |G−I| = 1.2×10⁻⁵; window-vs-locked cross overlap ≤ 9×10⁻⁸ (measured after review) |
+| G8 montage | **PASS** (quantitative); qualitative match shown side-by-side | gap between bands 500|501 (pre-registered); montage regenerated. Disclosures: a low-band shell-structure jump (114|115) is relatively larger at 96³/128³ (0.023–0.025) than the 500|501 gap; and the gap width is non-monotone in resolution (2.35% → 1.93% → 2.08% at 64/96/128³) — same rasterization sensitivity as G5, i.e. ~10% relative uncertainty on the gap width |
+| G9 precision (c64 vs c128) | **PASS** | max Δω/ω 2.4×10⁻⁷ over 96 bands (400× margin; independently recomputed in the final review) |
 
 **The G6 amendment (honest record).** As first implemented (count below band
 619's λ at degree 800) the gate read **86.6 phantom missing bands** — an
@@ -137,7 +145,10 @@ are reported.
 | montage render, 210 tiles @ 128³ CPU | ~25 min |
 
 The 128³ solve exceeded the pre-registered 4 h target (5.5 h, inside the 12 h
-hard cap): late-run blocks pay growing streamed-deflation cost. Identified
+hard cap; note the plan's §1.2 "2× projected" fallback trigger — 4.2 h — read
+strictly would have fired the ChebSI fallback; the §3 cap did not. The
+inconsistency is the plan's, recorded here). Late-run blocks pay growing
+streamed-deflation cost. Identified
 headroom (not yet implemented): real-field rfft specialization at Γ (≈2×
 memory + FLOPs), GPU-resident cache of hot locked chunks, larger blocks after
 the rfft memory win.
