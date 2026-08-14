@@ -31,9 +31,10 @@ def render_tile(
 
     gs = base.copy()
     gs["s"] = (eps > eps.min()).astype(np.float32).ravel(order="F")
+    # low uniform opacity so individual rods read as a translucent wireframe
     pl.add_volume(gs, scalars="s", cmap="Greys",
-                  opacity=[0.0, structure_opacity * 255], clim=[0, 3.0],
-                  show_scalar_bar=False, shade=False)
+                  opacity=[0.0, structure_opacity * 255, structure_opacity * 255],
+                  clim=[0, 6.0], show_scalar_bar=False, shade=False)
 
     if field is not None:
         f = np.asarray(field, np.float32)
@@ -41,9 +42,11 @@ def render_tile(
         f = np.clip(f / max(hi, 1e-30), 0, 1)
         gf = base.copy()
         gf["f"] = f.ravel(order="F")
-        pl.add_volume(gf, scalars="f", cmap="afmhot_r",
-                      opacity=[0.0, 0.02 * 255, 0.25 * 255, 0.65 * 255, 0.9 * 255],
-                      clim=[0, 1], show_scalar_bar=False, shade=False)
+        # reference look: mid = red-orange, high = bright yellow core ("hot"
+        # unreversed); opacity emphasizes upper-mid intensities
+        pl.add_volume(gf, scalars="f", cmap="hot",
+                      opacity=[0.0, 0.05 * 255, 0.35 * 255, 0.7 * 255, 0.9 * 255],
+                      clim=[0, 1.15], show_scalar_bar=False, shade=False)
 
     pos, azi, ele, zoom = camera
     pl.camera_position = pos
