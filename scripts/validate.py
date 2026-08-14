@@ -92,11 +92,24 @@ def gate_g6_completeness(rundir: str = "results/prod_N1000_G128") -> dict:
         op = MaxwellOperator(eps, L)
         ck = BlockCheckpointer(rd, "solve")
         lvals, lvecs, _, _ = ck.load()
-        lam_b = float(vals[min(len(vals) - 1, 618)])
+        # Threshold MID-GAP: the Jackson transition window must contain no
+        # eigenvalues, else unlocked bands inside the smearing width leak
+        # partial counts (measured: degree-800 at band 619 reads 86.6 phantom
+        # bands; see the 2026-08-14 amendment note in the experiment log).
+        d = np.diff(vals)
+        gi = int(np.argmax(d[380:620]) + 380)
+        lam_b = float((vals[gi] + vals[gi + 1]) / 2)
+        n_below = gi + 1
+        order = np.argsort(lvals, kind="stable")
+        below = np.ascontiguousarray(lvecs[order[:n_below]])
         lmax = 1.05 * lanczos_lambda_max(op)
-        est, se = kpm_count_below(op, lam_b, lmax, degree=800, n_probe=16,
-                                  locked=jnp.asarray(lvecs))
-        rec.update({"kpm_missed_below_band619": est, "kpm_se": se,
+        # degree such that the smearing half-width fits inside the gap
+        gap_w = float(vals[gi + 1] - vals[gi])
+        degree = int(min(8000, max(1600, 3.5 * np.pi * np.sqrt(lam_b * lmax) / gap_w)))
+        est, se = kpm_count_below(op, lam_b, lmax, degree=degree, n_probe=16,
+                                  locked=below)  # host numpy: streamed deflation
+        rec.update({"kpm_missed_below_midgap": est, "kpm_se": se,
+                    "kpm_degree": degree, "n_locked_below_gap": int(n_below),
                     "pass": mono and abs(est) <= max(1.0, 2 * se)})
     except Exception as e:  # GPU busy or vectors missing — partial gate
         rec.update({"kpm": f"deferred: {type(e).__name__} {e}", "pass": mono})

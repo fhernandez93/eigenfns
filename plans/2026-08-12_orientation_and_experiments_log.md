@@ -212,6 +212,30 @@ on MPB's exported grid (c64, tol 1e-4, m=40, host-streamed, CPU run): 33 min.
 Same-resolution calibration: MPB 300 bands = 2h22m CPU vs our 680 bands =
 15.7 min GPU.
 
+## G6 amendment (2026-08-14) — honest record
+
+The gate as first implemented (deflated-probe KPM count below band 619's λ at
+degree 800) measured **86.6 ± 0.9 phantom "missed" bands** — an artifact, not
+a finding: the Jackson smearing half-width at that (λ_b, λ_max, degree) is
+Δλ ≈ 0.38, which spans ~80 *unlocked* bands above the threshold, each leaking
+partial weight into the count. (That 86 bands were NOT actually missing is
+established independently: G3w matches MPB band-by-band through the window,
+and the gap appears at locked index 498 — 86 missing bands would displace it
+to ~414.) Amended gate (SC1a-style): threshold at MID-GAP — the transition
+window then contains no eigenvalues — with degree chosen so the smearing fits
+inside the measured gap width, and deflation against exactly the bands below
+the gap. Expected count 0.
+
+## Production run (2026-08-14)
+
+611 bands at 128³: solve **19,908 s = 5h32m** (31 blocks, m=32, guard=12,
+tol 1e-4, host-streamed locked set; over the 4 h target, inside the 12 h cap —
+honest miss, driven by streamed-deflation growth late in the run). The
+post-solve packaging was killed (host-RAM spike duplicating the 20.6 GB locked
+set); all 31 block checkpoints survived and outputs were rebuilt from them
+without re-solving (block-wise window gather; run_modes to be patched the same
+way). Gap at MPB 500|501, Δν/ν = 2.08% at 128³ (G8 PASS); G7 residuals PASS.
+
 ## Environment / hazards
 
 - `stage_b_resumable.py` from the ML repo auto-resumes on boot and takes ~9 GB GPU for

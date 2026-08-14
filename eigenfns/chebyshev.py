@@ -22,7 +22,7 @@ import jax.numpy as jnp
 import numpy as np
 
 from .operator import MaxwellOperator
-from .solver import _flat, gram, ortho_block, deflate, combine
+from .solver import _flat, gram, ortho_block, deflate, combine, deflate_chunk_rows
 
 
 def lanczos_lambda_max(op: MaxwellOperator, iters: int = 24, seed: int = 0,
@@ -247,8 +247,9 @@ def kpm_count_below(op: MaxwellOperator, lam_b: float, lam_max: float,
     kr, = jax.random.split(key, 1)
     Z = jnp.where(jax.random.bernoulli(kr, 0.5, G3), 1.0, -1.0).astype(jnp.complex64) * mask
     if locked is not None:
-        Z = deflate(Z, locked)
-        Z = deflate(Z, locked)
+        cr = deflate_chunk_rows(G)
+        Z = deflate(Z, locked, cr)
+        Z = deflate(Z, locked, cr)
     # three-term recurrence on the mapped operator B = (2A - lam_max)/lam_max
     def Bx(V):
         return (2.0 / lam_max) * op.theta(V) - V
