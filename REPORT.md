@@ -88,7 +88,7 @@ buffer pileup; stale cross-block references; functional-update buffer copies).
 | G2 literature reproduction | **PASS** | srs gap 28.0% at optimum (published 28.06%); ff at optimum ≈18% (published 17.88%) |
 | G3 disordered parity, 300 bands 64³ | **PASS** | max Δω/ω 9.0×10⁻⁶, median 1.4×10⁻⁶ (gate 10⁻⁴) |
 | G3w full-window parity, 660 bands 64³ | **PASS** | max Δω/ω 3.5×10⁻⁵, median 1.4×10⁻⁶ |
-| G4 degeneracy subspaces | [in flight — principal angles vs MPB H-fields] | |
+| G4 degeneracy subspaces | **PASS** | 6 clusters (pairs+triples), min cos principal angle 0.999986 vs MPB H-fields (gate 0.99); +2 index offset empirically confirmed |
 | G5 convergence ω(G) | [in flight — 64³/96³/128³ sweep] | |
 | G6 completeness | **PASS (amended)** | monotone locking; deflated-probe KPM at mid-gap, degree 8000: 0.21 ± 0.02 missed (≡ 0) |
 | G7 residuals + orthonormality | **PASS** | worst rel-res 9.8×10⁻⁵ (tol 1.2×10⁻⁴); orthonormality 1.4×10⁻⁴ |
