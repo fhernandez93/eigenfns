@@ -104,6 +104,9 @@ def deflate(X, locked, chunk_rows=_DEFLATE_CHUNK):
             chunk = jnp.asarray(chunk)  # H2D stream
         C = gram(chunk, X)
         X = X - jnp.tensordot(C.T, chunk, axes=(1, 0), precision=_HI)
+        # barrier: async dispatch otherwise keeps every X-version + chunk buffer
+        # live simultaneously (~10 GB transient with 6 chunks at 128^3)
+        X.block_until_ready()
     return X
 
 
@@ -342,6 +345,20 @@ def lobpcg_blocks(
         })
         if on_block is not None:
             on_block(int(locked_vals.size), lam[lock_idx], np.asarray(Xl))
+        # release this block's arrays before the next block allocates: stale
+        # X/HX/P — and the last iteration's R/W and the final-residual Rf —
+        # kept ~6 GB alive across the boundary (OOM at 128^3)
+        del X, HX, Xl, Rf
+        R = W = P = None
+        import gc
+        gc.collect()
+        if verbose:
+            try:
+                _ms = jax.local_devices()[0].memory_stats() or {}
+                print(f"    [block boundary] GPU in_use "
+                      f"{_ms.get('bytes_in_use', 0)/2**30:.2f} GiB", flush=True)
+            except Exception:
+                pass
         if verbose:
             print(f"  locked {locked_vals.size:4d}/{nev} (+{n_lock})  iters {it+1:3d}  "
                   f"lam [{lam[lock_idx][0]:.4f}..{lam[lock_idx][-1]:.4f}]  "

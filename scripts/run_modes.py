@@ -22,9 +22,7 @@ from pathlib import Path
 # Battle-tested GPU environment (see plans/ experiment log): on-demand async
 # allocation (desktop holds ~1-1.5 GB; BFC fragmentation OOMs), no cuBLASLt
 # autotune profiling (its scratch OOMs at 128^3). Must be set before jax import.
-os.environ.setdefault("XLA_PYTHON_CLIENT_PREALLOCATE", "false")
-os.environ.setdefault("XLA_PYTHON_CLIENT_MEM_FRACTION", "0.95")
-os.environ.setdefault("TF_GPU_ALLOCATOR", "cuda_malloc_async")
+os.environ.setdefault("XLA_PYTHON_CLIENT_ALLOCATOR", "platform")
 os.environ.setdefault("XLA_FLAGS",
                       "--xla_gpu_enable_cublaslt=false --xla_gpu_autotune_level=0")
 
@@ -57,8 +55,9 @@ def main() -> int:
     ap.add_argument("--grid", type=int, default=128)
     ap.add_argument("--band-lo", type=int, default=398)
     ap.add_argument("--band-hi", type=int, default=607)
-    ap.add_argument("--m", type=int, default=40)
-    ap.add_argument("--guard", type=int, default=16)
+    ap.add_argument("--m", type=int, default=32)
+    ap.add_argument("--guard", type=int, default=12)
+    ap.add_argument("--theta-chunk", type=int, default=8)
     ap.add_argument("--tol", type=float, default=1e-4)
     ap.add_argument("--tag", default=None)
     ap.add_argument("--resume", action="store_true")
@@ -96,7 +95,8 @@ def main() -> int:
     t0 = time.perf_counter()
     vals, vecs, stats = lobpcg_blocks_resumable(
         op, nev, m=args.m, guard=args.guard, tol=args.tol,
-        checkpointer=ck if True else None, resume=args.resume)
+        theta_chunk=args.theta_chunk, locked_storage="host", log_every=25,
+        checkpointer=ck, resume=args.resume)
     print(f"solve wall {time.perf_counter()-t0:.0f}s, theta applications "
           f"{stats.theta_applications}", flush=True)
 
