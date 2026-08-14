@@ -167,6 +167,26 @@ spectrum, no out-of-order recoveries).
 - E4 (48³): c64 tol 1e-4 vs c128 tol 1e-6 over 96 bands: **max Δω/ω =
   2.4e-7, median 4.9e-8** — precision gate passed with 400× margin.
 
+## 128³ RESOLVED (2026-08-14): the full memory campaign, final state
+
+Smoke: 64 bands at 128³ in 771 s (4 blocks, m=32, guard=12, theta_chunk=8,
+host-streamed locked storage), zero OOM. Production launched (bands→611).
+The complete recipe that fits 12 GB at 128³:
+- allocator: **XLA_PYTHON_CLIENT_ALLOCATOR=platform** (JAX's env var —
+  TF_GPU_ALLOCATOR is a TensorFlow variable and was a silent no-op; BFC
+  fragments; cuda_async's up-front reservation collides with the desktop's
+  ~1.3 GB) + --xla_gpu_enable_cublaslt=false --xla_gpu_autotune_level=0
+  (cublasLt autotune profiling wants ~2 GB scratch it can't get);
+- m=32 block, theta_chunk=8 (bounds cuFFT batch workspace), deflate chunks
+  ~0.75 GB with a **block_until_ready barrier per chunk** (async dispatch
+  otherwise keeps every X-version live: ~10 GB transient);
+- chunk-assembled Rayleigh-Ritz (no stored HW/HP: −2 persistent blocks);
+- **block-boundary cleanup of ALL stale arrays (X, HX, Xl, Rf, R, W)** — the
+  final-residual Rf and the last iteration's R/W retained ~3.2 GB invisibly;
+  this was the last OOM standing (diagnosed by step-wise nvidia-smi probes
+  after allocator stats proved misleading: platform reports 0 in_use).
+Steady-state ~4.4 GB peak per iteration + streamed chunks; ~5.5 GB headroom.
+
 ## The 64³→680-band memory war (four real bugs, all now fixed)
 
 1. Temporaries' lifetimes (R, W, HW, block lists) → ~2× peak → OOM; fixed with
