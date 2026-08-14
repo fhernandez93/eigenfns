@@ -89,7 +89,7 @@ buffer pileup; stale cross-block references; functional-update buffer copies).
 | G3 disordered parity, 300 bands 64³ | **PASS** | max Δω/ω 9.0×10⁻⁶, median 1.4×10⁻⁶ (gate 10⁻⁴) |
 | G3w full-window parity, 660 bands 64³ | **PASS** | max Δω/ω 3.5×10⁻⁵, median 1.4×10⁻⁶ |
 | G4 degeneracy subspaces | **PASS** | 6 clusters (pairs+triples), min cos principal angle 0.999986 vs MPB H-fields (gate 0.99); +2 index offset empirically confirmed |
-| G5 convergence ω(G) | [in flight — 64³/96³/128³ sweep] | |
+| G5 convergence ω(G) | **FAIL as registered — reported, diagnosed** | 5/6 sampled bands monotone, Richardson residual ≤0.23% at 128³; band 500 (upper gap edge, localized) non-monotone with 0.27% spread across 2× resolution — binary re-rasterization is not a nested refinement, and gap-edge localized modes track interface-voxel changes. Finding: the binary-ε convention's discretization (~0.2–0.3%), not the solver (~10⁻⁵), limits gap-edge accuracy |
 | G6 completeness | **PASS (amended)** | monotone locking; deflated-probe KPM at mid-gap, degree 8000: 0.21 ± 0.02 missed (≡ 0) |
 | G7 residuals + orthonormality | **PASS** | worst rel-res 9.8×10⁻⁵ (tol 1.2×10⁻⁴); orthonormality 1.4×10⁻⁴ |
 | G8 montage | **PASS** (quantitative); qualitative match shown side-by-side | gap between bands 500|501 (pre-registered value); montage regenerated, layout + gap-row pattern match |
@@ -145,9 +145,13 @@ the rfft memory win.
 ## 6. Honest limitations
 
 - ε(r) is the montage's binary convention; MPB-style subpixel smoothing is
-  deliberately NOT applied (fidelity to the reference). The smoothing
-  sensitivity is bounded by the G5 resolution sweep rather than a Kottke
-  implementation.
+  deliberately NOT applied (fidelity to the reference). The G5 sweep bounds
+  the consequence: extended-band frequencies carry ≤0.23% residual at 128³;
+  the localized gap-edge band 500 carries ~0.27% and converges
+  non-monotonically (binary re-rasterization is not nested) — the G5 gate
+  FAILED as registered on that band and the failure is reported, not waived.
+  Sub-0.1% gap-edge physics would require the smoothed-ε convention (a
+  deliberate departure from the montage).
 - The ±2 band-numbering convention vs the original montage is undecidable
   from local artifacts (flag provided).
 - 5.5 h at 128³ misses the 4 h target (honest miss; headroom identified).
