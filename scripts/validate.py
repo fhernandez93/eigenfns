@@ -169,8 +169,38 @@ def gate_g8_gap_position(rundir: str = "results/prod_N1000_G128") -> dict:
             "pass": abs(mpb_band - 500) <= 2}
 
 
+def gate_g5_convergence() -> dict:
+    """G5: omega(G) for sampled window bands at 64/96/128 (montage-convention
+    binary eps at each resolution; solver bands = MPB band - 2)."""
+    f64 = ROOT / "results/exp/e3_vals_G64.npy"
+    f96 = ROOT / "results/conv_N1000_G96/eigenvalues_all.npy"
+    f128 = ROOT / "results/prod_N1000_G128/eigenvalues_all.npy"
+    for f in (f64, f96, f128):
+        if not f.exists():
+            return {"gate": "G5 convergence", "skip": f"no {f}"}
+    v = {g: np.load(f) for g, f in ((64, f64), (96, f96), (128, f128))}
+    sample = [396, 448, 498, 499, 548, 605]  # solver indices (MPB -2), 1-based
+    rows, monotone = [], True
+    for b in sample:
+        w = {g: float(np.sqrt(v[g][b - 1])) for g in (64, 96, 128)}
+        d64, d96 = w[64] - w[128], w[96] - w[128]
+        same_sign = d64 * d96 >= 0 and abs(d96) <= abs(d64)
+        monotone &= same_sign
+        # Richardson-style: order p from ratio, extrapolated residual at 128
+        ratio = abs(d64 / d96) if d96 else float("inf")
+        resid128 = abs(d96) / (ratio - 1) if ratio > 1.05 else float("nan")
+        rows.append({"mpb_band": b + 2, "w64": w[64], "w96": w[96],
+                     "w128": w[128], "monotone": same_sign,
+                     "est_resid_128_rel": (resid128 / w[128]) if resid128 == resid128 else None})
+    worst = max((r["est_resid_128_rel"] or 0.0) for r in rows)
+    return {"gate": "G5 convergence (64/96/128)", "bands": rows,
+            "monotone_all": monotone, "worst_est_resid_128_rel": worst,
+            "pass": monotone}
+
+
 ALL = {"g2": gate_g2_literature, "g3": gate_g3_disordered_300,
-       "g3w": gate_g3w_full_window, "g6": gate_g6_completeness,
+       "g3w": gate_g3w_full_window, "g5": gate_g5_convergence,
+       "g6": gate_g6_completeness,
        "g7": gate_g7_residuals, "g8": gate_g8_gap_position}
 
 
