@@ -319,7 +319,18 @@ investigation §6):
 - The ±2 band-numbering ambiguity vs the original cluster convention remains
   (inherited open item; MPB numbering used throughout, flag available).
 - N=10k absolute band indices carry the KPM placement uncertainty (±13);
-  I2 certifies the window population, not the absolute index.
+  I2 certifies the window population, not the absolute index. The montage
+  tiles are labelled 4942–5074, from N(1.757) = 4939.1 (+3 for MPB's two
+  ω = 0 Γ modes and 1-based numbering). **That point estimate is biased low
+  by ≈ 4 states** (round 3, F2): the Jackson kernel smooths a steeply falling
+  ρ, and the counting bias at a single endpoint is ≈ (σ²/2)ρ′ = (0.0219²/2)
+  (−18451) = −4.4. The bias-corrected first index is ≈ 4946, i.e. the labels
+  read ~4 low — inside the disclosed ±13, so the labels were left as rendered
+  rather than re-cut to a second uncertain point estimate. The tile *count*
+  (133) is exact; the absolute numbering is not certified either way.
+  The mid-gap count 5010.3 ± 12.5 is **not** affected: ρ′ ≈ 800 inside the
+  gap gives a bias of +0.2 states, three orders below the quoted uncertainty,
+  so the 0.5-bands/vertex confirmation stands.
 - fp16 storage was pre-registered as a contingency but NOT needed at 192³
   (fp32 window artifacts ≈ 20 GB).
 
