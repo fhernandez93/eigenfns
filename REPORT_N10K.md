@@ -113,9 +113,33 @@ extrapolation: 1.38 TB locked-set storage = 12× RAM+disk; O(100) days).
   registered gate I5 clause "gap empty of converged pairs" accordingly
   **FAILS as registered** and is reported as this finding (Amendment A2,
   recorded before the gap slice ran); the measured in-gap DOS floor
-  ≈ 60 states/unit-λ is consistent with the discrete count. The photonic gap
-  of the N=10k structure is therefore a **mobility gap** (states present but
-  strongly localized), not a true spectral gap.
+  ≈ 60 states/unit-λ is consistent with the discrete count.
+- **TERMINOLOGY (2026-08-25).** A frequency range containing states is **not a
+  spectral gap** — a spectral gap means zero DOS, and this one is not empty.
+  "Gap" is used throughout this report as shorthand for the *nominal* gap
+  (the KPM 10%-criterion bracket [1.864, 1.996]) and should be read as
+  **pseudogap with localized in-gap states**. The stronger term *mobility
+  gap* is deliberately **not** claimed as measured: mobility is a transport
+  statement, and what was computed is Γ-point modes of a finite periodic
+  supercell, with no transport calculation anywhere in this project. What is
+  measured is ξ = 1.80–2.51 µm in an L = 24.65 µm box (ξ/L ≈ 0.08), which
+  makes the corresponding supercell defect bands flat and justifies treating
+  these as isolated localized states — an inference from ξ ≪ L, not a
+  measurement of mobility.
+- **Is the in-gap DOS visible independently of the eigensolver?** Partly.
+  KPM never asks the solver what it found, so it is the one completeness-
+  independent handle — but the Jackson kernel smooths the band edges *into*
+  the gap, so even a hard-zero gap reports a nonzero count. Measured
+  (`scripts/exp/exp_gap_leakage.py`): convolving a hard-zero gap of the
+  measured width with the measured kernel leaks only **0.3–1.9 states** into
+  S_gap = [1.925, 1.985] (1.4–3.2 in the adversarial limit where the true gap
+  is taken to be no wider than S_gap itself), against a measured KPM count of
+  **4.87 ± 0.41**. So there is a genuine **~3–4.5-state excess** over edge
+  leakage: the in-gap DOS is not a smoothing artifact. **But this does not
+  make it physics** — KPM consumes the *same rasterized ε(r)*, seam included,
+  so it counts seam states just as happily as bulk ones. It establishes that
+  states are really there in the structure as rasterized; only the periodic
+  re-solve can say whether they survive the fix.
 - **CORRECTION (2026-08-24) — four of the ten in-gap states are a
   rasterization artifact, not physics.** Self-audit of where the in-gap modes
   live (prompted by an adversarial pass) found three of them peaking at box
