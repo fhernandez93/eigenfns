@@ -54,3 +54,40 @@ def test_binary_values_only(gold):
     eps = rasterize_penlike(rods, 32, box)
     u = np.unique(eps)
     assert len(u) == 2 and u[0] == 1.0 and abs(u[1] - 2.9275**2) < 1e-4
+
+
+# --- periodic wrapping (2026-08-24; see plans/ round-2 adversarial record) ---
+
+def test_periodic_wraps_a_face_straddling_rod():
+    """A short rod centred on the +x face must appear on BOTH sides.
+
+    Default (montage) convention drops the wrap image — that is the documented
+    behaviour and the origin of the outer-shell material deficit.
+    """
+    box, G = 10.0, 40
+    # runs from x=4 to x=6, i.e. 1 µm past the +x face at L/2 = 5
+    rod = np.array([[4.0, 0.0, 0.0, 6.0, 0.0, 0.0]])
+    plain = rasterize_penlike(rod, G, box, minor_radius=0.5, aspect_ratio=1.0)
+    wrapped = rasterize_penlike(rod, G, box, minor_radius=0.5, aspect_ratio=1.0,
+                                periodic=True)
+    solid_p, solid_w = plain != 1.0, wrapped != 1.0
+    assert solid_w.sum() > solid_p.sum()          # wrap image recovered
+    assert solid_w[0].sum() > 0                   # material on the -x face...
+    assert solid_p[0].sum() == 0                  # ...which the default lacks
+    # the wrapped rasterization is a strict superset here
+    assert np.all(solid_w[solid_p])
+
+
+def test_periodic_changes_only_near_faces(gold):
+    """Interior voxels are untouched by the convention change."""
+    rods, n, box = gold
+    G = 64
+    a = rasterize_penlike(rods, G, box)
+    b = rasterize_penlike(rods, G, box, periodic=True)
+    diff = a != b
+    idx = np.arange(G)
+    d = np.minimum(idx, G - 1 - idx)
+    D = np.minimum(np.minimum(d[:, None, None], d[None, :, None]), d[None, None, :])
+    assert diff.any()                       # the seam exists at this resolution
+    assert not diff[D >= 4].any()           # nothing changes in the bulk
+    assert (b != 1.0).mean() >= (a != 1.0).mean()

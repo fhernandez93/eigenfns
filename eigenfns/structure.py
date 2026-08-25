@@ -56,6 +56,7 @@ def rasterize_penlike(
     aspect_ratio: float = 2.5,
     eps_rod: float = 2.9275**2,
     eps_bg: float = 1.0,
+    periodic: bool = False,
 ) -> np.ndarray:
     """Binary 'pen-like' rasterization — the montage convention.
 
@@ -69,6 +70,19 @@ def rasterize_penlike(
     (warped) world coordinates. Membership: axial clamp 0 ≤ t ≤ L (flat caps)
     and circular radial test, both in unwarped space. Voxels are assigned
     eps_rod if their *center* is inside any rod (no averaging).
+
+    `periodic=False` (default) reproduces the montage/notebook convention
+    exactly, including its non-wrapping edge handling: a rod whose *radius*
+    pokes through a box face loses the voxels of its wrap image. Measured
+    consequence at 192³/N=10k: the outermost voxel shell carries ff = 0.1975
+    against 0.2211 in the interior — an 11% material deficit forming a thin
+    seam on the box faces, which in a gapped medium hosts spurious localized
+    defect states (found 2026-08-24 during the in-gap audit).
+
+    `periodic=True` wraps the voxel indices (minimum-image assignment) so a
+    rod contributes its full volume wherever it sits. This is a CONVENTION
+    CHANGE relative to the reference montage — hence the flag; comparisons
+    against montage-convention results must be re-validated.
     """
     rods = np.asarray(rods, dtype=np.float64)
     G = int(grid_size)
@@ -97,20 +111,42 @@ def rasterize_penlike(
         if Lu <= 0.0:
             continue
         nu = vu / Lu
-        (ix0, ix1) = _rng(min(p1w[0], p2w[0]) - pad, max(p1w[0], p2w[0]) + pad)
-        (iy0, iy1) = _rng(min(p1w[1], p2w[1]) - pad, max(p1w[1], p2w[1]) + pad)
-        (iz0, iz1) = _rng(min(p1w[2], p2w[2]) - pad, max(p1w[2], p2w[2]) + pad)
-        X, Y, Z = np.meshgrid(
-            coords[ix0 : ix1 + 1], coords[iy0 : iy1 + 1], coords[iz0 : iz1 + 1],
-            indexing="ij",
-        )
+        if periodic:
+            # unclipped voxel index ranges: positions come from the UNWRAPPED
+            # indices (so the geometry test is right), assignment wraps
+            def _rng_p(lo, hi):
+                return (int(np.floor((lo + box_size / 2.0) / dx - 0.5)),
+                        int(np.ceil((hi + box_size / 2.0) / dx - 0.5)))
+            (ix0, ix1) = _rng_p(min(p1w[0], p2w[0]) - pad, max(p1w[0], p2w[0]) + pad)
+            (iy0, iy1) = _rng_p(min(p1w[1], p2w[1]) - pad, max(p1w[1], p2w[1]) + pad)
+            (iz0, iz1) = _rng_p(min(p1w[2], p2w[2]) - pad, max(p1w[2], p2w[2]) + pad)
+            gx = np.arange(ix0, ix1 + 1)
+            gy = np.arange(iy0, iy1 + 1)
+            gz = np.arange(iz0, iz1 + 1)
+            cx = (gx + 0.5) * dx - box_size / 2.0
+            cy = (gy + 0.5) * dx - box_size / 2.0
+            cz = (gz + 0.5) * dx - box_size / 2.0
+            X, Y, Z = np.meshgrid(cx, cy, cz, indexing="ij")
+        else:
+            (ix0, ix1) = _rng(min(p1w[0], p2w[0]) - pad, max(p1w[0], p2w[0]) + pad)
+            (iy0, iy1) = _rng(min(p1w[1], p2w[1]) - pad, max(p1w[1], p2w[1]) + pad)
+            (iz0, iz1) = _rng(min(p1w[2], p2w[2]) - pad, max(p1w[2], p2w[2]) + pad)
+            X, Y, Z = np.meshgrid(
+                coords[ix0 : ix1 + 1], coords[iy0 : iy1 + 1], coords[iz0 : iz1 + 1],
+                indexing="ij",
+            )
         RX, RY, RZ = X - p1u[0], Y - p1u[1], Z / s - p1u[2]
         t = RX * nu[0] + RY * nu[1] + RZ * nu[2]
         rX, rY, rZ = RX - t * nu[0], RY - t * nu[1], RZ - t * nu[2]
         mask = (t >= 0.0) & (t <= Lu) & (rX * rX + rY * rY + rZ * rZ <= b * b)
         if mask.any():
-            sub = grid[ix0 : ix1 + 1, iy0 : iy1 + 1, iz0 : iz1 + 1]
-            sub[mask] = eps_rod
+            if periodic:
+                wx, wy, wz = gx % G, gy % G, gz % G
+                ii, jj, kk = np.nonzero(mask)
+                grid[wx[ii], wy[jj], wz[kk]] = eps_rod
+            else:
+                sub = grid[ix0 : ix1 + 1, iy0 : iy1 + 1, iz0 : iz1 + 1]
+                sub[mask] = eps_rod
 
     return grid
 
