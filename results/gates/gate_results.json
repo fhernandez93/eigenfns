@@ -1,0 +1,272 @@
+{
+ "G2 literature (srs 28.06%)": {
+  "gate": "G2 literature (srs 28.06%)",
+  "measured_pct": 27.97,
+  "target_pct": 28.06,
+  "tol_pp": 1.5,
+  "pass": true
+ },
+ "G3 disordered parity (300 bands, 64^3)": {
+  "gate": "G3 disordered parity (300 bands, 64^3)",
+  "max_dw_w": 8.950294332496248e-06,
+  "median": 1.4247979726566015e-06,
+  "tol": 0.0001,
+  "n_bands": 298,
+  "pass": true
+ },
+ "G3w full-window parity": {
+  "gate": "G3w full-window parity",
+  "skip": "run exp_parity64w first"
+ },
+ "G6 completeness": {
+  "gate": "G6 completeness",
+  "monotone": true,
+  "n_bands": 611,
+  "kpm_missed_below_midgap": 0.21057173609733582,
+  "kpm_se": 0.019320877268910408,
+  "kpm_degree": 8000,
+  "n_locked_below_gap": 498,
+  "pass": true
+ },
+ "G7 residuals": {
+  "gate": "G7 residuals",
+  "skip": "no /home/francisco/Documents/Eigenfuntions/results/prod_N1000_G128/window_vecs_spectral.npy"
+ },
+ "G8 gap position": {
+  "gate": "G8 gap position",
+  "skip": "no /home/francisco/Documents/Eigenfuntions/results/prod_N1000_G128/eigenvalues_all.npy"
+ },
+ "G3w full-window parity (660 bands, 64^3)": {
+  "gate": "G3w full-window parity (660 bands, 64^3)",
+  "max_dw_w": 3.545773927296834e-05,
+  "median": 1.3904175497538372e-06,
+  "tol": 0.0001,
+  "n_bands": 658,
+  "pass": true
+ },
+ "G8 gap position (128^3)": {
+  "gate": "G8 gap position (128^3)",
+  "gap_between_mpb_bands": [
+   500,
+   501
+  ],
+  "dnu_nu": 0.02075522020459175,
+  "pass": true
+ },
+ "G7 residuals+orthonormality (window)": {
+  "gate": "G7 residuals+orthonormality (window)",
+  "worst_rel_res": 9.777050581760705e-05,
+  "worst_diag_block_orth": 0.00013500452042918234,
+  "tol_res": 0.0001,
+  "tol_orth": 0.001,
+  "pass": true
+ },
+ "G4 degeneracy subspaces (64^3, lowest 28)": {
+  "gate": "G4 degeneracy subspaces (64^3, lowest 28)",
+  "n_clusters": 6,
+  "clusters": [
+   {
+    "bands_solver": [
+     6,
+     7
+    ],
+    "bands_mpb": [
+     8,
+     9
+    ],
+    "min_cos_principal_angle": 0.9999989569709532,
+    "subspace_overlap_ok": true
+   },
+   {
+    "bands_solver": [
+     8,
+     9
+    ],
+    "bands_mpb": [
+     10,
+     11
+    ],
+    "min_cos_principal_angle": 0.9999988105328276,
+    "subspace_overlap_ok": true
+   },
+   {
+    "bands_solver": [
+     17,
+     18,
+     19
+    ],
+    "bands_mpb": [
+     19,
+     20,
+     21
+    ],
+    "min_cos_principal_angle": 0.9999959517846397,
+    "subspace_overlap_ok": true
+   },
+   {
+    "bands_solver": [
+     20,
+     21,
+     22
+    ],
+    "bands_mpb": [
+     22,
+     23,
+     24
+    ],
+    "min_cos_principal_angle": 0.999996315999059,
+    "subspace_overlap_ok": true
+   },
+   {
+    "bands_solver": [
+     24,
+     25
+    ],
+    "bands_mpb": [
+     26,
+     27
+    ],
+    "min_cos_principal_angle": 0.9999981450558424,
+    "subspace_overlap_ok": true
+   },
+   {
+    "bands_solver": [
+     27,
+     28
+    ],
+    "bands_mpb": [
+     29,
+     30
+    ],
+    "min_cos_principal_angle": 0.9999859429968125,
+    "subspace_overlap_ok": true
+   }
+  ],
+  "pass": true
+ },
+ "G5 convergence (64/96/128)": {
+  "gate": "G5 convergence (64/96/128)",
+  "bands": [
+   {
+    "mpb_band": 398,
+    "w64": 1.2369868977622986,
+    "w96": 1.2304159486128876,
+    "w128": 1.2276289463043213,
+    "monotone": true,
+    "est_resid_128_rel": 0.0009628961061166373
+   },
+   {
+    "mpb_band": 450,
+    "w64": 1.284722994325881,
+    "w96": 1.2785602341517297,
+    "w128": 1.2765780687332153,
+    "monotone": true,
+    "est_resid_128_rel": 0.0004994098957711379
+   },
+   {
+    "mpb_band": 500,
+    "w64": 1.372253666366041,
+    "w96": 1.3759711477309844,
+    "w128": 1.372208595275879,
+    "monotone": false,
+    "est_resid_128_rel": null
+   },
+   {
+    "mpb_band": 501,
+    "w64": 1.4049484163365316,
+    "w96": 1.4027671918480082,
+    "w128": 1.4009877443313599,
+    "monotone": true,
+    "est_resid_128_rel": 0.0010361810982578126
+   },
+   {
+    "mpb_band": 550,
+    "w64": 1.5022122441113412,
+    "w96": 1.5009971324377351,
+    "w128": 1.4989498853683472,
+    "monotone": true,
+    "est_resid_128_rel": 0.0023011090994064904
+   },
+   {
+    "mpb_band": 607,
+    "w64": 1.5568241025613387,
+    "w96": 1.555128178848588,
+    "w128": 1.5531494617462158,
+    "monotone": true,
+    "est_resid_128_rel": 0.0014864416023740064
+   }
+  ],
+  "monotone_all": false,
+  "worst_est_resid_128_rel": 0.0023011090994064904,
+  "pass": false
+ },
+ "I1 ground-truth parity (50-band slice, production config)": {
+  "gate": "I1 ground-truth parity (50-band slice, production config)",
+  "when": "2026-08-18 17:28",
+  "interior": "results/i1_n1000_slice",
+  "reference": "results/prod_N1000_G128",
+  "slice": [
+   473,
+   523
+  ],
+  "n_reported": 55,
+  "worst_res": 5.176458944333717e-05,
+  "targets_found": 50,
+  "targets_missed": 0,
+  "missed_idx": [],
+  "ghosts": [],
+  "max_dlam_rel": 2.8333790946544257e-05,
+  "median_dlam_rel": 2.772212930498844e-05,
+  "min_proj2": 1.0000202655792236,
+  "pass": true
+ },
+ "I2 completeness (Sgap)": {
+  "gate": "I2 completeness (Sgap)",
+  "when": "2026-08-24 16:45",
+  "rundir": "results/n10k_G192_Sgap",
+  "window": [
+   1.925,
+   1.985
+  ],
+  "n_deflated": 5,
+  "degree": 12000,
+  "probes": 8,
+  "missed_count": 0.6630859375,
+  "se": 26.466524153506903,
+  "wall_seconds": 7081.595466855913,
+  "pass": false,
+  "note": "expected ~0.2 Jackson-leakage bias (G6 precedent); >= 1 means missed state(s)"
+ },
+ "I7 decoration (N=10k, 192^3)": {
+  "gate": "I7 decoration",
+  "when": "2026-08-25 11:44",
+  "measured_ff": 0.22010732580114295,
+  "target": 0.22,
+  "tolerance_abs": 0.005,
+  "radius_um": 0.331836,
+  "aspect": 1.0,
+  "eps_rod": 8.41,
+  "grid": 192,
+  "pass": true,
+  "note": "montage-convention rasterization; periodic-wrapped variant gives 0.22089"
+ },
+ "I9 montage (N=10k gap-edge window)": {
+  "gate": "I9 montage",
+  "when": "2026-08-25 11:44",
+  "file": "results/n10k_G192_window/band_montage_n10k_gapedge_15.png",
+  "n_tiles": 133,
+  "per_row": 15,
+  "rows": 9,
+  "size_px": [
+   5250,
+   3276
+  ],
+  "band_labels": [
+   4942,
+   5074
+  ],
+  "band_numbering": "MPB (0-based solver index + 3), verified vs MPB output to 7e-7",
+  "caveat": "absolute band index carries the KPM placement uncertainty (+-13) AND a Jackson bias of about -4 states in N(1.757); tile COUNT is exact, absolute numbering is not certified",
+  "pass": true
+ }
+}
