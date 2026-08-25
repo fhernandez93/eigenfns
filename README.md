@@ -46,6 +46,70 @@ conda run -n lsu_ml python scripts/validate.py --all
 Band indices are MPB-numbered (bands 1–2 at Γ are the ω=0 modes). All long
 runs checkpoint per locked block and auto-resume (`--resume`).
 
+## Interior gap-window pipeline (N=10k project, 2026-08-17+)
+
+For windows deep in the spectrum (e.g. ~band 5,000 of the N=10,000 network)
+where bottom-up is infeasible (measured: 1.38 TB locked set), the two-stage
+bandpass ChebSI solver targets a λ-window directly
+(`plans/2026-08-18_interior_preregistration.md`):
+
+```bash
+# full-bandwidth KPM DOS + counting (locates the gap, derives the window):
+conda run --no-capture-output -n lsu_ml python scripts/exp/exp_kpm_dos.py \
+  Structures/20260701_N10000_lsu_generated.txt --grid 256 \
+  --radius 0.331836 --aspect 1.0 --eps-rod 8.41 --degree 12000 --tag n10k_dos
+conda run -n lsu_ml python scripts/exp/exp_kpm_analyze.py \
+  results/exp/n10k_dos_kpm.npz --gap-guess 1.95 --plot dos.png
+
+# interior window solve (per-outer checkpoints, resumable):
+conda run --no-capture-output -n lsu_ml python scripts/run_interior.py \
+  Structures/20260701_N10000_lsu_generated.txt --grid 192 \
+  --lam-lo 1.757 --lam-hi 1.930 --m 104 --build-degree 3000 --build-outers 2 \
+  --polish-degree 12000 --polish-outers 4 --tag n10k_G192_Sbelow --resume
+
+# completeness audit (gate I2) + parity scoring vs a bottom-up reference:
+conda run -n lsu_ml python scripts/exp/exp_i2_completeness.py \
+  --rundir results/n10k_G192_Sbelow --gate-name "I2 (S_below)"
+conda run -n lsu_ml python scripts/exp/exp_i1_score.py --interior results/<tag> \
+  --reference results/prod_N1000_G128 --ref-lo 395 --slice-lo 473 --slice-hi 523 \
+  --gate-name I1
+
+# same solve on a PERIODICALLY WRAPPED structure (convention change — see below):
+conda run --no-capture-output -n lsu_ml python scripts/run_interior.py \
+  Structures/20260701_N10000_lsu_generated.txt --grid 192 \
+  --lam-lo 1.855 --lam-hi 2.000 --m 30 --periodic --tag n10k_gap_periodic
+
+# merge slices into one eigenvalue-ordered window (dedup by eigenvector overlap):
+conda run -n lsu_ml python scripts/merge_slices.py --out results/n10k_G192_window \
+  results/n10k_G192_Sbelow results/n10k_G192_Sgap results/n10k_G192_Sabove
+
+# localization (IPR + xi with the L/2 finite-size ceiling):
+conda run -n lsu_ml python scripts/analyze_localization.py \
+  results/n10k_G192_Sbelow results/n10k_G192_Sabove --box 24.6467 \
+  --out results/n10k_localization
+
+# montage for interior runs (band offset from the I2-certified count):
+conda run -n lsu_ml python scripts/make_montage.py results/n10k_G192_Sbelow \
+  --band-offset <MPB band of stored mode 0> --band-lo <lo> --band-hi <hi>
+```
+
+### Rasterization conventions (read before comparing runs)
+
+`rasterize_penlike` defaults to the **montage convention**, bit-for-bit as the
+parent notebook: binary voxels, and rods whose *radius* pokes through a box
+face are NOT wrapped. That last detail was quantified on 2026-08-24: it leaves
+the outermost voxel shell with **ff = 0.1975 against 0.2211 in the interior**
+(11% material deficit), a thin seam on the box faces. In a structure with a
+photonic gap that seam behaves like a planar defect and hosts spurious
+localized gap states — four were found and discounted in the N=10k window (see
+`plans/2026-08-17_adversarial_verification.md`, round 2).
+
+`periodic=True` (CLI `--periodic`) wraps the voxel indices so every rod
+contributes its full volume. Verified surgical: only voxels within 3 of a face
+change (0.078% of the grid), outer-shell ff → 0.2177. It is a **convention
+change** relative to the reference montage, so results computed with it are not
+directly comparable to montage-convention results without re-validation.
+
 ## Hardware notes
 
 - One heavy GPU job at a time (12 GB card; `run_modes.py` refuses to start

@@ -59,6 +59,11 @@ def main() -> int:
     ap.add_argument("--guard", type=int, default=12)
     ap.add_argument("--theta-chunk", type=int, default=8)
     ap.add_argument("--tol", type=float, default=1e-4)
+    ap.add_argument("--radius", type=float, default=0.2252,
+                    help="rod minor radius, um (production N=1000: 0.2252)")
+    ap.add_argument("--aspect", type=float, default=2.5,
+                    help="z-warp aspect ratio (production: 2.5; circular: 1.0)")
+    ap.add_argument("--eps-rod", type=float, default=2.9275**2)
     ap.add_argument("--tag", default=None)
     ap.add_argument("--resume", action="store_true")
     ap.add_argument("--force", action="store_true", help="skip the busy-GPU check")
@@ -80,8 +85,10 @@ def main() -> int:
     print(f"structure N={N} L={L:.3f}  grid {args.grid}^3  bands "
           f"{args.band_lo}-{args.band_hi} (MPB numbering)  -> {outdir}", flush=True)
 
-    eps = rasterize_penlike(rods, args.grid, L)
-    print(f"ff = {(eps != 1).mean():.4f}", flush=True)
+    eps = rasterize_penlike(rods, args.grid, L, minor_radius=args.radius,
+                            aspect_ratio=args.aspect, eps_rod=args.eps_rod)
+    print(f"decoration r={args.radius} aspect={args.aspect} "
+          f"eps_rod={args.eps_rod:.4f}  ff = {(eps != 1).mean():.4f}", flush=True)
     op = MaxwellOperator(eps, L)
 
     # MPB numbering: band n (MPB) = solver mode n-2 at Γ; need modes through band_hi-2
@@ -90,6 +97,7 @@ def main() -> int:
         "structure": str(args.structure), "grid": args.grid, "N": N, "L": L,
         "tol": args.tol, "m": args.m, "guard": args.guard, "nev": nev,
         "band_lo": args.band_lo, "band_hi": args.band_hi,
+        "radius": args.radius, "aspect": args.aspect, "eps_rod": args.eps_rod,
         "band_numbering": "MPB (bands 1-2 are the omega=0 Gamma modes)",
     })
     t0 = time.perf_counter()

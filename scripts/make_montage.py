@@ -33,20 +33,35 @@ def main() -> int:
     ap.add_argument("--render-grid", type=int, default=None,
                     help="re-rasterize the structure at this resolution for the "
                          "wireframe (default: the solve grid)")
+    ap.add_argument("--band-offset", type=int, default=None,
+                    help="interior runs: MPB band number of stored mode 0 "
+                         "(from gate I2)")
     args = ap.parse_args()
 
     rundir = Path(args.rundir)
-    meta = json.loads((rundir / "solve_meta.json").read_text())
+    if (rundir / "solve_meta.json").exists():
+        meta = json.loads((rundir / "solve_meta.json").read_text())
+        win_lo = meta.get("band_lo", 398)
+    else:  # run_interior.py layout: bands = offset + index (offset from I2)
+        meta = json.loads((rundir / "interior_report.json").read_text())
+        if args.band_offset is None:
+            raise SystemExit("interior run: pass --band-offset (MPB band of "
+                             "the first stored mode, certified by gate I2)")
+        win_lo = args.band_offset
     ed = np.load(rundir / "window_energy_density.npy", mmap_mode="r")
     from eigenfns.render import assemble_montage, render_tile
     from eigenfns.structure import load_rods, rasterize_penlike
 
     rods, N, L = load_rods(meta["structure"])
     Gr = args.render_grid or meta["grid"]
-    eps_r = rasterize_penlike(rods, Gr, L)
+    # wireframe must use the run's OWN decoration (recorded in meta), not the
+    # rasterizer defaults (old production decoration)
+    eps_r = rasterize_penlike(rods, Gr, L,
+                              minor_radius=meta.get("radius", 0.2252),
+                              aspect_ratio=meta.get("aspect", 2.5),
+                              eps_rod=meta.get("eps_rod", 2.9275**2))
 
     lo, hi = args.band_lo, args.band_hi
-    win_lo = meta.get("band_lo", 398)
     tiles = []
     tiledir = rundir / "tiles"
     tiledir.mkdir(exist_ok=True)
