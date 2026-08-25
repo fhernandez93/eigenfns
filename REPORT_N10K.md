@@ -140,6 +140,46 @@ extrapolation: 1.38 TB locked-set storage = 12× RAM+disk; O(100) days).
   so it counts seam states just as happily as bulk ones. It establishes that
   states are really there in the structure as rasterized; only the periodic
   re-solve can say whether they survive the fix.
+- **Why does N=1000 have a clean gap and N=10k not?** Measured, not asserted
+  (`scripts/exp/exp_rare_regions.py`, `exp_rare_region_modes.py`, CPU only).
+  The two networks are density-matched with L scaling exactly as N^(1/3)
+  (24.6467/11.4405 = 2.1543 = 10^(1/3)), and their **local statistics
+  coincide**: filling fraction coarse-grained at the ξ ≈ 2 µm scale gives mean
+  0.2204 vs 0.2209 and sd 0.0398 vs 0.0405 (ratio 1.018), with matching
+  percentiles from 1% to 99%. What differs is the number of draws — 187 vs
+  1871 independent ξ-cells — and therefore the **tail reach**: the extremes go
+  −4.84σ…+4.00σ at N=1000 but −5.52σ…+4.51σ at N=10k. That is the rare-region
+  (Lifshitz-tail) picture in one line: same physics per unit volume, ten times
+  the chance of containing a gap-filling configuration. The Poisson arithmetic
+  makes the contrast unremarkable — if N=10k truly holds 5 in-gap states, the
+  rate is 0.5 per N=1000-volume and **P(zero at N=1000) = 0.61**, the single
+  most likely outcome. No new physics is needed to explain the difference.
+  Corroborating: with the same decoration the N=1000 gap is [1.8276, 2.0225]
+  (Δν/ν = 5.07%) and the N=10k nominal gap is [1.864, 1.996] (3.4%) — the gap
+  **narrowed by 32% and every N=10k in-gap state lies inside the N=1000 gap**,
+  i.e. the gap did not vanish, its edges frayed inward, which is what band
+  edges set by extreme-value statistics are supposed to do.
+- **Direct test of the mechanism — where do the in-gap modes live?**
+  Energy-weighted local ff, z-scored against the ξ-coarse-grained field:
+  the five candidates reach **|z| = 0.57 (max 0.70), 2.1× the bulk controls'
+  0.27**, and they split by band character exactly as the picture requires —
+  the low-λ ones sit in dielectric-rich regions (z = +0.41…+0.64, peeled off
+  the dielectric band) and the high-λ ones in air-rich regions (z = −0.61,
+  −0.70, peeled off the air band). Independent corroboration of the seam
+  classification falls out for free: **the four seam states score |z| = 0.22,
+  statistically indistinguishable from the controls' 0.27** — they are not in
+  anomalous material, which is what a boundary artifact should look like.
+  **Honest weight**: a factor 2.1 is suggestive, not decisive. Energy-weighting
+  over a mode whose extent (ξ ≈ 2 µm) matches the coarse-graining box regresses
+  z toward zero, so this understates the anomaly, but the measurement as it
+  stands does not by itself establish rare-region origin.
+- **Two mundane explanations remain open** and are exactly what the queued
+  runs test. (1) **Resolution**: N=10k runs at 7.79 vox/µm against N=1000's
+  11.2 — 70% — and gate G5 has already failed once on convergence, so coarser
+  rasterization manufacturing in-gap states is not excluded; the 256³ anchors
+  address it. (2) **The seam**, which already accounts for 4 of the 10; the
+  periodic re-solve settles it. Until both land, the finite-size explanation
+  is the leading one, not the established one.
 - **CORRECTION (2026-08-24) — four of the ten in-gap states are a
   rasterization artifact, not physics.** Self-audit of where the in-gap modes
   live (prompted by an adversarial pass) found three of them peaking at box
