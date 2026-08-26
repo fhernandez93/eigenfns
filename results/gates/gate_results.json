@@ -528,5 +528,59 @@
   },
   "certification": "A3: sub-interval certifies (|missed|<0.5); window is a consistency check, NOT a certification. Note exp_i2_v2.py's window clause uses max(0.5, 2*tot_se), which widens as the measurement gets noisier -- it must never be read as certifying.",
   "leakage_fix": "three defects corrected post-hoc: disjoint-mask trapezoid, pointwise-|se| error propagation, and double-counting of already-deflated states (see fix_i2_leakage.py)"
+ },
+ "I3 residuals+orthonormality (N=10k 192^3)": {
+  "gate": "I3 residuals+orthonormality (N=10k 192^3)",
+  "when": "2026-08-26 13:11",
+  "rundir": "results/n10k_G192_window",
+  "n_pairs": 133,
+  "worst_res": 5.875241186004132e-05,
+  "median_res": 3.2557727536186576e-05,
+  "worst_gram_dev": 0.0004858441243413836,
+  "worst_offdiag": 0.0004858441243413836,
+  "worst_diag_dev": 2.0384788513183594e-05,
+  "transversality": "exact by construction (2 transverse components)",
+  "pass": false,
+  "wall_seconds": 61.02067441283725
+ },
+ "I5 spectrum consistency (N=10k 192^3)": {
+  "gate": "I5 spectrum consistency (N=10k 192^3)",
+  "when": "2026-08-26 13:11",
+  "eigen_window": [
+   1.7570469501878812,
+   2.1165695086620007
+  ],
+  "largest_interior_spacing": [
+   1.8860078588720002,
+   1.926413256982914
+  ],
+  "eigen_gap_width": 0.040405398110913815,
+  "kpm_criterion_bracket": {
+   "5%": null,
+   "10%": null,
+   "20%": [
+    1.8819261501339073,
+    1.9737409839575537
+   ]
+  },
+  "registered_gap_interval": [
+   1.864,
+   1.996
+  ],
+  "states_inside_registered_gap": [
+   1.868981147045425,
+   1.8707585792024861,
+   1.8730821374768227,
+   1.8860078588720002,
+   1.926413256982914,
+   1.929596209673228,
+   1.944051593936228,
+   1.947209447202747,
+   1.973811320130794,
+   1.990119585136022
+  ],
+  "empty_gap_clause_pass": false,
+  "dos_bracket_clause_pass": false,
+  "note": "empty-gap clause evaluated as registered; in-gap states are a physics finding (see Amendment A2), not a solver artifact \u2014 each is residual-certified in I3"
  }
 }
