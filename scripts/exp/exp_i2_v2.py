@@ -172,10 +172,18 @@ def main() -> int:
             dos_se = np.sqrt((se_p[0]) ** 2 + 4 * ((se_p[1:] ** 2) @ (Tg[1:] ** 2))) \
                 / (np.pi * np.sin(thg)) * 2 / lmx
             rho = _bandpass_rho(grid, a, b, lam_max, args.degree)
-            outside = (grid < a) | (grid > b)
-            leak = float(np.trapezoid(rho[outside] * dos[outside], grid[outside]))
-            leak_err = float(np.trapezoid(rho[outside] * dos_se[outside],
-                                          grid[outside]))
+            # The "outside" region is TWO DISJOINT intervals. Integrating it
+            # as one array makes np.trapezoid bridge the gap between them with
+            # a single trapezoid spanning the whole window -- width (b-a),
+            # height ~ half the DOS at each edge. On the production window
+            # that phantom segment was 199.98 of a reported 207.68, driving
+            # missed_estimate to -198. Integrate each side on its own.
+            lo_m, hi_m = grid < a, grid > b
+            def _piece(y):
+                return (float(np.trapezoid(y[lo_m], grid[lo_m]))
+                        + float(np.trapezoid(y[hi_m], grid[hi_m])))
+            leak = _piece(rho * dos)
+            leak_err = _piece(rho * dos_se)
 
         # states we already have inside this interval (for context)
         n_in = int(((lam_found >= a) & (lam_found <= b)).sum())
