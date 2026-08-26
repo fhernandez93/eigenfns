@@ -127,6 +127,19 @@ def main() -> int:
     vec_gb = 2 * args.grid ** 3 * 8 / 2 ** 30
     # cap the filter recurrence transient (~4 chunks) at ~2 GiB
     chunk = min(args.chunk, max(2, int(2.0 / (4 * vec_gb))))
+    # Cap the RR/Gram chunk too. Only the filter chunk was capped, so
+    # --theta-chunk kept its default of 8 at every grid; at 256^3 that is
+    # 8 x 0.25 GiB per block and rr_extract_hosted's gram(Bc, Hc) asked for
+    # 6.00 GiB on a 12 GB card and died 1.5 h in (2026-08-26). The peak is
+    # ~3 x theta_chunk x vec_gb (Bc + Hc + the conj copy inside gram), so
+    # budget 3 GiB. At 192^3 this evaluates to 9 and the cap is inert, which
+    # is deliberate: every production result was produced at theta_chunk 8
+    # and this must not perturb them.
+    tchunk = min(args.theta_chunk, max(2, int(1.0 / vec_gb)))
+    if tchunk != args.theta_chunk:
+        print(f"theta chunk {args.theta_chunk} -> {tchunk} "
+              f"(RR/Gram cap, {vec_gb:.3f} GiB/vector)", flush=True)
+    args.theta_chunk = tchunk
     if chunk != args.chunk:
         print(f"filter chunk {args.chunk} -> {chunk} (recurrence transient cap)",
               flush=True)
