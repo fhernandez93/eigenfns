@@ -541,7 +541,44 @@
   "worst_diag_dev": 2.0384788513183594e-05,
   "transversality": "exact by construction (2 transverse components)",
   "pass": false,
-  "wall_seconds": 61.02067441283725
+  "wall_seconds": 61.02067441283725,
+  "diagnosis": {
+   "verdict": "merge artifact, NOT a solver defect -- but the specific mechanism is unexplained",
+   "all_pairs_scanned": 9236,
+   "cross_slice": {
+    "n": 4614,
+    "max_offdiag": 0.0004859
+   },
+   "same_slice": {
+    "n": 4622,
+    "max_offdiag": 8.579e-06,
+    "note": "comfortably inside the 5e-5 gate, so EACH SLICE INDIVIDUALLY PASSES I3. SVQB enforces orthonormality within a slice; nothing does across slices, because Sbelow/Sgap/Sabove were solved independently."
+   },
+   "worst_pair": {
+    "lam_i": 1.94721,
+    "lam_j": 2.11383,
+    "dlam": 0.167,
+    "overlap": 0.0004859,
+    "slices": [
+     "Sgap",
+     "Sabove"
+    ]
+   },
+   "dominant_state": {
+    "lam": 1.94721,
+    "appears_in": "6 of the 10 worst pairs",
+    "outer_shell_energy": 0.4208,
+    "note": "one of the four SEAM ARTIFACTS (42% of its energy in 6.1% of the volume). 1.92960 (44% shell) is the other repeat offender."
+   },
+   "hypotheses_refuted": [
+    "small eigenvalue spacing (|<i,j>| ~ (r_i+r_j)*lam/dlam): the worst pair is dlam = 0.167 apart, and the neighbour scan's worst (1.94e-4) is 2.5x below the global worst, so spacing does not drive it",
+    "poor convergence of the offending state: lam=1.94721 has residual 5.62e-5, rank 73 of 133 and better than the median 5.92e-5"
+   ],
+   "open": "why a seam-localized state has 4.9e-4 overlap with a state 0.167 away in lambda is NOT explained. Prediction available for free: the periodic re-solve removes the seam states, so a periodic merged window should pass I3 -- testable once the periodic slices are merged.",
+   "scripts": [
+    "scripts/exp/exp_i3_gram_diagnose.py"
+   ]
+  }
  },
  "I5 spectrum consistency (N=10k 192^3)": {
   "gate": "I5 spectrum consistency (N=10k 192^3)",
