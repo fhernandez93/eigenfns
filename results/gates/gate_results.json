@@ -218,7 +218,8 @@
   "max_dlam_rel": 2.8333790946544257e-05,
   "median_dlam_rel": 2.772212930498844e-05,
   "min_proj2": 1.0000202655792236,
-  "pass": true
+  "pass": true,
+  "provenance_note": "2026-08-26: results/prod_N1000_G128/ (28 GB, the bottom-up reference this gate was scored against) is NO LONGER ON DISK. The gate's measured numbers in this entry are unaffected and stand as recorded, but I1 can no longer be RE-verified without re-running the 611-band bottom-up solve (~8,876 s per the report timing table). Not removed by any script in this repo -- the only unlink is run_interior.py's post-save checkpoint cleanup, which touches interior_state.npz only. Cause undetermined."
  },
  "I2 completeness (Sgap)": {
   "gate": "I2 completeness (Sgap)",

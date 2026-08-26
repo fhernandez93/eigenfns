@@ -6,6 +6,13 @@
 # and require the all-clear on consecutive samples.
 #
 # Sequenced after the final chain (deterministic; no lock needed).
+#
+# 2026-08-26: polish outers 5 -> 8. The run had done polish 0,1,2 with median
+# residual 1.4e-2 -> 7.3e-3 -> 2.3e-3, a factor ~0.32 per outer and still
+# 0 converged. Two more outers would have reached only ~2.4e-4, above the
+# 1e-4 tolerance -- 7.4 h for nothing. Three further outers extrapolate to
+# ~8e-6. Resume semantics make this safe: outer0 = checkpoint outer + 1 and
+# the count comes from the flag, so it continues from polish 3 through 7.
 set +e
 cd /home/francisco/Documents/Eigenfuntions
 
@@ -26,7 +33,7 @@ conda run --no-capture-output -n lsu_ml python scripts/run_interior.py \
   Structures/20260701_N10000_lsu_generated.txt \
   --grid 160 --lam-lo 1.80 --lam-hi 2.06 --m 72 \
   --build-degree 3000 --build-outers 2 \
-  --polish-degree 10000 --polish-outers 5 --tol 1e-4 \
+  --polish-degree 10000 --polish-outers 8 --tol 1e-4 \
   --radius 0.331836 --aspect 1.0 --eps-rod 8.41 \
   --chunk 8 --tag n10k_G160_gapedge --resume \
   >> results/n10k_G160_gapedge.log 2>&1

@@ -53,6 +53,9 @@ def main() -> int:
     ap.add_argument("--lam-max", type=float, default=0.0)
     ap.add_argument("--chunk", type=int, default=8, help="filter chunk (vectors)")
     ap.add_argument("--theta-chunk", type=int, default=8)
+    ap.add_argument("--keep-checkpoint", action="store_true",
+                    help="retain interior_state.npz after a successful save "
+                         "(default: delete it; it only serves --resume)")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--tag", required=True)
     ap.add_argument("--resume", action="store_true")
@@ -251,6 +254,21 @@ def main() -> int:
     (outdir / "interior_report.json").write_text(json.dumps(report, indent=1))
     print(f"saved {len(idx)} pairs -> {outdir}  "
           f"(theta {n_theta}, wall {report['wall_seconds']:.0f}s)", flush=True)
+
+    # The checkpoint exists only to serve --resume. The run is now complete
+    # and every scientific product (eigenvalues, residuals, spectral vectors,
+    # energy densities, report) is on disk, so it is dead weight -- and it is
+    # large: m * 2 * G^3 * 8 bytes, i.e. 4.9 GB for the 128^3 I4 slice and
+    # ~4.5 GB per 256^3 anchor. The queue as of 2026-08-26 needs ~43 GB of
+    # writes against 16 GB free, so this is what keeps it alive. Dropped only
+    # after the report write above succeeds; --keep-checkpoint opts out when
+    # the run may need extending with more outers.
+    ck = outdir / "interior_state.npz"
+    if ck.exists() and not args.keep_checkpoint:
+        mb = ck.stat().st_size / 2 ** 20
+        ck.unlink()
+        print(f"removed checkpoint ({mb:.0f} MB freed; run complete, "
+              f"--keep-checkpoint to retain)", flush=True)
     return 0
 
 
