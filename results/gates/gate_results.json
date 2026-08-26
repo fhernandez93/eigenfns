@@ -621,5 +621,47 @@
   "empty_gap_clause_pass": false,
   "dos_bracket_clause_pass": false,
   "note": "empty-gap clause evaluated as registered; in-gap states are a physics finding (see Amendment A2), not a solver artifact \u2014 each is residual-certified in I3"
+ },
+ "I4-interior cross-solve (N=1000 new decoration, below-gap)": {
+  "gate": "I4-interior cross-solve (N=1000 new decoration, below-gap)",
+  "when": "2026-08-26 20:51",
+  "interior": "results/i4int_n1000_below",
+  "reference": "results/i4_n1000_circ_G128",
+  "slice": [
+   395,
+   498
+  ],
+  "n_reported": 107,
+  "worst_res": 9.573449642630294e-05,
+  "targets_found": 103,
+  "targets_missed": 0,
+  "missed_idx": [],
+  "ghosts": [],
+  "max_dlam_rel": 2.848092635921839e-07,
+  "median_dlam_rel": 7.610342546845273e-08,
+  "min_proj2": 0.9961164593696594,
+  "pass": true,
+  "overhang_note": "The interior slice extends past the reference's STORED VECTORS: 4 modes at eigenvalues_all indices 391-394 lie outside [395, 604], where i4_n1000_circ_G128 keeps window_vecs_spectral. They are excluded from the scored range (which is why n_reported exceeds targets_found) and checked on eigenvalues alone instead: max |dlam|/lam = 1.87e-07 across all 6, same order as the scored modes. Detail in results/gates/i4_overhang_modes.json."
+ },
+ "I4-interior cross-solve (N=1000 new decoration, above-gap)": {
+  "gate": "I4-interior cross-solve (N=1000 new decoration, above-gap)",
+  "when": "2026-08-26 20:51",
+  "interior": "results/i4int_n1000_above",
+  "reference": "results/i4_n1000_circ_G128",
+  "slice": [
+   498,
+   605
+  ],
+  "n_reported": 109,
+  "worst_res": 3.507618384901434e-05,
+  "targets_found": 107,
+  "targets_missed": 0,
+  "missed_idx": [],
+  "ghosts": [],
+  "max_dlam_rel": 4.1102019116138073e-07,
+  "median_dlam_rel": 9.758793844308984e-08,
+  "min_proj2": 0.9963919520378113,
+  "pass": true,
+  "overhang_note": "The interior slice extends past the reference's STORED VECTORS: 2 modes at eigenvalues_all indices 605-606 lie outside [395, 604], where i4_n1000_circ_G128 keeps window_vecs_spectral. They are excluded from the scored range (which is why n_reported exceeds targets_found) and checked on eigenvalues alone instead: max |dlam|/lam = 1.87e-07 across all 6, same order as the scored modes. Detail in results/gates/i4_overhang_modes.json."
  }
 }
