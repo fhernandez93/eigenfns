@@ -433,5 +433,100 @@
    "exp_periodic_verdict.py also prints xi as NaN (localization not run on the periodic dir)"
   ],
   "pass": true
+ },
+ "I2 completeness (N=10k window, v2 estimator)": {
+  "gate": "I2 completeness (N=10k window, v2 estimator)",
+  "when": "2026-08-26 07:15",
+  "rundir": "results/n10k_G192_window",
+  "degree": 24000,
+  "probes": 12,
+  "n_deflated": 133,
+  "estimator": "v2 paired bandpass, deflated probes, DOS-predicted edge leakage",
+  "results": {
+   "window": {
+    "interval": [
+     1.7571337223052979,
+     2.116673469543457
+    ],
+    "n_found_inside": 132,
+    "found_rho_weight": 125.9646565752808,
+    "deflated_estimate": 9.48082403341929,
+    "se": 0.261346186728481,
+    "predicted_edge_leakage": 7.797036225234136,
+    "leakage_se": 0.1902410732109905,
+    "missed_estimate": 1.683787808185155,
+    "wall_seconds": 9522.179673573002,
+    "leakage_by_edge": {
+     "below_edge": 4.172822606644231,
+     "above_edge": 3.5261362588507708
+    },
+    "leakage_detail": {
+     "modelled_all_outside": 7.797036225234136,
+     "from_already_deflated_states": 0.0,
+     "from_non_deflated_states": 7.797036225234136
+    }
+   },
+   "sub_gap": {
+    "interval": [
+     1.9063,
+     1.9606
+    ],
+    "n_found_inside": 4,
+    "found_rho_weight": 3.9875980887585185,
+    "deflated_estimate": 0.0014137649510909493,
+    "se": 0.00012641861466798136,
+    "predicted_edge_leakage": 0.0016627311739019458,
+    "leakage_se": 1.4316950682337054e-05,
+    "missed_estimate": -0.0002489662228109964,
+    "wall_seconds": 9469.161318284925,
+    "leakage_by_edge": {
+     "below_edge": 0.17917053885620005,
+     "above_edge": 0.26551716113233315
+    },
+    "leakage_detail": {
+     "modelled_all_outside": 0.4477806708763207,
+     "from_already_deflated_states": 0.4461139785706755,
+     "from_non_deflated_states": 0.0016627311739019458
+    }
+   }
+  },
+  "missed_window": 1.683787808185155,
+  "missed_window_se": 0.32325453632391227,
+  "missed_subgap": -0.0002489662228109964,
+  "missed_subgap_se": 0.00012722673151272898,
+  "pass": true,
+  "wall_seconds": 18991.41627607704,
+  "results_raw_buggy_leakage": {
+   "window": {
+    "interval": [
+     1.7571337223052979,
+     2.116673469543457
+    ],
+    "n_found_inside": 132,
+    "found_rho_weight": 125.9646565752808,
+    "deflated_estimate": 9.48082403341929,
+    "se": 0.261346186728481,
+    "predicted_edge_leakage": 207.683210519454,
+    "leakage_se": 65.55020283715386,
+    "missed_estimate": -198.20238648603473,
+    "wall_seconds": 9522.179673573002
+   },
+   "sub_gap": {
+    "interval": [
+     1.9063,
+     1.9606
+    ],
+    "n_found_inside": 4,
+    "found_rho_weight": 3.9875980887585185,
+    "deflated_estimate": 0.0014137649510909493,
+    "se": 0.00012641861466798136,
+    "predicted_edge_leakage": 2.1955278005198267,
+    "leakage_se": 11.983562334793174,
+    "missed_estimate": -2.194114035568736,
+    "wall_seconds": 9469.161318284925
+   }
+  },
+  "certification": "A3: sub-interval certifies (|missed|<0.5); window is a consistency check, NOT a certification. Note exp_i2_v2.py's window clause uses max(0.5, 2*tot_se), which widens as the measurement gets noisier -- it must never be read as certifying.",
+  "leakage_fix": "three defects corrected post-hoc: disjoint-mask trapezoid, pointwise-|se| error propagation, and double-counting of already-deflated states (see fix_i2_leakage.py)"
  }
 }
