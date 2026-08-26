@@ -219,7 +219,8 @@
   "median_dlam_rel": 2.772212930498844e-05,
   "min_proj2": 1.0000202655792236,
   "pass": true,
-  "provenance_note": "2026-08-26: results/prod_N1000_G128/ (28 GB, the bottom-up reference this gate was scored against) was MOVED off this filesystem by the user, not deleted. The data exists; only the path is stale. The gate's measured numbers stand as recorded, and I1 remains re-verifiable by pointing exp_i1_score.py --reference at the new location. No queued work reads it."
+  "provenance_note": "2026-08-26: results/prod_N1000_G128/ (28 GB, the bottom-up reference this gate was scored against) was MOVED off this filesystem by the user, not deleted. The data exists; only the path is stale. The gate's measured numbers stand as recorded, and I1 remains re-verifiable by pointing exp_i1_score.py --reference at the new location. No queued work reads it.",
+  "stale_numbers_note": "max_dlam_rel (2.833e-05) and min_proj2 (1.0000203) in this entry PRE-DATE the round-3 F1 fix (unnormalised Rayleigh quotient). Independent fp64 recomputation gives max 2.351e-07 / median 6.293e-08 over 55 pairs -- a 121x improvement -- and min_proj2 > 1 was the same artifact. The scorer has NOT been re-run, so these fields are deliberately left as measured rather than overwritten with hand-computed values. Re-running needs exp_i1_score.py --reference pointed at prod_N1000_G128, which the user moved off this filesystem."
  },
  "I2 completeness (Sgap)": {
   "gate": "I2 completeness (Sgap)",

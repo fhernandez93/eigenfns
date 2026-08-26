@@ -346,12 +346,13 @@ GPU-days → the pre-registered descope fired **at registration** (192³ +
 
 | gate | status | measured |
 |---|---|---|
-| I1 ground-truth parity | **PASS** | 50/50, max Δω/ω 2.83×10⁻⁵ (gate 1e-4), min proj² 1.0000 (gate 0.99), 0 ghosts, worst res 5.2×10⁻⁵; first run 49/50 → Amendment A1 recorded |
-| I2 completeness | ⟨pending⟩ | deflated-probe KPM per slice |
-| I3 residuals / no ghosts | ⟨pending — production⟩ | every reported pair ≤ 1e-4 by construction; Gram check pending |
-| I4 new-decoration cross-check | bottom-up half DONE; interior half ⟨pending⟩ | gap 500\|501, Δν/ν 5.07%, 8,876 s |
-| I5 spectrum consistency | ⟨pending⟩ | |
-| I6 convergence (160³/192³ + 256³ anchors) | ⟨pending⟩ | |
+| I1 ground-truth parity | **PASS** | 50/50 targets, 0 ghosts, worst res 5.18×10⁻⁵. Parity **max Δλ/λ = 2.35×10⁻⁷, median 6.29×10⁻⁸** over 55 pairs (gate 1e-4). The ledger entry still records the *pre-correction* 2.83×10⁻⁵ / min proj² 1.0000203 because the scorer has not been re-run — see the note on that entry. First run 49/50 → Amendment A1 |
+| I2 completeness | **PASS — certified** | Certifying sub-interval [1.9063, 1.9606]: **missed = −0.00025 ± 0.00013** (gate \|missed\| < 0.5), i.e. 2000× inside it. Consistency check on the full window (explicitly *not* certifying, per A3): missed = +1.68 ± 0.32, within the acknowledged O(1) bias floor. Leakage term needed three corrections — see §2 |
+| I3 residuals / orthonormality | **FAIL** | Residuals PASS: worst 5.88×10⁻⁵, median 3.26×10⁻⁵ (gate 1e-4). **Gram ‖G−I‖max = 4.86×10⁻⁴ vs gate 5×10⁻⁵ — fails by 9.7×**, entirely off-diagonal (diagonal 2.04×10⁻⁵). Diagnosed: **created by the merge, not the solver** — cross-slice max 4.86×10⁻⁴ vs same-slice max 8.58×10⁻⁶, so *each slice individually passes*. Dominated by λ=1.94721 (a seam artifact) in 6 of the 10 worst pairs. Two of my own explanations refuted by measurement; the specific mechanism is recorded **open** |
+| I4 new-decoration cross-check | bottom-up DONE; interior below-gap DONE, above-gap running | Bottom-up: gap 500\|501, Δν/ν 5.07%, 8,876 s. Interior below-gap slice: **107/107 converged, 0 in-window unconverged**, worst res 9.57×10⁻⁵, λ ∈ [1.47016, 1.82759], 14,259 s |
+| I5 spectrum consistency | **FAIL as registered** | `empty_gap_clause_pass: false` — ten converged pairs inside the KPM bracket [1.864, 1.996]. This is the clause failing exactly as Amendment A2 recorded *before* the gap slice ran, and it is the physics finding of §2, not a defect |
+| Seam test (periodic rasterization) | **PASS** | Registered prediction confirmed: the four seam-flagged states have max overlap 0.006/0.13/0.09/0.30 with any periodic state (gone); all six bulk states persist at overlap 0.95–0.9997 with Δλ = −0.0007…−0.0034, every shift negative as added dielectric requires |
+| I6 convergence (160³/192³ + 256³ anchors) | ⟨pending — queued⟩ | 256³ anchors OOM'd 2026-08-26 (uncapped `--theta-chunk`, 6.00 GiB request); re-queued under the fix. 160³ raised to 8 polish outers after its residual trajectory (1.4e-2 → 7.3e-3 → 2.3e-3) showed 5 would stop short of tolerance |
 | I7 decoration | **PASS** | ff = 22.011% at 192³ (gate 22.0 ± 0.5); r = 0.331836 µm |
 | I8 localization | pipeline validated (N=1000); cross-solver + N=10k ⟨pending⟩ | band 500: ξ=1.82 µm r²=0.97 (production dec.) / 1.47 µm (circular); extended modes auto-flagged |
 | I9 montage | **DONE** (band-count agreement pends I2; absolute numbering carries the KPM ±13 placement caveat) | N=10k: 133 tiles, 15/row, 9 rows, 5250×3276 (`results/n10k_G192_window/band_montage_n10k_gapedge_15.png`); N=1000-circular: 210 tiles for the finite-size comparison |
