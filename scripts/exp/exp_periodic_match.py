@@ -51,7 +51,12 @@ def main() -> int:
     lam_m = np.load(MONT / "window_eigenvalues.npy")
     lam_p = np.load(PERI / "window_eigenvalues.npy")
     man = json.loads((MONT / "vec_manifest.json").read_text())
-    ingap = np.where((lam_m >= GAP_LO) & (lam_m <= GAP_HI))[0]
+    full = "--full" in sys.argv
+    # --full scans EVERY montage mode, not just the in-gap ten. Used to ask
+    # whether a periodic state has any montage partner at all -- a completeness
+    # datapoint independent of I2.
+    ingap = (np.arange(len(lam_m)) if full
+             else np.where((lam_m >= GAP_LO) & (lam_m <= GAP_HI))[0])
 
     Vp = np.load(PERI / "window_vecs_spectral.npy", mmap_mode="r")
     B = [np.asarray(Vp[j]).ravel() for j in range(len(lam_p))]
@@ -89,8 +94,19 @@ def main() -> int:
     unmatched = [r for r in out if r["overlap"] <= 0.5]
     print(f"genuinely gone (no periodic partner above 0.5): "
           f"{[round(r['lam_mont'], 5) for r in unmatched]}")
-    (ROOT / "results" / "gates" / "periodic_overlap_match.json").write_text(
-        json.dumps({"rule": "|overlap|>0.5", "pairs": out}, indent=1))
+    # per-periodic-state best partner over everything scanned
+    print("\nPER-PERIODIC best montage partner"
+          + (" (scanned ALL montage modes)" if full else " (in-gap only)"))
+    M = np.array([r["all_overlaps"] for r in out])          # (n_scanned, n_peri)
+    for j in range(M.shape[1]):
+        b = int(np.argmax(M[:, j]))
+        flag = "" if M[b, j] > 0.5 else "   <- NO PARTNER"
+        print(f"  peri {lam_p[j]:.5f}  best montage {lam_m[ingap[b]]:.5f}"
+              f"  |ov| {M[b, j]:.4f}{flag}")
+    name = "periodic_overlap_match_full.json" if full else "periodic_overlap_match.json"
+    (ROOT / "results" / "gates" / name).write_text(
+        json.dumps({"rule": "|overlap|>0.5", "scanned": "all" if full else "in-gap",
+                    "pairs": out}, indent=1))
     return 0
 
 

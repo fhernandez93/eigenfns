@@ -140,6 +140,17 @@ extrapolation: 1.38 TB locked-set storage = 12× RAM+disk; O(100) days).
   so it counts seam states just as happily as bulk ones. It establishes that
   states are really there in the structure as rasterized; only the periodic
   re-solve can say whether they survive the fix.
+  - **SUPERSEDED IN PART (2026-08-26).** The re-solve landed, so the numbers
+    above must be read as **pre-fix**. S_gap held five montage states, and the
+    overlap test proved **two of them (1.9296, 1.9472) were seam artifacts**;
+    the periodic run finds **three** states in S_gap (1.94067, 1.97081,
+    1.98401). So the eigensolver count this KPM excess was compared against
+    has dropped 5 → 3. The KPM moments were computed on the seam-contaminated
+    ε(r) and **a post-fix KPM run does not exist** — it is a full-bandwidth
+    12,000-degree job and is not queued. The honest position: the
+    ~3–4.5-state excess is a measurement on the *unfixed* structure and is
+    **not** evidence for the post-fix in-gap count. Treat it as retired
+    pending a periodic KPM run.
 - **VERDICT (2026-08-26) — the seam test came back, and the registered
   prediction is CONFIRMED.** The gap window [1.855, 2.000] was re-solved at
   192³ against the periodically-wrapped structure (20.0 h, 7 converged pairs,
@@ -164,7 +175,17 @@ extrapolation: 1.38 TB locked-set storage = 12× RAM+disk; O(100) days).
     1.8860, 1.9264, 1.9738, 1.9901 → 1.8683, 1.8853, 1.9242, 1.9708, 1.9879),
     as does the one extended mode (1.9441 → 1.9407), which remains extended
     and remains excluded from the candidate list.
-  - One periodic state (1.98401) has no montage counterpart above the rule.
+  - **The one apparently-new periodic state is not new.** Extending the
+    overlap scan to all 133 montage modes (`--full`) finds 1.98401's partner
+    at **2.00879, overlap 0.9149, Δλ = −0.02478** — a state that sat *above*
+    the gap and was pulled **into** it by the added dielectric, shifting ~10×
+    further than the localized ones, as a delocalized band-edge state should.
+    So the gap edge moved inward under the fix. Usefully, **all seven periodic
+    states have a montage partner above the rule**, so the montage run missed
+    nothing the periodic run found — a small completeness datapoint that does
+    not depend on I2.
+  - Net in-gap population in the KPM bracket [1.864, 1.996]: **10 → 7** (four
+    seam artifacts removed, one band-edge state pulled in).
   - **What this does NOT settle**: the resolution confound. This test changed
     the boundary convention at fixed 192³; it says nothing about whether
     7.79 vox/µm is enough. The 256³ anchors (I6) remain the open question,
