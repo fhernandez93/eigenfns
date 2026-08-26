@@ -140,6 +140,35 @@ extrapolation: 1.38 TB locked-set storage = 12× RAM+disk; O(100) days).
   so it counts seam states just as happily as bulk ones. It establishes that
   states are really there in the structure as rasterized; only the periodic
   re-solve can say whether they survive the fix.
+- **VERDICT (2026-08-26) — the seam test came back, and the registered
+  prediction is CONFIRMED.** The gap window [1.855, 2.000] was re-solved at
+  192³ against the periodically-wrapped structure (20.0 h, 7 converged pairs,
+  1 in-window unconverged at λ = 1.9095, reported not dropped). Identity
+  between the two runs is decided by **eigenvector overlap > 0.5 — the same
+  rule as cross-slice dedup — not by a λ window**, and that distinction
+  matters: `exp_periodic_verdict.py` matches with `tol = 2e-3` absolute,
+  which is *smaller than the real physical shift*, so it mis-called four
+  persisting states as "vanished (unexpected)" and their moved counterparts
+  as "new". Widening the tolerance to fix that would have been gate-weakening;
+  `exp_periodic_match.py` decides on physics instead.
+  - **The four seam-flagged states are gone.** Their best overlap with *any*
+    periodic state is **0.006, 0.13, 0.09, 0.30** — all below the rule. They
+    were rasterization artifacts, as diagnosed.
+  - **All six bulk states persist**, at overlap **0.95–0.9997**, shifted by
+    Δλ = −0.0007…−0.0034. **Every shift is negative**, which is the sign
+    required: wrapping *adds* the dielectric missing from the outer shell, and
+    more dielectric pushes frequencies down. A physical shift of the right
+    sign and a near-unit overlap is what "the same state, slightly perturbed"
+    looks like.
+  - **So the five rare-region candidates survive the fix** (λ = 1.8690,
+    1.8860, 1.9264, 1.9738, 1.9901 → 1.8683, 1.8853, 1.9242, 1.9708, 1.9879),
+    as does the one extended mode (1.9441 → 1.9407), which remains extended
+    and remains excluded from the candidate list.
+  - One periodic state (1.98401) has no montage counterpart above the rule.
+  - **What this does NOT settle**: the resolution confound. This test changed
+    the boundary convention at fixed 192³; it says nothing about whether
+    7.79 vox/µm is enough. The 256³ anchors (I6) remain the open question,
+    and completeness (I2) still bounds nothing.
 - **Why does N=1000 have a clean gap and N=10k not?** Measured, not asserted
   (`scripts/exp/exp_rare_regions.py`, `exp_rare_region_modes.py`, CPU only).
   The two networks are density-matched with L scaling exactly as N^(1/3)

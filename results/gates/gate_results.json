@@ -268,5 +268,170 @@
   "band_numbering": "MPB (0-based solver index + 3), verified vs MPB output to 7e-7",
   "caveat": "absolute band index carries the KPM placement uncertainty (+-13) AND a Jackson bias of about -4 states in N(1.757); tile COUNT is exact, absolute numbering is not certified",
   "pass": true
+ },
+ "Boundary-seam test (in-gap states, periodic re-solve)": {
+  "test": "boundary-seam hypothesis (montage vs periodic rasterization)",
+  "montage_in_gap": 10,
+  "periodic_in_gap": 7,
+  "shell_volume_fraction": 0.061206958912037035,
+  "seam_flagged": 4,
+  "seam_flagged_vanished": 4,
+  "bulk_flagged": 6,
+  "bulk_persisted": 2,
+  "per_state": [
+   {
+    "lam": 1.868981147045425,
+    "shell_x": 0.4443285515608121,
+    "flagged_seam": false,
+    "counterpart_lam": 1.8683130741119385,
+    "delta": 0.0006680729334864743,
+    "verdict": "persists"
+   },
+   {
+    "lam": 1.8707585792024861,
+    "shell_x": 2.966347546604927,
+    "flagged_seam": true,
+    "counterpart_lam": null,
+    "delta": null,
+    "verdict": "VANISHED (seam artifact)"
+   },
+   {
+    "lam": 1.8730821374768227,
+    "shell_x": 3.8594089394782283,
+    "flagged_seam": true,
+    "counterpart_lam": null,
+    "delta": null,
+    "verdict": "VANISHED (seam artifact)"
+   },
+   {
+    "lam": 1.8860078588720002,
+    "shell_x": 0.4640521470615265,
+    "flagged_seam": false,
+    "counterpart_lam": 1.885307788848877,
+    "delta": 0.0007000700231232226,
+    "verdict": "persists"
+   },
+   {
+    "lam": 1.926413256982914,
+    "shell_x": 0.40524529586568825,
+    "flagged_seam": false,
+    "counterpart_lam": null,
+    "delta": null,
+    "verdict": "vanished (unexpected)"
+   },
+   {
+    "lam": 1.929596209673228,
+    "shell_x": 7.13196341793124,
+    "flagged_seam": true,
+    "counterpart_lam": null,
+    "delta": null,
+    "verdict": "VANISHED (seam artifact)"
+   },
+   {
+    "lam": 1.944051593936228,
+    "shell_x": 1.3230451599923596,
+    "flagged_seam": false,
+    "counterpart_lam": null,
+    "delta": null,
+    "verdict": "vanished (unexpected)"
+   },
+   {
+    "lam": 1.947209447202747,
+    "shell_x": 6.87502600463741,
+    "flagged_seam": true,
+    "counterpart_lam": null,
+    "delta": null,
+    "verdict": "VANISHED (seam artifact)"
+   },
+   {
+    "lam": 1.973811320130794,
+    "shell_x": 1.7097299073960797,
+    "flagged_seam": false,
+    "counterpart_lam": null,
+    "delta": null,
+    "verdict": "vanished (unexpected)"
+   },
+   {
+    "lam": 1.990119585136022,
+    "shell_x": 0.49712652926924733,
+    "flagged_seam": false,
+    "counterpart_lam": null,
+    "delta": null,
+    "verdict": "vanished (unexpected)"
+   }
+  ],
+  "hypothesis_supported": false
+ },
+ "Periodic-rasterization seam test (N=10k gap window, 192^3)": {
+  "gate": "boundary-seam hypothesis, registered prediction",
+  "when": "2026-08-26 02:15",
+  "prediction": "the four seam-flagged states (18-44% outer-2-voxel-shell energy) VANISH or shift substantially under periodic wrapping; the bulk-localized in-gap states PERSIST at nearly the same eigenvalues",
+  "solve": {
+   "tag": "n10k_G192_gap_periodic",
+   "window": [
+    1.855,
+    2.0
+   ],
+   "converged": 7,
+   "in_window_unconverged": [
+    "1.9095"
+   ],
+   "wall_seconds": 71958
+  },
+  "identity_rule": "eigenvector overlap > 0.5 -- the SAME rule as cross-slice dedup. NOT a lambda window: exp_periodic_verdict.py's tol=2e-3 absolute is smaller than the real physical shift and mis-called 4 persisting states as 'vanished'.",
+  "seam_flagged": {
+   "n": 4,
+   "lams": [
+    1.87076,
+    1.87308,
+    1.9296,
+    1.94721
+   ],
+   "max_overlap_with_any_periodic_state": [
+    0.0061,
+    0.1312,
+    0.0901,
+    0.3012
+   ],
+   "verdict": "all 4 GONE"
+  },
+  "bulk": {
+   "n": 6,
+   "lams": [
+    1.86898,
+    1.88601,
+    1.92641,
+    1.94405,
+    1.97381,
+    1.99012
+   ],
+   "overlap": [
+    0.9988,
+    0.9997,
+    0.9936,
+    0.9519,
+    0.9971,
+    0.9676
+   ],
+   "dlam": [
+    -0.00067,
+    -0.0007,
+    -0.00219,
+    -0.00338,
+    -0.003,
+    -0.00223
+   ],
+   "verdict": "all 6 PERSIST; every shift NEGATIVE, as required since wrapping ADDS the dielectric missing from the outer shell"
+  },
+  "unmatched_periodic": [
+   1.98401
+  ],
+  "conclusion": "prediction CONFIRMED as registered. The 4 seam states are rasterization artifacts and are discounted; the 5 rare-region candidates + 1 extended mode survive the fix.",
+  "caveats": [
+   "periodic run has 1 in-window unconverged pair at 1.9095, reported not dropped",
+   "resolution confound (192^3, 7.79 vox/um) is NOT addressed by this test -- I6 256^3 anchors do that",
+   "exp_periodic_verdict.py also prints xi as NaN (localization not run on the periodic dir)"
+  ],
+  "pass": true
  }
 }
