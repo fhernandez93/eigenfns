@@ -31,6 +31,14 @@ RES_GATE = 1e-4
 GRAM_GATE = 5e-5
 
 
+def _save(entries: dict) -> None:
+    """Merge entries into the gate ledger immediately."""
+    g = Path(__file__).resolve().parents[2] / "results" / "gates" / "gate_results.json"
+    d = json.loads(g.read_text()) if g.exists() else {}
+    d.update(entries)
+    g.write_text(json.dumps(d, indent=1))
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--rundir", required=True)
@@ -134,6 +142,13 @@ def main() -> int:
           "pass": bool(res.max() <= RES_GATE and gram_err <= GRAM_GATE),
           "wall_seconds": time.perf_counter() - t0}
 
+    # Persist I3 NOW, before I5 can fail. On 2026-08-26 I5 raised
+    # TypeError on crit["10%"][0] (no contiguous sub-10% DOS region was
+    # found, so the criterion bracket was None) and the exception discarded
+    # a completed I3 measurement -- 45 s of GPU work on 133 vectors at 192^3,
+    # thrown away for a missing command-line argument.
+    _save({i3["gate"]: i3})
+
     # --- I5: spectrum consistency ----------------------------------------
     i5 = None
     if args.kpm:
@@ -170,8 +185,18 @@ def main() -> int:
         d = np.diff(lam)
         k = int(np.argmax(d))
         eig_gap = [float(lam[k]), float(lam[k + 1])]
-        gl = args.gap_lo if args.gap_lo is not None else crit["10%"][0]
-        gh = args.gap_hi if args.gap_hi is not None else crit["10%"][1]
+        # crit["10%"] is None when no contiguous region falls below the
+        # criterion on this grid -- data-dependent, so never assume it.
+        auto = crit.get("10%")
+        if args.gap_lo is None or args.gap_hi is None:
+            if auto is None:
+                raise SystemExit(
+                    "I5: the 10% DOS criterion found no contiguous bracket on "
+                    "this grid, so the gap interval cannot be inferred. Pass "
+                    "--gap-lo/--gap-hi explicitly (registered KPM bracket: "
+                    "1.864 1.996). I3 has already been saved to the ledger.")
+        gl = args.gap_lo if args.gap_lo is not None else auto[0]
+        gh = args.gap_hi if args.gap_hi is not None else auto[1]
         in_gap = [float(v) for v in lam if gl < v < gh]
         i5 = {"gate": f"I5 spectrum consistency {args.gate_suffix}".strip(),
               "when": time.strftime("%Y-%m-%d %H:%M"),
