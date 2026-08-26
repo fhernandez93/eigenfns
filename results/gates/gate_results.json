@@ -663,5 +663,75 @@
   "min_proj2": 0.9963919520378113,
   "pass": true,
   "overhang_note": "The interior slice extends past the reference's STORED VECTORS: 2 modes at eigenvalues_all indices 605-606 lie outside [395, 604], where i4_n1000_circ_G128 keeps window_vecs_spectral. They are excluded from the scored range (which is why n_reported exceeds targets_found) and checked on eigenvalues alone instead: max |dlam|/lam = 1.87e-07 across all 6, same order as the scored modes. Detail in results/gates/i4_overhang_modes.json."
+ },
+ "I2 calibration (N=1000 I1 slice, v2 estimator)": {
+  "gate": "I2 calibration (N=1000 I1 slice, v2 estimator)",
+  "when": "2026-08-26 21:15",
+  "rundir": "results/i1_n1000_slice",
+  "degree": 16000,
+  "probes": 12,
+  "n_deflated": 55,
+  "estimator": "v2 paired bandpass, deflated probes, DOS-predicted edge leakage",
+  "results": {
+   "window": {
+    "interval": [
+     1.70129,
+     2.15583
+    ],
+    "n_found_inside": 55,
+    "found_rho_weight": 50.92070012428913,
+    "deflated_estimate": 2.5183115005493164,
+    "se": 0.21679225204579702,
+    "predicted_edge_leakage": 3.749808013434574,
+    "leakage_se": 0.08942354030794009,
+    "missed_estimate": -1.2314965128852577,
+    "wall_seconds": 1545.5721507251728,
+    "leakage_detail": {
+     "modelled_all_outside": 3.749808013434574,
+     "from_already_deflated_states": 0.0,
+     "from_non_deflated_states": 3.749808013434574
+    }
+   }
+  },
+  "missed_window": -1.2314965128852577,
+  "missed_window_se": 0.23451108738883578,
+  "missed_subgap": null,
+  "missed_subgap_se": null,
+  "pass": null,
+  "wall_seconds": 1545.632087080041,
+  "results_raw_buggy_leakage": {
+   "window": {
+    "interval": [
+     1.70129,
+     2.15583
+    ],
+    "n_found_inside": 55,
+    "found_rho_weight": 50.92070012428913,
+    "deflated_estimate": 2.5183115005493164,
+    "se": 0.21679225204579702,
+    "predicted_edge_leakage": null,
+    "leakage_se": null,
+    "missed_estimate": null,
+    "wall_seconds": 1545.5721507251728
+   }
+  },
+  "pass_note": "no sub-interval measured, so nothing here certifies; the window number is a consistency check only (A3)",
+  "certification": "A3: sub-interval certifies (|missed|<0.5); window is a consistency check, NOT a certification. Note exp_i2_v2.py's window clause uses max(0.5, 2*tot_se), which widens as the measurement gets noisier -- it must never be read as certifying.",
+  "leakage_fix": "three defects corrected post-hoc: disjoint-mask trapezoid, pointwise-|se| error propagation, and double-counting of already-deflated states (see fix_i2_leakage.py)",
+  "interpretation": {
+   "headline": "NEGATIVE RESULT about the full-window estimator: its leakage model over-predicts by at least 1.23 +- 0.23 states.",
+   "measured": {
+    "deflated": 2.5183,
+    "se": 0.2168,
+    "leakage_predicted": 3.7498,
+    "leakage_se": 0.0894,
+    "missed": -1.2315,
+    "missed_se": 0.2345
+   },
+   "why_this_is_a_bound_not_an_estimate": "deflated = leakage + missed with both terms non-negative, so a deflated measurement of 2.52 against a predicted leakage of 3.75 means the model over-predicts by AT LEAST 1.23; if the I1 slice also missed states, the over-prediction is larger still. The true population of [1.70129, 2.15583] cannot be counted here because prod_N1000_G128 was moved off this filesystem, so 'missed' is not separable from model bias.",
+   "cleanest_possible_test": "No grid confound: the KPM moments (kpm_n1000_G128_prod_kpm.npz) and the solve share structure, decoration, grid 128^3 and lam_max (4633.5995 vs 4633.6). The N=10k window used a 256^3 DOS against a 192^3 solve; here that excuse is unavailable and the bias persists.",
+   "does_NOT_touch_the_N10k_certification": "The N=10k gate was certified on the SUB-INTERVAL, where the true leakage is 0.0017 -- three orders below this bias -- so the certifying number does not depend on the leakage model at all. This is precisely why Amendment A3 made the sub-interval the certifying test and demoted the full window to a consistency check. The calibration confirms that call was right, and confirms the full-window number (+1.68 +- 0.32 at N=10k) must not be read as a state count.",
+   "sign_differs_from_N10k": "calibration -1.23, N=10k window +1.68 -- opposite signs, so this is not a constant offset that could be subtracted off. Not modelled further."
+  }
  }
 }

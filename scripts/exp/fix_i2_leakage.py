@@ -44,6 +44,7 @@ under `results_raw_buggy_leakage` for provenance.  CPU only.
 from __future__ import annotations
 
 import json
+import pathlib
 import sys
 from pathlib import Path
 
@@ -110,6 +111,12 @@ def leakage(a, b, defl_lo, defl_hi, lam_max, degree, kpm=KPM):
 
 def main() -> int:
     name = sys.argv[1]
+    # --kpm <npz>: the DOS must come from the SAME structure+decoration+grid as
+    # the run being corrected. The N=10k default is wrong for the N=1000
+    # calibration slice, which needs kpm_n1000_G128_prod_kpm.npz.
+    kpm = KPM
+    if "--kpm" in sys.argv:
+        kpm = pathlib.Path(sys.argv[sys.argv.index("--kpm") + 1])
     data = json.loads(GATES.read_text())
     e = data[name]
     meta = json.loads((Path(e["rundir"]) / "interior_report.json").read_text())
@@ -121,7 +128,7 @@ def main() -> int:
 
     for key, r in e["results"].items():
         a, b = r["interval"]
-        leak, leak_se, detail = leakage(a, b, dlo, dhi, lam_max, degree)
+        leak, leak_se, detail = leakage(a, b, dlo, dhi, lam_max, degree, kpm)
         r["predicted_edge_leakage"] = leak
         r["leakage_se"] = leak_se
         r["leakage_detail"] = detail
@@ -129,11 +136,15 @@ def main() -> int:
         tot = float(np.hypot(r["se"], leak_se))
         print(f"{key:8s} [{a:.4f},{b:.4f}]  deflated {r['deflated_estimate']:9.4f}"
               f" +- {r['se']:.4f}")
-        print(f"          leakage {raw[key]['predicted_edge_leakage']:9.3f}"
+        # the original may hold None (the N=1000 calibration ran without
+        # --kpm, so exp_i2_v2.py had no DOS and skipped leakage entirely)
+        def _f(v):
+            return "     none" if v is None else f"{v:9.3f}"
+        print(f"          leakage {_f(raw[key]['predicted_edge_leakage'])}"
               f" -> {leak:8.4f} +- {leak_se:.4f}")
         print(f"            (modelled-all {detail['modelled_all_outside']:.4f},"
               f" of which already-deflated {detail['from_already_deflated_states']:.4f})")
-        print(f"          missed  {raw[key]['missed_estimate']:9.3f}"
+        print(f"          missed  {_f(raw[key]['missed_estimate'])}"
               f" -> {r['missed_estimate']:+8.4f} +- {tot:.4f}")
 
     win, sub = e["results"]["window"], e["results"].get("sub_gap")
@@ -145,7 +156,16 @@ def main() -> int:
     # Acceptance per Amendment A3: the SUB-INTERVAL certifies (|missed| < 0.5);
     # the full window is a consistency check only, since its bias cannot be
     # driven below one state at feasible degree.
-    e["pass"] = bool(sub is not None and abs(sub["missed_estimate"]) < 0.5)
+    if sub is None:
+        # No certifying sub-interval was requested (the chain omitted --sub-lo
+        # for the N=1000 calibration). A3 is explicit that the full window
+        # cannot certify, so this is recorded as NOT CERTIFYING rather than
+        # silently failing on a missing field.
+        e["pass"] = None
+        e["pass_note"] = ("no sub-interval measured, so nothing here certifies; "
+                          "the window number is a consistency check only (A3)")
+    else:
+        e["pass"] = bool(abs(sub["missed_estimate"]) < 0.5)
     e["certification"] = (
         "A3: sub-interval certifies (|missed|<0.5); window is a consistency "
         "check, NOT a certification. Note exp_i2_v2.py's window clause uses "
@@ -157,8 +177,13 @@ def main() -> int:
                         "(see fix_i2_leakage.py)")
     data[name] = e
     GATES.write_text(json.dumps(data, indent=1))
-    print(f"\nCERTIFYING (sub-interval) |missed| = "
-          f"{abs(sub['missed_estimate']):.4f} < 0.5  ->  pass = {e['pass']}")
+    if sub is None:
+        print(f"\nNO CERTIFYING sub-interval measured. Window missed = "
+              f"{win['missed_estimate']:+.4f} +- {e['missed_window_se']:.4f} "
+              f"(consistency check only, per A3).")
+    else:
+        print(f"\nCERTIFYING (sub-interval) |missed| = "
+              f"{abs(sub['missed_estimate']):.4f} < 0.5  ->  pass = {e['pass']}")
     return 0
 
 
