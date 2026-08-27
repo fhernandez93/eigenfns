@@ -230,6 +230,25 @@ def main() -> int:
     np.save(outdir / "window_residuals.npy", rn[idx])
     Xw = X[np.asarray(idx)]
     np.save(outdir / "window_vecs_spectral.npy", np.asarray(Xw))
+
+    # Save the IN-WINDOW UNCONVERGED pairs too. They were previously listed in
+    # the report and then discarded, which cost us a real measurement: the
+    # periodic gap re-solve left one pair unconverged at lambda = 1.9095, and
+    # when I2 later showed that solve was incomplete, the question "is 1.9095
+    # a heavily-shifted counterpart of the seam state at 1.92960?" could not
+    # be answered, because no vector for it existed anywhere on disk. An
+    # unconverged pair is not worthless -- its residual is reported, so it can
+    # be used for overlap and locality tests as long as nobody mistakes it for
+    # a certified eigenpair. Kept in separate files for exactly that reason.
+    uidx = np.where(unconv)[0][np.argsort(lam[unconv], kind="stable")]
+    if len(uidx):
+        np.save(outdir / "window_unconverged_lams.npy", lam[uidx])
+        np.save(outdir / "window_unconverged_residuals.npy", rn[uidx])
+        np.save(outdir / "window_unconverged_vecs_spectral.npy",
+                np.asarray(X[np.asarray(uidx)]))
+        print(f"saved {len(uidx)} UNCONVERGED in-window pairs separately "
+              f"(residuals {rn[uidx].min():.2e}-{rn[uidx].max():.2e}; NOT "
+              f"certified eigenpairs)", flush=True)
     ed = np.empty((len(idx), args.grid, args.grid, args.grid), np.float32)
     for s in range(0, len(idx), 8):
         E = op.e_realspace(jnp.asarray(np.asarray(Xw[s:s + 8])),
