@@ -733,5 +733,59 @@
    "does_NOT_touch_the_N10k_certification": "The N=10k gate was certified on the SUB-INTERVAL, where the true leakage is 0.0017 -- three orders below this bias -- so the certifying number does not depend on the leakage model at all. This is precisely why Amendment A3 made the sub-interval the certifying test and demoted the full window to a consistency check. The calibration confirms that call was right, and confirms the full-window number (+1.68 +- 0.32 at N=10k) must not be read as a state count.",
    "sign_differs_from_N10k": "calibration -1.23, N=10k window +1.68 -- opposite signs, so this is not a constant offset that could be subtracted off. Not modelled further."
   }
+ },
+ "I6 convergence: 160^3 gap-edge leg (N=10k)": {
+  "gate": "I6 convergence sweep, 160^3 leg",
+  "when": "2026-08-27 15:38",
+  "rundir": "results/n10k_G160_gapedge",
+  "window": [
+   1.8,
+   2.06
+  ],
+  "m": 72,
+  "polish_outers_used": 8,
+  "n_converged": 45,
+  "n_inwindow_unconverged": 18,
+  "worst_res_reported": 8.21929206722416e-05,
+  "converged_lam_range": [
+   1.809584617614746,
+   2.051631450653076
+  ],
+  "wall_seconds_total_incl_prior": 65830,
+  "residual_trajectory_med": [
+   0.014,
+   0.0073,
+   0.0023,
+   0.00078,
+   0.00022,
+   0.00012,
+   4.5e-05,
+   3.7e-05
+  ],
+  "converged_trajectory": [
+   0,
+   0,
+   0,
+   2,
+   15,
+   30,
+   42,
+   45
+  ],
+  "partial_coverage": {
+   "verdict": "EDGE-TRUNCATED, not randomly incomplete",
+   "unconverged_distance_from_nearest_window_edge": [
+    0.0,
+    0.0253
+   ],
+   "converged_distance_from_nearest_window_edge": [
+    0.0084,
+    0.1226
+   ],
+   "reading": "all 18 unconverged states lie within 0.025 of a window edge (12 at the 1.80 floor, 6 at the 2.06 ceiling) while every converged state is >= 0.0084 inside. This is the bandpass filter's transition zone: edge states receive the least amplification and converge slowest. The usable 160^3 result is therefore an INTERIOR sub-window [1.8096, 2.0516], which is what any 160-vs-192 comparison must be restricted to."
+  },
+  "outers_raised_5_to_8": "Justified after the fact: outer 4 was the last under the original 5-outer config and ended with 15/63 converged at 2.2e-4, above the 1e-4 tolerance. Outers 5-7 took it to 45. A prediction of 52-55 made at outer 6 was OPTIMISTIC -- the +12/outer trend did not hold on the last step.",
+  "pass": null,
+  "pass_note": "I6 cannot be scored until the 256^3 anchors land; this entry records the 160^3 leg only, with its edge truncation."
  }
 }
