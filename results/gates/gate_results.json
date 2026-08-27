@@ -889,5 +889,32 @@
    "why_incomplete": "m=30 with 5 polish outers over [1.855, 2.000]; the montage window holds 10 states in that interval and the periodic structure gains more from above (1.98401's partner came from 2.00879), so ~12 is consistent. The solve converged 7."
   },
   "pass_note": "FAIL as registered. Recorded as a real negative: it bounds how much the seam verdict's negative half can claim."
+ },
+ "I8 localization (cross-solver xi agreement, N=1000)": {
+  "gate": "I8 localization (cross-solver xi agreement, N=1000)",
+  "when": "2026-08-27 21:55",
+  "solvers": [
+   "i4_n1000_circ_G128 (bottom-up)",
+   "i4int_n1000_below/_above (interior bandpass)"
+  ],
+  "n_interior_modes": 216,
+  "n_matched": 210,
+  "n_resolved_in_both": 42,
+  "n_gap_edge_resolved": 20,
+  "gap_edge_rel_diff": {
+   "max": 0.000867952266196842,
+   "median": 6.423176762754768e-05,
+   "mean": 0.00015114779417964668
+  },
+  "all_resolved_rel_diff": {
+   "max": 0.0021093889262258363,
+   "median": 0.00013263254224075491
+  },
+  "criterion": "max relative xi difference <= 10% on gap-edge modes resolved in BOTH solvers",
+  "ceiling_um": 5.72,
+  "note": "restricted to modes resolved in both: an unresolved fit is a lower bound and comparing it would be meaningless. In an 11.44 um box the L/2 = 5.72 um ceiling catches most modes, so this is a small but honest sample.",
+  "pass": true,
+  "honest_caveat": "The agreement is 0.01-0.09%, i.e. far tighter than the 10% gate, and that tightness should be read for what it is. The two solvers agree on these eigenvalues to ~3e-07 with near-unit eigenvector overlap (gate I4), so they hand the localization pipeline almost the SAME field. What this therefore establishes strongly is that the pipeline is deterministic and free of solver-path dependence -- it does NOT independently validate the envelope-fit METHOD itself, since both numbers come from the same estimator. The method's own fit-range sensitivity was measured separately in adversarial round 3 (item 3): absolute xi moves at the tens-of-percent level as the fit range varies, while the trend survives. Both facts belong in the report.",
+  "sample_restriction": "20 of 216 modes. 210 matched across solvers; 42 were resolved in BOTH (the L/2 = 5.72 um ceiling in an 11.44 um box catches the rest); 20 of those sit within 0.15 of a gap edge. Comparing unresolved fits was refused because a ceiling-limited xi is a lower bound, not a value."
  }
 }
