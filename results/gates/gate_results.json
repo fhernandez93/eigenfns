@@ -787,5 +787,107 @@
   "outers_raised_5_to_8": "Justified after the fact: outer 4 was the last under the original 5-outer config and ended with 15/63 converged at 2.2e-4, above the 1e-4 tolerance. Outers 5-7 took it to 45. A prediction of 52-55 made at outer 6 was OPTIMISTIC -- the +12/outer trend did not hold on the last step.",
   "pass": null,
   "pass_note": "I6 cannot be scored until the 256^3 anchors land; this entry records the 160^3 leg only, with its edge truncation."
+ },
+ "I2 completeness (N=10k periodic gap window, v2 estimator)": {
+  "gate": "I2 completeness (N=10k periodic gap window, v2 estimator)",
+  "when": "2026-08-27 20:17",
+  "rundir": "results/n10k_G192_gap_periodic",
+  "degree": 24000,
+  "probes": 12,
+  "n_deflated": 7,
+  "estimator": "v2 paired bandpass, deflated probes, DOS-predicted edge leakage",
+  "results": {
+   "window": {
+    "interval": [
+     1.855,
+     2.0
+    ],
+    "n_found_inside": 7,
+    "found_rho_weight": 6.853673665998179,
+    "deflated_estimate": 5.651528577009837,
+    "se": 0.49610513018293895,
+    "predicted_edge_leakage": 1.474881155861741,
+    "leakage_se": 0.07990197039102635,
+    "missed_estimate": 4.176647421148096,
+    "wall_seconds": 8178.90439135395,
+    "leakage_detail": {
+     "modelled_all_outside": 1.474881155861741,
+     "from_already_deflated_states": 0.0,
+     "from_non_deflated_states": 1.474881155861741
+    }
+   },
+   "sub_gap": {
+    "interval": [
+     1.9063,
+     1.9606
+    ],
+    "n_found_inside": 2,
+    "found_rho_weight": 2.099570291407308,
+    "deflated_estimate": 2.0439084668954215,
+    "se": 0.41610509575140514,
+    "predicted_edge_leakage": 0.007331748536983269,
+    "leakage_se": 0.00019927262845743015,
+    "missed_estimate": 2.0365767183584382,
+    "wall_seconds": 8150.324478188995,
+    "leakage_detail": {
+     "modelled_all_outside": 0.4477493329752552,
+     "from_already_deflated_states": 0.44038117428652696,
+     "from_non_deflated_states": 0.007331748536983269
+    }
+   }
+  },
+  "missed_window": 4.176647421148096,
+  "missed_window_se": 0.5024983831478458,
+  "missed_subgap": 2.0365767183584382,
+  "missed_subgap_se": 0.4161051434672089,
+  "pass": false,
+  "wall_seconds": 16329.294302575057,
+  "results_raw_buggy_leakage": {
+   "window": {
+    "interval": [
+     1.855,
+     2.0
+    ],
+    "n_found_inside": 7,
+    "found_rho_weight": 6.853673665998179,
+    "deflated_estimate": 5.651528577009837,
+    "se": 0.49610513018293895,
+    "predicted_edge_leakage": 1.484731026869492,
+    "leakage_se": 2.3587128077055093,
+    "missed_estimate": 4.166797550140345,
+    "wall_seconds": 8178.90439135395
+   },
+   "sub_gap": {
+    "interval": [
+     1.9063,
+     1.9606
+    ],
+    "n_found_inside": 2,
+    "found_rho_weight": 2.099570291407308,
+    "deflated_estimate": 2.0439084668954215,
+    "se": 0.41610509575140514,
+    "predicted_edge_leakage": 0.4446563740374694,
+    "leakage_se": 2.3201671601346416,
+    "missed_estimate": 1.5992520928579521,
+    "wall_seconds": 8150.324478188995
+   }
+  },
+  "certification": "A3: sub-interval certifies (|missed|<0.5); window is a consistency check, NOT a certification. Note exp_i2_v2.py's window clause uses max(0.5, 2*tot_se), which widens as the measurement gets noisier -- it must never be read as certifying.",
+  "leakage_fix": "three defects corrected post-hoc: disjoint-mask trapezoid, pointwise-|se| error propagation, and double-counting of already-deflated states (see fix_i2_leakage.py)",
+  "interpretation": {
+   "headline": "THE PERIODIC SOLVE IS INCOMPLETE. Sub-interval missed = +2.037 +- 0.416 against a gate of |missed| < 0.5 -- FAIL.",
+   "reliability": "The sub-interval number is the trustworthy one: its true leakage is 0.0073, so the leakage model (which the N=1000 calibration showed over-predicts by >= 1.23) is irrelevant there. The full-window +4.18 +- 0.50 inherits that model bias and should not be read as a count.",
+   "one_of_the_two_is_known": {
+    "lam": 1.9094840288162231,
+    "note": "the periodic run's own in-window UNCONVERGED pair, which lies inside the sub-interval [1.9063, 1.9606]. Found but not converged, so never deflated, so it contributes ~1 to the deflated estimate. That leaves ~1.0 genuinely unaccounted for."
+   },
+   "IMPACT ON THE SEAM VERDICT": {
+    "unaffected": "The POSITIVE half stands: six montage bulk states have periodic partners at overlap 0.95-0.9997 with Delta-lambda all negative. Finding a partner is positive evidence and incompleteness cannot manufacture it.",
+    "WEAKENED": "The NEGATIVE half -- 'the four seam-flagged states vanished' -- rested on those states having no partner above 0.5 among the seven converged periodic states. With the periodic solve now measured to be missing ~1 state in the sub-interval alone (and ~4 across the window), ABSENCE OF A PARTNER IS NOT PROOF OF ABSENCE. The seam states are still the best explanation, but the test no longer excludes the alternative that they persist and were simply not found.",
+    "specific_suspicion": "The unconverged 1.9095 sits 0.0201 BELOW the seam state at 1.92960. Bulk states shifted -0.0007..-0.0034 and the band-edge state shifted -0.0248; a state living in the very shell whose material changed would be expected to shift hard. So 1.9095 is a plausible heavily-shifted counterpart of a seam state. NOT TESTABLE from stored data: run_interior.py saves only converged pairs, and the checkpoint holding that vector was removed under the approved post-save cleanup policy. Deciding it needs a re-solve with more polish outers."
+   },
+   "why_incomplete": "m=30 with 5 polish outers over [1.855, 2.000]; the montage window holds 10 states in that interval and the periodic structure gains more from above (1.98401's partner came from 2.00879), so ~12 is consistent. The solve converged 7."
+  },
+  "pass_note": "FAIL as registered. Recorded as a real negative: it bounds how much the seam verdict's negative half can claim."
  }
 }
