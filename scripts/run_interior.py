@@ -249,11 +249,22 @@ def main() -> int:
         print(f"saved {len(uidx)} UNCONVERGED in-window pairs separately "
               f"(residuals {rn[uidx].min():.2e}-{rn[uidx].max():.2e}; NOT "
               f"certified eigenpairs)", flush=True)
+    # Chunk from args.theta_chunk, NOT a hard-coded 8. e_realspace returns
+    # THREE real-space components per vector, so a block costs 3x what the
+    # solver's own blocks do: at 256^3 that is 0.402 GB/vector, and 8 of them
+    # asked for exactly the 3.00 GiB that killed the edgelow anchor at 23:31
+    # on 2026-08-28 -- AFTER 20.5 h of solving and after the eigenvalues and
+    # vectors had been written. Halved again (theta_chunk is already capped to
+    # 4 at 256^3) to keep this well inside the budget, since it runs at peak
+    # memory with the whole converged basis still resident.
+    ed_chunk = max(1, args.theta_chunk // 2)
     ed = np.empty((len(idx), args.grid, args.grid, args.grid), np.float32)
-    for s in range(0, len(idx), 8):
-        E = op.e_realspace(jnp.asarray(np.asarray(Xw[s:s + 8])),
-                           jnp.asarray(vals[s:s + 8]))
-        ed[s:s + 8] = np.asarray(eps[None] * (np.abs(np.asarray(E)) ** 2).sum(1))
+    for s in range(0, len(idx), ed_chunk):
+        E = op.e_realspace(jnp.asarray(np.asarray(Xw[s:s + ed_chunk])),
+                           jnp.asarray(vals[s:s + ed_chunk]))
+        ed[s:s + ed_chunk] = np.asarray(
+            eps[None] * (np.abs(np.asarray(E)) ** 2).sum(1))
+        del E
     np.save(outdir / "window_energy_density.npy", ed)
     report = {
         "structure": str(args.structure), "N": N, "L": L, "grid": args.grid,
