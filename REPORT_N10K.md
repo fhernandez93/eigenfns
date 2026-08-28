@@ -37,8 +37,13 @@ extrapolation: 1.38 TB locked-set storage = 12× RAM+disk; O(100) days).
   exact N=1000 eigenvalues) locates the N=10k gap and pins the mid-gap state
   count at **5010.3 ± 12.5 — the 0.5 bands/vertex rule confirmed by
   measurement** (gap between MPB bands ≈5012|5013 ± 13). KPM gap width
-  0.13 ± 0.05 (criterion-dominated), Δν/ν ≈ 3.4% [2.2, 4.8]%. Exact edges:
-  ⟨pending — production window solve⟩.
+  0.13 ± 0.05 (criterion-dominated), Δν/ν ≈ 3.4% [2.2, 4.8]%. **Exact edges
+  from the eigensolver** (these supersede the KPM criterion edges): the
+  largest interior spacing in the certified 133-mode window runs from
+  λ = 1.8860 to 1.9264, and the ten states inside the KPM bracket
+  [1.864, 1.996] mean the "edges" are not a clean pair — the gap is a
+  pseudogap populated by localized states, so §2 reports the state list
+  rather than an edge pair.
 - **Method** (chosen by measured bake-off, not opinion): **two-stage bandpass
   Chebyshev filtered subspace iteration** — build at degree ~3000, polish
   with the same filter at degree 8000–12000 on the trimmed basis; extraction
@@ -88,7 +93,16 @@ extrapolation: 1.38 TB locked-set storage = 12× RAM+disk; O(100) days).
   (validated machinery) solved N=1000/circular/ff22 at 128³ (8,876 s):
   gap again exactly at MPB 500|501, **Δν/ν = 5.07%** — the circular-rod
   decoration more than doubles the elliptical production gap (2.08%).
-  Interior-vs-bottom-up comparison: ⟨pending — I4-interior run⟩.
+  **Interior-vs-bottom-up comparison: DONE and PASSING on both sides of the
+  gap.** The interior solver reproduced the same structure from scratch —
+  below-gap 107/107 converged, above-gap 109/109, zero in-window unconverged
+  in either — and scored against the bottom-up reference gives
+  **210/210 targets, 0 missed, 0 ghosts, max Δλ/λ = 4.11×10⁻⁷, min proj²
+  0.9961**. Six further modes lie outside the range where the reference
+  stores vectors and were checked on eigenvalues alone (max 1.87×10⁻⁷).
+  This is also independent confirmation of the round-3 Rayleigh-norm fix: a
+  fresh solve against a different reference lands at ~3×10⁻⁷, the corrected
+  figure, not the 2.83×10⁻⁵ the unnormalised quotient produced.
 - **N=10k production** (192³, window λ ∈ [1.757, 1.930] ∪ [1.980, 2.117],
   plus the Amendment-A2 gap-covering slice [1.925, 1.985]):
   **COMPLETE — 130 residual-certified eigenpairs**: S_below 69/69 (KPM
