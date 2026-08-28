@@ -1,8 +1,19 @@
 # Interior gap-edge eigenmodes of the N=10,000 LSU network on a laptop GPU
 
-**Project report — 2026-08 (IN PROGRESS: production solve running; N=10k
-results sections marked ⟨pending⟩) · RTX 4080 Laptop (12 GB), 62 GB RAM ·
+**Project report — 2026-08 · RTX 4080 Laptop (12 GB), 62 GB RAM ·
 env `lsu_ml` (JAX 0.10.0 cuda12)**
+
+**Status (2026-08-28): the eigenmodes are delivered and certified; one gate
+is still running.** 401 residual-certified eigenpairs are on disk with their
+ε|E|² fields — 133 for the N=10k gap window at 192³, 45 at 160³, 216 across
+two N=1000 interior slices, 7 for the periodic re-solve. Accuracy against
+exact bottom-up ground truth is verified twice independently: **210/210
+targets at Δλ/λ ≈ 3×10⁻⁷ with zero ghosts and zero missed** (I1, I4). Of the
+nine registered interior gates, **8 entries PASS, 3 FAIL with recorded
+diagnoses, 3 remain open**; I6 (grid convergence) is the only one still
+waiting on computation. Every failure below is reported as a failure — the
+pre-registration's rule was that a FAIL plus an honest explanation beats a
+massaged PASS, and three of them are exactly that.
 
 Companion records: `plans/2026-08-17_interior_investigation.md` (Phase 1,
 all measurements), `plans/2026-08-17_interior_literature_survey.md`,
@@ -317,7 +328,18 @@ extrapolation: 1.38 TB locked-set storage = 12× RAM+disk; O(100) days).
   fit above ceiling / below 1 decade of decay / r² < 0.7 is flagged
   "unresolved — lower bound only"). N=1000 new-decoration gap-edge modes:
   ξ = 1.47 µm (band 500) / 2.30 µm (band 501), sharper than the elliptical
-  decoration — wider gap, tighter confinement. N=10k ξ(ω): ⟨pending⟩.
+  decoration — wider gap, tighter confinement. **N=10k ξ(ω) is measured**:
+  121 of 133 modes resolved, a clean funnel from ~8 µm at the lower window
+  edge down to 1.8 µm at the gap and back out to ~10 µm above, with the
+  remaining 12 flagged (one above the 12.32 µm ceiling, eleven failing the
+  r² ≥ 0.7 exponential-shape test — a different statement, and stated
+  separately). The pipeline itself is now cross-validated: **gate I8 compares
+  ξ from the bottom-up and interior solvers on the same N=1000 modes and finds
+  max 0.09% / median 0.01%** disagreement over the 20 gap-edge modes resolved
+  in both. Read that for what it is — the two solvers agree on those
+  eigenvalues to ~3×10⁻⁷ with near-unit overlap, so this proves the pipeline
+  is deterministic and solver-independent; it does **not** validate the
+  envelope-fit method, whose own fit-range sensitivity is tens of percent.
 
 ## 1. Why new machinery (measured, not asserted)
 
@@ -418,6 +440,42 @@ investigation §6):
 | N=1000 KPM moments (128³, degree 8k × 16 probes) | 731 s |
 
 ## 6. Honest limitations (running list; finalized at delivery)
+
+**The four that matter most, stated first:**
+
+- **I3 FAILS: the merged 133-mode set is not orthonormal to gate.**
+  ‖G−I‖max = 4.86×10⁻⁴ against a registered ≤5×10⁻⁵. Diagnosed rather than
+  excused: **cross-slice pairs max 4.86×10⁻⁴, same-slice pairs max
+  8.58×10⁻⁶**, so *each slice individually passes* — SVQB enforces
+  orthonormality within a slice and nothing enforces it across the three
+  independent solves that were concatenated. The worst pairs are dominated by
+  λ = 1.94721 (a seam artifact) in 6 of the top 10. Two explanations of mine
+  were **refuted by measurement**: small eigenvalue spacing (the worst pair is
+  Δλ = 0.167 apart) and poor convergence of the offending state (its residual
+  ranks 73 of 133, better than median). The actual mechanism is **open**.
+  Consequence: use the per-slice sets when mutual orthonormality matters; the
+  merged set is fine for spectra, montages and localization, which do not.
+- **The seam verdict's negative half is weakened.** "The four seam-flagged
+  states vanish under periodic wrapping" rested on their having no partner
+  above overlap 0.5 among the periodic solve's **seven** converged states.
+  I2 later measured that solve to be **incomplete** (sub-interval missed
+  +2.04 ± 0.42; it converged 7 in a window holding ~12), so absence of a
+  partner is **not proof of absence**. The seam explanation remains the best
+  available — those four states did carry 18–44% of their energy in 6.1% of
+  the volume — but the alternative that they persist and were simply not
+  found is no longer excluded. A re-solve at m = 48 with 8 polish outers is
+  queued. **The positive half is unaffected**: six bulk states have partners
+  at overlap 0.95–0.9997 with every Δλ negative, and incompleteness cannot
+  manufacture a partner.
+- **The full-window completeness estimator is biased and must not be read as
+  a state count.** The N=1000 calibration — the cleanest possible test, with
+  KPM moments and solve sharing structure, decoration, grid and λ_max — shows
+  its leakage model **over-predicts by ≥1.23 ± 0.23 states**. The N=10k
+  certification does not depend on it: that came from the sub-interval, where
+  true leakage is 0.0017, three orders below this bias. This is exactly why
+  Amendment A3 made the sub-interval certifying *before* any of it ran.
+- **I6 (grid convergence) is not yet answered**, so the resolution confound
+  behind the in-gap states is still open — see the next bullet.
 
 - **Window descoped from ~300 to ~139 bands** (64/side) by the measured cost
   wall (10–15 GPU-days at 256³ full window); recorded at registration with a
