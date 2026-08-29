@@ -1004,5 +1004,69 @@
   },
   "cost": "9.1 h of GPU spent, no converged pairs produced. Recorded rather than quietly re-run.",
   "pass": null
+ },
+ "I6 cross-grid eigenvector match (192^3 vs 256^3, low gap edge)": {
+  "gate": "I6 supporting measurement -- per-state identity across grids",
+  "when": "2026-08-29 11:45",
+  "method": "192^3 spectral coefficients embedded into the 256^3 k-set by integer wavenumber n (both grids share L, and make_basis builds the transverse frame deterministically from the physical k+G, so the frame is identical at equal n and the two amplitudes mean the same thing in both runs). Overlap is then a plain inner product over the shared k-set, accumulated in complex128.",
+  "RESULT": {
+   "matched_one_to_one": "11 of 11, with 11 DISTINCT fine partners",
+   "overlap_min": 0.8734,
+   "overlap_median": 0.9961,
+   "overlap_max": 0.9969,
+   "reading": "the two grids found the SAME STATES, not merely the same NUMBER of states. This upgrades the 11-vs-11 count agreement from suggestive to per-state identification."
+  },
+  "fine_power_inside_coarse_kset": {
+   "min_pct": 99.975,
+   "max_pct": 99.984,
+   "reading": "each 256^3 mode keeps 99.98% of its power at wavenumbers the 192^3 grid can represent, i.e. the production grid is not missing the physics -- direct evidence that 7.79 vox/um resolves these modes."
+  },
+  "SORTED_ORDER_WAS_WRONG": {
+   "n_disagreements": 6,
+   "n_pairs": 11,
+   "examples": [
+    [
+     1.84478,
+     "sorted 1.84026",
+     "overlap 1.84375"
+    ],
+    [
+     1.86898,
+     "sorted 1.85814",
+     "overlap 1.86036"
+    ],
+    [
+     1.94405,
+     "sorted 1.93752",
+     "overlap 1.94228"
+    ]
+   ],
+   "reading": "6 of 11 pairings differ from naive sorted-eigenvalue pairing, confirming the caution recorded with the anchor: the inter-grid shift is 3.2x the smallest level spacing, so states DO reorder. Any per-state claim made from sorted order would have been wrong for more than half the window."
+  },
+  "two_low_overlap_states": {
+   "lams": [
+    1.94405,
+    1.94721
+   ],
+   "separation": 0.00316,
+   "overlaps": [
+    0.8792,
+    0.8734
+   ],
+   "second_best": [
+    0.4679,
+    0.4715
+   ],
+   "combined_two_state": [
+    0.9959,
+    0.9926
+   ],
+   "reading": "not a failure: these two are near-degenerate and mix with EACH OTHER (second-best ~0.47). Summed over the 2D subspace they span, the overlap is 0.993-0.996, so the SUBSPACE is preserved across grids even though the individual basis vectors rotate within it -- the expected behaviour for a near-degenerate pair, and the same phenomenon gate G4 tested at N=1000. Note these are the extended mode (1.94405) and a seam artifact (1.94721)."
+  },
+  "scripts": [
+   "scripts/exp/exp_crossgrid_match.py"
+  ],
+  "pass": null,
+  "pass_note": "supporting evidence for I6; the gate itself awaits the high-edge anchor."
  }
 }
