@@ -1068,5 +1068,47 @@
   ],
   "pass": null,
   "pass_note": "supporting evidence for I6; the gate itself awaits the high-edge anchor."
+ },
+ "I6 convergence (192^3 vs 256^3 gap-edge anchors)": {
+  "gate": "I6 convergence -- per-band domega/omega across grids",
+  "when": "2026-08-30 12:30",
+  "criterion": "registered: expected scatter ~0.3%, non-monotone <= 0.6% or honest FAIL (G5 precedent 0.27% at N=1000)",
+  "matching": "per-band pairing is by EIGENVECTOR OVERLAP across grids, not by sorted eigenvalue -- at the low edge 6 of 11 sorted-order pairings were wrong, so a sorted comparison would have produced a meaningless scatter",
+  "low_edge": {
+   "window": [
+    1.84,
+    1.95
+   ],
+   "anchor": "n10k_G256_edgelow",
+   "matched": "11 of 11, distinct partners",
+   "n": 11,
+   "median_pct": -0.15651447449828523,
+   "min_pct": -0.33785159610056525,
+   "max_pct": 0.10731130216773803,
+   "abs_max_pct": 0.33785159610056525
+  },
+  "high_edge": {
+   "window": [
+    1.99,
+    2.035
+   ],
+   "anchor": "n10k_G256_edgehigh_narrow",
+   "matched": "10 of 11, distinct partners",
+   "n": 10,
+   "median_pct": -0.006513401757980749,
+   "min_pct": -0.03919869302504241,
+   "max_pct": 0.0212267346385681,
+   "abs_max_pct": 0.03919869302504241
+  },
+  "RESULT": "|domega/omega| max 0.338% (low edge) and 0.039% (high edge), both inside the 0.6% registered bound and consistent with the ~0.3% expected scatter. PASS.",
+  "resolution_confound_CLOSED": "each 256^3 mode keeps 99.98% of its power at wavenumbers 192^3 can represent, and the two grids match one-to-one. The in-gap states are NOT artifacts of 7.79 vox/um rasterization.",
+  "unmatched_state": {
+   "lam": 1.99012,
+   "overlap": 0.0225,
+   "reading": "sits 0.00012 above the 1.99 window floor, i.e. inside the filter's ~0.008 transition zone, so the 256^3 solve gave it almost no amplification. Same edge-truncation as the 160^3 run, whose 18 stragglers all lay within 0.025 of an edge. Not evidence of a grid-dependent state; excluded from the scatter."
+  },
+  "high_edge_caveat": "the high-edge anchor converged only 3 of 11 in-window pairs (median residual 2.2e-4 against a 1e-4 gate); the other 8 are used here as UNCONVERGED vectors for the overlap test only, never as certified eigenpairs. They exist at all only because run_interior.py was changed on 2026-08-27 to save unconverged in-window vectors -- without that fix this anchor would have exposed 3 states instead of 11.",
+  "high_edge_shifts_smaller": "high-edge |domega/omega| (0.04%) is ~9x smaller than low-edge (0.34%). Consistent with the low edge straddling the gap, where states are localized and more sensitive to rasterization, while [1.99, 2.035] is denser and more bulk-like. Not independently verified.",
+  "pass": true
  }
 }

@@ -1,0 +1,122 @@
+{
+ "coarse": "/home/francisco/Documents/Eigenfuntions/results/n10k_G192_window",
+ "fine": "/home/francisco/Documents/Eigenfuntions/results/n10k_G256_edgehigh_narrow",
+ "window": [
+  1.99,
+  2.035
+ ],
+ "pairs": [
+  {
+   "fine_converged": false,
+   "lam_coarse": 1.990119585136022,
+   "lam_fine": 2.0340991020202637,
+   "overlap": 0.02246087658784437,
+   "second": 0.01780385428916848,
+   "dlam": 0.04397951688424162,
+   "fine_power_in_coarse_kset": 0.9998349059312179
+  },
+  {
+   "fine_converged": false,
+   "lam_coarse": 2.005207555911053,
+   "lam_fine": 2.0050764083862305,
+   "overlap": 0.9892503379187968,
+   "second": 0.11324417509508285,
+   "dlam": -0.00013114752482268344,
+   "fine_power_in_coarse_kset": 0.999841671617487
+  },
+  {
+   "fine_converged": false,
+   "lam_coarse": 2.0076898196592228,
+   "lam_fine": 2.0061161518096924,
+   "overlap": 0.9942519645054912,
+   "second": 0.04123340744693793,
+   "dlam": -0.0015736678495303913,
+   "fine_power_in_coarse_kset": 0.9998347242872152
+  },
+  {
+   "fine_converged": true,
+   "lam_coarse": 2.008786923599595,
+   "lam_fine": 2.0076613426208496,
+   "overlap": 0.9893924708385268,
+   "second": 0.11315382812703871,
+   "dlam": -0.0011255809787455995,
+   "fine_power_in_coarse_kset": 0.999831182677822
+  },
+  {
+   "fine_converged": true,
+   "lam_coarse": 2.0118514016931117,
+   "lam_fine": 2.0114450454711914,
+   "overlap": 0.9961988807176548,
+   "second": 0.04068379880568465,
+   "dlam": -0.00040635622192031207,
+   "fine_power_in_coarse_kset": 0.9998304483855531
+  },
+  {
+   "fine_converged": true,
+   "lam_coarse": 2.0146775297674973,
+   "lam_fine": 2.014404773712158,
+   "overlap": 0.9021639584993678,
+   "second": 0.4231786295393971,
+   "dlam": -0.0002727560553390518,
+   "fine_power_in_coarse_kset": 0.9998363116070919
+  },
+  {
+   "fine_converged": false,
+   "lam_coarse": 2.0163744377774315,
+   "lam_fine": 2.016503095626831,
+   "overlap": 0.9013913819996411,
+   "second": 0.42450192701482026,
+   "dlam": 0.00012865784939952718,
+   "fine_power_in_coarse_kset": 0.9998352123196159
+  },
+  {
+   "fine_converged": false,
+   "lam_coarse": 2.0209310275532464,
+   "lam_fine": 2.021789073944092,
+   "overlap": 0.9919809565911716,
+   "second": 0.06783386768436389,
+   "dlam": 0.0008580463908454128,
+   "fine_power_in_coarse_kset": 0.9998345173834496
+  },
+  {
+   "fine_converged": false,
+   "lam_coarse": 2.027383139619256,
+   "lam_fine": 2.02698016166687,
+   "overlap": 0.9890322531307673,
+   "second": 0.0952087949966149,
+   "dlam": -0.00040297795238597445,
+   "fine_power_in_coarse_kset": 0.9998333247343868
+  },
+  {
+   "fine_converged": false,
+   "lam_coarse": 2.030879163719515,
+   "lam_fine": 2.030757427215576,
+   "overlap": 0.9817772621998332,
+   "second": 0.10209357400963776,
+   "dlam": -0.00012173650393876301,
+   "fine_power_in_coarse_kset": 0.999829959466211
+  },
+  {
+   "fine_converged": false,
+   "lam_coarse": 2.0329249044178193,
+   "lam_fine": 2.032670497894287,
+   "overlap": 0.9745275418148839,
+   "second": 0.1309575584810298,
+   "dlam": -0.0002544065235321469,
+   "fine_power_in_coarse_kset": 0.9998351129796547
+  }
+ ],
+ "fine_power_in_coarse_kset": [
+  0.999841671617487,
+  0.9998347242872152,
+  0.999831182677822,
+  0.9998304483855531,
+  0.9998363116070919,
+  0.9998352123196159,
+  0.9998345173834496,
+  0.9998333247343868,
+  0.999829959466211,
+  0.9998351129796547,
+  0.9998349059312179
+ ]
+}

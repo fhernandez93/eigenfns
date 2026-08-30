@@ -35,9 +35,16 @@ from pathlib import Path
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
-COARSE = ROOT / "results" / "n10k_G192_window"      # merged 192^3 window
-FINE = ROOT / "results" / "n10k_G256_edgelow"       # 256^3 anchor
-LO, HI = 1.84, 1.95
+import sys as _sys
+_a = _sys.argv[1:]
+COARSE = ROOT / "results" / "n10k_G192_window"
+FINE = ROOT / "results" / (_a[0] if _a else "n10k_G256_edgelow")
+LO, HI = (float(_a[1]), float(_a[2])) if len(_a) > 2 else (1.84, 1.95)
+# --with-unconverged also pulls in window_unconverged_vecs_spectral.npy.
+# Those pairs failed the 1e-4 residual gate and are NOT certified eigenpairs,
+# but they are perfectly usable for an overlap test -- and without them the
+# high-edge anchor would expose only 3 of its 11 in-window states.
+WITH_UNCONV = "--with-unconverged" in _a
 G_C, G_F = 192, 256
 
 
@@ -54,9 +61,25 @@ def main() -> int:
     sel = np.where((lam_c_all >= LO) & (lam_c_all <= HI))[0]
     lam_c = lam_c_all[sel]
     lam_f = np.load(FINE / "window_eigenvalues.npy")
+    Vf_c = np.load(FINE / "window_vecs_spectral.npy", mmap_mode="r")
+    conv_flag = [True] * len(lam_f)
+    if WITH_UNCONV and (FINE / "window_unconverged_lams.npy").exists():
+        lu = np.load(FINE / "window_unconverged_lams.npy")
+        Vu = np.load(FINE / "window_unconverged_vecs_spectral.npy", mmap_mode="r")
+        lam_f = np.concatenate([lam_f, lu])
+        conv_flag += [False] * len(lu)
+        print(f"including {len(lu)} UNCONVERGED fine pairs (not certified; "
+              f"overlap-testable only)")
+
+        class _Cat:
+            def __getitem__(self, i):
+                return Vf_c[i] if i < Vf_c.shape[0] else Vu[i - Vf_c.shape[0]]
+        Vf = _Cat()
+    else:
+        Vf = Vf_c
     order = np.argsort(lam_f)
     lam_f = lam_f[order]
-    Vf = np.load(FINE / "window_vecs_spectral.npy", mmap_mode="r")
+    conv_flag = [conv_flag[i] for i in order]
     print(f"coarse {G_C}^3: {len(lam_c)} states in [{LO}, {HI}]")
     print(f"fine   {G_F}^3: {len(lam_f)} states\n")
 
@@ -91,12 +114,14 @@ def main() -> int:
             float(np.real(np.vdot(F[a], F[a])))) for a in range(len(lam_f))])
         k = int(np.argmax(ov))
         second = float(np.sort(ov)[-2])
-        rows.append({"lam_coarse": float(lam_c[i]), "lam_fine": float(lam_f[k]),
+        rows.append({"fine_converged": bool(conv_flag[k]),
+                     "lam_coarse": float(lam_c[i]), "lam_fine": float(lam_f[k]),
                      "overlap": float(ov[k]), "second": second,
                      "dlam": float(lam_f[k] - lam_c[i]),
                      "fine_power_in_coarse_kset": float(keep[k])})
         print(f"{lam_c[i]:11.5f} {lam_f[k]:10.5f} {ov[k]:10.4f} "
-              f"{lam_f[k]-lam_c[i]:+10.5f} {second:8.4f}")
+              f"{lam_f[k]-lam_c[i]:+10.5f} {second:8.4f}"
+              f"{'' if conv_flag[k] else '   (fine unconv)'}")
         del c
 
     o = np.array([r["overlap"] for r in rows])
@@ -110,7 +135,7 @@ def main() -> int:
           f"{keep.min()*100:.3f}% .. {keep.max()*100:.3f}%")
     print("\nREAD: a one-to-one matching with high overlap means the two grids "
           "found the SAME states, not merely the same NUMBER of states.")
-    (ROOT / "results" / "gates" / "crossgrid_match.json").write_text(
+    (ROOT / "results" / "gates" / f"crossgrid_match_{FINE.name}.json").write_text(
         json.dumps({"coarse": str(COARSE), "fine": str(FINE),
                     "window": [LO, HI], "pairs": rows,
                     "fine_power_in_coarse_kset": keep.tolist()}, indent=1))
