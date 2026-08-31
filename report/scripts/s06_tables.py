@@ -162,7 +162,7 @@ with open(TAB / "states_n10k.tex", "w") as f, open(TAB / "states_n10k.csv", "w",
     wr.writerow(["i", "tile_label", "lambda_um-2", "lambda_raw", "norm_sq", "nu_a2.288", "residual_reported", "pr_fraction", "pr_volume_um3", "xi_um", "r2", "dyn_range_dec",
                  "resolved", "shell2_energy_frac", "slice", "in_gap_bracket", "class", "periodic_partner_lam", "periodic_overlap"])
     f.write("\\begin{longtable}{@{}rrllllllllll@{}}\n")
-    f.write("\\caption{All 133 residual-certified $N=10^4$ eigenstates (corrected $\\lambda=\\lambda_\\mathrm{raw}/\\|x\\|^2$). $\\nu=\\sqrt{\\lambda}\\,a/2\\pi$ with $a=2.288\\,\\mu$m. Residuals are the reported (raw-$\\lambda$) values. $p$ is the participation fraction; $\\xi$ the envelope decay length (`u' = unresolved: lower bound only; ceiling $L/2=12.32\\,\\mu$m); $f_2$ the energy fraction in the outer 2-voxel shell (volume fraction 6.1\\%). Class: g = inside the nominal bracket [1.864, 1.996]; seam = boundary-seam artefact (seam* = undetermined, see text); ext.\\ = extended in-gap mode. Periodic: best-overlap partner in the seam-free re-solve (in-gap states only).}\\label{tab:states}\\\\\n")
+    f.write("\\caption{All 133 residual-certified $N=10^4$ eigenstates (corrected $\\lambda=\\lambda_\\mathrm{raw}/\\|x\\|^2$). $\\nu=\\sqrt{\\lambda}\\,a/2\\pi$ with $a=2.288\\,\\mu$m. Residuals are the reported (raw-$\\lambda$) values. $p$ is the participation fraction; $\\xi$ the envelope decay length (`u' = unresolved: lower bound only; ceiling $L/2=12.32\\,\\mu$m); $f_2$ the energy fraction in the outer 2-voxel shell (volume fraction 6.1\\%). Class: g = inside the nominal bracket [1.864, 1.996]; seam = seam-flagged (18--44\\% outer-shell energy; no partner in the incomplete periodic re-solve; seam* = undetermined, see text); ext.\\ = compact but non-exponential in-gap mode (unresolved $\\xi$). Periodic: best-overlap partner in the seam-free re-solve (in-gap states only).}\\label{tab:states}\\\\\n")
     f.write("\\hline\\hline\n \\# & tile & $\\lambda$ ($\\mu$m$^{-2}$) & $\\nu$ & res. & $p$ (\\%) & $\\xi$ ($\\mu$m) & $r^2$ & $f_2$ (\\%) & slice & class & periodic \\\\\n\\hline\n\\endfirsthead\n")
     f.write("\\hline\n \\# & tile & $\\lambda$ & $\\nu$ & res. & $p$ (\\%) & $\\xi$ & $r^2$ & $f_2$ (\\%) & slice & class & periodic \\\\\n\\hline\n\\endhead\n\\hline\n\\endfoot\n\\hline\\hline\n\\endlastfoot\n")
     for i in range(133):
@@ -194,11 +194,11 @@ with open(TAB / "ingap.tex", "w") as f:
         if cls == "cand.":
             verdict = f"localized; persists (ov.\\ {pp['overlap']:.3f}, $\\Delta\\lambda={pp['dlam']:+.4f}$)"
         elif cls == "seam":
-            verdict = f"seam artefact; no partner (best ov.\\ {pp['overlap']:.3f})"
+            verdict = f"seam-flagged; no partner in the incomplete re-solve (best ov.\\ {pp['overlap']:.3f})"
         elif cls == "seam*":
             verdict = f"seam-flagged; undetermined (best ov.\\ {pp['overlap']:.2f}, budget 0.097)"
         else:
-            verdict = f"extended ($\\xi>L/2$, $r^2=0.33$); persists as 1.9407"
+            verdict = f"compact, non-exponential envelope ($r^2=0.33$, unresolved); partner 1.9407 fits $\\xi=2.2$"
         xi_s = f"{r['xi_um']:.2f}" + ("$^\\mathrm{u}$" if r["unresolved"] else "")
         f.write(f" {lam[i]:.4f} & {nu_from_lam(lam[i]):.4f} & {100 * r['pr_fraction']:.3f} & {r['pr_volume_um3']:.1f} & {xi_s} & {r['r2']:.3f} & {100 * r['shell2_energy_frac']:.1f} & {verdict} \\\\\n")
     f.write("\\hline\\hline\n\\end{tabular}\n")
@@ -248,7 +248,7 @@ with open(TAB / "parity.tex", "w") as f:
         f.write(f" {lab} & & {s01[f'mpb_parity_{k}_n_bands']['value']} & {sci(s01[f'mpb_parity_{k}_max_dw_w']['value'])} & {sci(s01[f'mpb_parity_{k}_median_dw_w']['value'])} \\\\\n")
     f.write(f" G9: c64 vs c128 (48$^3$, 96 bands) & & {s01['g9_n_bands']['value']} & {sci(s01['g9_max_dw_w']['value'])} & -- \\\\\n")
     f.write(f" I1: interior vs bottom-up ($N=1000$, 128$^3$; $\\Delta\\lambda/\\lambda$) & & {s01['i1_n_reported']['value']} & {sci(s01['i1_max_dlam_lam_corrected']['value'])} & {sci(s01['i1_median_dlam_lam_corrected']['value'])} \\\\\n")
-    f.write(f" I4: interior vs bottom-up ($N=1000$ circ.; $\\Delta\\lambda/\\lambda$) & & {s01['i4int_below_n']['value'] + s01['i4int_above_n']['value']} & {sci(max(s01['i4int_below_max_dlam_lam']['value'], s01['i4int_above_max_dlam_lam']['value']))} & {sci(max(s01['i4int_below_median_dlam_lam']['value'], s01['i4int_above_median_dlam_lam']['value']))} \\\\\n")
+    f.write(f" I4: interior vs bottom-up ($N=1000$ circ.; $\\Delta\\lambda/\\lambda$) & & {s01['i4int_below_n']['value'] + s01['i4int_above_n']['value']} & {sci(s01['i4int_pooled_max_dlam_lam']['value'])} & {sci(s01['i4int_pooled_median_dlam_lam']['value'])} \\\\\n")
     f.write("\\hline\\hline\n\\end{tabular}\n")
 led.save()
 print("tables written:", sorted(p.name for p in TAB.iterdir()))

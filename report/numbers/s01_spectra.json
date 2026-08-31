@@ -436,6 +436,20 @@
   "unit": "relative",
   "value": 9.573449642630294e-05
  },
+ "i4int_pooled_max_dlam_lam": {
+  "notes": "216 pairs, both slices",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_below/window_eigenvalues.npy",
+  "unit": "relative",
+  "value": 4.110203600990477e-07
+ },
+ "i4int_pooled_median_dlam_lam": {
+  "notes": "216 pairs, both slices",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_below/window_eigenvalues.npy",
+  "unit": "relative",
+  "value": 7.935103130892096e-08
+ },
  "i6_G160_converged": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",

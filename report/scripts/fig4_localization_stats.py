@@ -18,7 +18,7 @@ RP, RG = s5["r_poisson"]["value"], s5["r_goe"]["value"]
 s1 = load_json(FIG.parent / "numbers" / "s01_spectra.json")
 gap_c = (s1["n1k_circ_gap_lo_128"]["value"], s1["n1k_circ_gap_hi_128"]["value"])
 
-fig, (ax, bx) = plt.subplots(2, 1, figsize=(SINGLE, 4.0), gridspec_kw=dict(hspace=0.42, left=0.15, right=0.98, top=0.97, bottom=0.11))
+fig, (ax, bx) = plt.subplots(2, 1, figsize=(SINGLE, 3.4), gridspec_kw=dict(hspace=0.47, left=0.15, right=0.98, top=0.97, bottom=0.11))
 # ---- (a) sliding window r(lambda) N=10k + band points
 sl = ls["sliding_n10k_w15"]["rows"]
 lc = np.array([r["lam_centre"] for r in sl]); rm = np.array([r["r_mean"] for r in sl]); rs = np.array([r["r_se"] for r in sl])
@@ -67,7 +67,7 @@ bx.axhline(L_N1K / 2, ls="--", color=VERM, lw=0.8); bx.text(0.3, L_N1K / 2 + 0.2
 bx.axhline(L_N10K / 2, ls="--", color=BLUE, lw=0.8); bx.text(0.3, L_N10K / 2 + 0.25, r"$L/2$, $N=10^4$", fontsize=6, color=BLUE, ha="right")
 bx.axvline(0, color=GREY, lw=0.5)
 bx.plot(d10[~u10 & ~s10], x10[~u10 & ~s10], "o", ms=3, color=BLUE, mec="none", label=r"$N=10^4$ resolved")
-bx.plot(d10[~u10 & s10], x10[~u10 & s10], "o", ms=3.5, mfc="none", mec=BLUE, mew=0.8, label="seam artefacts")
+bx.plot(d10[~u10 & s10], x10[~u10 & s10], "o", ms=3.5, mfc="none", mec=BLUE, mew=0.8, label="seam-flagged")
 bx.plot(d10[u10], np.full(u10.sum(), L_N10K / 2), "^", ms=3.5, color=BLUE, alpha=0.6, mec="none")
 bx.plot(d1[~u1], x1[~u1], "s", ms=3, color=VERM, mec="none", label=r"$N=10^3$ resolved")
 bx.plot(d1[u1], np.full(u1.sum(), L_N1K / 2), "^", ms=3.5, color=VERM, alpha=0.6, mec="none", label="unresolved (lower bound)")

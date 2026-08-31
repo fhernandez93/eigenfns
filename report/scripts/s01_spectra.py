@@ -320,6 +320,14 @@ for tag in ("below", "above"):
     led.add(f"i4int_{tag}_m", r4["m"], "vectors", rel(RES / f"i4int_n1000_{tag}" / "interior_report.json"))
     led.add(f"i4int_{tag}_ff_128", r4["ff"], "fraction", rel(RES / f"i4int_n1000_{tag}" / "interior_report.json"))
 
+dl_pool = []
+for tag in ("below", "above"):
+    l4 = np.load(RES / f"i4int_n1000_{tag}" / "window_eigenvalues.npy")
+    idx4 = np.array([int(np.argmin(np.abs(ev_c - l0))) for l0 in l4])
+    dl_pool.extend((np.abs(ev_c[idx4] - l4) / l4).tolist())
+led.add("i4int_pooled_max_dlam_lam", float(max(dl_pool)), "relative", rel(RES / "i4int_n1000_below" / "window_eigenvalues.npy"), "216 pairs, both slices")
+led.add("i4int_pooled_median_dlam_lam", float(np.median(dl_pool)), "relative", rel(RES / "i4int_n1000_below" / "window_eigenvalues.npy"), "216 pairs, both slices")
+
 # ---------------------------------------------------------------- G9 precision
 c64 = np.load(RES / "exp" / "prec48_c64.npy")
 c128 = np.load(RES / "exp" / "prec48_c128.npy")

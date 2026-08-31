@@ -28,7 +28,7 @@ def arrays(rows):
 
 l10, x10, u10, p10 = arrays(r10)
 l1, x1, u1, p1 = arrays(r1)
-fig, (ax, bx) = plt.subplots(2, 1, figsize=(SINGLE, 3.9), sharex=True, gridspec_kw=dict(hspace=0.08, left=0.14, right=0.98, top=0.97, bottom=0.12))
+fig, (ax, bx) = plt.subplots(2, 1, figsize=(SINGLE, 3.3), sharex=True, gridspec_kw=dict(hspace=0.08, left=0.14, right=0.98, top=0.97, bottom=0.12))
 # gaps
 for a in (ax, bx):
     a.axvspan(GAP_LO_10K, GAP_HI_10K, color=ORANGE, alpha=0.22, lw=0)
@@ -40,7 +40,7 @@ ax.text(2.54, L_N10K / 2 - 0.9, r"$L/2$ ($N=10^4$)", fontsize=6, color=BLUE, ha=
 ax.text(2.54, L_N1K / 2 + 0.35, r"$L/2$ ($N=10^3$)", fontsize=6, color=VERM, ha="right")
 s10 = np.array([l in seam for l in l10])
 ax.plot(l10[~u10 & ~s10], x10[~u10 & ~s10], "o", ms=3, mfc=BLUE, mec="none", label=r"$N=10^4$ resolved (%d)" % (~u10).sum(), zorder=3)
-ax.plot(l10[~u10 & s10], x10[~u10 & s10], "o", ms=3.5, mfc="none", mec=BLUE, mew=0.8, label="seam artefacts (4)", zorder=4)
+ax.plot(l10[~u10 & s10], x10[~u10 & s10], "o", ms=3.5, mfc="none", mec=BLUE, mew=0.8, label="seam-flagged (4)", zorder=4)
 ax.plot(l10[u10], np.full(u10.sum(), L_N10K / 2), "^", ms=4, color=BLUE, mec="none", alpha=0.7, label=r"$N=10^4$ unresolved: $\xi\geq$ bound (%d)" % u10.sum(), zorder=3)
 ax.plot(l1[~u1], x1[~u1], "s", ms=3, color=VERM, mec="none", label=r"$N=10^3$ resolved (%d)" % (~u1).sum(), zorder=3)
 ax.plot(l1[u1], np.full(u1.sum(), L_N1K / 2), "^", ms=4, color=VERM, mec="none", alpha=0.6, label=r"$N=10^3$ unresolved (%d)" % u1.sum(), zorder=2)

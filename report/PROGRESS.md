@@ -52,3 +52,8 @@ Gap 500|501 elliptical 2.076 % (report 2.08 %), series 2.354/1.929/2.076 %; circ
 - `build.sh` builds both with tectonic (REVTeX 4.2 fetched by tectonic), greps for undefined references/citations, prints page counts; `--figures` regenerates everything from the saved data.
 - Reference check: 41/41 DOIs resolved by an independent checker (Crossref + second sources); two author-list corrections applied (Yamilov 2023; Imagawa 2010). `references_verified.md` written.
 - Fact-check round 1 launched: five SM section checkers (A–E) and three main-text checkers, each with the section text and the primary file list only; two adversarial reviewers (physicist, numerical analyst) launched on the full drafts.
+
+## 6. Fact-check round 1 (2026-08-31, commits 78a0e86 → b24da21)
+- Completed: SM checkers B (87 claims, 2 WRONG), C (134, 2 minor WRONG), D (73, 11 WRONG), E (78, 0 WRONG); main-text checker 2 (78, 8 WRONG). All WRONG items corrected; ledger in `FACTCHECK.md`.
+- Substantive corrections: GOE surmise prefactor 27/8 → 27/4 for the folded ratio (affected LLRs, expected σ, the "1.7σ" → "2.2σ" statement, and the P(r) curve in Fig. S9); five mis-transcribed short-range ξ medians in the SM; candidate persistence overlaps 0.994–1.000 → 0.968–1.000 and shift range −0.0034 → −0.0030 (the −0.0034 belongs to the extended state); "≈5150 bands below the gap" → "up to the window top"; no basis trimming in production.
+- The session usage limit terminated checker A (partial), main-text checkers 1 and 3 and both adversarial reviewers mid-run; all relaunched at low priority (A asked to deliver its partial ledger).

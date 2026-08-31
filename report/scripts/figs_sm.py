@@ -78,7 +78,7 @@ for rows, c, mk, lab, sv in ((re_, VERM, "s", "N=10$^3$ elliptical (210)", 1 - (
     ax.plot(l_, e_, mk, ms=3, color=c, mec="none", label=lab)
 ax.axhline(1, color=GREY, lw=0.6)
 ax.set_xlabel(r"$\lambda$ ($\mu$m$^{-2}$)"); ax.set_ylim(0, 8)
-ax.set_title(r"$N=10^3$, $128^3$: shell = outer 2 voxels (12.1\% of volume)", fontsize=7)
+ax.set_title(r"$N=10^3$, $128^3$: shell = outer 2 voxels (9.1\% of volume)", fontsize=7)
 ax.legend(fontsize=6, loc="upper right")
 panel_label(ax, "(b)", x=-0.12)
 save(fig, str(FIG / "figS_seam"))
