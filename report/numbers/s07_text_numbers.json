@@ -1,0 +1,194 @@
+{
+ "coarse_ff_mean_n10k": {
+  "notes": "ff coarse-grained over 2 um cubes, periodic rasterization, 0.18 um voxels",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "fraction",
+  "value": 0.22085027396678925
+ },
+ "coarse_ff_mean_n1k": {
+  "notes": "ff coarse-grained over 2 um cubes, periodic rasterization, 0.18 um voxels",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "fraction",
+  "value": 0.22040939331054688
+ },
+ "coarse_ff_sd_n10k": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "fraction",
+  "value": 0.04049673676490784
+ },
+ "coarse_ff_sd_n1k": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "fraction",
+  "value": 0.03979937732219696
+ },
+ "i3_all_listed_pairs_within_bound": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/i3_gram_diagnosis.json",
+  "unit": "bool",
+  "value": true
+ },
+ "i3_worst_pair_overlap_bound": {
+  "notes": "(r_i lam_i + r_j lam_j)/|dlam| for the worst pair 1.94721|2.11383; measured 0.0004859",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "dimensionless",
+  "value": 0.0017661885010521597
+ },
+ "matched_upper_edge_vp_ratio": {
+  "notes": "V_p(N=1000 band 501)/V_p(N=10k 1.9264)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "report/tables/loc_n1k_circ.json",
+  "unit": "ratio",
+  "value": 8.30750682290998
+ },
+ "n10k_bulk_states_inside_n1k_circ_gap_interval": {
+  "notes": "excluding the four seam-flagged states and the non-exponential 1.9441",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 19
+ },
+ "n10k_certified_inside_rho_lt_160": {
+  "notes": "bracket [1.8640, 1.9955]",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 10
+ },
+ "n10k_certified_inside_rho_lt_320": {
+  "notes": "bracket [1.8375, 2.0220]",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 21
+ },
+ "n10k_certified_inside_rho_lt_80": {
+  "notes": "bracket [1.8845, 1.9670]",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 5
+ },
+ "n10k_n_modes_shell_gt2": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "modes",
+  "value": 20
+ },
+ "n10k_near_edge_above_n": {
+  "notes": "2.005 <= lambda <= 2.050",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "levels",
+  "value": 18
+ },
+ "n10k_near_edge_above_p_median": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "fraction",
+  "value": 0.011642344098474913
+ },
+ "n10k_near_edge_above_xi_median": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "um",
+  "value": 4.057035375029198
+ },
+ "n10k_near_edge_below_max_shell_frac": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "fraction",
+  "value": 0.2479105879379726
+ },
+ "n10k_near_edge_below_n": {
+  "notes": "1.8208 <= lambda <= 1.8502",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "levels",
+  "value": 12
+ },
+ "n10k_near_edge_below_n_shell_gt2": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "levels",
+  "value": 4
+ },
+ "n10k_near_edge_below_xi_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "um",
+  "value": [
+   1.9817322302471683,
+   3.355443304573493
+  ]
+ },
+ "n10k_pairs_closer_than_weyl_radius": {
+  "notes": "consecutive pairs with dlambda < 1e-4 lambda: 1.76504|1.76516, 2.10723|2.10743",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "pairs",
+  "value": 2
+ },
+ "n10k_states_inside_n1k_circ_gap_interval": {
+  "notes": "certified N=10k states in the N=1000 circular gap interval [1.8276, 2.0225]",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 24
+ },
+ "n10k_weyl_radius_abs_at_1p9": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "arithmetic",
+  "unit": "um^-2",
+  "value": 0.00019
+ },
+ "n10k_weyl_radius_over_median_spacing": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "ratio",
+  "value": 0.13386482431979435
+ },
+ "n_xi_cells_n10k": {
+  "notes": "(L/2 um)^3",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "geometry",
+  "unit": "cells",
+  "value": 1871.49248
+ },
+ "n_xi_cells_n1k": {
+  "notes": "(L/2 um)^3",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "geometry",
+  "unit": "cells",
+  "value": 187.14924799999997
+ },
+ "p_empty_n1k_gap_from_bulk_rate": {
+  "notes": "exp(-n_bulk/10): Poisson probability of an empty N=1000 gap at one tenth the N=10k rate",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "probability",
+  "value": 0.14956861922263506
+ },
+ "p_empty_n1k_gap_from_five_candidates": {
+  "notes": "exp(-5/10)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "arithmetic",
+  "unit": "probability",
+  "value": 0.6065306597126334
+ }
+}

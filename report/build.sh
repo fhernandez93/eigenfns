@@ -16,7 +16,7 @@ fi
 
 build() {
   local tex=$1
-  if "$TECTONIC" --keep-logs --keep-intermediates -Z shell-escape=false "$tex" > "build_${tex%.tex}.log" 2>&1; then
+  if "$TECTONIC" --keep-logs --keep-intermediates "$tex" > "build_${tex%.tex}.log" 2>&1; then
     echo "tectonic: built ${tex%.tex}.pdf"
   else
     echo "tectonic failed for $tex (see build_${tex%.tex}.log); trying latexmk"
