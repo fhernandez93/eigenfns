@@ -155,7 +155,7 @@ save(fig, str(FIG / "figS_dos_full"))
 ls = load_json(TAB / "levelstats.json")
 grid = np.linspace(0, 1, 400)
 pr_p = 2 / (1 + grid) ** 2
-pr_g = 27 / 8 * (grid + grid ** 2) / (1 + grid + grid ** 2) ** 2.5
+pr_g = 27 / 4 * (grid + grid ** 2) / (1 + grid + grid ** 2) ** 2.5
 sg = np.linspace(0, 4, 400)
 ps_p = np.exp(-sg); ps_g = np.pi / 2 * sg * np.exp(-np.pi * sg ** 2 / 4)
 fig, axs = plt.subplots(2, 3, figsize=(DOUBLE, 4.2), gridspec_kw=dict(wspace=0.3, hspace=0.45, left=0.07, right=0.99, top=0.95, bottom=0.1))

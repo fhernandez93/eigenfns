@@ -45,3 +45,10 @@ Gap 500|501 elliptical 2.076 % (report 2.08 %), series 2.354/1.929/2.076 %; circ
 
 ## 4. What was left out and why
 (filled at the end)
+
+## 5. Draft complete (commit 78a0e86, 2026-08-31)
+- `main.tex`: 5 pages in `prl,twocolumn` including ~1.3 pages of references; body+abstract 2385 words, captions 278, figure equivalents 667 (PRL formula) → ≈3330 words-equivalent ≤ 3750. Abstract ≤ 600 rendered characters (measured with pdftotext). 4 figures.
+- `supplement.tex`: 34 pages (REVTeX preprint), 12 sections, 8 tables incl. the 133-row state table, 16 figures.
+- `build.sh` builds both with tectonic (REVTeX 4.2 fetched by tectonic), greps for undefined references/citations, prints page counts; `--figures` regenerates everything from the saved data.
+- Reference check: 41/41 DOIs resolved by an independent checker (Crossref + second sources); two author-list corrections applied (Yamilov 2023; Imagawa 2010). `references_verified.md` written.
+- Fact-check round 1 launched: five SM section checkers (A–E) and three main-text checkers, each with the section text and the primary file list only; two adversarial reviewers (physicist, numerical analyst) launched on the full drafts.

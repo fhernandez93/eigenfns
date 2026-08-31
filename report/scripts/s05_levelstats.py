@@ -51,8 +51,9 @@ def r_surmise_poisson(r):
 
 
 def r_surmise_goe(r):
-    # Atas et al. 2013, Eq. (5) with beta = 1: P(r) = (27/8) (r + r^2) / (1 + r + r^2)^(5/2)
-    return 27.0 / 8.0 * (r + r ** 2) / (1 + r + r ** 2) ** 2.5
+    # Atas et al. 2013, beta = 1: P(r) = (27/8)(r + r^2)/(1 + r + r^2)^(5/2) on r in [0, inf);
+    # for the folded ratio r~ = min/max in [0, 1] the density doubles: prefactor 27/4 (integrates to 1).
+    return 27.0 / 4.0 * (r + r ** 2) / (1 + r + r ** 2) ** 2.5
 
 
 def band_stats(lam, name, n_boot=20000):

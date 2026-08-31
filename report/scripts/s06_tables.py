@@ -65,7 +65,7 @@ rows.append(("Folded-spectrum LOBPCG", "$m=32$, WZ preconditioner $\\alpha^2\\in
 rows.append(("Expansion-RR polish (5 variants)", "on the two-stage build subspace", 0, 0, None, None, None, None,
              "med. res.\\ $4.2\\times10^{-2}\\to0.9$ in one sweep; continuity/strip variants oscillate $7$--$23\\times10^{-3}$"))
 with open(TAB / "bakeoff.tex", "w") as f:
-    f.write("\\begin{tabular}{@{}p{3.1cm}p{4.2cm}rrrrp{4.6cm}@{}}\n\\hline\\hline\n")
+    f.write("\\begin{tabular}{@{}p{2.5cm}p{3.4cm}rrrrp{4.2cm}@{}}\n\\hline\\hline\n")
     f.write("Method & Configuration & verified & ghosts & $\\Theta$-applies & wall (s) & Failure mode / note \\\\\n\\hline\n")
     for r in rows:
         ta = f"{r[4]:,}" if r[4] else "--"
@@ -114,7 +114,7 @@ for tag, note in (("n10k_G192_Sbelow", "$S_\\mathrm{below}$"), ("n10k_G192_Sgap"
     prod.append((note, r["grid"], r["window"], r["m"], r["build_degree"], r["polish_degree"], r["n_converged"], r["n_inwindow_unconverged"],
                  r["theta_applications"], r["wall_seconds"], r["worst_res_reported"]))
 with open(TAB / "runs.tex", "w") as f:
-    f.write("\\begin{tabular}{@{}lrlrrrrrrrr@{}}\n\\hline\\hline\n run & grid & window ($\\mu$m$^{-2}$) & $m$ & $d_\\mathrm{build}$ & $d_\\mathrm{polish}$ & conv. & unconv. & $\\Theta$-applies & wall (h) & worst res.\\ \\\\\n\\hline\n")
+    f.write("\\begin{tabular}{@{}lrlrrrrrrrr@{}}\n\\hline\\hline\n run & grid & window & $m$ & $d_\\mathrm{b}$ & $d_\\mathrm{p}$ & conv. & unc. & $\\Theta$-applies & wall (h) & worst res.\\ \\\\\n\\hline\n")
     for p in prod:
         ta = f"{p[8]/1e6:.2f}M" if p[8] else "n/a"
         f.write(f" {p[0]} & ${p[1]}^3$ & [{p[2][0]:.3f}, {p[2][1]:.3f}] & {p[3]} & {p[4]} & {p[5]} & {p[6]} & {p[7]} & {ta} & {p[9]/3600:.1f} & {sci(p[10])} \\\\\n")

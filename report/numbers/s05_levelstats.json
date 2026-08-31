@@ -63,7 +63,7 @@
   "value": 0.6027
  },
  "r_n10k_above_edge": {
-  "notes": "n_levels=60, n_r=58; LLR(GOE-Poisson)=-27.17; ",
+  "notes": "n_levels=60, n_r=58; LLR(GOE-Poisson)=13.03; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
   "unit": "dimensionless",
@@ -73,7 +73,7 @@
   ]
  },
  "r_n10k_above_far": {
-  "notes": "n_levels=42, n_r=40; LLR(GOE-Poisson)=-20.87; ",
+  "notes": "n_levels=42, n_r=40; LLR(GOE-Poisson)=6.85; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
   "unit": "dimensionless",
@@ -83,7 +83,7 @@
   ]
  },
  "r_n10k_above_near": {
-  "notes": "n_levels=18, n_r=16; LLR(GOE-Poisson)=-5.79; ",
+  "notes": "n_levels=18, n_r=16; LLR(GOE-Poisson)=5.30; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
   "unit": "dimensionless",
@@ -93,7 +93,7 @@
   ]
  },
  "r_n10k_all133": {
-  "notes": "n_levels=133, n_r=131; LLR(GOE-Poisson)=-76.37; ",
+  "notes": "n_levels=133, n_r=131; LLR(GOE-Poisson)=14.43; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
   "unit": "dimensionless",
@@ -103,7 +103,7 @@
   ]
  },
  "r_n10k_below_edge": {
-  "notes": "n_levels=63, n_r=61; LLR(GOE-Poisson)=-37.01; ",
+  "notes": "n_levels=63, n_r=61; LLR(GOE-Poisson)=5.27; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
   "unit": "dimensionless",
@@ -113,7 +113,7 @@
   ]
  },
  "r_n10k_below_far": {
-  "notes": "n_levels=51, n_r=49; LLR(GOE-Poisson)=-26.14; ",
+  "notes": "n_levels=51, n_r=49; LLR(GOE-Poisson)=7.82; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
   "unit": "dimensionless",
@@ -123,7 +123,7 @@
   ]
  },
  "r_n10k_below_near": {
-  "notes": "n_levels=12, n_r=10; LLR(GOE-Poisson)=-9.50; ",
+  "notes": "n_levels=12, n_r=10; LLR(GOE-Poisson)=-2.57; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
   "unit": "dimensionless",
@@ -133,7 +133,7 @@
   ]
  },
  "r_n10k_in_gap_all10": {
-  "notes": "n_levels=10, n_r=8; LLR(GOE-Poisson)=-7.83; ",
+  "notes": "n_levels=10, n_r=8; LLR(GOE-Poisson)=-2.28; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
   "unit": "dimensionless",
@@ -143,7 +143,7 @@
   ]
  },
  "r_n10k_in_gap_bulk6": {
-  "notes": "n_levels=6, n_r=4; LLR(GOE-Poisson)=-1.46; ",
+  "notes": "n_levels=6, n_r=4; LLR(GOE-Poisson)=1.31; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
   "unit": "dimensionless",
@@ -153,7 +153,7 @@
   ]
  },
  "r_n10k_outside_gap_pooled_r": {
-  "notes": "n_levels=None, n_r=119; LLR(GOE-Poisson)=-64.18; ",
+  "notes": "n_levels=None, n_r=119; LLR(GOE-Poisson)=18.30; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
   "unit": "dimensionless",
@@ -163,7 +163,7 @@
   ]
  },
  "r_n1k_circ_above_edge_501_550": {
-  "notes": "n_levels=50, n_r=48; LLR(GOE-Poisson)=-19.10; ",
+  "notes": "n_levels=50, n_r=48; LLR(GOE-Poisson)=14.17; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
@@ -173,7 +173,7 @@
   ]
  },
  "r_n1k_circ_above_edge_501_600": {
-  "notes": "n_levels=100, n_r=98; LLR(GOE-Poisson)=-48.01; ",
+  "notes": "n_levels=100, n_r=98; LLR(GOE-Poisson)=19.91; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
@@ -183,7 +183,7 @@
   ]
  },
  "r_n1k_circ_all_611": {
-  "notes": "n_levels=611, n_r=609; LLR(GOE-Poisson)=-336.90; ",
+  "notes": "n_levels=611, n_r=609; LLR(GOE-Poisson)=85.23; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
@@ -206,7 +206,7 @@
   }
  },
  "r_n1k_circ_below_edge_401_500": {
-  "notes": "n_levels=100, n_r=98; LLR(GOE-Poisson)=-56.00; ",
+  "notes": "n_levels=100, n_r=98; LLR(GOE-Poisson)=11.93; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
@@ -216,7 +216,7 @@
   ]
  },
  "r_n1k_circ_below_edge_451_500": {
-  "notes": "n_levels=50, n_r=48; LLR(GOE-Poisson)=-27.72; ",
+  "notes": "n_levels=50, n_r=48; LLR(GOE-Poisson)=5.55; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
@@ -226,7 +226,7 @@
   ]
  },
  "r_n1k_circ_low_3_200": {
-  "notes": "n_levels=198, n_r=196; LLR(GOE-Poisson)=-125.34; ",
+  "notes": "n_levels=198, n_r=196; LLR(GOE-Poisson)=10.52; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
@@ -236,7 +236,7 @@
   ]
  },
  "r_n1k_circ_mid_201_400": {
-  "notes": "n_levels=200, n_r=198; LLR(GOE-Poisson)=-93.28; ",
+  "notes": "n_levels=200, n_r=198; LLR(GOE-Poisson)=43.97; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
@@ -246,7 +246,7 @@
   ]
  },
  "r_n1k_circ_window_398_607": {
-  "notes": "n_levels=210, n_r=208; LLR(GOE-Poisson)=-110.56; ",
+  "notes": "n_levels=210, n_r=208; LLR(GOE-Poisson)=33.61; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
@@ -256,7 +256,7 @@
   ]
  },
  "r_n1k_ell_above_edge_501_550": {
-  "notes": "n_levels=50, n_r=48; LLR(GOE-Poisson)=-24.46; ",
+  "notes": "n_levels=50, n_r=48; LLR(GOE-Poisson)=8.81; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
@@ -266,7 +266,7 @@
   ]
  },
  "r_n1k_ell_above_edge_501_600": {
-  "notes": "n_levels=100, n_r=98; LLR(GOE-Poisson)=-48.72; ",
+  "notes": "n_levels=100, n_r=98; LLR(GOE-Poisson)=19.21; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
@@ -276,7 +276,7 @@
   ]
  },
  "r_n1k_ell_all_611": {
-  "notes": "n_levels=611, n_r=609; LLR(GOE-Poisson)=-358.51; ",
+  "notes": "n_levels=611, n_r=609; LLR(GOE-Poisson)=63.62; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
@@ -299,7 +299,7 @@
   }
  },
  "r_n1k_ell_below_edge_401_500": {
-  "notes": "n_levels=100, n_r=98; LLR(GOE-Poisson)=-48.89; ",
+  "notes": "n_levels=100, n_r=98; LLR(GOE-Poisson)=19.04; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
@@ -309,7 +309,7 @@
   ]
  },
  "r_n1k_ell_below_edge_451_500": {
-  "notes": "n_levels=50, n_r=48; LLR(GOE-Poisson)=-25.37; ",
+  "notes": "n_levels=50, n_r=48; LLR(GOE-Poisson)=7.90; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
@@ -319,7 +319,7 @@
   ]
  },
  "r_n1k_ell_low_3_200": {
-  "notes": "n_levels=198, n_r=196; LLR(GOE-Poisson)=-134.93; ",
+  "notes": "n_levels=198, n_r=196; LLR(GOE-Poisson)=0.93; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
@@ -329,7 +329,7 @@
   ]
  },
  "r_n1k_ell_mid_201_400": {
-  "notes": "n_levels=200, n_r=198; LLR(GOE-Poisson)=-119.82; ",
+  "notes": "n_levels=200, n_r=198; LLR(GOE-Poisson)=17.42; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
@@ -339,7 +339,7 @@
   ]
  },
  "r_n1k_ell_window_398_607": {
-  "notes": "n_levels=210, n_r=208; LLR(GOE-Poisson)=-101.69; ",
+  "notes": "n_levels=210, n_r=208; LLR(GOE-Poisson)=42.49; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
   "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
