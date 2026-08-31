@@ -388,7 +388,7 @@ GPU-days → the pre-registered descope fired **at registration** (192³ +
 | I4 new-decoration cross-check | bottom-up DONE; interior below-gap DONE, above-gap running | Bottom-up: gap 500\|501, Δν/ν 5.07%, 8,876 s. Interior below-gap slice: **107/107 converged, 0 in-window unconverged**, worst res 9.57×10⁻⁵, λ ∈ [1.47016, 1.82759], 14,259 s |
 | I5 spectrum consistency | **FAIL as registered** | `empty_gap_clause_pass: false` — ten converged pairs inside the KPM bracket [1.864, 1.996]. This is the clause failing exactly as Amendment A2 recorded *before* the gap slice ran, and it is the physics finding of §2, not a defect |
 | Seam test (periodic rasterization) | **PASS** | Registered prediction confirmed: the four seam-flagged states have max overlap 0.006/0.13/0.09/0.30 with any periodic state (gone); all six bulk states persist at overlap 0.95–0.9997 with Δλ = −0.0007…−0.0034, every shift negative as added dielectric requires |
-| I6 convergence (160³/192³ + 256³ anchors) | ⟨pending — queued⟩ | 256³ anchors OOM'd 2026-08-26 (uncapped `--theta-chunk`, 6.00 GiB request); re-queued under the fix. 160³ raised to 8 polish outers after its residual trajectory (1.4e-2 → 7.3e-3 → 2.3e-3) showed 5 would stop short of tolerance |
+| I6 convergence (160³/192³ + 256³ anchors) | **PASS** | Per-band Δω/ω across grids, paired by **eigenvector overlap** (not sorted eigenvalue — at the low edge 6 of 11 sorted pairings were wrong, so a sorted comparison would have reported meaningless scatter). Low edge [1.84, 1.95]: 11 of 11 matched, |Δω/ω| max **0.338%**. High edge [1.99, 2.035]: 10 of 11, max **0.039%**. Both inside the registered 0.6% bound and consistent with the ~0.3% expectation. **The resolution confound is closed**: each 256³ mode keeps **99.98%** of its power at wavenumbers 192³ can represent, so the in-gap states are not rasterization artifacts. Caveats on the ledger: the one unmatched state (λ=1.99012) sits 1.2×10⁻⁴ above the window floor, inside the filter transition zone; the high-edge anchor certified only 3 of 11 pairs, the other 8 used as uncertified vectors for the overlap test only; the 160³ leg is edge-truncated to [1.8096, 2.0516] |
 | I7 decoration | **PASS** | ff = 22.011% at 192³ (gate 22.0 ± 0.5); r = 0.331836 µm |
 | I8 localization | **PASS** | Cross-solver ξ agreement on the 20 gap-edge modes resolved in *both* the bottom-up and interior solvers: **max 0.09%, median 0.01%** (gate ≤ 10%). Sample discipline: 210 of 216 modes matched, 42 resolved in both (the L/2 = 5.72 µm ceiling catches the rest in an 11.44 µm box), 20 of those gap-edge; ceiling-limited fits were *excluded*, since a lower bound cannot be compared. **Read correctly**: the two solvers agree on these eigenvalues to ~3×10⁻⁷ with near-unit overlap, so they hand the pipeline nearly the same field — this proves the pipeline is deterministic and solver-independent, but does **not** independently validate the envelope-fit method, whose own fit-range sensitivity is tens of percent (round 3, item 3). Ceiling ξ_max = L/2 stated on every figure; unresolved fits reported as lower bounds only |
 | I9 montage | **DONE** (band-count agreement pends I2; absolute numbering carries the KPM ±13 placement caveat) | N=10k: 133 tiles, 15/row, 9 rows, 5250×3276 (`results/n10k_G192_window/band_montage_n10k_gapedge_15.png`); N=1000-circular: 210 tiles for the finite-size comparison |
@@ -488,8 +488,27 @@ investigation §6):
   certification does not depend on it: that came from the sub-interval, where
   true leakage is 0.0017, three orders below this bias. This is exactly why
   Amendment A3 made the sub-interval certifying *before* any of it ran.
-- **I6 (grid convergence) is not yet answered**, so the resolution confound
-  behind the in-gap states is still open — see the next bullet.
+- **I6 is now answered and the resolution confound is CLOSED.** 192³ and 256³
+  find the *same* states, matched one-to-one by eigenvector overlap, and each
+  256³ mode keeps **99.98%** of its power at wavenumbers 192³ can represent.
+  Per-band |Δω/ω| is 0.338% (low edge) and 0.039% (high edge), inside the
+  registered 0.6%. The in-gap states are **not** rasterization artifacts.
+  Residual caveats are on the ledger, not hidden: the high-edge anchor
+  certified only 3 of its 11 pairs (the rest enter the overlap test as
+  uncertified vectors), one state at the window floor sits in the filter
+  transition zone, and the 160³ leg is edge-truncated.
+- **The seam re-solve did not lift its caveat.** A second periodic solve at
+  m = 48 — 60% more subspace — reproduced the verdict exactly (four
+  seam-flagged states with no partner above 0.5; six bulk states persisting at
+  0.952–0.9997, every Δλ negative) but found **the same seven states**, not the
+  ~2 additional ones I2 said were missing. So the incompleteness is not a
+  subspace-size problem, and the negative half of the seam claim — "the four
+  vanished" versus "the four were not found" — remains unresolved. Suggestive
+  detail: the two solves left *different* λ unconverged (1.9095 vs 1.9534),
+  both in or near the certifying sub-interval, which is what several
+  hard-to-converge states there would look like. Disclosed against myself: the
+  re-solve was stopped after 4 of 8 requested polish outers on a two-outer
+  plateau, so later outers are untested.
 
 - **Window descoped from ~300 to ~139 bands** (64/side) by the measured cost
   wall (10–15 GPU-days at 256³ full window); recorded at registration with a
