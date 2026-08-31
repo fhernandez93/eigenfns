@@ -1,0 +1,1137 @@
+{
+ "i8_recompute_all_max_median": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4int_n1000_below/window_energy_density.npy",
+  "unit": "relative",
+  "value": [
+   0.00215300112021122,
+   0.00010110976516829659
+  ]
+ },
+ "i8_recompute_gap_edge_max_median": {
+  "notes": "ledger: max 8.7e-4, median 6.4e-5",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4int_n1000_below/window_energy_density.npy",
+  "unit": "relative",
+  "value": [
+   0.0008242099493400056,
+   6.43129647828466e-05
+  ]
+ },
+ "i8_recompute_n_gap_edge_resolved_both": {
+  "notes": "ledger: 20 (within 0.15 of an edge)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4int_n1000_below/window_energy_density.npy",
+  "unit": "modes",
+  "value": 20
+ },
+ "i8_recompute_n_matched": {
+  "notes": "ledger: 210 of 216",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4int_n1000_below/window_eigenvalues.npy",
+  "unit": "modes",
+  "value": 210
+ },
+ "i8_recompute_n_resolved_both": {
+  "notes": "ledger: 42",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4int_n1000_below/window_energy_density.npy",
+  "unit": "modes",
+  "value": 42
+ },
+ "matched_edge_states_n10k": {
+  "notes": "3 nearest resolved states on each side of the largest interior spacing 1.8860|1.9264, N=10k",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "mixed",
+  "value": {
+   "above": [
+    {
+     "lam": 1.926413256982914,
+     "pr_volume_um3": 6.955791095596608,
+     "xi_um": 2.0908524474205126
+    },
+    {
+     "lam": 1.929596209673228,
+     "pr_volume_um3": 9.782524318347951,
+     "xi_um": 2.1435671116777315
+    },
+    {
+     "lam": 1.947209447202747,
+     "pr_volume_um3": 7.892025232267777,
+     "xi_um": 3.014410278491984
+    }
+   ],
+   "below": [
+    {
+     "lam": 1.8860078588720002,
+     "pr_volume_um3": 5.154119750518896,
+     "xi_um": 1.7990858425692686
+    },
+    {
+     "lam": 1.8730821374768227,
+     "pr_volume_um3": 13.918829274396995,
+     "xi_um": 1.9079144816361326
+    },
+    {
+     "lam": 1.8707585792024861,
+     "pr_volume_um3": 7.233313996318711,
+     "xi_um": 1.832257342047432
+    }
+   ]
+  }
+ },
+ "matched_edge_states_n10k_kpm_bracket": {
+  "notes": "3 nearest resolved states on each side of the KPM bracket [1.864, 1.996]",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "mixed",
+  "value": {
+   "above": [
+    {
+     "lam": 2.005207555911053,
+     "pr_volume_um3": 50.802455538604015,
+     "xi_um": 2.562310746114581
+    },
+    {
+     "lam": 2.0076898196592228,
+     "pr_volume_um3": 137.58698121343681,
+     "xi_um": 2.752547044319262
+    },
+    {
+     "lam": 2.008786923599595,
+     "pr_volume_um3": 118.06301457043999,
+     "xi_um": 2.835627574850136
+    }
+   ],
+   "below": [
+    {
+     "lam": 1.850147869329301,
+     "pr_volume_um3": 6.3554512019993075,
+     "xi_um": 2.0770059411734674
+    },
+    {
+     "lam": 1.8466197259526949,
+     "pr_volume_um3": 5.777793221518273,
+     "xi_um": 1.9817322302471683
+    },
+    {
+     "lam": 1.8447796233956846,
+     "pr_volume_um3": 9.828300753008207,
+     "xi_um": 2.0286914475705133
+    }
+   ]
+  }
+ },
+ "matched_edge_states_n1k": {
+  "notes": "3 nearest resolved band-edge states on each side, N=1000 circular (edges = bands 500|501)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4_n1000_circ_G128/window_energy_density.npy",
+  "unit": "mixed",
+  "value": {
+   "above": [
+    {
+     "lam": 2.022493362426758,
+     "pr_volume_um3": 57.785281985405305,
+     "xi_um": 2.297590076402044
+    },
+    {
+     "lam": 2.056980609893799,
+     "pr_volume_um3": 161.98260793632673,
+     "xi_um": 4.137940106287354
+    },
+    {
+     "lam": 2.075735569000244,
+     "pr_volume_um3": 198.2350797523837,
+     "xi_um": 3.414549203024182
+    }
+   ],
+   "below": [
+    {
+     "lam": 1.8275874853134155,
+     "pr_volume_um3": 6.233086108408799,
+     "xi_um": 1.4672587222717426
+    },
+    {
+     "lam": 1.785499930381775,
+     "pr_volume_um3": 8.845747948902266,
+     "xi_um": 1.7343324257727804
+    },
+    {
+     "lam": 1.7775907516479492,
+     "pr_volume_um3": 19.939058396451596,
+     "xi_um": 2.9369147088894914
+    }
+   ]
+  }
+ },
+ "n10k_candidate_lams": {
+  "notes": "five bulk-localised in-gap candidates",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "um^-2",
+  "value": [
+   1.868981147045425,
+   1.8860078588720002,
+   1.926413256982914,
+   1.973811320130794,
+   1.990119585136022
+  ]
+ },
+ "n10k_candidate_pr_fraction_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "fraction",
+  "value": [
+   0.0003442519677208972,
+   0.0032939030512764205
+  ]
+ },
+ "n10k_candidate_r2_range": {
+  "notes": "REPORT_N10K: 0.971-0.998",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "r2",
+  "value": [
+   0.9712016981771269,
+   0.9979974364081798
+  ]
+ },
+ "n10k_candidate_shell2_range": {
+  "notes": "REPORT_N10K: 2.5-10%",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "fraction",
+  "value": [
+   0.02480383101030093,
+   0.10464737425124836
+  ]
+ },
+ "n10k_candidate_xi_over_L": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "ratio",
+  "value": [
+   0.072994901727101,
+   0.10181710405927528
+  ]
+ },
+ "n10k_candidate_xi_range": {
+  "notes": "REPORT_N10K: 1.80-2.51",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "um",
+  "value": [
+   1.7990858425692686,
+   2.509458963713288
+  ]
+ },
+ "n10k_controls_pr_fraction_range": {
+  "notes": "REPORT_N10K round 4: 0.72-12.1%",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "fraction",
+  "value": [
+   0.007170344847196153,
+   0.12081800058693316
+  ]
+ },
+ "n10k_controls_shell2_enhancement_range": {
+  "notes": "six lowest + six highest window modes (REPORT_N10K: 0.6-0.9x)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "ratio",
+  "value": [
+   0.4945790784442525,
+   1.4338576620027519
+  ]
+ },
+ "n10k_edge_resolved_n": {
+  "notes": "resolved modes within 0.15 outside the KPM bracket",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "modes",
+  "value": 112
+ },
+ "n10k_edge_resolved_xi_median": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "um",
+  "value": 4.858830787924917
+ },
+ "n10k_edge_resolved_xi_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "um",
+  "value": [
+   1.9817322302471683,
+   10.59959713879352
+  ]
+ },
+ "n10k_extended_1p9441": {
+  "notes": "REPORT_N10K round-3 F3: xi 12.98 > ceiling, r2 0.325, 1.94 decades, PR 0.56%",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "mixed",
+  "value": {
+   "dyn_range_dec": 1.9373447188973625,
+   "lam": 1.944051593936228,
+   "pr_fraction": 0.005576335214592446,
+   "r2": 0.32452224204823243,
+   "unresolved": true,
+   "xi_um": 12.974779983239973
+  }
+ },
+ "n10k_fitrange_ratio_all_median_abs_dev": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "ratio",
+  "value": 0.30003356022279326
+ },
+ "n10k_fitrange_ratio_compact_median": {
+  "notes": "xi(r_hi=0.60 L/2)/xi(r_hi=0.95 L/2), resolved modes with PR fraction < 0.2%",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "ratio",
+  "value": 0.7477634025610038
+ },
+ "n10k_fitrange_ratio_compact_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "ratio",
+  "value": [
+   0.49290561180296694,
+   1.1598338847653324
+  ]
+ },
+ "n10k_fitrange_ratio_extended_median": {
+  "notes": "resolved modes with PR fraction > 1%",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "ratio",
+  "value": 0.6636967968389921
+ },
+ "n10k_fitrange_ratio_extended_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "ratio",
+  "value": [
+   0.48153049326501407,
+   1.6425076114593882
+  ]
+ },
+ "n10k_funnel_contrast_pr_radius_below_above": {
+  "notes": "participation-volume radius (3V_p/4pi)^(1/3), all modes, same bins -- independent of the envelope fit",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "ratio",
+  "value": [
+   1.8195403057169313,
+   1.7384951254595684
+  ]
+ },
+ "n10k_funnel_contrast_xi_below_above": {
+  "notes": "median xi in [1.757,1.80] / median xi in [1.80,1.864]; and [2.07,2.117] / [1.996,2.02]; resolved modes, r_hi 0.95",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "ratio",
+  "value": [
+   1.6912343907840066,
+   2.1853151589339403
+  ]
+ },
+ "n10k_funnel_contrast_xi_rhi060_below_above": {
+  "notes": "same bins with r_hi 0.60",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "ratio",
+  "value": [
+   1.8140802287872921,
+   1.64894734099062
+  ]
+ },
+ "n10k_ingap_all_pr_fraction_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "fraction",
+  "value": [
+   0.0003442519677208972,
+   0.005576335214592446
+  ]
+ },
+ "n10k_ingap_all_xi_range": {
+  "notes": "over all ten in-gap states incl. the extended one (REPORT_N10K: 1.80-12.98)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "um",
+  "value": [
+   1.7990858425692686,
+   12.974779983239973
+  ]
+ },
+ "n10k_ingap_table": {
+  "notes": "all 10 certified states in [1.864, 1.996]",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "mixed",
+  "value": [
+   {
+    "dyn_range_dec": 4.946149061123824,
+    "lam": 1.868981147045425,
+    "peak_face_coords": 0,
+    "pr_fraction": 0.0007204960458542219,
+    "pr_volume_um3": 10.787223453487295,
+    "r2": 0.9922421695630556,
+    "shell2_energy_frac": 0.02719599919948678,
+    "shell2_enhancement": 0.44432854830397983,
+    "unresolved": false,
+    "xi_um": 1.9114822401877574
+   },
+   {
+    "dyn_range_dec": 5.236606806043605,
+    "lam": 1.8707585792024861,
+    "peak_face_coords": 0,
+    "pr_fraction": 0.00048312470351996215,
+    "pr_volume_um3": 7.233313996318711,
+    "r2": 0.9949850477490251,
+    "shell2_energy_frac": 0.18156109272184728,
+    "shell2_enhancement": 2.9663472250398164,
+    "unresolved": false,
+    "xi_um": 1.832257342047432
+   },
+   {
+    "dyn_range_dec": 4.6126190554979924,
+    "lam": 1.8730821374768227,
+    "peak_face_coords": 2,
+    "pr_fraction": 0.0009296610474756618,
+    "pr_volume_um3": 13.918829274396995,
+    "r2": 0.9910213097012194,
+    "shell2_energy_frac": 0.23622268963920362,
+    "shell2_enhancement": 3.85940902534773,
+    "unresolved": false,
+    "xi_um": 1.9079144816361326
+   },
+   {
+    "dyn_range_dec": 5.288476538186348,
+    "lam": 1.8860078588720002,
+    "peak_face_coords": 0,
+    "pr_fraction": 0.0003442519677208972,
+    "pr_volume_um3": 5.154119750518896,
+    "r2": 0.9911910978168464,
+    "shell2_energy_frac": 0.028403226593026482,
+    "shell2_enhancement": 0.4640522433706577,
+    "unresolved": false,
+    "xi_um": 1.7990858425692686
+   },
+   {
+    "dyn_range_dec": 4.713957138026098,
+    "lam": 1.926413256982914,
+    "peak_face_coords": 0,
+    "pr_fraction": 0.0004645885015522882,
+    "pr_volume_um3": 6.955791095596608,
+    "r2": 0.9712016981771269,
+    "shell2_energy_frac": 0.02480383101030093,
+    "shell2_enhancement": 0.40524527686382006,
+    "unresolved": false,
+    "xi_um": 2.0908524474205126
+   },
+   {
+    "dyn_range_dec": 4.706494390029692,
+    "lam": 1.929596209673228,
+    "peak_face_coords": 2,
+    "pr_fraction": 0.000653390570820511,
+    "pr_volume_um3": 9.782524318347951,
+    "r2": 0.9649384199750111,
+    "shell2_energy_frac": 0.4365257832383228,
+    "shell2_enhancement": 7.131963276686742,
+    "unresolved": false,
+    "xi_um": 2.1435671116777315
+   },
+   {
+    "dyn_range_dec": 1.9373447188973625,
+    "lam": 1.944051593936228,
+    "peak_face_coords": 2,
+    "pr_fraction": 0.005576335214592446,
+    "pr_volume_um3": 83.4885553605516,
+    "r2": 0.32452224204823243,
+    "shell2_energy_frac": 0.08097958095554962,
+    "shell2_enhancement": 1.3230453267892062,
+    "unresolved": true,
+    "xi_um": 12.974779983239973
+   },
+   {
+    "dyn_range_dec": 3.819750852487911,
+    "lam": 1.947209447202747,
+    "peak_face_coords": 2,
+    "pr_fraction": 0.0005271210889575532,
+    "pr_volume_um3": 7.892025232267777,
+    "r2": 0.919500825558849,
+    "shell2_energy_frac": 0.4207994315928264,
+    "shell2_enhancement": 6.875025962285982,
+    "unresolved": false,
+    "xi_um": 3.014410278491984
+   },
+   {
+    "dyn_range_dec": 3.9441662169914102,
+    "lam": 1.973811320130794,
+    "peak_face_coords": 0,
+    "pr_fraction": 0.0032939030512764205,
+    "pr_volume_um3": 49.316118322503016,
+    "r2": 0.9979974364081798,
+    "shell2_energy_frac": 0.10464737425124836,
+    "shell2_enhancement": 1.7097300063811565,
+    "unresolved": false,
+    "xi_um": 2.125805448935833
+   },
+   {
+    "dyn_range_dec": 3.2790835084141903,
+    "lam": 1.990119585136022,
+    "peak_face_coords": 0,
+    "pr_fraction": 0.0028997167163743397,
+    "pr_volume_um3": 43.41438423059897,
+    "r2": 0.9815840657065603,
+    "shell2_energy_frac": 0.030427605419769882,
+    "shell2_enhancement": 0.4971265679691517,
+    "unresolved": false,
+    "xi_um": 2.509458963713288
+   }
+  ]
+ },
+ "n10k_max_xi_resolved": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "um",
+  "value": 10.59959713879352
+ },
+ "n10k_median_r_pr_by_bin": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "mixed",
+  "value": [
+   {
+    "bin": [
+     1.757,
+     1.8
+    ],
+    "median_pr_fraction": 0.00521741857114728,
+    "median_r_pr_um": 2.6518464974631164,
+    "median_xi_rhi060_um": 3.6390068555307993,
+    "median_xi_um": 4.99521144317981
+   },
+   {
+    "bin": [
+     1.8,
+     1.85
+    ],
+    "median_pr_fraction": 0.0009251444746213292,
+    "median_r_pr_um": 1.4898172819786146,
+    "median_xi_rhi060_um": 2.012836157597123,
+    "median_xi_um": 3.0080573918212306
+   },
+   {
+    "bin": [
+     1.85,
+     1.864
+    ],
+    "median_pr_fraction": 0.00042449083217791677,
+    "median_r_pr_um": 1.1490861578345422,
+    "median_xi_rhi060_um": 1.7072973357820667,
+    "median_xi_um": 2.0770059411734674
+   },
+   {
+    "bin": [
+     1.864,
+     1.996
+    ],
+    "median_pr_fraction": 0.0006869433083373665,
+    "median_r_pr_um": 1.3487192266363612,
+    "median_xi_rhi060_um": 1.7001023925620515,
+    "median_xi_um": 2.0908524474205126
+   },
+   {
+    "bin": [
+     1.996,
+     2.02
+    ],
+    "median_pr_fraction": 0.008537637691438811,
+    "median_r_pr_um": 3.1229156424489286,
+    "median_xi_rhi060_um": 2.450473859811642,
+    "median_xi_um": 2.794087309584699
+   },
+   {
+    "bin": [
+     2.02,
+     2.07
+    ],
+    "median_pr_fraction": 0.01977867359474473,
+    "median_r_pr_um": 4.134868404233178,
+    "median_xi_rhi060_um": 3.3498163477240643,
+    "median_xi_um": 4.748489369760452
+   },
+   {
+    "bin": [
+     2.07,
+     2.117
+    ],
+    "median_pr_fraction": 0.04477303006729379,
+    "median_r_pr_um": 5.429173621618899,
+    "median_xi_rhi060_um": 4.040702355303428,
+    "median_xi_um": 6.105961353020392
+   }
+  ]
+ },
+ "n10k_median_xi_by_bin": {
+  "notes": "resolved modes only; bins chosen in this report",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "um",
+  "value": [
+   {
+    "bin": [
+     1.757,
+     1.8
+    ],
+    "median_pr_fraction": 0.00521741857114728,
+    "median_xi_um": 4.99521144317981,
+    "n_resolved": 36,
+    "n_total": 41
+   },
+   {
+    "bin": [
+     1.8,
+     1.85
+    ],
+    "median_pr_fraction": 0.0009251444746213292,
+    "median_xi_um": 3.0080573918212306,
+    "n_resolved": 21,
+    "n_total": 21
+   },
+   {
+    "bin": [
+     1.85,
+     1.864
+    ],
+    "median_pr_fraction": 0.00042449083217791677,
+    "median_xi_um": 2.0770059411734674,
+    "n_resolved": 1,
+    "n_total": 1
+   },
+   {
+    "bin": [
+     1.864,
+     1.996
+    ],
+    "median_pr_fraction": 0.0006869433083373665,
+    "median_xi_um": 2.0908524474205126,
+    "n_resolved": 9,
+    "n_total": 10
+   },
+   {
+    "bin": [
+     1.996,
+     2.02
+    ],
+    "median_pr_fraction": 0.008537637691438811,
+    "median_xi_um": 2.794087309584699,
+    "n_resolved": 6,
+    "n_total": 6
+   },
+   {
+    "bin": [
+     2.02,
+     2.07
+    ],
+    "median_pr_fraction": 0.01977867359474473,
+    "median_xi_um": 4.748489369760452,
+    "n_resolved": 21,
+    "n_total": 22
+   },
+   {
+    "bin": [
+     2.07,
+     2.117
+    ],
+    "median_pr_fraction": 0.04477303006729379,
+    "median_xi_um": 6.105961353020392,
+    "n_resolved": 27,
+    "n_total": 32
+   }
+  ]
+ },
+ "n10k_median_xi_high_edge": {
+  "notes": "1.996 < lambda <= 2.02, resolved",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "um",
+  "value": 2.794087309584699
+ },
+ "n10k_median_xi_low_edge": {
+  "notes": "1.85 <= lambda < 1.864, resolved",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "um",
+  "value": 2.0770059411734674
+ },
+ "n10k_median_xi_window_bottom": {
+  "notes": "lambda < 1.80, resolved",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "um",
+  "value": 4.99521144317981
+ },
+ "n10k_median_xi_window_top": {
+  "notes": "lambda > 2.07, resolved",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "um",
+  "value": 6.105961353020392
+ },
+ "n10k_min_xi_resolved": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "um",
+  "value": 1.7990858425692686
+ },
+ "n10k_n_modes_shell2_enhancement_gt2": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "modes",
+  "value": 20
+ },
+ "n10k_n_resolved": {
+  "notes": "REPORT_N10K: 121 of 133",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "modes",
+  "value": 121
+ },
+ "n10k_n_unresolved": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "modes",
+  "value": 12
+ },
+ "n10k_n_unresolved_above_ceiling": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "modes",
+  "value": 1
+ },
+ "n10k_n_unresolved_dyn_fail": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "modes",
+  "value": 0
+ },
+ "n10k_n_unresolved_r2_fail": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "modes",
+  "value": 12
+ },
+ "n10k_pr_fraction_median": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "fraction",
+  "value": 0.006937191525006418
+ },
+ "n10k_pr_fraction_range_all": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "fraction",
+  "value": [
+   0.0003442519677208972,
+   0.12081800058693316
+  ]
+ },
+ "n10k_r_pr_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "um",
+  "value": [
+   1.0715735004011597,
+   7.558582705626622
+  ]
+ },
+ "n10k_recompute_vs_json_max_rel_dpr": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/localization_modes.json",
+  "unit": "relative",
+  "value": 0.0
+ },
+ "n10k_recompute_vs_json_max_rel_dxi": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/localization_modes.json",
+  "unit": "relative",
+  "value": 1.3329965022048113e-06
+ },
+ "n10k_recompute_vs_json_n_matched": {
+  "notes": "of 133 recomputed; matched on lambda to 1e-6",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/localization_modes.json",
+  "unit": "modes",
+  "value": 133
+ },
+ "n10k_seam_peak_face_coords": {
+  "notes": "number of peak-voxel coordinates on a box face",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "count",
+  "value": [
+   0,
+   2,
+   2,
+   2
+  ]
+ },
+ "n10k_seam_shell2_fracs": {
+  "notes": "REPORT_N10K: 18%, 24%, 44%, 42% for 1.8709, 1.8732, 1.9297, 1.9473",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "fraction",
+  "value": [
+   0.18156109272184728,
+   0.23622268963920362,
+   0.4365257832383228,
+   0.4207994315928264
+  ]
+ },
+ "n10k_shell2_enhancement_range_nonseam": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_window/window_energy_density.npy",
+  "unit": "ratio",
+  "value": [
+   0.06035071505833679,
+   4.55532855514001
+  ]
+ },
+ "n10k_shell_volume_fraction": {
+  "notes": "outer 2-voxel shell",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "geometry 1-(1-4/192)^3",
+  "unit": "fraction",
+  "value": 0.06120695891203709
+ },
+ "n10k_xi_ceiling_um": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "L/2",
+  "unit": "um",
+  "value": 12.323366426982375
+ },
+ "n1k_circ_band500": {
+  "notes": "REPORT_N10K: xi = 1.47 um",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4_n1000_circ_G128/window_energy_density.npy",
+  "unit": "mixed",
+  "value": {
+   "dyn_range_dec": 2.8373699118657316,
+   "lam": 1.8275874853134155,
+   "pr_fraction": 0.0041631787029734685,
+   "pr_volume_um3": 6.233086108408799,
+   "r2": 0.9740990593243104,
+   "unresolved": false,
+   "xi_um": 1.4672587222717426
+  }
+ },
+ "n1k_circ_band501": {
+  "notes": "REPORT_N10K: xi = 2.30 um",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4_n1000_circ_G128/window_energy_density.npy",
+  "unit": "mixed",
+  "value": {
+   "dyn_range_dec": 1.6482284973389105,
+   "lam": 2.022493362426758,
+   "pr_fraction": 0.0385957214649116,
+   "pr_volume_um3": 57.785281985405305,
+   "r2": 0.9458908644080959,
+   "unresolved": false,
+   "xi_um": 2.297590076402044
+  }
+ },
+ "n1k_circ_edge_resolved_n": {
+  "notes": "resolved modes within 0.15 of the gap edges",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4_n1000_circ_G128/window_energy_density.npy",
+  "unit": "modes",
+  "value": 20
+ },
+ "n1k_circ_edge_resolved_xi_median": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4_n1000_circ_G128/window_energy_density.npy",
+  "unit": "um",
+  "value": 3.1091114694449473
+ },
+ "n1k_circ_edge_resolved_xi_range": {
+  "notes": "REPORT_N10K: 1.5-2.3 um",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4_n1000_circ_G128/window_energy_density.npy",
+  "unit": "um",
+  "value": [
+   1.4672587222717426,
+   4.949753604431961
+  ]
+ },
+ "n1k_circ_n_above_ceiling": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4_n1000_circ_G128/window_energy_density.npy",
+  "unit": "modes",
+  "value": 141
+ },
+ "n1k_circ_n_modes": {
+  "notes": "bands 398-607",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4_n1000_circ_G128/window_energy_density.npy",
+  "unit": "modes",
+  "value": 210
+ },
+ "n1k_circ_n_r2_fail": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4_n1000_circ_G128/window_energy_density.npy",
+  "unit": "modes",
+  "value": 77
+ },
+ "n1k_circ_n_unresolved": {
+  "notes": "REPORT_N10K: 168/210 ceiling-limited",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4_n1000_circ_G128/window_energy_density.npy",
+  "unit": "modes",
+  "value": 168
+ },
+ "n1k_circ_pr_fraction_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4_n1000_circ_G128/window_energy_density.npy",
+  "unit": "fraction",
+  "value": [
+   0.0041631787029734685,
+   0.37234298497625923
+  ]
+ },
+ "n1k_circ_recompute_vs_json_max_rel_dpr": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4_n1000_circ_G128/localization_modes.json",
+  "unit": "relative",
+  "value": 0.0
+ },
+ "n1k_circ_recompute_vs_json_max_rel_dxi": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4_n1000_circ_G128/localization_modes.json",
+  "unit": "relative",
+  "value": 0.0
+ },
+ "n1k_circ_recompute_vs_json_n_matched": {
+  "notes": "of 210 recomputed; matched on lambda to 1e-6",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4_n1000_circ_G128/localization_modes.json",
+  "unit": "modes",
+  "value": 210
+ },
+ "n1k_circ_resolved_xi_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4_n1000_circ_G128/window_energy_density.npy",
+  "unit": "um",
+  "value": [
+   1.4672587222717426,
+   5.407953338804944
+  ]
+ },
+ "n1k_circ_shell2_enhancement_range": {
+  "notes": "seam diagnostic on the N=1000 circular window",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/i4_n1000_circ_G128/window_energy_density.npy",
+  "unit": "ratio",
+  "value": [
+   0.5763157658666265,
+   3.428824937741733
+  ]
+ },
+ "n1k_circ_xi_ceiling_um": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "L/2",
+  "unit": "um",
+  "value": 5.72
+ },
+ "n1k_ell_band500": {
+  "notes": "INV17 / ADV17 round 1: band 500 xi = 1.82 um, r2 0.97",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "unit": "mixed",
+  "value": {
+   "dyn_range_dec": 2.3472374565597285,
+   "lam": 1.8829562664031982,
+   "pr_fraction": 0.008126662995291668,
+   "pr_volume_um3": 12.167190946546103,
+   "r2": 0.9725904398621609,
+   "unresolved": false,
+   "xi_um": 1.8221736435906535
+  }
+ },
+ "n1k_ell_band501": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "unit": "mixed",
+  "value": {
+   "dyn_range_dec": 1.3932851872804368,
+   "lam": 1.9627666473388672,
+   "pr_fraction": 0.07821984012957807,
+   "pr_volume_um3": 117.11027407144604,
+   "r2": 0.9859045398909633,
+   "unresolved": false,
+   "xi_um": 2.920716943934037
+  }
+ },
+ "n1k_ell_n_unresolved": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "unit": "modes",
+  "value": 180
+ },
+ "n1k_ell_pr_fraction_band500_501": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "unit": "fraction",
+  "value": [
+   0.008126662995291668,
+   0.07821984012957807
+  ]
+ },
+ "n1k_ell_pr_fraction_median_edge": {
+  "notes": "bands 495-506",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "unit": "fraction",
+  "value": 0.06622822173146947
+ },
+ "n1k_ell_pr_fraction_median_far": {
+  "notes": "bands 398-437 and 568-607",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "unit": "fraction",
+  "value": 0.18543273745773142
+ },
+ "n1k_ell_pr_fraction_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "unit": "fraction",
+  "value": [
+   0.008126662995291668,
+   0.30017044890330874
+  ]
+ },
+ "n1k_ell_shell2_enhancement_range": {
+  "notes": "seam diagnostic on the N=1000 elliptical window",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "unit": "ratio",
+  "value": [
+   0.5835783131769597,
+   3.9531093795243346
+  ]
+ },
+ "periodic_v2_table": {
+  "notes": "seam-free re-solve, m=48",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
+  "source_file": "results/n10k_G192_gap_periodic_v2/window_energy_density.npy",
+  "unit": "mixed",
+  "value": [
+   {
+    "lam": 1.8682242631912231,
+    "pr_fraction": 0.0007138455626025482,
+    "r2": 0.9950692387268067,
+    "shell2_energy_frac": 0.02626074464822743,
+    "shell2_enhancement": 0.42904834866845404,
+    "unresolved": false,
+    "xi_um": 1.8253022623686421
+   },
+   {
+    "lam": 1.885216474533081,
+    "pr_fraction": 0.000342942620295789,
+    "r2": 0.9924050004131963,
+    "shell2_energy_frac": 0.02779205264687838,
+    "shell2_enhancement": 0.4540668763958592,
+    "unresolved": false,
+    "xi_um": 1.7772451095269493
+   },
+   {
+    "lam": 1.924135446548462,
+    "pr_fraction": 0.00045751155780430596,
+    "r2": 0.9846974744824073,
+    "shell2_energy_frac": 0.019687086612042045,
+    "shell2_enhancement": 0.3216478479242062,
+    "unresolved": false,
+    "xi_um": 1.8695574838012436
+   },
+   {
+    "lam": 1.940580129623413,
+    "pr_fraction": 0.005000061964640055,
+    "r2": 0.9877682431799165,
+    "shell2_energy_frac": 0.04150505825764091,
+    "shell2_enhancement": 0.6781101200811079,
+    "unresolved": false,
+    "xi_um": 2.2419426472710837
+   },
+   {
+    "lam": 1.9707187414169312,
+    "pr_fraction": 0.0032752428085222555,
+    "r2": 0.9968665442025544,
+    "shell2_energy_frac": 0.10300821818686844,
+    "shell2_enhancement": 1.682949455713125,
+    "unresolved": false,
+    "xi_um": 2.1249558491008793
+   },
+   {
+    "lam": 1.9839143753051758,
+    "pr_fraction": 0.005866739398164346,
+    "r2": 0.994269658394616,
+    "shell2_energy_frac": 0.1305411953372704,
+    "shell2_enhancement": 2.1327835536621946,
+    "unresolved": false,
+    "xi_um": 2.550627227556829
+   },
+   {
+    "lam": 1.987801432609558,
+    "pr_fraction": 0.0032124867037498345,
+    "r2": 0.9857222139134587,
+    "shell2_energy_frac": 0.03679719598533779,
+    "shell2_enhancement": 0.6011930120269572,
+    "unresolved": false,
+    "xi_um": 2.631237220275172
+   }
+  ]
+ }
+}

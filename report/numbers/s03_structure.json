@@ -1,0 +1,350 @@
+{
+ "L_ratio_n10k_n1k": {
+  "notes": "10^(1/3) = 2.15443",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "geometry",
+  "unit": "ratio",
+  "value": 2.154434690031884
+ },
+ "d0_um": {
+  "notes": "settled constant of the LSU family",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "eigenfns/structure.py",
+  "unit": "um",
+  "value": 0.8
+ },
+ "eps_circ": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "n = 2.9",
+  "unit": "dimensionless",
+  "value": 8.41
+ },
+ "eps_ell": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "n = 2.9275",
+  "unit": "dimensionless",
+  "value": 8.570256250000002
+ },
+ "n10k_L": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "um",
+  "value": 24.64673285396475
+ },
+ "n10k_dx_192": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "geometry",
+  "unit": "um",
+  "value": 0.1283684002810664
+ },
+ "n10k_ff_160_montage": {
+  "notes": "interior_report (G160): 0.22006",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "fraction",
+  "value": 0.2200634765625
+ },
+ "n10k_ff_192_montage": {
+  "notes": "REPORT_N10K: 22.011%; interior_report.json 0.2201073",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "fraction",
+  "value": 0.22010732580114295
+ },
+ "n10k_ff_192_periodic": {
+  "notes": "REPORT_N10K: 0.22089",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "fraction",
+  "value": 0.22088834974500868
+ },
+ "n10k_ff_256_montage": {
+  "notes": "ff_calibration_n10k.json: 0.2200044 at r=0.331836",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "fraction",
+  "value": 0.22000443935394287
+ },
+ "n10k_periodic_fix_changed_pct": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "%",
+  "value": 0.07810239438657407
+ },
+ "n10k_periodic_fix_changed_voxels": {
+  "notes": "ADV17 R2: 5,528 (0.078%)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "voxels",
+  "value": 5528
+ },
+ "n10k_periodic_fix_max_depth_of_changed_voxel": {
+  "notes": "ADV17 R2: every one within 3 voxels of a face",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "voxels",
+  "value": 3
+ },
+ "n10k_rod_diameter_in_voxels_192": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "geometry",
+  "unit": "voxels",
+  "value": 5.17005741714371
+ },
+ "n10k_rod_length_mean_median": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "um",
+  "value": [
+   0.8013043497177817,
+   0.8025556017051069
+  ]
+ },
+ "n10k_rod_rows": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "rows",
+  "value": 15704
+ },
+ "n10k_rods_per_vertex": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "ratio",
+  "value": 1.5704
+ },
+ "n10k_shell0_ff_256": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "fraction",
+  "value": 0.19467540855871557
+ },
+ "n10k_shell_deficit_pct": {
+  "notes": "REPORT_N10K: 11%",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "%",
+  "value": 10.667950888355227
+ },
+ "n10k_shell_deficit_pct_256": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "%",
+  "value": 11.767559865222033
+ },
+ "n10k_shell_ff_montage": {
+  "notes": "ff by depth from a box face; ADV17 R2: d=0 0.1975, d=1 0.2144, d=2 0.2201, interior 0.2211",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "fraction",
+  "value": {
+   "0": 0.19749826395234094,
+   "1": 0.21435370086969505,
+   "2": 0.22011667365691845,
+   "interior_ge10": 0.22108332442426454
+  }
+ },
+ "n10k_shell_ff_periodic": {
+  "notes": "ADV17 R2: outer shell 0.2177 after the fix",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "fraction",
+  "value": {
+   "0": 0.2176729651694017,
+   "1": 0.21936937777611884,
+   "2": 0.22028825256415144,
+   "interior_ge10": 0.22108332442426454
+  }
+ },
+ "n10k_vertex_density": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "um^-3",
+  "value": 0.6679161222170661
+ },
+ "n10k_vox_per_um_192": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "geometry",
+  "unit": "vox/um",
+  "value": 7.79007916130816
+ },
+ "n1k_L": {
+  "notes": "box_size_for_n: (N/1000)^(1/3) x 11.44",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "um",
+  "value": 11.44
+ },
+ "n1k_dx_128": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "geometry",
+  "unit": "um",
+  "value": 0.089375
+ },
+ "n1k_ff_128_circ": {
+  "notes": "i4int interior_report: 0.21908",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "fraction",
+  "value": 0.21907520294189453
+ },
+ "n1k_ff_128_circ_periodic": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "fraction",
+  "value": 0.22058391571044922
+ },
+ "n1k_ff_128_ell": {
+  "notes": "i1 interior_report: 0.21724",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "fraction",
+  "value": 0.2172412872314453
+ },
+ "n1k_ff_256_ell": {
+  "notes": "REPORT.md: 21.7% at 256^3 (montage convention)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "fraction",
+  "value": 0.2172093391418457
+ },
+ "n1k_ff_64_ell": {
+  "notes": "golden 0.21733856 (64^3) in tests",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "fraction",
+  "value": 0.21733856201171875
+ },
+ "n1k_ff_matched_dx_circ": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "fraction",
+  "value": 0.21891317206855904
+ },
+ "n1k_matched_dx_grid": {
+  "notes": "N=1000 grid with the N=10k 192^3 voxel size",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "geometry",
+  "unit": "voxels",
+  "value": 89
+ },
+ "n1k_periodic_fix_changed_pct_128_circ": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "%",
+  "value": 0.15087127685546875
+ },
+ "n1k_rod_diameter_in_voxels_128_circ": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "geometry",
+  "unit": "voxels",
+  "value": 7.4257006993007
+ },
+ "n1k_rod_length_mean_median": {
+  "notes": "includes clipped face-crossing segments",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "um",
+  "value": [
+   0.7999617735241846,
+   0.8007560357847796
+  ]
+ },
+ "n1k_rod_minor_diameter_in_voxels_128_ell": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "geometry",
+  "unit": "voxels",
+  "value": 5.03944055944056
+ },
+ "n1k_rod_rows": {
+  "notes": "PBC-duplicated face-crossing rods included",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "rows",
+  "value": 1653
+ },
+ "n1k_rods_per_vertex": {
+  "notes": "trivalent network: 1.5 edges/vertex + PBC duplicates",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "ratio",
+  "value": 1.653
+ },
+ "n1k_shell_deficit_pct_128_circ": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "%",
+  "value": 11.314123752064663
+ },
+ "n1k_shell_deficit_pct_128_ell": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "%",
+  "value": 12.763141611055516
+ },
+ "n1k_shell_ff_128_circ": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "fraction",
+  "value": {
+   "0": 0.19189675126064312,
+   "1": 0.20952086355491084,
+   "2": 0.22093945536265092,
+   "interior_ge10": 0.21637802926383173
+  }
+ },
+ "n1k_shell_ff_128_ell": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "fraction",
+  "value": {
+   "0": 0.18829048524427544,
+   "1": 0.2040489802884205,
+   "2": 0.21432977879615758,
+   "interior_ge10": 0.21583822333993802
+  }
+ },
+ "n1k_vertex_density": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
+  "unit": "um^-3",
+  "value": 0.6679161222170661
+ },
+ "n1k_vox_per_um_128": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "geometry",
+  "unit": "vox/um",
+  "value": 11.18881118881119
+ },
+ "resolution_ratio_n10k192_over_n1k128": {
+  "notes": "REPORT_N10K: 70%",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
+  "source_file": "geometry",
+  "unit": "ratio",
+  "value": 0.6962383250419167
+ }
+}

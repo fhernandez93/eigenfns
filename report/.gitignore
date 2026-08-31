@@ -1,0 +1,15 @@
+# un-ignore the report's generated figures and data (the repo root ignores *.png/*.npy/*.npz)
+!*.png
+!*.pdf
+!*.npy
+!*.npz
+# LaTeX build products
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+build/

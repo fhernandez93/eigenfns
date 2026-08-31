@@ -1,0 +1,465 @@
+{
+ "a_norm_n10k_check": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "geometry",
+  "unit": "um",
+  "value": 2.2880000000000003
+ },
+ "a_norm_um": {
+  "notes": "a = L_1000/5 = 2.288 um; identical for N=10k (density-matched: L_10k/1250^(1/3))",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "REPORT.md",
+  "unit": "um",
+  "value": 2.288
+ },
+ "bakeoff_folded_block": {
+  "notes": "first block of 20 locked at maxit=200 with folded Rayleigh quotients mu in [0.096, 0.279]; all 50 targets have mu <= 0.0497 (INV17)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/bakeoff_folded_m32.log",
+  "unit": "mixed",
+  "value": {
+   "elapsed": 628.9,
+   "iters": 200,
+   "locked": 20,
+   "mu_hi": 0.2793,
+   "mu_lo": 0.0956,
+   "worst_res": 1.0
+  }
+ },
+ "bakeoff_onestage_medres_trajectory": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/bakeoff_bandpass_m80_d3300.json",
+  "unit": "relative",
+  "value": [
+   0.0657174363732338,
+   0.041757164523005486,
+   0.024605082347989082
+  ]
+ },
+ "bakeoff_onestage_theta_apps": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/bakeoff_bandpass_m80_d3300.json",
+  "unit": "applications",
+  "value": 792528
+ },
+ "bakeoff_onestage_wall_s": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/bakeoff_bandpass_m80_d3300.json",
+  "unit": "s",
+  "value": 7109.244014886033
+ },
+ "bakeoff_polish_trajectory_hybrid_m80": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/bakeoff_hybrid_m80.json",
+  "unit": "relative",
+  "value": [
+   0.011986167170107365,
+   0.00323231378570199,
+   0.001422491215635091
+  ]
+ },
+ "bakeoff_polish_trajectory_hybrid_m80c": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/bakeoff_hybrid_m80c.json",
+  "unit": "relative",
+  "value": [
+   0.0005822553066536784,
+   0.0002201699826400727,
+   0.00015827281458768994
+  ]
+ },
+ "bakeoff_shiftinv_medres": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/bakeoff_shiftinv_m64b.json",
+  "unit": "relative",
+  "value": 0.1770501360297203
+ },
+ "bakeoff_shiftinv_theta_apps": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/bakeoff_shiftinv_m64b.json",
+  "unit": "applications",
+  "value": 32336
+ },
+ "bakeoff_shiftinv_wall_s": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/bakeoff_shiftinv_m64b.json",
+  "unit": "s",
+  "value": 441.1054069719976
+ },
+ "bakeoff_sigma": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/bakeoff_bandpass_m80_d3300.json",
+  "unit": "um^-2",
+  "value": 1.9228614568710327
+ },
+ "bakeoff_slice": {
+  "notes": "= MPB bands 476..525",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/bakeoff_bandpass_m80_d3300.json",
+  "unit": "0-based solver index",
+  "value": [
+   473,
+   523
+  ]
+ },
+ "bakeoff_twostage_max_dlam_rel": {
+  "notes": "pre-Rayleigh-correction figure (2.8e-5)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/bakeoff_hybrid_m80c.json",
+  "unit": "relative",
+  "value": 2.777293395550776e-05
+ },
+ "bakeoff_twostage_theta_apps": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/bakeoff_hybrid_m80c.json",
+  "unit": "applications",
+  "value": 3217088
+ },
+ "bakeoff_twostage_verified": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/bakeoff_hybrid_m80c.json",
+  "unit": "pairs",
+  "value": 24
+ },
+ "bakeoff_twostage_wall_s": {
+  "notes": "polish legs only (hybrid_m80 + hybrid_m80c); the build is bandpass_m80_d3300 (7,109 s)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/bakeoff_hybrid_m80c.json",
+  "unit": "s",
+  "value": 18464.002246688004
+ },
+ "lam_max_G192": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/n10k_G192_timing.json",
+  "unit": "um^-2",
+  "value": 2208.8752802229146
+ },
+ "lam_max_G224": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/n10k_G224_timing.json",
+  "unit": "um^-2",
+  "value": 3030.7448764232327
+ },
+ "lam_max_G256": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/n10k_G256_timing.json",
+  "unit": "um^-2",
+  "value": 3974.6092191761923
+ },
+ "lam_max_G288": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/n10k_G288_timing.json",
+  "unit": "um^-2",
+  "value": 5055.851727480362
+ },
+ "matvec_ms_G128_n1k": {
+  "notes": "batched, 128^3 c64 (log-quoted; no JSON)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "REPORT.md / plans log",
+  "unit": "ms/vector",
+  "value": 2.7
+ },
+ "matvec_ms_G192": {
+  "notes": "chunk 8, degree 8000 x 16 probes",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/n10k_G192_timing.json",
+  "unit": "ms/vector",
+  "value": 23.237610350042814
+ },
+ "matvec_ms_G224": {
+  "notes": "chunk 8, degree 8000 x 16 probes",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/n10k_G224_timing.json",
+  "unit": "ms/vector",
+  "value": 38.18976883776486
+ },
+ "matvec_ms_G256": {
+  "notes": "chunk 4, degree 8000 x 16 probes",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/n10k_G256_timing.json",
+  "unit": "ms/vector",
+  "value": 53.905568800109904
+ },
+ "matvec_ms_G256_n1k_log": {
+  "notes": "N=1000 256^3, chunks <= 4 (log-quoted)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "REPORT.md",
+  "unit": "ms/vector",
+  "value": 28.6
+ },
+ "matvec_ms_G288": {
+  "notes": "chunk 4, degree 8000 x 16 probes",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/exp/n10k_G288_timing.json",
+  "unit": "ms/vector",
+  "value": 79.17202720127534
+ },
+ "n10k_production_total_theta_apps": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/n10k_G192_S*/interior_report.json",
+  "unit": "applications",
+  "value": 11578584
+ },
+ "n10k_production_total_wall_h": {
+  "notes": "three slices",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/n10k_G192_S*/interior_report.json",
+  "unit": "h",
+  "value": 104.33127570598697
+ },
+ "n10k_state_table_rows": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "report/tables/states_n10k.csv",
+  "unit": "rows",
+  "value": 133
+ },
+ "n1k_G96_wall_s_theta": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/conv_N1000_G96.log",
+  "unit": "s, applications",
+  "value": [
+   6426,
+   155168
+  ]
+ },
+ "n1k_circ_prod_theta_apps": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/i4_n1000_circ_G128.log",
+  "unit": "applications",
+  "value": 69728
+ },
+ "n1k_circ_prod_wall_s": {
+  "notes": "REPORT_N10K: 8,876 s",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/i4_n1000_circ_G128.log",
+  "unit": "s",
+  "value": 8876
+ },
+ "n1k_prod_iters_per_block_min_max": {
+  "notes": "31 blocks logged",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/prod_N1000_G128.log",
+  "unit": "iterations",
+  "value": [
+   23,
+   72
+  ]
+ },
+ "n1k_prod_wall_s": {
+  "notes": "5 h 32 m, 611 bands, 128^3",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "REPORT.md / results/prod_N1000_G128.log",
+  "unit": "s",
+  "value": 19908
+ },
+ "runs_table_rows": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "results/*/interior_report.json",
+  "unit": "mixed",
+  "value": [
+   {
+    "conv": 69,
+    "grid": 192,
+    "m": 104,
+    "run": "$S_\\mathrm{below}$",
+    "theta": 6865456,
+    "unconv": 0,
+    "wall_s": 227870.083736768,
+    "window": [
+     1.757,
+     1.93
+    ],
+    "worst_res": 6.43982712063007e-05
+   },
+   {
+    "conv": 5,
+    "grid": 192,
+    "m": 16,
+    "run": "$S_\\mathrm{gap}$",
+    "theta": 512128,
+    "unconv": 0,
+    "wall_s": 12864.290109310066,
+    "window": [
+     1.925,
+     1.985
+    ],
+    "worst_res": 5.768258779426105e-05
+   },
+   {
+    "conv": 61,
+    "grid": 192,
+    "m": 100,
+    "run": "$S_\\mathrm{above}$",
+    "theta": 4201000,
+    "unconv": 0,
+    "wall_s": 134858.21869547502,
+    "window": [
+     1.98,
+     2.117
+    ],
+    "worst_res": 8.744638034841046e-05
+   },
+   {
+    "conv": 7,
+    "grid": 192,
+    "m": 30,
+    "run": "periodic re-solve v1",
+    "theta": 2040468,
+    "unconv": 1,
+    "wall_s": 71957.53566211113,
+    "window": [
+     1.855,
+     2.0
+    ],
+    "worst_res": 5.949584738118574e-05
+   },
+   {
+    "conv": 7,
+    "grid": 192,
+    "m": 48,
+    "run": "periodic re-solve v2",
+    "theta": 2688624,
+    "unconv": 2,
+    "wall_s": 14448.142818436958,
+    "window": [
+     1.855,
+     2.0
+    ],
+    "worst_res": 3.507026849547401e-05
+   },
+   {
+    "conv": 45,
+    "grid": 160,
+    "m": 72,
+    "run": "I6 $160^3$ leg",
+    "theta": 6193488,
+    "unconv": 18,
+    "wall_s": 65829.81692098221,
+    "window": [
+     1.8,
+     2.06
+    ],
+    "worst_res": 8.21929206722416e-05
+   },
+   {
+    "conv": 11,
+    "grid": 256,
+    "m": 18,
+    "run": "I6 $256^3$ low-edge anchor",
+    "theta": null,
+    "unconv": 0,
+    "wall_s": 97949.0,
+    "window": [
+     1.84,
+     1.95
+    ],
+    "worst_res": 9.762440458871424e-05
+   },
+   {
+    "conv": 3,
+    "grid": 256,
+    "m": 18,
+    "run": "I6 $256^3$ high-edge anchor",
+    "theta": 1296264,
+    "unconv": 8,
+    "wall_s": 96579.38791374979,
+    "window": [
+     1.99,
+     2.035
+    ],
+    "worst_res": 9.985567157855257e-05
+   },
+   {
+    "conv": 55,
+    "grid": 128,
+    "m": 80,
+    "run": "I1 slice ($N=1000$, $128^3$)",
+    "theta": 4321280,
+    "unconv": 1,
+    "wall_s": 9439.788636252983,
+    "window": [
+     1.70129,
+     2.15583
+    ],
+    "worst_res": 5.176458944333717e-05
+   },
+   {
+    "conv": 107,
+    "grid": 128,
+    "m": 155,
+    "run": "I4 below ($N=1000$ circ.)",
+    "theta": 2015978,
+    "unconv": 0,
+    "wall_s": 14259.090195142897,
+    "window": [
+     1.47,
+     1.835
+    ],
+    "worst_res": 9.573449642630294e-05
+   },
+   {
+    "conv": 109,
+    "grid": 128,
+    "m": 160,
+    "run": "I4 above ($N=1000$ circ.)",
+    "theta": 3361328,
+    "unconv": 0,
+    "wall_s": 23515.89352806704,
+    "window": [
+     2.015,
+     2.55
+    ],
+    "worst_res": 3.507618384901434e-05
+   }
+  ]
+ },
+ "vector_GB_G192": {
+  "notes": "two complex64 transverse components",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "geometry",
+  "unit": "GB",
+  "value": 0.113246208
+ },
+ "vector_GB_G224": {
+  "notes": "two complex64 transverse components",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "geometry",
+  "unit": "GB",
+  "value": 0.179830784
+ },
+ "vector_GB_G256": {
+  "notes": "two complex64 transverse components",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "geometry",
+  "unit": "GB",
+  "value": 0.268435456
+ },
+ "vector_GB_G288": {
+  "notes": "two complex64 transverse components",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
+  "source_file": "geometry",
+  "unit": "GB",
+  "value": 0.382205952
+ }
+}

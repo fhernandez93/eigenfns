@@ -1,0 +1,1682 @@
+{
+ "binary64_gap_501_502_pct": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/exp/e3_vals_G64.npy",
+  "unit": "%",
+  "value": 0.6142213745955568
+ },
+ "g2_srs_gap_pct": {
+  "notes": "published 28.06%",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "%",
+  "value": 27.97
+ },
+ "g3_max_dw_w": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "relative",
+  "value": 8.950294332496248e-06
+ },
+ "g3w_max_dw_w": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "relative",
+  "value": 3.545773927296834e-05
+ },
+ "g3w_median_dw_w": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "relative",
+  "value": 1.3904175497538372e-06
+ },
+ "g4_min_cos": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "cos",
+  "value": 0.9999859429968125
+ },
+ "g6_kpm_missed_below_midgap": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "states",
+  "value": [
+   0.21057173609733582,
+   0.019320877268910408
+  ]
+ },
+ "g7_worst_rel_res": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "relative",
+  "value": 9.777050581760705e-05
+ },
+ "g9_max_dw_w": {
+  "notes": "REPORT.md: 2.4e-7 over 96 bands",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/exp/prec48_c128.npy",
+  "unit": "relative",
+  "value": 2.44096402420042e-07
+ },
+ "g9_n_bands": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/exp/prec48_c64.npy",
+  "unit": "bands",
+  "value": 96
+ },
+ "i1_improvement_factor": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i1_n1000_slice/window_eigenvalues.npy",
+  "unit": "ratio",
+  "value": 121.1491875028572
+ },
+ "i1_ledger_pre_correction_max": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "relative",
+  "value": 2.8333790946544257e-05
+ },
+ "i1_matched_ref_index_range_mpb": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "unit": "MPB band",
+  "value": [
+   473,
+   527
+  ]
+ },
+ "i1_max_dlam_lam_corrected": {
+  "notes": "eigenvalue parity vs the bottom-up reference (float32 on disk, ~6e-8 quantisation); ledger recomputation 2.35e-7 over 55",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i1_n1000_slice/window_eigenvalues.npy",
+  "unit": "relative",
+  "value": 2.3510864101482388e-07
+ },
+ "i1_max_dlam_lam_raw": {
+  "notes": "pre-correction: ledger 2.83e-5",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i1_n1000_slice/window_eigenvalues_raw.npy",
+  "unit": "relative",
+  "value": 2.8483220833846843e-05
+ },
+ "i1_max_dw_w_corrected": {
+  "notes": "Delta omega/omega = Delta lambda / (2 lambda)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i1_n1000_slice/window_eigenvalues.npy",
+  "unit": "relative",
+  "value": 1.1755432050741194e-07
+ },
+ "i1_median_dlam_lam_corrected": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i1_n1000_slice/window_eigenvalues.npy",
+  "unit": "relative",
+  "value": 6.293068411737762e-08
+ },
+ "i1_n_reported": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i1_n1000_slice/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 55
+ },
+ "i1_ref_dtype": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "unit": "dtype",
+  "value": "float32"
+ },
+ "i1_targets_in_slice_473_522_found": {
+  "notes": "registered slice: MPB bands 473..522 (50 bands)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "unit": "states",
+  "value": 50
+ },
+ "i1_theta_apps": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i1_n1000_slice/interior_report.json",
+  "unit": "applications",
+  "value": 4321280
+ },
+ "i1_unconverged_lams": {
+  "notes": "1.7314 lies outside the registered 473..522 slice (below the window's interior)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i1_n1000_slice/interior_report.json",
+  "unit": "um^-2",
+  "value": [
+   1.7313902378082275
+  ]
+ },
+ "i1_window": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i1_n1000_slice/interior_report.json",
+  "unit": "um^-2",
+  "value": [
+   1.70129,
+   2.15583
+  ]
+ },
+ "i1_worst_res": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i1_n1000_slice/interior_report.json",
+  "unit": "relative",
+  "value": 5.176458944333717e-05
+ },
+ "i2_calibration_missed": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "states",
+  "value": [
+   -1.2314965128852577,
+   0.23451108738883578
+  ]
+ },
+ "i2_periodic_subgap_missed": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "states",
+  "value": [
+   2.0365767183584382,
+   0.4161051434672089
+  ]
+ },
+ "i2_subgap_interval": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "REPORT_N10K.md",
+  "unit": "um^-2",
+  "value": [
+   1.9063,
+   1.9606
+  ]
+ },
+ "i2_subgap_missed": {
+  "notes": "certifying sub-interval [1.9063, 1.9606]",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "states",
+  "value": [
+   -0.0002489662228109964,
+   0.00012722673151272898
+  ]
+ },
+ "i2_window_missed": {
+  "notes": "consistency check only (leakage model biased by >= 1.23 +- 0.23, N=1000 calibration)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "states",
+  "value": [
+   1.683787808185155,
+   0.32325453632391227
+  ]
+ },
+ "i3_cross_slice_max": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "dimensionless",
+  "value": 0.0004859
+ },
+ "i3_median_res": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "relative",
+  "value": 3.2557727536186576e-05
+ },
+ "i3_same_slice_max": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "dimensionless",
+  "value": 8.579e-06
+ },
+ "i3_worst_gram_dev": {
+  "notes": "gate 5e-5: FAIL",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "dimensionless",
+  "value": 0.0004858441243413836
+ },
+ "i3_worst_res": {
+  "notes": "recomputed with fp64 normalised quotient",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "relative",
+  "value": 5.875241186004132e-05
+ },
+ "i4_ledger_max_dlam_rel": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "relative",
+  "value": 4.1102019116138073e-07
+ },
+ "i4_ledger_min_proj2": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "dimensionless",
+  "value": 0.9961164593696594
+ },
+ "i4_ledger_targets": {
+  "notes": "210 vector-matched targets, 0 missed, 0 ghosts; 6 more checked on eigenvalues only",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "states",
+  "value": 210
+ },
+ "i4int_above_distinct_matches": {
+  "notes": "== n means one-to-one (no ghosts, no duplicates)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_above/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 109
+ },
+ "i4int_above_ff_128": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_above/interior_report.json",
+  "unit": "fraction",
+  "value": 0.21907520294189453
+ },
+ "i4int_above_m": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_above/interior_report.json",
+  "unit": "vectors",
+  "value": 160
+ },
+ "i4int_above_max_dlam_lam": {
+  "notes": "eigenvalue-only parity vs i4_n1000_circ_G128 (fp64 reference); ledger vector-matched 2.85e-7 / 4.11e-7",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_above/window_eigenvalues.npy",
+  "unit": "relative",
+  "value": 4.110203600990477e-07
+ },
+ "i4int_above_median_dlam_lam": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_above/window_eigenvalues.npy",
+  "unit": "relative",
+  "value": 9.758792891968503e-08
+ },
+ "i4int_above_n": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_above/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 109
+ },
+ "i4int_above_ref_mpb_band_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
+  "unit": "MPB band",
+  "value": [
+   501,
+   609
+  ]
+ },
+ "i4int_above_wall_h": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_above/interior_report.json",
+  "unit": "h",
+  "value": 6.5321926466852895
+ },
+ "i4int_above_window": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_above/interior_report.json",
+  "unit": "um^-2",
+  "value": [
+   2.015,
+   2.55
+  ]
+ },
+ "i4int_above_worst_res": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_above/interior_report.json",
+  "unit": "relative",
+  "value": 3.507618384901434e-05
+ },
+ "i4int_below_distinct_matches": {
+  "notes": "== n means one-to-one (no ghosts, no duplicates)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_below/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 107
+ },
+ "i4int_below_ff_128": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_below/interior_report.json",
+  "unit": "fraction",
+  "value": 0.21907520294189453
+ },
+ "i4int_below_m": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_below/interior_report.json",
+  "unit": "vectors",
+  "value": 155
+ },
+ "i4int_below_max_dlam_lam": {
+  "notes": "eigenvalue-only parity vs i4_n1000_circ_G128 (fp64 reference); ledger vector-matched 2.85e-7 / 4.11e-7",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_below/window_eigenvalues.npy",
+  "unit": "relative",
+  "value": 2.848093447085236e-07
+ },
+ "i4int_below_median_dlam_lam": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_below/window_eigenvalues.npy",
+  "unit": "relative",
+  "value": 7.636699012414447e-08
+ },
+ "i4int_below_n": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_below/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 107
+ },
+ "i4int_below_ref_mpb_band_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
+  "unit": "MPB band",
+  "value": [
+   394,
+   500
+  ]
+ },
+ "i4int_below_wall_h": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_below/interior_report.json",
+  "unit": "h",
+  "value": 3.9608583875396937
+ },
+ "i4int_below_window": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_below/interior_report.json",
+  "unit": "um^-2",
+  "value": [
+   1.47,
+   1.835
+  ]
+ },
+ "i4int_below_worst_res": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4int_n1000_below/interior_report.json",
+  "unit": "relative",
+  "value": 9.573449642630294e-05
+ },
+ "i6_G160_converged": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G160_gapedge/interior_report.json",
+  "unit": "states",
+  "value": 45
+ },
+ "i6_G160_converged_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G160_gapedge/window_eigenvalues.npy",
+  "unit": "um^-2",
+  "value": [
+   1.809584617614746,
+   2.051631450653076
+  ]
+ },
+ "i6_G160_unconverged": {
+  "notes": "all within 0.025 of a window edge (edge-truncated)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G160_gapedge/interior_report.json",
+  "unit": "states",
+  "value": 18
+ },
+ "i6_G192_count_in_edgelow_window": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 11
+ },
+ "i6_G256_edgelow_ingap_count": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G256_edgelow/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 6
+ },
+ "i6_G256_edgelow_n": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G256_edgelow/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 11
+ },
+ "i6_G256_ff": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G256_edgelow/interior_report.json",
+  "unit": "fraction",
+  "value": 0.22000443935394287
+ },
+ "i6_high_edge_abs_max_dw_w_pct": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/crossgrid_match_n10k_G256_edgehigh_narrow.json",
+  "unit": "%",
+  "value": 0.03919869302504241
+ },
+ "i6_high_edge_median_dw_w_pct": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/crossgrid_match_n10k_G256_edgehigh_narrow.json",
+  "unit": "%",
+  "value": -0.006513401757980749
+ },
+ "i6_high_edge_n_fine_converged": {
+  "notes": "only 3 of 11 fine pairs residual-certified; the rest are unconverged vectors used for overlap only",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/crossgrid_match_n10k_G256_edgehigh_narrow.json",
+  "unit": "states",
+  "value": 3
+ },
+ "i6_high_edge_n_matched": {
+  "notes": "of 11 coarse states",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/crossgrid_match_n10k_G256_edgehigh_narrow.json",
+  "unit": "states",
+  "value": 10
+ },
+ "i6_high_edge_overlap_min_median": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/crossgrid_match_n10k_G256_edgehigh_narrow.json",
+  "unit": "overlap",
+  "value": [
+   0.9013913819996411,
+   0.989141295524782
+  ]
+ },
+ "i6_high_edge_power_retention_range": {
+  "notes": "saturated statistic (withdrawn as evidence, round 4)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/crossgrid_match_n10k_G256_edgehigh_narrow.json",
+  "unit": "fraction",
+  "value": [
+   0.999829959466211,
+   0.999841671617487
+  ]
+ },
+ "i6_high_edge_unmatched": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/crossgrid_match_n10k_G256_edgehigh_narrow.json",
+  "unit": "mixed",
+  "value": [
+   {
+    "lam_coarse": 1.990119585136022,
+    "overlap": 0.02246087658784437
+   }
+  ]
+ },
+ "i6_high_edge_window": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/crossgrid_match_n10k_G256_edgehigh_narrow.json",
+  "unit": "um^-2",
+  "value": [
+   1.99,
+   2.035
+  ]
+ },
+ "i6_low_edge_abs_max_dw_w_pct": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/crossgrid_match.json",
+  "unit": "%",
+  "value": 0.33785159610056525
+ },
+ "i6_low_edge_median_dw_w_pct": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/crossgrid_match.json",
+  "unit": "%",
+  "value": -0.15651447449828523
+ },
+ "i6_low_edge_n_matched": {
+  "notes": "of 11 coarse states",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/crossgrid_match.json",
+  "unit": "states",
+  "value": 11
+ },
+ "i6_low_edge_overlap_min_median": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/crossgrid_match.json",
+  "unit": "overlap",
+  "value": [
+   0.8734327566862993,
+   0.9960815273616225
+  ]
+ },
+ "i6_low_edge_power_retention_range": {
+  "notes": "saturated statistic (withdrawn as evidence, round 4)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/crossgrid_match.json",
+  "unit": "fraction",
+  "value": [
+   0.9997494767940442,
+   0.9998400608213173
+  ]
+ },
+ "i6_low_edge_window": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/crossgrid_match.json",
+  "unit": "um^-2",
+  "value": [
+   1.84,
+   1.95
+  ]
+ },
+ "i6_retention_at_96_cube_range": {
+  "notes": "power of 256^3 modes inside a 96^3 k-cube (half the production resolution) -- shows the statistic is saturated",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/retention.json",
+  "unit": "fraction",
+  "value": [
+   0.9997551841774168,
+   0.9998434837349947
+  ]
+ },
+ "i6_vox_per_um": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "geometry",
+  "unit": "vox/um",
+  "value": {
+   "160": 6.491732634423467,
+   "192": 7.79007916130816,
+   "256": 10.386772215077547,
+   "n1k_128": 11.18881118881119
+  }
+ },
+ "i8_gap_edge_rel_diff_max_median": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "relative",
+  "value": [
+   0.000867952266196842,
+   6.423176762754768e-05
+  ]
+ },
+ "i8_n_gap_edge_resolved": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "modes",
+  "value": 20
+ },
+ "i8_n_resolved_in_both": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "modes",
+  "value": 42
+ },
+ "judge64_gap_500_501_pct": {
+  "notes": "on the judge grid the 500|501 spacing is 0.60%; largest spacing 501|502 (0.83%); binary raster: 500|501 at 2.35%",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/parity64w_ours.npy",
+  "unit": "%",
+  "value": 0.6003359671233237
+ },
+ "judge64_gap_501_502_pct": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/parity64w_ours.npy",
+  "unit": "%",
+  "value": 0.8297991738203155
+ },
+ "judge64_vs_binary64_rel_dnu_bands_498_503": {
+  "notes": "same solver, MPB's interpolated eps vs our binary eps at 64^3: -1.4% to -3.3% at the gap edge",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/parity64w_ours.npy",
+  "unit": "relative",
+  "value": [
+   -0.013993678368729246,
+   -0.016587402806575446,
+   -0.014097701711963471,
+   -0.03124237567008654,
+   -0.02915166911434022,
+   -0.033353300852390064
+  ]
+ },
+ "mpb32_fill_pct": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/exp/mpb32.out",
+  "unit": "%",
+  "value": 21.8086
+ },
+ "mpb64w_gap_500_501_pct": {
+  "notes": "MPB's own 64^3 gap between bands 500|501 (index = band-3 after dropping omega=0 pair)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/mpb64w.out",
+  "unit": "%",
+  "value": 0.6006394948799921
+ },
+ "mpb64w_largest_spacing_bands": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/mpb64w.out",
+  "unit": "MPB band",
+  "value": [
+   501,
+   502
+  ]
+ },
+ "mpb_parity_32_max_dw_w": {
+  "notes": "worst at MPB band 43",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/exp/parity32_ours.npy",
+  "unit": "relative",
+  "value": 4.315330140794633e-06
+ },
+ "mpb_parity_32_median_dw_w": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/exp/parity32_ours.npy",
+  "unit": "relative",
+  "value": 8.60591665195927e-07
+ },
+ "mpb_parity_32_n_bands": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/exp/mpb32.out",
+  "unit": "bands",
+  "value": 148
+ },
+ "mpb_parity_64_max_dw_w": {
+  "notes": "worst at MPB band 24",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/parity64_ours.npy",
+  "unit": "relative",
+  "value": 8.950294332550476e-06
+ },
+ "mpb_parity_64_median_dw_w": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/parity64_ours.npy",
+  "unit": "relative",
+  "value": 1.4247979725585566e-06
+ },
+ "mpb_parity_64_n_bands": {
+  "notes": "G3: REPORT.md 298 bands, 8.95e-6",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/mpb64.out",
+  "unit": "bands",
+  "value": 298
+ },
+ "mpb_parity_64w_max_dw_w": {
+  "notes": "worst at MPB band 420",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/parity64w_ours.npy",
+  "unit": "relative",
+  "value": 3.545773927302155e-05
+ },
+ "mpb_parity_64w_median_dw_w": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/parity64w_ours.npy",
+  "unit": "relative",
+  "value": 1.3904175497074016e-06
+ },
+ "mpb_parity_64w_n_bands": {
+  "notes": "G3w: REPORT.md 658 bands, 3.5e-5",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/mpb64w.out",
+  "unit": "bands",
+  "value": 658
+ },
+ "mpb_tolerance": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/exp/mpb32.ctl",
+  "unit": "relative",
+  "value": 1e-09
+ },
+ "n10k_L": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/interior_report.json",
+  "unit": "um",
+  "value": 24.64673285396475
+ },
+ "n10k_Sabove_degrees": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sabove/interior_report.json",
+  "unit": "degree",
+  "value": [
+   3000,
+   12000
+  ]
+ },
+ "n10k_Sabove_m": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sabove/interior_report.json",
+  "unit": "vectors",
+  "value": 100
+ },
+ "n10k_Sabove_n_converged": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sabove/interior_report.json",
+  "unit": "states",
+  "value": 61
+ },
+ "n10k_Sabove_n_inwindow_unconverged": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sabove/interior_report.json",
+  "unit": "states",
+  "value": 0
+ },
+ "n10k_Sabove_theta_apps": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sabove/interior_report.json",
+  "unit": "applications",
+  "value": 4201000
+ },
+ "n10k_Sabove_wall_h": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sabove/interior_report.json",
+  "unit": "h",
+  "value": 37.46061630429862
+ },
+ "n10k_Sabove_window": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sabove/interior_report.json",
+  "unit": "um^-2",
+  "value": [
+   1.98,
+   2.117
+  ]
+ },
+ "n10k_Sabove_worst_res_reported": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sabove/interior_report.json",
+  "unit": "relative",
+  "value": 8.744638034841046e-05
+ },
+ "n10k_Sbelow_degrees": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sbelow/interior_report.json",
+  "unit": "degree",
+  "value": [
+   3000,
+   12000
+  ]
+ },
+ "n10k_Sbelow_m": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sbelow/interior_report.json",
+  "unit": "vectors",
+  "value": 104
+ },
+ "n10k_Sbelow_n_converged": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sbelow/interior_report.json",
+  "unit": "states",
+  "value": 69
+ },
+ "n10k_Sbelow_n_inwindow_unconverged": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sbelow/interior_report.json",
+  "unit": "states",
+  "value": 0
+ },
+ "n10k_Sbelow_theta_apps": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sbelow/interior_report.json",
+  "unit": "applications",
+  "value": 6865456
+ },
+ "n10k_Sbelow_wall_h": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sbelow/interior_report.json",
+  "unit": "h",
+  "value": 63.29724548243556
+ },
+ "n10k_Sbelow_window": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sbelow/interior_report.json",
+  "unit": "um^-2",
+  "value": [
+   1.757,
+   1.93
+  ]
+ },
+ "n10k_Sbelow_worst_res_reported": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sbelow/interior_report.json",
+  "unit": "relative",
+  "value": 6.43982712063007e-05
+ },
+ "n10k_Sgap_degrees": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sgap/interior_report.json",
+  "unit": "degree",
+  "value": [
+   4000,
+   12000
+  ]
+ },
+ "n10k_Sgap_m": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sgap/interior_report.json",
+  "unit": "vectors",
+  "value": 16
+ },
+ "n10k_Sgap_n_converged": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sgap/interior_report.json",
+  "unit": "states",
+  "value": 5
+ },
+ "n10k_Sgap_n_inwindow_unconverged": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sgap/interior_report.json",
+  "unit": "states",
+  "value": 0
+ },
+ "n10k_Sgap_theta_apps": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sgap/interior_report.json",
+  "unit": "applications",
+  "value": 512128
+ },
+ "n10k_Sgap_wall_h": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sgap/interior_report.json",
+  "unit": "h",
+  "value": 3.573413919252796
+ },
+ "n10k_Sgap_window": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sgap/interior_report.json",
+  "unit": "um^-2",
+  "value": [
+   1.925,
+   1.985
+  ]
+ },
+ "n10k_Sgap_worst_res_reported": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sgap/interior_report.json",
+  "unit": "relative",
+  "value": 5.768258779426105e-05
+ },
+ "n10k_bulk_median_spacing": {
+  "notes": "median spacing outside the KPM bracket; REPORT_N10K 1.35e-3",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "um^-2",
+  "value": 0.0012743255902849526
+ },
+ "n10k_cross_slice_dup_rel_diff": {
+  "notes": "REPORT_N10K: 1.4e-6 and 1.7e-6 (same normalisation bias in both, cancels)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sgap/window_eigenvalues.npy",
+  "unit": "relative",
+  "value": [
+   7.659105009818321e-09,
+   1.1791738936630363e-08
+  ]
+ },
+ "n10k_cross_slice_dup_rel_diff_raw": {
+  "notes": "REPORT_N10K quotes these raw figures (1.4e-6, 1.7e-6); the corrected values agree to ~1e-8 because the two solves had different ||x||^2",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_Sgap/window_eigenvalues_raw.npy",
+  "unit": "relative",
+  "value": [
+   1.4232062063671276e-06,
+   1.7297404153848055e-06
+  ]
+ },
+ "n10k_duplicates_removed": {
+  "notes": "two states found by both S_gap and S_below",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/interior_report.json",
+  "unit": "[lambda, overlap]",
+  "value": [
+   [
+    1.9265048503875732,
+    0.9988044500350952
+   ],
+   [
+    1.9296884536743164,
+    0.9987991452217102
+   ]
+  ]
+ },
+ "n10k_ff_192_montage": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/interior_report.json",
+  "unit": "fraction",
+  "value": 0.22010732580114295
+ },
+ "n10k_ingap_count_montage": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 10
+ },
+ "n10k_ingap_kpm_bracket": {
+  "notes": "KPM 10%-criterion bracket; s04_kpm.py recomputes",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "REPORT_N10K.md",
+  "unit": "um^-2",
+  "value": [
+   1.864,
+   1.996
+  ]
+ },
+ "n10k_ingap_max_spacing_over_bulk": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "ratio",
+  "value": 28.467692208888568
+ },
+ "n10k_ingap_states_lam": {
+  "notes": "all certified states inside [1.864, 1.996]",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "um^-2",
+  "value": [
+   1.868981147045425,
+   1.8707585792024861,
+   1.8730821374768227,
+   1.8860078588720002,
+   1.926413256982914,
+   1.929596209673228,
+   1.944051593936228,
+   1.947209447202747,
+   1.973811320130794,
+   1.990119585136022
+  ]
+ },
+ "n10k_lam_max_192": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/interior_report.json",
+  "unit": "um^-2",
+  "value": 2208.8753
+ },
+ "n10k_lam_range": {
+  "notes": "corrected endpoints",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "um^-2",
+  "value": [
+   1.7570469501878812,
+   2.1165695086620007
+  ]
+ },
+ "n10k_largest_interior_spacing": {
+  "notes": "REPORT_N10K: 1.8860 - 1.9264",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "um^-2",
+  "value": [
+   1.8860078588720002,
+   1.926413256982914
+  ]
+ },
+ "n10k_largest_interior_spacing_rel_gap_pct": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "%",
+  "value": 1.0598654131441043
+ },
+ "n10k_largest_interior_spacing_width": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "um^-2",
+  "value": 0.040405398110913815
+ },
+ "n10k_median_spacing_all": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "um^-2",
+  "value": 0.0014193422429338298
+ },
+ "n10k_n_above_bracket": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 60
+ },
+ "n10k_n_below_bracket": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 63
+ },
+ "n10k_n_certified": {
+  "notes": "after cross-slice dedup of 135 (69 S_below + 5 S_gap + 61 S_above)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 133
+ },
+ "n10k_norm_sq_minus_1_mean": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_norms.npy",
+  "unit": "dimensionless",
+  "value": 4.731120347547557e-05
+ },
+ "n10k_norm_sq_minus_1_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_norms.npy",
+  "unit": "dimensionless",
+  "value": [
+   4.3981737527287734e-05,
+   6.481350605369585e-05
+  ]
+ },
+ "n10k_rayleigh_abs_shift_at_1p94": {
+  "notes": "mean relative shift x lambda~1.94",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_norms.npy",
+  "unit": "um^-2",
+  "value": 9.176199999999999e-05
+ },
+ "n10k_rayleigh_rel_shift_mean": {
+  "notes": "REPORT_N10K quotes -4.7e-5",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues_raw.npy",
+  "unit": "relative",
+  "value": -4.730895751349539e-05
+ },
+ "n10k_rayleigh_rel_shift_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_eigenvalues_raw.npy",
+  "unit": "relative",
+  "value": [
+   -6.480930553545728e-05,
+   -4.39798032191686e-05
+  ]
+ },
+ "n10k_residual_max_corrected_est": {
+  "notes": "sqrt(r_rep^2 - delta^2), delta = |lam_raw - lam|/lam per vector; ledger I3 measured 5.88e-5 directly",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_residuals.npy",
+  "unit": "relative",
+  "value": 5.870331224944872e-05
+ },
+ "n10k_residual_max_reported": {
+  "notes": "reported residuals were computed with the raw lambda and carry a floor ~ |lambda_raw-lambda|/lambda",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_residuals.npy",
+  "unit": "relative",
+  "value": 8.744638034841046e-05
+ },
+ "n10k_residual_median_reported": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_window/window_residuals.npy",
+  "unit": "relative",
+  "value": 5.920212061027996e-05
+ },
+ "n1k_circ_gap_center_nu": {
+  "notes": "a = 2.288 um",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
+  "unit": "dimensionless",
+  "value": 0.5052380829466048
+ },
+ "n1k_circ_gap_hi_128": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
+  "unit": "um^-2",
+  "value": 2.022493362426758
+ },
+ "n1k_circ_gap_lo_128": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
+  "unit": "um^-2",
+  "value": 1.8275874853134155
+ },
+ "n1k_circ_gap_over_neighbour_spacing_128": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
+  "unit": "ratio",
+  "value": 26.233908557767133
+ },
+ "n1k_circ_gap_pct_128": {
+  "notes": "REPORT_N10K quotes 5.07%",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
+  "unit": "%",
+  "value": 5.065631605798619
+ },
+ "n1k_circ_lam_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
+  "unit": "um^-2",
+  "value": [
+   0.149267315864563,
+   2.559621810913086
+  ]
+ },
+ "n1k_circ_largest_spacing_between_mpb_bands": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
+  "unit": "MPB band",
+  "value": [
+   500,
+   501
+  ]
+ },
+ "n1k_circ_median_spacing_450_550": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
+  "unit": "um^-2",
+  "value": 0.003929495811462402
+ },
+ "n1k_ell_g5_band500_spread_pct": {
+  "notes": "max-min of sqrt(lambda) over 64/96/128 relative to 128^3; REPORT.md quotes 0.27%",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "%",
+  "value": 0.27419682897038206
+ },
+ "n1k_ell_g5_monotone_bands": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "MPB band",
+  "value": [
+   398,
+   450,
+   501,
+   550,
+   607
+  ]
+ },
+ "n1k_ell_g5_worst_est_resid_128_pct": {
+  "notes": "worst Richardson residual among the 5 monotone bands",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "%",
+  "value": 0.23011090994064903
+ },
+ "n1k_ell_gap_center_nu": {
+  "notes": "nu = omega a / 2 pi c with a = L/5 = 2.288 um",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "unit": "dimensionless",
+  "value": 0.5049520606894846
+ },
+ "n1k_ell_gap_edges_64": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/exp/e3_vals_G64.npy",
+  "unit": "um^-2",
+  "value": [
+   1.8830801248550415,
+   1.9738800525665283
+  ]
+ },
+ "n1k_ell_gap_hi_128": {
+  "notes": "MPB band 501 (bottom of upper band), 128^3",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "unit": "um^-2",
+  "value": 1.9627666473388672
+ },
+ "n1k_ell_gap_lo_128": {
+  "notes": "MPB band 500 (top of lower band), 128^3, elliptical decoration",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "unit": "um^-2",
+  "value": 1.8829562664031982
+ },
+ "n1k_ell_gap_over_neighbour_spacing_128": {
+  "notes": "gap spacing / median of the 20 neighbouring spacings",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "unit": "ratio",
+  "value": 9.613699023549684
+ },
+ "n1k_ell_gap_pct_128": {
+  "notes": "Delta nu / nu_mid = 2 (w501 - w500)/(w501 + w500); REPORT.md quotes 2.08%",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "unit": "%",
+  "value": 2.0755259263512764
+ },
+ "n1k_ell_gap_pct_64_from_e3": {
+  "notes": "680-band 64^3 solve (G3w reference)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/exp/e3_vals_G64.npy",
+  "unit": "%",
+  "value": 2.3545099706013777
+ },
+ "n1k_ell_gap_pct_series_64_96_128": {
+  "notes": "G5 ledger sqrt(lambda) of bands 500/501; REPORT.md quotes 2.35 -> 1.93 -> 2.08%",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/gate_results.json",
+  "unit": "%",
+  "value": [
+   2.3545099706013777,
+   1.92864824552597,
+   2.0755219271316996
+  ]
+ },
+ "n1k_ell_jump_114_115_rel": {
+  "notes": "low-band shell-structure jump disclosed in REPORT.md G8",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "unit": "%",
+  "value": 2.369717872775965
+ },
+ "n1k_ell_lam_max": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "unit": "um^-2",
+  "value": 2.4245762825012207
+ },
+ "n1k_ell_lam_min": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "unit": "um^-2",
+  "value": 0.14752191305160522
+ },
+ "n1k_ell_largest_spacing_between_mpb_bands": {
+  "notes": "largest lambda spacing over all 611 bands",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "unit": "MPB band",
+  "value": [
+   14,
+   15
+  ]
+ },
+ "n1k_ell_largest_spacing_rel_gap_pct": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "unit": "%",
+  "value": 31.003705091035894
+ },
+ "n1k_ell_n_bands": {
+  "notes": "611 eigenvalues = MPB bands 3..613 (bands 1-2 are omega=0 at Gamma)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "unit": "bands",
+  "value": 611
+ },
+ "n1k_ell_window_bands": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_eigenvalues.npy",
+  "unit": "MPB band",
+  "value": [
+   398,
+   607
+  ]
+ },
+ "n1k_ell_window_lam": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_eigenvalues.npy",
+  "unit": "um^-2",
+  "value": [
+   1.5070726871490479,
+   2.4122731685638428
+  ]
+ },
+ "periodic_bulk_all_negative": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/periodic_overlap_match.json",
+  "unit": "bool",
+  "value": true
+ },
+ "periodic_bulk_dlam_range": {
+  "notes": "all negative",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/periodic_overlap_match.json",
+  "unit": "um^-2",
+  "value": [
+   -0.0033800307877294156,
+   -0.0006680729334864743
+  ]
+ },
+ "periodic_bulk_overlap_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/periodic_overlap_match.json",
+  "unit": "overlap",
+  "value": [
+   0.9519441323517986,
+   0.9997157639792987
+  ]
+ },
+ "periodic_bulk_overlap_range_v2": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/periodic_overlap_match_n10k_G192_gap_periodic_v2.json",
+  "unit": "overlap",
+  "value": [
+   0.9519441672391127,
+   0.9997157748757602
+  ]
+ },
+ "periodic_ff_192": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_gap_periodic/interior_report.json",
+  "unit": "fraction",
+  "value": 0.22088834974500868
+ },
+ "periodic_full_scan_best_partner_per_periodic_state": {
+  "notes": "every periodic state's best montage partner over all 133 modes",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/periodic_overlap_match_full.json",
+  "unit": "mixed",
+  "value": [
+   {
+    "best_overlap": 0.998839342656164,
+    "dlam": -0.0006680729334864743,
+    "lam_mont": 1.868981147045425,
+    "lam_peri": 1.8683130741119385
+   },
+   {
+    "best_overlap": 0.9997157639792987,
+    "dlam": -0.0007000700231232226,
+    "lam_mont": 1.8860078588720002,
+    "lam_peri": 1.885307788848877
+   },
+   {
+    "best_overlap": 0.993583022618322,
+    "dlam": -0.0021867345372352798,
+    "lam_mont": 1.926413256982914,
+    "lam_peri": 1.9242265224456787
+   },
+   {
+    "best_overlap": 0.9519441323517986,
+    "dlam": -0.0033800307877294156,
+    "lam_mont": 1.944051593936228,
+    "lam_peri": 1.9406715631484985
+   },
+   {
+    "best_overlap": 0.9970991189267768,
+    "dlam": -0.0029994762587237656,
+    "lam_mont": 1.973811320130794,
+    "lam_peri": 1.9708118438720703
+   },
+   {
+    "best_overlap": 0.9148546501412649,
+    "dlam": -0.024778730583542963,
+    "lam_mont": 2.008786923599595,
+    "lam_peri": 1.9840081930160522
+   },
+   {
+    "best_overlap": 0.9675563109965046,
+    "dlam": -0.0022251692806143364,
+    "lam_mont": 1.990119585136022,
+    "lam_peri": 1.9878944158554077
+   }
+  ]
+ },
+ "periodic_ingap_count_after_fix": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_gap_periodic/window_eigenvalues.npy",
+  "unit": "states",
+  "value": 7
+ },
+ "periodic_match_table": {
+  "notes": "montage in-gap state -> best periodic partner (|overlap|), dlam, total overlap budget sum_j |<m,p_j>|^2",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/periodic_overlap_match.json",
+  "unit": "mixed",
+  "value": [
+   {
+    "best_overlap": 0.998839342656164,
+    "budget": 0.9977196035281467,
+    "dlam": -0.0006680729334864743,
+    "lam_mont": 1.868981147045425,
+    "lam_peri": 1.8683130741119385
+   },
+   {
+    "best_overlap": 0.006058475304570949,
+    "budget": 5.1116858836275944e-05,
+    "dlam": -0.0024455050905476394,
+    "lam_mont": 1.8707585792024861,
+    "lam_peri": 1.8683130741119385
+   },
+   {
+    "best_overlap": 0.13124045199192305,
+    "budget": 0.020079315433201,
+    "dlam": 0.11092605553922952,
+    "lam_mont": 1.8730821374768227,
+    "lam_peri": 1.9840081930160522
+   },
+   {
+    "best_overlap": 0.9997157639792987,
+    "budget": 0.9994322934374646,
+    "dlam": -0.0007000700231232226,
+    "lam_mont": 1.8860078588720002,
+    "lam_peri": 1.885307788848877
+   },
+   {
+    "best_overlap": 0.993583022618322,
+    "budget": 0.9872196002579198,
+    "dlam": -0.0021867345372352798,
+    "lam_mont": 1.926413256982914,
+    "lam_peri": 1.9242265224456787
+   },
+   {
+    "best_overlap": 0.09013716176594454,
+    "budget": 0.008687675200730147,
+    "dlam": -0.005369687227549269,
+    "lam_mont": 1.929596209673228,
+    "lam_peri": 1.9242265224456787
+   },
+   {
+    "best_overlap": 0.9519441323517986,
+    "budget": 0.9068923308153196,
+    "dlam": -0.0033800307877294156,
+    "lam_mont": 1.944051593936228,
+    "lam_peri": 1.9406715631484985
+   },
+   {
+    "best_overlap": 0.3012216846373701,
+    "budget": 0.09714644871092921,
+    "dlam": -0.006537884054248488,
+    "lam_mont": 1.947209447202747,
+    "lam_peri": 1.9406715631484985
+   },
+   {
+    "best_overlap": 0.9970991189267768,
+    "budget": 0.9945060772588116,
+    "dlam": -0.0029994762587237656,
+    "lam_mont": 1.973811320130794,
+    "lam_peri": 1.9708118438720703
+   },
+   {
+    "best_overlap": 0.9675563109965046,
+    "budget": 0.9973522096195525,
+    "dlam": -0.0022251692806143364,
+    "lam_mont": 1.990119585136022,
+    "lam_peri": 1.9878944158554077
+   }
+  ]
+ },
+ "periodic_seam_best_overlaps": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/periodic_overlap_match.json",
+  "unit": "overlap",
+  "value": [
+   0.006058475304570949,
+   0.13124045199192305,
+   0.09013716176594454,
+   0.3012216846373701
+  ]
+ },
+ "periodic_seam_budgets": {
+  "notes": "REPORT_N10K round 4: 0.0001, 0.0201, 0.0087, 0.0971 (order 1.87076, 1.87308, 1.92960, 1.94721)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/gates/periodic_overlap_match.json",
+  "unit": "sum |overlap|^2",
+  "value": [
+   5.1116858836275944e-05,
+   0.020079315433201,
+   0.008687675200730147,
+   0.09714644871092921
+  ]
+ },
+ "periodic_v1_lams": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_gap_periodic/window_eigenvalues.npy",
+  "unit": "um^-2",
+  "value": [
+   1.8683130741119385,
+   1.885307788848877,
+   1.9242265224456787,
+   1.9406715631484985,
+   1.9708118438720703,
+   1.9840081930160522,
+   1.9878944158554077
+  ]
+ },
+ "periodic_v1_unconverged": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_gap_periodic/interior_report.json",
+  "unit": "um^-2",
+  "value": [
+   1.9094840288162231
+  ]
+ },
+ "periodic_v1_v2_max_rel_diff": {
+  "notes": "v2 was solved with the fixed (normalised) rr_extract, v1 with the raw one; ~4.7e-5 expected",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_gap_periodic_v2/window_eigenvalues.npy",
+  "unit": "relative",
+  "value": 4.843469927616049e-05
+ },
+ "periodic_v2_lams": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_gap_periodic_v2/window_eigenvalues.npy",
+  "unit": "um^-2",
+  "value": [
+   1.8682242631912231,
+   1.885216474533081,
+   1.924135446548462,
+   1.940580129623413,
+   1.9707187414169312,
+   1.9839143753051758,
+   1.987801432609558
+  ]
+ },
+ "periodic_v2_unconverged": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_gap_periodic_v2/interior_report.json",
+  "unit": "um^-2",
+  "value": [
+   1.8902223110198975,
+   1.9533703327178955
+  ]
+ },
+ "periodic_v2_unconverged_res": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
+  "source_file": "results/n10k_G192_gap_periodic_v2/window_unconverged_residuals.npy",
+  "unit": "relative",
+  "value": [
+   0.06155448406934738,
+   0.06272287666797638
+  ]
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "fig3_n10k_resolved_shown": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/fig3_xi_pr.py",
+  "source_file": "report/tables/loc_n10k.json",
+  "unit": "modes",
+  "value": 121
+ },
+ "fig3_n1k_resolved_shown": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/fig3_xi_pr.py",
+  "source_file": "report/tables/loc_n1k_circ.json",
+  "unit": "modes",
+  "value": 42
+ }
+}

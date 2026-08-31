@@ -1,0 +1,11 @@
+\begin{tabular}{@{}p{3.1cm}p{4.2cm}rrrrp{4.6cm}@{}}
+\hline\hline
+Method & Configuration & verified & ghosts & $\Theta$-applies & wall (s) & Failure mode / note \\
+\hline
+Bandpass ChebSI, one stage & $m=80$, $d=3300$, 3 outers & 0/50 & 0 & 792,528 & 7,109 & subspace captured 50/50 to $2\times10^{-3}$; med. res.\ $6.6\to4.2\to2.5\times10^{-2}$ \\
+Two-stage bandpass (build\,+\,polish) & build $d=3300$ $m=80$ $\times2$, trim 56, polish $d=8000$ $\times6$ & 24/50 & 0 & 3,217,088 & 18,464 & 26 unconverged = slice-edge/gap-edge pairs still descending; trim-limited ($1.12\times$ oversampling) \\
+Shift-invert PMINRES SI & $m=64$, inner tol $10^{-2}$, maxit 150, 2 outers & 0/50 & 0 & 32,336 & 441 & inner solves hit maxit (150/150); med. res.\ $1.8\times10^{-1}$ \\
+Folded-spectrum LOBPCG & $m=32$, WZ preconditioner $\alpha^2\in\{0.05,1,20\}\sigma^2$ & 0/50 & 0 & -- & 629 & first block locked 20 at maxit 200 with folded $\mu\in[0.096,0.279]$ vs targets $\mu\le0.0497$ \\
+Expansion-RR polish (5 variants) & on the two-stage build subspace & 0/50 & 0 & -- & -- & med. res.\ $4.2\times10^{-2}\to0.9$ in one sweep; continuity/strip variants oscillate $7$--$23\times10^{-3}$ \\
+\hline\hline
+\end{tabular}

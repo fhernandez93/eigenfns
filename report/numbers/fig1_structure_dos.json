@@ -1,0 +1,19 @@
+{
+ "fig1_lambda_range": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/fig1_structure_dos.py",
+  "source_file": "figure axis",
+  "unit": "um^-2",
+  "value": [
+   1.6,
+   2.3
+  ]
+ },
+ "fig1_n1k_eigenvalues_shown": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/fig1_structure_dos.py",
+  "source_file": "results/i4_n1000_circ_G128/eigenvalues_all.npy",
+  "unit": "states",
+  "value": 82
+ }
+}

@@ -1,0 +1,47 @@
+{
+ "fig2_bottom_lams": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/fig2_tiles.py",
+  "source_file": "results/n10k_G192_window/tiles",
+  "unit": "um^-2",
+  "value": [
+   1.7570469501878812,
+   1.850147869329301,
+   1.868981147045425,
+   1.8860078588720002,
+   1.926413256982914,
+   2.005207555911053,
+   2.1165695086620007
+  ]
+ },
+ "fig2_bottom_tiles": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/fig2_tiles.py",
+  "source_file": "results/n10k_G192_window/tiles",
+  "unit": "file",
+  "value": [
+   "band_4942.png",
+   "band_5004.png",
+   "band_5005.png",
+   "band_5008.png",
+   "band_5009.png",
+   "band_5015.png",
+   "band_5074.png"
+  ]
+ },
+ "fig2_top_bands": {
+  "notes": "",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/fig2_tiles.py",
+  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/tiles",
+  "unit": "MPB band",
+  "value": [
+   398,
+   498,
+   499,
+   500,
+   501,
+   502,
+   607
+  ]
+ }
+}

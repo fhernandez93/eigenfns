@@ -1,0 +1,24 @@
+{
+ "fig4_near_edge_xi_n10k": {
+  "notes": "resolved non-seam states within 0.05 of the exact edges 1.8860|1.9264 (in-gap states count as distance 0)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/fig4_localization_stats.py",
+  "source_file": "report/tables/loc_n10k.json",
+  "unit": "um, um, n",
+  "value": [
+   1.7990858425692686,
+   2.4601102241797435,
+   8
+  ]
+ },
+ "fig4_near_edge_xi_n1k": {
+  "notes": "resolved states within 0.05 of the exact edges 1.8276|2.0225",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/fig4_localization_stats.py",
+  "source_file": "report/tables/loc_n1k_circ.json",
+  "unit": "um, um, n",
+  "value": [
+   1.4672587222717426,
+   4.137940106287354,
+   5
+  ]
+ }
+}
