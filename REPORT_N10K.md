@@ -3,15 +3,13 @@
 **Project report — 2026-08 · RTX 4080 Laptop (12 GB), 62 GB RAM ·
 env `lsu_ml` (JAX 0.10.0 cuda12)**
 
-**Status (2026-08-28): the eigenmodes are delivered and certified; one gate
-is still running.** 401 residual-certified eigenpairs are on disk with their
+**Status (2026-08-31): all computation complete; adversarial round 4 applied.** 401 residual-certified eigenpairs are on disk with their
 ε|E|² fields — 133 for the N=10k gap window at 192³, 45 at 160³, 216 across
 two N=1000 interior slices, 7 for the periodic re-solve. Accuracy against
 exact bottom-up ground truth is verified twice independently: **210/210
 targets at Δλ/λ ≈ 3×10⁻⁷ with zero ghosts and zero missed** (I1, I4). Of the
 nine registered interior gates, **8 entries PASS, 3 FAIL with recorded
-diagnoses, 3 remain open**; I6 (grid convergence) is the only one still
-waiting on computation. Every failure below is reported as a failure — the
+diagnoses, the rest recorded open with reasons**. No computation is pending. Every failure below is reported as a failure — the
 pre-registration's rule was that a FAIL plus an honest explanation beats a
 massaged PASS, and three of them are exactly that.
 
@@ -86,7 +84,7 @@ extrapolation: 1.38 TB locked-set storage = 12× RAM+disk; O(100) days).
     comparisons are unmoved.
   - *Effect on the residual gate:* reported residuals carry a floor of the
     same size (r_reported² = r_true² + δ²), so the true worst residuals are
-    ≈ 4.4×10⁻⁵ (S_below) and 7.4×10⁻⁵ (S_above), not the quoted values —
+    ≈ 4.26×10⁻⁵ (S_below) and 5.87×10⁻⁵ (S_above) — recomputed per vector with its own norm; an earlier 7.4×10⁻⁵ came from applying the nominal δ instead, not the quoted values —
     roughly half the 10⁻⁴ budget was being spent on this bug. **No state was
     lost to it**: all three slices report zero in-window unconverged pairs.
 - **Cross-solver check on the new decoration (gate I4)**: bottom-up
@@ -105,12 +103,12 @@ extrapolation: 1.38 TB locked-set storage = 12× RAM+disk; O(100) days).
   figure, not the 2.83×10⁻⁵ the unnormalised quotient produced.
 - **N=10k production** (192³, window λ ∈ [1.757, 1.930] ∪ [1.980, 2.117],
   plus the Amendment-A2 gap-covering slice [1.925, 1.985]):
-  **COMPLETE — 130 residual-certified eigenpairs**: S_below 69/69 (KPM
+  **COMPLETE — 135 pairs across three slices, 133 after cross-slice dedup**: S_below 69/69 (KPM
   predicted 69 ± 1.5; worst res 6.4×10⁻⁵; 6.87M Θ-apps; 63.3 h) and S_above
   61/61 (predicted 66 ± 2.4; worst res 8.7×10⁻⁵; 4.20M Θ-apps; 37.5 h) and
   the Amendment-A2 gap slice 5/5 (3.6 h); zero in-window pairs left
   unconverged in any slice. After cross-slice dedup: **133 distinct
-  residual-certified eigenpairs, λ ∈ [1.75713, 2.11667]**, bulk median level
+  residual-certified eigenpairs, λ ∈ [1.75705, 2.11657]** (post-correction endpoints), bulk median level
   spacing 1.35×10⁻³.
 - **Internal accuracy check (no ground truth exists at N=10k).** Two states
   were found independently by two slices — different filter windows, degrees,
@@ -121,12 +119,12 @@ extrapolation: 1.38 TB locked-set storage = 12× RAM+disk; O(100) days).
   measures reproducibility, not absolute accuracy — the absolute figure is
   the I1 parity above.
 - **Physics finding — the gap is populated by localized states, not empty.**
-  Nine residual-certified eigenstates lie inside the KPM 10%-criterion gap
-  bracket [1.864, 1.996]: λ = 1.8709, 1.8732, 1.8861, 1.9265, 1.9297,
+  Ten residual-certified eigenstates lie inside the KPM 10%-criterion gap
+  bracket [1.864, 1.996]: λ = 1.8690, 1.8709, 1.8732, 1.8861, 1.9265, 1.9297,
   **1.9441, 1.9473, 1.9739** (the last three from the dedicated gap slice,
   straddling gap centre 1.957) and 1.9902 — separated by spacings up to 80×
-  the bulk spacing, with **ξ = 1.8–2.1 µm and participation fractions
-  0.03–0.56%** (envelope-fit quality r² = 0.33–0.998 — see the correction on
+  the bulk spacing, with **ξ = 1.80–2.51 µm (five candidates; 1.80–12.98 µm over all ten, the
+  top value being the extended mode) and participation fractions 0.03–0.56%** (envelope-fit quality r² = 0.33–0.998 — see the correction on
   λ = 1.9441 below; the "1.8–2.1 µm / 0.03–0.09% / r² ≥ 0.96" ranges quoted in
   an earlier draft described only the five states known before the gap slice
   ran and were stale). The N=1000 network
@@ -187,9 +185,25 @@ extrapolation: 1.38 TB locked-set storage = 12× RAM+disk; O(100) days).
   persisting states as "vanished (unexpected)" and their moved counterparts
   as "new". Widening the tolerance to fix that would have been gate-weakening;
   `exp_periodic_match.py` decides on physics instead.
-  - **The four seam-flagged states are gone.** Their best overlap with *any*
-    periodic state is **0.006, 0.13, 0.09, 0.30** — all below the rule. They
-    were rasterization artifacts, as diagnosed.
+  - **Three of the four seam-flagged states are gone; the fourth is not
+    separable from "not converged" (round 4).** Best overlap with any periodic
+    state is 0.006, 0.13, 0.09, 0.30. But the right measure is the total
+    overlap *budget* Σ_j |⟨m, p_j⟩|² over the found periodic set:
+    λ = 1.87076 → **0.0001**, 1.92960 → **0.0087**, 1.87308 → **0.0201**, and
+    λ = 1.94721 → **0.0971** — 5–1000× the others. The structure is specific:
+    periodic state 1.94067 has budget 0.9984, of which **0.9969 lies inside
+    span{montage 1.94405, 1.94721}**. Exactly one converged periodic vector
+    occupies that 2D montage subspace; the orthogonal direction has no
+    counterpart among the seven found — and I2 independently measured ~2 states
+    missing in [1.9063, 1.9606], the interval containing 1.94067.
+    **Disclosed double standard**: the I6 cross-grid entry applies a
+    2D-subspace argument to *this exact pair* (overlaps 0.879/0.873, combined
+    0.996/0.993 — "the subspace is preserved while basis vectors rotate"),
+    while the seam analysis rejects the same argument for the same pair by
+    treating 0.30 as below threshold. Both cannot be right. For 1.94721 the
+    honest verdict is **undetermined**; for the other three the 0.5 threshold
+    is doing no work at all, since nothing sits between 0.30 and 0.95 and their
+    budgets are ≤ 0.02.
   - **All six bulk states persist**, at overlap **0.95–0.9997**, shifted by
     Δλ = −0.0007…−0.0034. **Every shift is negative**, which is the sign
     required: wrapping *adds* the dielectric missing from the outer shell, and
@@ -234,20 +248,45 @@ extrapolation: 1.38 TB locked-set storage = 12× RAM+disk; O(100) days).
   **narrowed by 32% and every N=10k in-gap state lies inside the N=1000 gap**,
   i.e. the gap did not vanish, its edges frayed inward, which is what band
   edges set by extreme-value statistics are supposed to do.
-- **Direct test of the mechanism — where do the in-gap modes live?**
-  Energy-weighted local ff, z-scored against the ξ-coarse-grained field:
-  the five candidates reach **|z| = 0.57 (max 0.70), 2.1× the bulk controls'
-  0.27**, and they split by band character exactly as the picture requires —
-  the low-λ ones sit in dielectric-rich regions (z = +0.41…+0.64, peeled off
-  the dielectric band) and the high-λ ones in air-rich regions (z = −0.61,
-  −0.70, peeled off the air band). Independent corroboration of the seam
-  classification falls out for free: **the four seam states score |z| = 0.22,
-  statistically indistinguishable from the controls' 0.27** — they are not in
-  anomalous material, which is what a boundary artifact should look like.
-  **Honest weight**: a factor 2.1 is suggestive, not decisive. Energy-weighting
-  over a mode whose extent (ξ ≈ 2 µm) matches the coarse-graining box regresses
-  z toward zero, so this understates the anomaly, but the measurement as it
-  stands does not by itself establish rare-region origin.
+- **RETRACTED (2026-08-31, adversarial round 4) — the "direct test of the
+  mechanism" does not survive an extent-matched null, and its stated caveat
+  had the sign backwards.** The claim was: energy-weighted local filling
+  fraction, z-scored against the ξ-coarse-grained field, gives the five
+  candidates **|z| = 0.57 against bulk controls' 0.27**, a 2.1× contrast
+  supporting rare-region origin. Those numbers reproduce exactly. The
+  inference does not.
+  - **The comparison was never extent-matched.** The controls were taken as
+    the six lowest and six highest modes of the window — which are the *most
+    extended* modes in the entire set (participation 0.72–12.1%) — against
+    candidates that are the *most compact* (0.034–0.33%). That is a **36×
+    median volume difference**. Energy-weighting a coarse-grained field is a
+    shrinkage estimator: the wider the mode, the smaller |z| must come out,
+    with no anomaly required.
+  - **So the caveat was exactly wrong.** The report previously said
+    energy-weighting "regresses z toward zero, so this understates the
+    anomaly." It regresses the *controls* far harder than the candidates, and
+    therefore **manufactures** the 2.1× ratio rather than suppressing it.
+  - **Against a proper null the ordering reverses.** Translating each mode
+    rigidly to all 192³ lattice positions — holding its own shape and extent
+    fixed, randomizing only location — gives |z|/σ_null of **2.77 for the
+    candidates versus 7.19 for the controls**, and a permutation test on that
+    extent-normalized statistic returns p = 0.999 *in the claimed direction*.
+    Three of the five candidates are not significant against their own
+    translation null at all (p = 0.06–0.09).
+  - **The sign-split argument fails the same way.** All six λ≈1.757 controls
+    have z > 0 and all six λ≈2.11 controls have z < 0 at p ≤ 0.0025, so the
+    dielectric-rich/air-rich split is a generic band-character effect across
+    the whole window, not a signature of the candidates.
+  - **What survives**: nothing here supports rare-region origin. The
+    finite-size *statistics* argument in the bullets above — matched local
+    distributions, 10× the draws, deeper tail reach, and P(zero at N=1000) =
+    0.61 — is untouched, because it never used this statistic. The seam
+    corroboration (four seam states at |z| = 0.22 ≈ controls) is likewise
+    weakened: those states are extended, so shrinkage explains their low |z|
+    without appeal to material.
+  - Honest limit on the refutation itself: a rigidly translated mode is not an
+    eigenmode, so this is a null for "sits in anomalous material", not a
+    physical alternative model.
 - **Two mundane explanations remain open** and are exactly what the queued
   runs test. (1) **Resolution**: N=10k runs at 7.79 vox/µm against N=1000's
   11.2 — 70% — and gate G5 has already failed once on convergence, so coarser
@@ -345,9 +384,9 @@ extrapolation: 1.38 TB locked-set storage = 12× RAM+disk; O(100) days).
   decoration — wider gap, tighter confinement. **N=10k ξ(ω) is measured**:
   121 of 133 modes resolved, a clean funnel from ~8 µm at the lower window
   edge down to 1.8 µm at the gap and back out to ~10 µm above, with the
-  remaining 12 flagged (one above the 12.32 µm ceiling, eleven failing the
-  r² ≥ 0.7 exponential-shape test — a different statement, and stated
-  separately). The pipeline itself is now cross-validated: **gate I8 compares
+  remaining 12 flagged (all twelve fail the r² ≥ 0.7 exponential-shape
+  test, and one of those twelve *also* exceeds the 12.32 µm ceiling — the two
+  criteria overlap rather than partition). The pipeline itself is now cross-validated: **gate I8 compares
   ξ from the bottom-up and interior solvers on the same N=1000 modes and finds
   max 0.09% / median 0.01%** disagreement over the 20 gap-edge modes resolved
   in both. Read that for what it is — the two solvers agree on those
@@ -385,10 +424,10 @@ GPU-days → the pre-registered descope fired **at registration** (192³ +
 | I1 ground-truth parity | **PASS** | 50/50 targets, 0 ghosts, worst res 5.18×10⁻⁵. Parity **max Δλ/λ = 2.35×10⁻⁷, median 6.29×10⁻⁸** over 55 pairs (gate 1e-4). The ledger entry still records the *pre-correction* 2.83×10⁻⁵ / min proj² 1.0000203 because the scorer has not been re-run — see the note on that entry. First run 49/50 → Amendment A1 |
 | I2 completeness | **PASS — certified** | Certifying sub-interval [1.9063, 1.9606]: **missed = −0.00025 ± 0.00013** (gate \|missed\| < 0.5), i.e. 2000× inside it. Consistency check on the full window (explicitly *not* certifying, per A3): missed = +1.68 ± 0.32, within the acknowledged O(1) bias floor. Leakage term needed three corrections — see §2 |
 | I3 residuals / orthonormality | **FAIL** | Residuals PASS: worst 5.88×10⁻⁵, median 3.26×10⁻⁵ (gate 1e-4). **Gram ‖G−I‖max = 4.86×10⁻⁴ vs gate 5×10⁻⁵ — fails by 9.7×**, entirely off-diagonal (diagonal 2.04×10⁻⁵). Diagnosed: **created by the merge, not the solver** — cross-slice max 4.86×10⁻⁴ vs same-slice max 8.58×10⁻⁶, so *each slice individually passes*. Dominated by λ=1.94721 (a seam artifact) in 6 of the 10 worst pairs. Two of my own explanations refuted by measurement; the specific mechanism is recorded **open** |
-| I4 new-decoration cross-check | bottom-up DONE; interior below-gap DONE, above-gap running | Bottom-up: gap 500\|501, Δν/ν 5.07%, 8,876 s. Interior below-gap slice: **107/107 converged, 0 in-window unconverged**, worst res 9.57×10⁻⁵, λ ∈ [1.47016, 1.82759], 14,259 s |
+| I4 new-decoration cross-check | **PASS (both halves)** | Bottom-up: gap 500\|501, Δν/ν 5.07%, 8,876 s. Interior below-gap **107/107 converged**, above-gap **109/109**, zero in-window unconverged in either. Scored vs the bottom-up reference: **210/210 targets, 0 missed, 0 ghosts, max Δλ/λ = 4.11×10⁻⁷, min proj² 0.9961**; 6 further modes lie outside the reference's stored-vector range and check on eigenvalues alone at 1.87×10⁻⁷ |
 | I5 spectrum consistency | **FAIL as registered** | `empty_gap_clause_pass: false` — ten converged pairs inside the KPM bracket [1.864, 1.996]. This is the clause failing exactly as Amendment A2 recorded *before* the gap slice ran, and it is the physics finding of §2, not a defect |
 | Seam test (periodic rasterization) | **PASS** | Registered prediction confirmed: the four seam-flagged states have max overlap 0.006/0.13/0.09/0.30 with any periodic state (gone); all six bulk states persist at overlap 0.95–0.9997 with Δλ = −0.0007…−0.0034, every shift negative as added dielectric requires |
-| I6 convergence (160³/192³ + 256³ anchors) | **PASS** | Per-band Δω/ω across grids, paired by **eigenvector overlap** (not sorted eigenvalue — at the low edge 6 of 11 sorted pairings were wrong, so a sorted comparison would have reported meaningless scatter). Low edge [1.84, 1.95]: 11 of 11 matched, |Δω/ω| max **0.338%**. High edge [1.99, 2.035]: 10 of 11, max **0.039%**. Both inside the registered 0.6% bound and consistent with the ~0.3% expectation. **The resolution confound is closed**: each 256³ mode keeps **99.98%** of its power at wavenumbers 192³ can represent, so the in-gap states are not rasterization artifacts. Caveats on the ledger: the one unmatched state (λ=1.99012) sits 1.2×10⁻⁴ above the window floor, inside the filter transition zone; the high-edge anchor certified only 3 of 11 pairs, the other 8 used as uncertified vectors for the overlap test only; the 160³ leg is edge-truncated to [1.8096, 2.0516] |
+| I6 convergence (160³/192³ + 256³ anchors) | **PASS** | Per-band Δω/ω across grids, paired by **eigenvector overlap** (not sorted eigenvalue — at the low edge 6 of 11 sorted pairings were wrong, so a sorted comparison would have reported meaningless scatter). Low edge [1.84, 1.95]: 11 of 11 matched, |Δω/ω| max **0.338%**. High edge [1.99, 2.035]: 10 of 11, max **0.039%**. Both inside the registered 0.6% bound and consistent with the ~0.3% expectation — **the gate passes on its registered criterion**. **The 99.98%-power-retention argument for "confound closed" is WITHDRAWN** (round 4): that statistic is saturated — a hypothetical 96³ grid at *half* the production resolution also retains 99.82%, and it is flat at 99.975–99.984% across all 14 modes measured, so it cannot discriminate adequate from inadequate resolution. What the gate does establish is the per-band bound above. Caveats on the ledger: the one unmatched state (λ=1.99012) sits 1.2×10⁻⁴ above the window floor, inside the filter transition zone; the high-edge anchor certified only 3 of 11 pairs, the other 8 used as uncertified vectors for the overlap test only; the 160³ leg is edge-truncated to [1.8096, 2.0516] |
 | I7 decoration | **PASS** | ff = 22.011% at 192³ (gate 22.0 ± 0.5); r = 0.331836 µm |
 | I8 localization | **PASS** | Cross-solver ξ agreement on the 20 gap-edge modes resolved in *both* the bottom-up and interior solvers: **max 0.09%, median 0.01%** (gate ≤ 10%). Sample discipline: 210 of 216 modes matched, 42 resolved in both (the L/2 = 5.72 µm ceiling catches the rest in an 11.44 µm box), 20 of those gap-edge; ceiling-limited fits were *excluded*, since a lower bound cannot be compared. **Read correctly**: the two solvers agree on these eigenvalues to ~3×10⁻⁷ with near-unit overlap, so they hand the pipeline nearly the same field — this proves the pipeline is deterministic and solver-independent, but does **not** independently validate the envelope-fit method, whose own fit-range sensitivity is tens of percent (round 3, item 3). Ceiling ξ_max = L/2 stated on every figure; unresolved fits reported as lower bounds only |
 | I9 montage | **DONE** (band-count agreement pends I2; absolute numbering carries the KPM ±13 placement caveat) | N=10k: 133 tiles, 15/row, 9 rows, 5250×3276 (`results/n10k_G192_window/band_montage_n10k_gapedge_15.png`); N=1000-circular: 210 tiles for the finite-size comparison |
@@ -406,7 +445,7 @@ envelope fits mode for mode.
 
 | figure | what it shows |
 |---|---|
-| `fig_dos_spectrum.png` | the 133 converged eigenvalues drawn on the KPM DOS; the gap bracket, and the 10 in-gap states in red. The DOS floor inside the gap is *accounted for by those states* (11.18 ± 0.58 predicted vs 10 certified), not by kernel leakage |
+| `fig_dos_spectrum.png` | the 133 converged eigenvalues drawn on the KPM DOS; the gap bracket, and the 10 in-gap states in red. **Caption caveat (round 4)**: the figure's original caption claimed the in-gap DOS floor is *accounted for* by those states (11.18 ± 0.58 predicted vs 10 certified). That comparison is retired in §0 — KPM consumes the same rasterized ε(r), carries a ≈ +1 Jackson bias here, and the seam verdict moved the count 10 → 7. Read the red marks as the certified in-gap set, not as agreement with KPM |
 | `fig_xi_omega.png` | ξ(ω) for N=10k and N=1000 side by side, same decoration, each with its own L/2 ceiling. The N=10k panel is a clean funnel — 8 µm → 1.8 µm → 10 µm across the gap, 121/133 resolved. The N=1000 panel shows the same physics unresolvable: 168/210 modes parked at the 5.72 µm ceiling |
 | `fig_montage_sbs.png` | the two montages side by side (finite-size comparison, ceiling caveat printed on each) |
 | `results/n10k_G192_window/band_montage_n10k_gapedge_15.png` | the N=10k gap-edge montage itself, 133 tiles, 15/row |
@@ -488,15 +527,31 @@ investigation §6):
   certification does not depend on it: that came from the sub-interval, where
   true leakage is 0.0017, three orders below this bias. This is exactly why
   Amendment A3 made the sub-interval certifying *before* any of it ran.
-- **I6 is now answered and the resolution confound is CLOSED.** 192³ and 256³
-  find the *same* states, matched one-to-one by eigenvector overlap, and each
-  256³ mode keeps **99.98%** of its power at wavenumbers 192³ can represent.
-  Per-band |Δω/ω| is 0.338% (low edge) and 0.039% (high edge), inside the
-  registered 0.6%. The in-gap states are **not** rasterization artifacts.
-  Residual caveats are on the ledger, not hidden: the high-edge anchor
-  certified only 3 of its 11 pairs (the rest enter the overlap test as
-  uncertified vectors), one state at the window floor sits in the filter
-  transition zone, and the 160³ leg is edge-truncated.
+- **I6 PASSES, but "the resolution confound is CLOSED" was an overclaim and is
+  withdrawn (round 4).** What is measured and stands: 192³ and 256³ find the
+  same states, matched one-to-one by eigenvector overlap, with per-band
+  |Δω/ω| of 0.338% (low edge) and 0.039% (high edge) — inside the registered
+  0.6%. That is the gate, and it passes.
+  What does **not** follow is the sentence it was attached to. The 99.98%
+  power-retention figure is saturated: measured against coarser k-cubes, a
+  hypothetical **96³ grid — half the production resolution — still retains
+  99.82%**, and the statistic is flat at 99.975–99.984% across all 14 modes
+  measured, in-gap and band-edge alike. A statistic that does not vary with
+  mode character is not evidence about mode character. It also measures
+  band-limiting of **E**, whereas the confound is about **ε(r)**; the two
+  grids do rasterize measurably different dielectrics (ff 22.011% at 192³ vs
+  22.000% at 256³).
+  Pulling the other way, on the ledger: the mean inter-grid shift is **3.2× the
+  smallest 192³ level spacing**, 6 of 11 sorted pairings were wrong, and
+  cross-grid overlaps run down to 0.873. Operators whose spectra reorder by
+  three level spacings are close, not equivalent. **Fair summary: the in-gap
+  states survive a 2.4×-voxel refinement with per-band agreement inside the
+  registered bound — good evidence they are not rasterization artifacts, but
+  not the proof "closed" implied.**
+  Residual caveats stand: the high-edge anchor certified only 3 of its 11 pairs
+  (the rest enter the overlap test as uncertified vectors), one state at the
+  window floor sits in the filter transition zone, and the 160³ leg is
+  edge-truncated.
 - **The seam re-solve did not lift its caveat.** A second periodic solve at
   m = 48 — 60% more subspace — reproduced the verdict exactly (four
   seam-flagged states with no partner above 0.5; six bulk states persisting at

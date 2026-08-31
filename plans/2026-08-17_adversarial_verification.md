@@ -238,3 +238,99 @@ is **untracked in git** — flagged to the user; committing awaits their say-so.
    *amplitude* is inflated ~2× by multi-blob structure; trend survives.)
 
 *(Later rounds appended below as they run.)*
+
+---
+
+## Round 4 (2026-08-31) — final pass against the finished report
+
+Fresh reviewer, given rounds 1–3 to avoid re-reporting, and pointed at the
+newest and least-reviewed material: the I6 closure claim, the rare-region
+statistics, gate arithmetic recomputed from raw data, and internal
+consistency after five days of heavy editing.
+
+### MAJOR
+
+**R4-M1 — the rare-region |z| test is refuted; its caveat had the sign backwards.**
+`|z| = 0.57` (candidates) vs `0.27` (controls) reproduces exactly, and on raw
+|z| a permutation test gives p = 1.6e-4. But the comparison was never
+extent-matched: controls were the six lowest and six highest window modes,
+i.e. the MOST EXTENDED in the set (participation 0.72–12.1%), against the MOST
+COMPACT candidates (0.034–0.33%) — a **36× median volume difference**
+(independently verified here). Energy-weighting a coarse-grained field is a
+shrinkage estimator, so wider modes must give smaller |z| with no anomaly
+present. Against a translation null (each mode moved rigidly to all 192³
+lattice sites, shape and extent fixed) the ordering REVERSES: |z|/σ_null is
+2.77 for candidates vs 7.19 for controls, permutation p = 0.999 in the claimed
+direction, and 3 of 5 candidates are not significant against their own null
+(p = 0.06–0.09). The report's caveat claimed energy-weighting "understates the
+anomaly"; it in fact **manufactures** the ratio. The band-character sign split
+fails identically — all six low-λ controls z>0 and all six high-λ z<0 at
+p ≤ 0.0025, a whole-window effect. RETRACTED in the report.
+Untouched: the finite-size *statistics* argument (matched local distributions,
+10× draws, deeper tail, P(zero at N=1000) = 0.61) never used this statistic.
+
+**R4-M2 — "the resolution confound is CLOSED" is an overclaim; its statistic is saturated.**
+Retention of a 256³ mode inside the 192³ k-set is 99.98%, but measured against
+coarser cubes a hypothetical **96³ grid (half production resolution) still
+retains 99.82%** (verified here), and the figure is flat at 99.975–99.984%
+across all 14 modes, in-gap and band-edge alike. A statistic that does not vary
+with mode character is not evidence about mode character; it also measures
+band-limiting of E while the confound concerns ε(r) (the grids do rasterize
+different dielectrics, ff 22.011% vs 22.000%). Counter-evidence already sat in
+the ledger: mean inter-grid shift = 3.2× the smallest level spacing, 6 of 11
+sorted pairings wrong, overlaps down to 0.873. The I6 **gate still passes** on
+its registered per-band criterion (0.338% / 0.039% vs 0.6%); the "closed"
+sentence is WITHDRAWN.
+
+**R4-M3 — for λ = 1.94721, "vanished" is not separable from "not converged", and the ledger applies opposite standards to one pair of states.**
+Overlap budget Σ_j|<m,p_j>|² over the found periodic set: 1.87076 → 0.0001,
+1.92960 → 0.0087, 1.87308 → 0.0201, but **1.94721 → 0.0971**. Periodic state
+1.94067 has budget 0.9984, of which 0.9969 lies inside
+span{montage 1.94405, 1.94721} — one converged periodic vector in that 2D
+subspace, the orthogonal direction unaccounted for, and I2 independently found
+~2 states missing in the interval containing it. Meanwhile the I6 cross-grid
+entry applies a 2D-subspace argument to *this same pair* to excuse overlaps of
+0.879/0.873. Both cannot be right. Verdict for 1.94721 is now **undetermined**;
+the other three seam states are unaffected (budgets ≤ 0.02, nothing between
+0.30 and 0.95, so the 0.5 threshold does no work there).
+
+### MINOR (all corrected)
+
+m1 unannotated stale residuals inside the I3 entry's prose (conclusion survives:
+1.94721 corrected 2.787e-5 vs median 3.251e-5); plus a superseded 130-mode
+localization file at results/ top level.
+m2 §0 per-slice residuals: S_above is 5.87e-5, not 7.4e-5 (nominal δ applied
+instead of the per-vector one) — as written it exceeded §3's merged worst.
+m3 fig_dos_spectrum caption restated the retired KPM-agreement claim.
+m4 in-gap ξ range self-contradicting: asserted 1.8–2.1 µm while its own
+parenthetical called that stale. Correct: 1.80–2.51 µm (candidates).
+m5 "Nine residual-certified eigenstates" listed nine λ for a set of ten
+(1.8690 omitted); ten elsewhere in three places.
+m6 stale header ("one gate still running"), stale I4 row ("above-gap running"),
+pre-correction window endpoints.
+m7 "130 residual-certified eigenpairs" against a 69+61+5 = 135 → 133 list.
+m8 unresolved-mode partition: all 12 fail r² < 0.7 and one ALSO exceeds the
+ceiling; the criteria overlap rather than partition.
+
+### Attacked and HELD (refutation failed)
+
+1. **The cross-grid k-space embedding.** Both bases constructed and compared
+   directly: `max|t_192 − t_256,sub| = 0.0` and `max|kn_192 − kn_256,sub| = 0.0`
+   over all 7,077,888 coarse k-points — bit-identical frames, no sign flips, no
+   differential triggering of the reference-axis switch. The overlaps are
+   well-defined. (This was the assumption I reasoned from code but never
+   verified; it holds.)
+2. **I6 gate arithmetic** reproduces to five digits (0.33785% / 0.03920%).
+3. **I2's certifying sub-interval.** Attacked as a difference of large numbers —
+   wrong: leak is a direct piecewise integral. Robust to the leakage model
+   entirely (with leak = 0 the number is 0.0014 vs a 0.5 gate), and the
+   deflation premise cannot manufacture a pass.
+4. **I4 and I8 arithmetic** reproduce (210/210, 4.11e-7, proj² 0.9961; I8 max
+   0.0868% → "0.09%").
+5. **Seam classification and periodic bookkeeping**: shell fractions, the five
+   candidates' periodic counterparts, 10 → 7, S_gap 5 → 3, and the
+   1.98401 ↔ 2.00879 band-edge reassignment all reproduce.
+6. **The "8 PASS / 3 FAIL" header tally** matches the ledger exactly.
+7. **Localization counts** (121 of 133 resolved) reproduce.
+
+Raw artifacts: results/gates/zperm.json, results/gates/retention.json.
