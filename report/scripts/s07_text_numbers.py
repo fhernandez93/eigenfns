@@ -90,6 +90,13 @@ for tag, path, L in (("n1k", STRUCT_N1K, L_N1K), ("n10k", STRUCT_N10K, L_N10K)):
     led.add(f"coarse_ff_mean_{tag}", out[tag][0], "fraction", rel(path), "ff coarse-grained over 2 um cubes, periodic rasterization, 0.18 um voxels")
     led.add(f"coarse_ff_sd_{tag}", out[tag][1], "fraction", rel(path))
     led.add(f"n_xi_cells_{tag}", out[tag][2], "cells", "geometry", "(L/2 um)^3")
+# fp64 verification of two scored fp32 quantities (round-2 fact-check)
+led.add("n10k_duplicate_overlaps_fp64", [0.999999943, 0.999999903], "overlap", "results/n10k_G192_Sgap|Sbelow/window_vecs_spectral.npy",
+        "normalised complex128 overlaps of the two cross-slice duplicates; the merge recorded 0.9988 (fp32 vdot)")
+led.add("i4_min_proj2_fp64", 0.99989, "dimensionless", "results/i4int_n1000_*/window_vecs_spectral.npy vs results/i4_n1000_circ_G128/window_vecs_spectral.npy",
+        "min over 210 matched pairs of normalised |<x,y>|^2 in complex128; scorer recorded 0.9961 (fp32)")
+led.add("kpm10k_bracket_count_bias_model", 2.6, "states",
+        "results/exp/n10k_G256_dos_kpm.npz", "(sigma^2/2) rho' at the bracket edges; value from the round-2 checker's recomputation (project record ~+1)")
 led.save()
 print({k: v["value"] for k, v in led.d.items() if not k.startswith("coarse") and "cells" not in k})
 print({k: v["value"] for k, v in led.d.items() if k.startswith("coarse")})

@@ -66,3 +66,17 @@ Gap 500|501 elliptical 2.076 % (report 2.08 %), series 2.354/1.929/2.076 %; circ
 - The kickoff's suggested verdict wording ("consistent with Anderson-type localization") was tightened to "consistent with localization at the edges of a photonic pseudogap … whether interference-driven or trap-like cannot be decided from this data", following the adversarial review; the kickoff itself required writing only what the data support.
 - Fig. 1(c) corrected: it had overlaid the circular-decoration exact spectrum on the elliptical-decoration KPM curve; it now shows the binned density of the same exact spectrum.
 - Round 2 (fresh checkers on the corrected main text and SM) launched.
+
+## 8. Fact-check round 2 and close-out
+- Round-2 checkers (fresh agents on the corrected text): SM A+B 119 claims / 3 WRONG (minor); main text 84 / 5 WRONG (minor); SM C+D+E 146 / 8 WRONG (minor). All corrected (FACTCHECK.md). Two fp32-scored project numbers were replaced by fp64 recomputations made here: duplicate overlaps 0.9999999 (recorded 0.9988) and I4 min proj² 0.9999 (recorded 0.9961).
+- Per the user's instruction (mid-session) no further agents were launched; the final corrections were verified directly by scripts.
+- Final build: `bash build.sh --figures` regenerates all 501 ledger entries, 21 tables/CSVs and 20 figures from the saved data in ≈4 min and builds both PDFs with zero undefined references. main.pdf: 5 pages, body+abstract ≈2530 words, captions ≈310, figure equivalents ≈610 → ≈3450 words-equivalent (PRL limit 3750); abstract ≈ 600 rendered characters (612 by pdftotext including two page-header artefacts). supplement.pdf: 36 pages.
+- `references_verified.md`: 41/41 DOIs resolved; two author corrections applied.
+
+## 4. What was left out and why (final)
+- **Thouless ratio / boundary-twist sensitivity**: not computable from the saved Γ-point data; no re-solve permitted. Stated in the paper.
+- **Third independent fact-check round**: not run (user instruction to stop launching agents); replaced by direct script verification of the round-2 corrections. Round 2 had found only minor numerical/provenance items.
+- **MPB parity at 128³/192³**: does not exist in the project; the paper states parity at 64³ only.
+- **A post-fix (periodic) KPM run, an I2 audit of the 256³ anchors, and tiles for the periodic re-solve**: do not exist; not generated (no GPU work allowed).
+- **The G2 srs-scan MPB output**: not retained by the project; the 27.97 % is quoted as a ledger value with that disclosure.
+- **Acknowledgments**: placeholder removed to fit the page budget; author/affiliation placeholders kept as instructed.

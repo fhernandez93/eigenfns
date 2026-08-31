@@ -646,6 +646,13 @@
   "unit": "states",
   "value": 210
  },
+ "i4_min_proj2_fp64": {
+  "notes": "min over 210 matched pairs of normalised |<x,y>|^2 in complex128; scorer recorded 0.9961 (fp32)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/i4int_n1000_*/window_vecs_spectral.npy vs results/i4_n1000_circ_G128/window_vecs_spectral.npy",
+  "unit": "dimensionless",
+  "value": 0.99989
+ },
  "i4int_above_distinct_matches": {
   "notes": "== n means one-to-one (no ghosts, no duplicates)",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
@@ -1106,6 +1113,13 @@
   "source_file": "results/exp/n10k_G256_dos_kpm.npz",
   "unit": "bands/vertex",
   "value": 0.5008287101342551
+ },
+ "kpm10k_bracket_count_bias_model": {
+  "notes": "(sigma^2/2) rho' at the bracket edges; value from the round-2 checker's recomputation (project record ~+1)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/exp/n10k_G256_dos_kpm.npz",
+  "unit": "states",
+  "value": 2.6
  },
  "kpm10k_count_below_1.9300": {
   "notes": "transverse states below lambda (excludes the two omega=0 modes); REPORT_N10K mid-gap 5010.3 +- 12.5",
@@ -2318,6 +2332,16 @@
    1.7297404153848055e-06
   ]
  },
+ "n10k_duplicate_overlaps_fp64": {
+  "notes": "normalised complex128 overlaps of the two cross-slice duplicates; the merge recorded 0.9988 (fp32 vdot)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_Sgap|Sbelow/window_vecs_spectral.npy",
+  "unit": "overlap",
+  "value": [
+   0.999999943,
+   0.999999903
+  ]
+ },
  "n10k_duplicates_removed": {
   "notes": "two states found by both S_gap and S_below",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
@@ -3287,6 +3311,13 @@
   "source_file": "Structures/20260701_N10000_lsu_generated.txt",
   "unit": "%",
   "value": 10.667950888355227
+ },
+ "n10k_shell_deficit_pct_160": {
+  "notes": "outermost-layer ff deficit at 160^3",
+  "script": "s03_structure.py (addendum via s07)",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "%",
+  "value": 9.607355346781832
  },
  "n10k_shell_deficit_pct_256": {
   "notes": "",

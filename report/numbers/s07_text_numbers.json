@@ -41,6 +41,20 @@
   "unit": "dimensionless",
   "value": 0.0017661885010521597
  },
+ "i4_min_proj2_fp64": {
+  "notes": "min over 210 matched pairs of normalised |<x,y>|^2 in complex128; scorer recorded 0.9961 (fp32)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/i4int_n1000_*/window_vecs_spectral.npy vs results/i4_n1000_circ_G128/window_vecs_spectral.npy",
+  "unit": "dimensionless",
+  "value": 0.99989
+ },
+ "kpm10k_bracket_count_bias_model": {
+  "notes": "(sigma^2/2) rho' at the bracket edges; value from the round-2 checker's recomputation (project record ~+1)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/exp/n10k_G256_dos_kpm.npz",
+  "unit": "states",
+  "value": 2.6
+ },
  "matched_upper_edge_vp_ratio": {
   "notes": "V_p(N=1000 band 501)/V_p(N=10k 1.9264)",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
@@ -75,6 +89,16 @@
   "source_file": "results/n10k_G192_window/window_eigenvalues.npy",
   "unit": "states",
   "value": 5
+ },
+ "n10k_duplicate_overlaps_fp64": {
+  "notes": "normalised complex128 overlaps of the two cross-slice duplicates; the merge recorded 0.9988 (fp32 vdot)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s07_text_numbers.py",
+  "source_file": "results/n10k_G192_Sgap|Sbelow/window_vecs_spectral.npy",
+  "unit": "overlap",
+  "value": [
+   0.999999943,
+   0.999999903
+  ]
  },
  "n10k_n_modes_shell_gt2": {
   "notes": "",

@@ -135,6 +135,13 @@
   "unit": "%",
   "value": 10.667950888355227
  },
+ "n10k_shell_deficit_pct_160": {
+  "notes": "outermost-layer ff deficit at 160^3",
+  "script": "s03_structure.py (addendum via s07)",
+  "source_file": "Structures/20260701_N10000_lsu_generated.txt",
+  "unit": "%",
+  "value": 9.607355346781832
+ },
  "n10k_shell_deficit_pct_256": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
