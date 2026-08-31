@@ -1110,5 +1110,55 @@
   "high_edge_caveat": "the high-edge anchor converged only 3 of 11 in-window pairs (median residual 2.2e-4 against a 1e-4 gate); the other 8 are used here as UNCONVERGED vectors for the overlap test only, never as certified eigenpairs. They exist at all only because run_interior.py was changed on 2026-08-27 to save unconverged in-window vectors -- without that fix this anchor would have exposed 3 states instead of 11.",
   "high_edge_shifts_smaller": "high-edge |domega/omega| (0.04%) is ~9x smaller than low-edge (0.34%). Consistent with the low edge straddling the gap, where states are localized and more sensitive to rasterization, while [1.99, 2.035] is denser and more bulk-like. Not independently verified.",
   "pass": true
+ },
+ "Periodic re-solve v2 (m=48): seam verdict re-tested, completeness NOT resolved": {
+  "gate": "seam hypothesis, re-test on a larger subspace",
+  "when": "2026-08-31 07:20",
+  "run": {
+   "tag": "n10k_G192_gap_periodic_v2",
+   "m": 48,
+   "polish_outers_run": 4,
+   "polish_outers_requested": 8,
+   "converged": 7,
+   "unconverged": [
+    1.8902,
+    1.9534
+   ],
+   "unconverged_residuals": "6.16e-2 to 6.27e-2 -- never converged at all, not near-misses",
+   "wall_seconds_final_leg": 14448
+  },
+  "SEAM VERDICT CONFIRMED": {
+   "seam_flagged_gone": [
+    1.87076,
+    1.87308,
+    1.9296,
+    1.94721
+   ],
+   "their_best_overlap": [
+    0.0061,
+    0.1312,
+    0.0901,
+    0.3012
+   ],
+   "bulk_persisted": 6,
+   "bulk_overlap_range": [
+    0.9519,
+    0.9997
+   ],
+   "dlam_all_negative": [
+    -0.00347,
+    -0.00076
+   ],
+   "reading": "identical to the m=30 result. The four seam-flagged states have no partner above the 0.5 rule; all six bulk states persist with every shift negative, as added dielectric requires."
+  },
+  "THE POINT OF THE RE-SOLVE WAS NOT ACHIEVED": {
+   "purpose": "I2 measured the m=30 solve incomplete (sub-interval missed +2.04 +- 0.42). The re-solve at m=48 was meant to find the missing states so the verdict's NEGATIVE half could rest on a complete solve.",
+   "outcome": "m=48 found THE SAME SEVEN certified states as m=30 (agreeing to 4.7e-05, which is exactly the Rayleigh-norm correction now built in). It did NOT find additional states.",
+   "implication": "the incompleteness is NOT a subspace-size problem. Either I2's sub-interval estimate is biased, or there are states the bandpass filter cannot converge at this degree. Suggestive of the latter: v1's unconverged pair was at 1.9095 and v2's at 1.9534 -- DIFFERENT lambdas, both inside or near the certifying sub-interval [1.9063, 1.9606], consistent with more than one hard-to-converge state there.",
+   "status": "the seam verdict's negative half remains WEAKENED, exactly as recorded on 2026-08-27. This re-solve did not lift that caveat."
+  },
+  "MY OWN LIMITATION, RECORDED": "I stopped the run after 4 of the requested 8 polish outers, on the evidence that outers 1 and 2 were bit-identical (7 converged, median 3.4e-05). That saved ~16 h. But it means the possibility that outers 4-7 would have converged the stragglers is UNTESTED. Against it: those stragglers sat at ~6e-2 residual throughout, four orders above the gate, with no downward trend. For it: I did not let it run. Stated so the reader can discount accordingly.",
+  "pass": null,
+  "pass_note": "seam verdict reproduced; completeness question still open."
  }
 }

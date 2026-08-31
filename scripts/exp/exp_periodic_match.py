@@ -28,7 +28,8 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 MONT = ROOT / "results" / "n10k_G192_window"
-PERI = ROOT / "results" / "n10k_G192_gap_periodic"
+import sys as _s
+PERI = ROOT / "results" / next((a for a in _s.argv[1:] if not a.startswith("--")), "n10k_G192_gap_periodic")
 GAP_LO, GAP_HI = 1.864, 1.996
 CHUNK = 1 << 21
 
@@ -103,7 +104,7 @@ def main() -> int:
         flag = "" if M[b, j] > 0.5 else "   <- NO PARTNER"
         print(f"  peri {lam_p[j]:.5f}  best montage {lam_m[ingap[b]]:.5f}"
               f"  |ov| {M[b, j]:.4f}{flag}")
-    name = "periodic_overlap_match_full.json" if full else "periodic_overlap_match.json"
+    name = f"periodic_overlap_match_{PERI.name}{'_full' if full else ''}.json"
     (ROOT / "results" / "gates" / name).write_text(
         json.dumps({"rule": "|overlap|>0.5", "scanned": "all" if full else "in-gap",
                     "pairs": out}, indent=1))
