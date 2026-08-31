@@ -19,7 +19,7 @@ led = Ledger(__file__)
 s1 = load_json(FIG.parent / "numbers" / "s01_spectra.json")
 gap_c = (s1["n1k_circ_gap_lo_128"]["value"], s1["n1k_circ_gap_hi_128"]["value"])
 
-fig = plt.figure(figsize=(DOUBLE, 2.55))
+fig = plt.figure(figsize=(DOUBLE, 2.4))
 gs = gridspec.GridSpec(2, 3, width_ratios=[1.0, 1.0, 2.6], height_ratios=[1, 1], wspace=0.28, hspace=0.12,
                        left=0.03, right=0.99, top=0.90, bottom=0.16)
 cmap = ListedColormap(["white", "#404040"])

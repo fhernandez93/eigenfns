@@ -43,7 +43,7 @@ def crop(im, frac=0.06):
 top_bands = [398, 498, 499, 500, 501, 502, 607]
 bot_lams = [1.7570469501878812, 1.850147869329301, 1.868981147045425, 1.8860078588720002, 1.926413256982914, 2.005207555911053, 2.1165695086620007]
 bot_idx = [n10k_idx(l) for l in bot_lams]
-fig, axs = plt.subplots(2, 7, figsize=(DOUBLE, 2.3))
+fig, axs = plt.subplots(2, 7, figsize=(DOUBLE, 2.2))
 fig.subplots_adjust(left=0.035, right=0.995, top=0.91, bottom=0.005, wspace=0.03, hspace=0.30)
 for j, b in enumerate(top_bands):
     ax = axs[0, j]
