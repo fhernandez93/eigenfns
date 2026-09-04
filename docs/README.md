@@ -38,6 +38,7 @@ started and never edited afterwards (amendments are appended, labelled).
 - `00_kickoff_prompt_eigenmodes.md` — phase 1
 - `01_kickoff_prompt_interior_gap_modes_N10k.md` — phase 2
 - `02_kickoff_prompt_PRL_report.md` — phase 3
+- `03_kickoff_prompt_bandstructure_a_and_resolution.md` — phase 4 (proposed 2026-09-04): lattice-constant convention, Γ–X–M–R–Γ band structures vs MPB, resolution-matched in-gap test, PRL-style report package `report_bands/`
 
 Repository paths quoted inside these were rewritten to the current layout on
 2026-09-04. Two names in the first prompt (`docs/plans/2026-07-21_preregistered_plan.md`,
