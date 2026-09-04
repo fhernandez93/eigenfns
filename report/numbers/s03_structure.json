@@ -223,7 +223,7 @@
   "value": 0.2172412872314453
  },
  "n1k_ff_256_ell": {
-  "notes": "REPORT.md: 21.7% at 256^3 (montage convention)",
+  "notes": "docs/REPORT_N1000.md: 21.7% at 256^3 (montage convention)",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
   "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
   "unit": "fraction",

@@ -16,7 +16,7 @@
  "a_norm_um": {
   "notes": "a = L_1000/5 = 2.288 um; identical for N=10k (density-matched: L_10k/1250^(1/3))",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
-  "source_file": "REPORT.md",
+  "source_file": "docs/REPORT_N1000.md",
   "unit": "um",
   "value": 2.288
  },
@@ -407,7 +407,7 @@
   "value": 9.777050581760705e-05
  },
  "g9_max_dw_w": {
-  "notes": "REPORT.md: 2.4e-7 over 96 bands",
+  "notes": "docs/REPORT_N1000.md: 2.4e-7 over 96 bands",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
   "source_file": "results/exp/prec48_c128.npy",
   "unit": "relative",
@@ -549,7 +549,7 @@
  "i2_subgap_interval": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "REPORT_N10K.md",
+  "source_file": "docs/REPORT_N10K.md",
   "unit": "um^-2",
   "value": [
    1.9063,
@@ -1868,7 +1868,7 @@
  "matvec_ms_G128_n1k": {
   "notes": "batched, 128^3 c64 (log-quoted; no JSON)",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
-  "source_file": "REPORT.md / plans log",
+  "source_file": "docs/REPORT_N1000.md / plans log",
   "unit": "ms/vector",
   "value": 2.7
  },
@@ -1896,7 +1896,7 @@
  "matvec_ms_G256_n1k_log": {
   "notes": "N=1000 256^3, chunks <= 4 (log-quoted)",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
-  "source_file": "REPORT.md",
+  "source_file": "docs/REPORT_N1000.md",
   "unit": "ms/vector",
   "value": 28.6
  },
@@ -1967,7 +1967,7 @@
   "value": 1.4247979725585566e-06
  },
  "mpb_parity_64_n_bands": {
-  "notes": "G3: REPORT.md 298 bands, 8.95e-6",
+  "notes": "G3: docs/REPORT_N1000.md 298 bands, 8.95e-6",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
   "source_file": "results/gates/mpb64.out",
   "unit": "bands",
@@ -1988,7 +1988,7 @@
   "value": 1.3904175497074016e-06
  },
  "mpb_parity_64w_n_bands": {
-  "notes": "G3w: REPORT.md 658 bands, 3.5e-5",
+  "notes": "G3w: docs/REPORT_N1000.md 658 bands, 3.5e-5",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
   "source_file": "results/gates/mpb64w.out",
   "unit": "bands",
@@ -2532,7 +2532,7 @@
  "n10k_ingap_kpm_bracket": {
   "notes": "KPM 10%-criterion bracket; s04_kpm.py recomputes",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "REPORT_N10K.md",
+  "source_file": "docs/REPORT_N10K.md",
   "unit": "um^-2",
   "value": [
    1.864,
@@ -3677,7 +3677,7 @@
   }
  },
  "n1k_ell_g5_band500_spread_pct": {
-  "notes": "max-min of sqrt(lambda) over 64/96/128 relative to 128^3; REPORT.md quotes 0.27%",
+  "notes": "max-min of sqrt(lambda) over 64/96/128 relative to 128^3; docs/REPORT_N1000.md quotes 0.27%",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
   "source_file": "results/gates/gate_results.json",
   "unit": "%",
@@ -3742,7 +3742,7 @@
   "value": 9.613699023549684
  },
  "n1k_ell_gap_pct_128": {
-  "notes": "Delta nu / nu_mid = 2 (w501 - w500)/(w501 + w500); REPORT.md quotes 2.08%",
+  "notes": "Delta nu / nu_mid = 2 (w501 - w500)/(w501 + w500); docs/REPORT_N1000.md quotes 2.08%",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
   "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "%",
@@ -3756,7 +3756,7 @@
   "value": 2.3545099706013777
  },
  "n1k_ell_gap_pct_series_64_96_128": {
-  "notes": "G5 ledger sqrt(lambda) of bands 500/501; REPORT.md quotes 2.35 -> 1.93 -> 2.08%",
+  "notes": "G5 ledger sqrt(lambda) of bands 500/501; docs/REPORT_N1000.md quotes 2.35 -> 1.93 -> 2.08%",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
   "source_file": "results/gates/gate_results.json",
   "unit": "%",
@@ -3767,7 +3767,7 @@
   ]
  },
  "n1k_ell_jump_114_115_rel": {
-  "notes": "low-band shell-structure jump disclosed in REPORT.md G8",
+  "notes": "low-band shell-structure jump disclosed in docs/REPORT_N1000.md G8",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
   "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "%",
@@ -3904,7 +3904,7 @@
   "value": 0.2172412872314453
  },
  "n1k_ff_256_ell": {
-  "notes": "REPORT.md: 21.7% at 256^3 (montage convention)",
+  "notes": "docs/REPORT_N1000.md: 21.7% at 256^3 (montage convention)",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
   "source_file": "/home/francisco/Documents/Create LSU Structures  - Claude/Example/N1000_lsu_example_ends.txt",
   "unit": "fraction",
@@ -3951,7 +3951,7 @@
  "n1k_prod_wall_s": {
   "notes": "5 h 32 m, 611 bands, 128^3",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
-  "source_file": "REPORT.md / results/prod_N1000_G128.log",
+  "source_file": "docs/REPORT_N1000.md / results/prod_N1000_G128.log",
   "unit": "s",
   "value": 19908
  },

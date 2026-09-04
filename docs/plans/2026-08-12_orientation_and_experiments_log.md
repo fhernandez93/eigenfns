@@ -7,7 +7,7 @@ copies of the scripts were lost in the crash; from here on all experiment script
 
 ## Settled facts about the target
 
-- Montage `band_montage_398_607_15_non_ideal.png`: 210 tiles, 14 rows x 15 cols, bands
+- Montage `docs/reference/band_montage_398_607_15_non_ideal.png`: 210 tiles, 14 rows x 15 cols, bands
   398→607, grey network + orange field renders; tiles in rows ~6-7 (~bands 475-500) go
   nearly grey → the window straddles a gap-like DOS minimum there.
 - ε(r) convention (from `20250903_create_h5_from_ends.ipynb` + user statement): binary

@@ -37,7 +37,7 @@ R_ELL, ASPECT_ELL = 0.2252, 2.5
 N_IDX_CIRC = 2.9                                      # circular decoration
 EPS_CIRC = N_IDX_CIRC ** 2                            # 8.41
 R_CIRC, ASPECT_CIRC = 0.331836, 1.0
-A_NORM_N1K = L_N1K / 5.0                              # a = 2.288 um (REPORT.md)
+A_NORM_N1K = L_N1K / 5.0                              # a = 2.288 um (docs/REPORT_N1000.md)
 
 # KPM 10%-criterion nominal gap bracket of the N=10k structure (REPORT_N10K)
 GAP_LO_10K, GAP_HI_10K = 1.864, 1.996

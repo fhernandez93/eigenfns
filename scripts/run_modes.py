@@ -19,7 +19,7 @@ import sys
 import time
 from pathlib import Path
 
-# Battle-tested GPU environment (see plans/ experiment log): on-demand async
+# Battle-tested GPU environment (see docs/plans/ experiment log): on-demand async
 # allocation (desktop holds ~1-1.5 GB; BFC fragmentation OOMs), no cuBLASLt
 # autotune profiling (its scratch OOMs at 128^3). Must be set before jax import.
 os.environ.setdefault("XLA_PYTHON_CLIENT_ALLOCATOR", "platform")

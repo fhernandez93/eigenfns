@@ -10,7 +10,7 @@ the photonic analogue of wavefunctions, most likely obtained originally with a s
 plane-wave / iterative Maxwell eigensolver.
 
 The evidence of what we must reproduce is in this folder:
-`band_montage_398_607_15_non_ideal.png` — a 5250×5096 montage of ~210 tiles arranged 15 per
+`docs/reference/band_montage_398_607_15_non_ideal.png` — a 5250×5096 montage of ~210 tiles arranged 15 per
 row, labelled by band index **398 → 607**. Each tile is a 3-D volume rendering of one
 eigenmode: the dielectric network (grey, semi-transparent wireframe — the permittivity
 distribution) with the mode's field intensity (orange/red isosurfaces or volume rendering)
@@ -33,7 +33,7 @@ given a rod-network structure file from our previous projects, produces:
 
 This is the **Tier-0 philosophy from the previous project applied to a new problem**: no ML,
 no approximate shortcuts — exact numerics, engineered to be fast on this specific GPU. Read
-`/home/francisco/Documents/Create LSU Structures - ML /TIER0_EXPLAINED.md` and `REPORT.md`
+`/home/francisco/Documents/Create LSU Structures - ML /TIER0_EXPLAINED.md` and `docs/REPORT_N1000.md`
 (note: folder name has a trailing space) to absorb how that project worked: profile first,
 rewrite exactly, validate against an independent judge, pre-register gates, verify
 adversarially.
@@ -52,7 +52,7 @@ These four are hard requirements. Violating any of them makes the deliverable wo
    policy), and every nontrivial piece of code must be independently checked by adversarial
    subagents whose explicit job is to refute it — separate agents for physics, for numerics,
    and for code correctness. Record what each verification pass found (including "nothing")
-   in the plans/verification files, as the previous project did.
+   in the docs/plans/verification files, as the previous project did.
 
 2. **Search the literature online.** You are on an institutional network with access to many
    journals — use it. Find and read the primary sources before committing to a method: the
@@ -92,15 +92,15 @@ These four are hard requirements. Violating any of them makes the deliverable wo
 | Rod-file ↔ network tools | parent repo `tools.py` (`rods_to_network`, `srs_crystal_rods`), README §5 for the PBC convention | Use these to load structures; do not rewrite the PBC handling. |
 | Crystal reference generator | `srs_crystal_rods` in parent `tools.py` | An ideal srs/single-gyroid-like crystal — your known-physics validation case. |
 | Settled constants | both repos' READMEs | d0 = 0.8 µm, ρ ≈ 0.668 µm⁻³, L = 11.44 µm at N=1000. Never change these. |
-| Tier-0 methodology | `.../Create LSU Structures - ML /TIER0_EXPLAINED.md`, `REPORT.md`, `plans/` | The working style to replicate: profiling tables, pre-registration, adversarial verification records, honest negatives. |
-| The target | `band_montage_398_607_15_non_ideal.png` in this folder | What the deliverable must be able to reproduce for an equivalent structure. |
+| Tier-0 methodology | `.../Create LSU Structures - ML /TIER0_EXPLAINED.md`, `docs/REPORT_N1000.md`, `docs/plans/` | The working style to replicate: profiling tables, pre-registration, adversarial verification records, honest negatives. |
+| The target | `docs/reference/band_montage_398_607_15_non_ideal.png` in this folder | What the deliverable must be able to reproduce for an equivalent structure. |
 
 Also read the memory directories of both previous projects if present — they encode validated
 findings and falsified dead ends. Do not re-derive what is settled there.
 
 ---
 
-## Phase 1 — Investigate (deliverable: `plans/<date>_investigation_report.md`)
+## Phase 1 — Investigate (deliverable: `docs/plans/<date>_investigation_report.md`)
 
 Answer these before writing any solver code, with literature citations and agent verification:
 
@@ -145,13 +145,13 @@ Answer these before writing any solver code, with literature citations and agent
    run on downsized cases (small supercell crystal, small disordered cell). The judge must be
    code we did not write.
 
-## Phase 2 — Plan and pre-register (deliverable: `plans/<date>_preregistered_plan.md`)
+## Phase 2 — Plan and pre-register (deliverable: `docs/plans/<date>_preregistered_plan.md`)
 
 Before building, pre-register: the chosen formulation and solver, the grid resolution and its
 convergence justification, the precision policy, the exact validation gates with numeric
 tolerances (see below), and the performance target (wall-clock for the full 210-band window
 on an N=1000 structure on this GPU). The previous project's
-`plans/2026-07-21_preregistered_plan.md` is the template.
+`docs/plans/2026-07-21_preregistered_plan.md` is the template.
 
 ## Phase 3 — Build
 
@@ -165,7 +165,7 @@ on an N=1000 structure on this GPU). The previous project's
 - Reproduce the montage: same tile layout (15 per row), band-index labels, network wireframe
   + field volume rendering, so the output is directly comparable to the reference image.
 
-## Phase 4 — Validate (deliverable: `plans/<date>_validation_report.md`)
+## Phase 4 — Validate (deliverable: `docs/plans/<date>_validation_report.md`)
 
 Faithfulness gates — all must pass and be recorded:
 
@@ -187,15 +187,15 @@ being claimed as PASS.
 
 1. `README.md` — install, one-command run, hardware notes.
 2. The library + CLI scripts + notebook, tested (`pytest`).
-3. `REPORT.md` — physics + methods + literature + performance table (ms per operator
+3. `docs/REPORT_N1000.md` — physics + methods + literature + performance table (ms per operator
    application, wall-clock per band window vs N and resolution) + validation results +
    honest limitations.
 4. The regenerated montage image(s).
-5. `plans/` — investigation report, pre-registration, verification records.
+5. `docs/plans/` — investigation report, pre-registration, verification records.
 
 ## Rules
 
-- Orient first: read both previous repos' READMEs, TIER0_EXPLAINED.md, REPORT.md, and
+- Orient first: read both previous repos' READMEs, TIER0_EXPLAINED.md, docs/REPORT_N1000.md, and
   memories before writing code.
 - Profile before optimizing; put the measured breakdown table in the report, Tier-0 style.
 - Never weaken a gate to make it pass; a failed gate plus an honest explanation beats a

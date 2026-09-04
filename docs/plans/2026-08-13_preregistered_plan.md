@@ -99,6 +99,6 @@ Allocation env: XLA_PYTHON_CLIENT_PREALLOCATE=false, MEM_FRACTION=0.90.
 `eigenfns/` (operator, solver, chebyshev, structure, render, io), thin CLIs
 (`scripts/run_modes.py`, `scripts/validate.py`, `scripts/make_montage.py`),
 `notebooks/frontend.ipynb`, `tests/` (incl. solver-vs-dense at G=8, golden ff
-with provenance + skipif, judge-protocol smoke), `README.md`, `REPORT.md`,
-`plans/` records. Heavy artifacts in `results/` + `Structures/` (gitignored),
+with provenance + skipif, judge-protocol smoke), `README.md`, `docs/REPORT_N1000.md`,
+`docs/plans/` records. Heavy artifacts in `results/` + `Structures/` (gitignored),
 regenerable by script.

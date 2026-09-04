@@ -3,7 +3,7 @@
 **2026-08-17 · RTX 4080 Laptop (12 GB), 62 GB RAM, 54 GB free disk at kickoff ·
 env `lsu_ml` (JAX 0.10.0 cuda12)**
 
-Companion: `plans/2026-08-17_interior_literature_survey.md` (method literature,
+Companion: `docs/plans/2026-08-17_interior_literature_survey.md` (method literature,
 full citations). Status: §1–§5 measured and final; §6 (bake-off) IN PROGRESS —
 table filled as runs complete.
 

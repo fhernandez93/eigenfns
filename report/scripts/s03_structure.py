@@ -129,7 +129,7 @@ led.add("n1k_ff_128_circ_periodic", filling_fraction(eps1cp), "fraction", rel(ST
 led.add("n1k_periodic_fix_changed_pct_128_circ", 100 * float((eps1c != eps1cp).mean()), "%", rel(STRUCT_N1K))
 del eps1cp
 eps1e256 = rasterize_penlike(rods1, 256, L1, R_ELL, ASPECT_ELL, EPS_ELL, periodic=False)
-led.add("n1k_ff_256_ell", filling_fraction(eps1e256), "fraction", rel(STRUCT_N1K), "REPORT.md: 21.7% at 256^3 (montage convention)")
+led.add("n1k_ff_256_ell", filling_fraction(eps1e256), "fraction", rel(STRUCT_N1K), "docs/REPORT_N1000.md: 21.7% at 256^3 (montage convention)")
 del eps1e256
 eps1e64 = rasterize_penlike(rods1, 64, L1, R_ELL, ASPECT_ELL, EPS_ELL, periodic=False)
 led.add("n1k_ff_64_ell", filling_fraction(eps1e64), "fraction", rel(STRUCT_N1K), "golden 0.21733856 (64^3) in tests")

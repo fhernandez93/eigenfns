@@ -43,7 +43,7 @@ Headline experimental results:
 
 ## 1. What exactly was computed (the target montage)
 
-**Structure.** `band_montage_398_607_15_non_ideal.png`: 210 tiles (14×15), bands
+**Structure.** `docs/reference/band_montage_398_607_15_non_ideal.png`: 210 tiles (14×15), bands
 398→607. The generating pipeline is pinned by the user's statement + the parent
 notebook `20250903_create_h5_from_ends.ipynb`: a 256³ **binary** permittivity
 grid from an N=1000 LSU rod network (box L=11.44 µm), "pen-like" cylinders —

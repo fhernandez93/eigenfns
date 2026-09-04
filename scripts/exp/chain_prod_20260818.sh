@@ -1,6 +1,6 @@
 #!/bin/bash
 # Detached production chain: wait for the I1 chain -> N=10k S_below -> S_above.
-# Pre-registered parameters (plans/2026-08-18_interior_preregistration.md).
+# Pre-registered parameters (docs/plans/2026-08-18_interior_preregistration.md).
 set -e
 cd /home/francisco/Documents/Eigenfuntions
 

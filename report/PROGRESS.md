@@ -13,7 +13,7 @@ Conventions: all Python via `/home/francisco/miniconda3/envs/lsu_ml/bin/python` 
 - The nested `report/.gitignore` un-ignores `*.png/*.pdf/*.npy/*.npz` under `report/` (the repo root ignores them).
 
 ## 1. Timeline
-- Read REPORT.md, REPORT_N10K.md in full; plans/ digested by a subagent (verbatim gate criteria, all four adversarial rounds); gate ledger, all interior_report.json, data shapes, code conventions (`eigenfns/localization.py`, `structure.py`, `operator.py`, `interior.py`, `render.py`) read directly.
+- Read docs/REPORT_N1000.md, docs/REPORT_N10K.md in full; docs/plans/ digested by a subagent (verbatim gate criteria, all four adversarial rounds); gate ledger, all interior_report.json, data shapes, code conventions (`eigenfns/localization.py`, `structure.py`, `operator.py`, `interior.py`, `render.py`) read directly.
 - `s01_spectra.py` … `s06_tables.py`, `fig1`–`fig4`, `figs_sm.py` written and run (all CPU, total < 5 min).
 - `main.tex` drafted; `refs.bib` drafted (46 entries, every one with a DOI); reference-checker subagent launched on `refs.bib` only.
 
@@ -25,7 +25,7 @@ Gap 500|501 elliptical 2.076 % (report 2.08 %), series 2.354/1.929/2.076 %; circ
 ### 2.2 Corrections / precisions adopted in the paper
 1. **Δλ/λ vs Δω/ω.** REPORT_N10K labels the I1 parity "max Δω/ω = 2.4×10⁻⁷"; the scorer computes |Δλ|/λ. The paper writes Δλ/λ = 2.4×10⁻⁷ (Δω/ω = 1.2×10⁻⁷). Same for I4 (4.1×10⁻⁷ is Δλ/λ).
 2. **Cross-slice duplicates.** REPORT_N10K: the two states found by both S_gap and S_below agree to 1.4×10⁻⁶ and 1.7×10⁻⁶ "because both carried the same bias". Recomputed: those are the *raw* differences; the corrected values agree to 7.7×10⁻⁹ and 1.2×10⁻⁸, because the two solves had *different* ‖x‖² (1.0000475 vs 1.0000461). The paper quotes the corrected figure; this is an independent confirmation of the normalisation fix.
-3. **Gap centre ν.** REPORT.md quotes ν ≈ 0.516 for the N=1000 gap centre "at a = 2.288 µm". √(1.9229)·2.288/2π = 0.505 (elliptical), 0.505 (circular). 0.516 is not reproducible with a = 2.288 (it would need a = 2.337 µm). The paper uses 0.505.
+3. **Gap centre ν.** docs/REPORT_N1000.md quotes ν ≈ 0.516 for the N=1000 gap centre "at a = 2.288 µm". √(1.9229)·2.288/2π = 0.505 (elliptical), 0.505 (circular). 0.516 is not reproducible with a = 2.288 (it would need a = 2.337 µm). The paper uses 0.505.
 4. **"ξ = 1.5–2.3 µm (N=1000)"** in REPORT_N10K §0 is the band-500/501 pair (1.47 / 2.30 µm), not a range over edge modes: resolved modes within 0.15 of the N=1000 edges span 1.47–4.95 µm (20 modes, median 3.1). The paper quotes the pair explicitly as the two edge states.
 5. **KPM bracket normalisation** (see §0): the project's `exp_kpm_analyze.py` uses the median DOS over a Chebyshev–Gauss grid in [0.5g, 1.6g]; reproducing that gives the *first-pass* bracket [1.8877, 2.0262] of INV17, not the fine-grid [1.864, 1.996]. The DOS at the registered edges is 158.9/160.2, so the registered brackets correspond to absolute thresholds 80/160/320 states per unit λ (5/10/20 % of ≈1600; the median over the production window is 302, over [1,3] it is 3735). Stated as a convention in the paper.
 6. **Mid-gap count** 5010.3±12.5 is the count below λ = 1.957 (the project's reference σ); at the 10 %-bracket centre 1.930 it is 5008.3±12.6. Both are quoted with their λ.

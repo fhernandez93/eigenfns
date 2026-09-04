@@ -84,7 +84,7 @@ GPU transient budget per job ≤ 9.5 GB (measured headroom above desktop's
 
 ## 6. Deliverables checklist (unchanged from kickoff)
 
-REPORT_N10K.md; extended library + CLIs + tests; README one-command runs;
+docs/REPORT_N10K.md; extended library + CLIs + tests; README one-command runs;
 N=10k gap-edge montage + N=1000 new-decoration montage side-by-side; ξ(ω)
-figure with ceiling marked; plans/ records incl. adversarial verifications;
+figure with ceiling marked; docs/plans/ records incl. adversarial verifications;
 gate_results.json all gates.

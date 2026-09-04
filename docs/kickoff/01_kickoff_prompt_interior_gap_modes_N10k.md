@@ -23,12 +23,12 @@ Deliverables, in order of importance:
    structure/decoration, plus exact eigenvalues for a ~300-band window straddling the gap
    (expected near band ~5,000 by the 0.5 bands/vertex rule — but *located by KPM, not assumed*).
 2. **Eigenfunction tiles**: a montage (same 15-per-row convention as
-   `band_montage_398_607_15_non_ideal.png`) of ε|E|² for the gap-edge window modes.
+   `docs/reference/band_montage_398_607_15_non_ideal.png`) of ε|E|² for the gap-edge window modes.
 3. **Localization analysis**: per-mode participation ratio / IPR and envelope-decay fits,
    reported as ξ(ω) across the window **with the finite-size ceiling stated explicitly**
    (a 24.65 µm periodic box resolves ξ up to only ~L/2 ≈ 12 µm; every mode whose fitted ξ
    exceeds that must be flagged "unresolved — lower bound only", never reported as extended).
-4. **REPORT_N10K.md** + pre-registration and adversarial-verification records in `plans/`,
+4. **docs/REPORT_N10K.md** + pre-registration and adversarial-verification records in `docs/plans/`,
    in the same style as the delivered project.
 
 ## Why this needs new machinery (read before planning)
@@ -63,7 +63,7 @@ its residual proves otherwise.
 ## Non-negotiables (inherited from the original kickoff, all still binding)
 
 1. **Adversarial verification of all physics, numerics, and code** by refutation-tasked
-   subagents; every pass (including "found nothing") recorded in `plans/`.
+   subagents; every pass (including "found nothing") recorded in `docs/plans/`.
 2. **Literature search online before committing to a method.** Read the primary sources on
    interior eigensolvers at scale: folded spectrum (Wang & Zunger / PARSEC-ESCAN lineage),
    Chebyshev filtered subspace iteration (Zhou, Saad et al.; ChASE), FEAST/contour methods,
@@ -88,12 +88,12 @@ its residual proves otherwise.
 | Working Γ-point Maxwell operator, bottom-up LOBPCG, checkpointing | `eigenfns/operator.py`, `solver.py`, `io.py`, `scripts/run_modes.py` | The operator and its GPU environment (platform allocator, cuBLASLt off, `precision=HIGHEST` for fp32 Gram — TF32 silently poisons it) are validated. Reuse verbatim. |
 | Lowpass Chebyshev filter + Lanczos λ_max + KPM counting | `eigenfns/chebyshev.py` | Starting point for (b) and the DOS/counting oracle. Implemented, **never exercised at scale** — shake it out before trusting it. |
 | Rasterizer with `aspect_ratio`, `eps_rod`, `minor_radius` parameters | `eigenfns/structure.py` (`rasterize_penlike`) | The new decoration is pure parameters. Keep the binary-voxel convention; its gap-edge sensitivity is *known* (G5: ~0.3% non-monotone) and must be re-measured, not re-litigated. |
-| **Validated ground truth for the window**: N=1000 production run | `results/prod_N1000_G128/` (611 bands, window modes, ε\|E\|²), `REPORT.md`, `results/gates/` | **The single most valuable asset.** Any interior method must first reproduce these known interior eigenpairs on the same structure/grid/decoration before touching N=10k. MPB parity for the new run reduces to this chain — MPB itself cannot judge N=10k. |
+| **Validated ground truth for the window**: N=1000 production run | `results/prod_N1000_G128/` (611 bands, window modes, ε\|E\|²), `docs/REPORT_N1000.md`, `results/gates/` | **The single most valuable asset.** Any interior method must first reproduce these known interior eigenpairs on the same structure/grid/decoration before touching N=10k. MPB parity for the new run reduces to this chain — MPB itself cannot judge N=10k. |
 | Montage + rendering | `scripts/make_montage.py`, `eigenfns/render.py` | Reuse for the tiles. |
-| Gate framework + records | `scripts/validate.py`, `plans/`, `results/gates/` | Extend, same style. |
+| Gate framework + records | `scripts/validate.py`, `docs/plans/`, `results/gates/` | Extend, same style. |
 | Methodology + hardware quirk memories | project memory dir (`tier0-methodology`, `gpu-jax-quirks`, `project-final-state`) | TF32/Gram, fixed shapes under jit, orphaned-process hazard, ±2 band-numbering open item (we emit MPB numbering; bands 1–2 are ω=0), rfft-at-Γ ~2× headroom (optional, only with parity re-check). |
 
-## Phase 1 — Investigate (deliverable: `plans/<date>_interior_investigation.md`)
+## Phase 1 — Investigate (deliverable: `docs/plans/<date>_interior_investigation.md`)
 
 1. **KPM shakeout + DOS of the target.** Validate KPM counting against the known N=1000
    spectrum (count in the production window vs the 611 known eigenvalues — exact agreement).
@@ -118,7 +118,7 @@ its residual proves otherwise.
    will use. The G5 lesson stands: gap-edge accuracy is rasterization-limited — expect ~0.3%
    scatter and design the sweep to *measure* it, not hide it.
 
-## Phase 2 — Pre-register (deliverable: `plans/<date>_interior_preregistration.md`, frozen before build-out)
+## Phase 2 — Pre-register (deliverable: `docs/plans/<date>_interior_preregistration.md`, frozen before build-out)
 
 The chosen method and its parameters (filter degree / σ placement / inner-solve tolerances),
 grid(s), window definition protocol, precision policy (inherit fp32-compute/fp64-Gram unless
@@ -137,7 +137,7 @@ narrower window / coarser grid, decided *now*, not mid-run).
 - Montage + localization analysis scripts reusing `render.py`; IPR and envelope-decay fit
   with the ξ ceiling logic built in.
 
-## Phase 4 — Validate (deliverable: `plans/<date>_interior_validation.md` + `results/gates/`)
+## Phase 4 — Validate (deliverable: `docs/plans/<date>_interior_validation.md` + `results/gates/`)
 
 | gate | test | tolerance (pre-register exact numbers) |
 |---|---|---|
@@ -153,7 +153,7 @@ narrower window / coarser grid, decided *now*, not mid-run).
 
 ## Final deliverables
 
-1. `REPORT_N10K.md` — methods + literature + the bake-off table + performance breakdown
+1. `docs/REPORT_N10K.md` — methods + literature + the bake-off table + performance breakdown
    (ms/matvec at each grid, total matvecs, wall-clock) + DOS figure + gap numbers + ξ(ω)
    figure with the ceiling marked + honest limitations.
 2. Extended library + CLIs + tests; updated `README.md` (one-command runs for DOS, interior
@@ -161,12 +161,12 @@ narrower window / coarser grid, decided *now*, not mid-run).
 3. The N=10k gap-edge montage; the N=1000 new-decoration montage from I4 as a finite-size
    comparison (small-box vs 24.65 µm box localization, same decoration — state the ξ-ceiling
    caveat for both).
-4. `plans/` records: investigation, pre-registration, adversarial verifications, gate results
+4. `docs/plans/` records: investigation, pre-registration, adversarial verifications, gate results
    (all gates in `gate_results.json` this time — G9's omission was an open item).
 
 ## Rules
 
-- Orient first: read `REPORT.md`, `plans/`, and the project memories before writing code;
+- Orient first: read `docs/REPORT_N1000.md`, `docs/plans/`, and the project memories before writing code;
   do not re-derive settled constants (d0 = 0.8 µm, L rule, density) or re-open settled
   conventions (binary voxels, MPB numbering) — parameter changes yes, convention changes no.
 - Profile before optimizing; quote speedups at the size measured; label extrapolations.

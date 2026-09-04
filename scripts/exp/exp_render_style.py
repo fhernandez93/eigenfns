@@ -1,6 +1,6 @@
 """Prototype the montage tile renderer: grey semi-transparent network volume +
 orange/red field energy volume, perspective camera, white background — to match
-band_montage_398_607_15_non_ideal.png's style.
+docs/reference/band_montage_398_607_15_non_ideal.png's style.
 
 Renders the N=1000 structure at 128^3 with a quickly-computed low mode's
 eps|E|^2 (CPU, small solve at 48^3 upsampled) just to derisk the pipeline.

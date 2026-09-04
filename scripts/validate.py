@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Validation gates (pre-registered in plans/2026-08-13_preregistered_plan.md).
+"""Validation gates (pre-registered in docs/plans/2026-08-13_preregistered_plan.md).
 
 Each gate prints PASS/FAIL with its measured numbers and writes a JSON record
 to results/gates/gate_results.json. Gates that need artifacts not yet computed

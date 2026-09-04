@@ -13,10 +13,10 @@ diagnoses, the rest recorded open with reasons**. No computation is pending. Eve
 pre-registration's rule was that a FAIL plus an honest explanation beats a
 massaged PASS, and three of them are exactly that.
 
-Companion records: `plans/2026-08-17_interior_investigation.md` (Phase 1,
-all measurements), `plans/2026-08-17_interior_literature_survey.md`,
-`plans/2026-08-18_interior_preregistration.md` (frozen + Amendment A1),
-`plans/2026-08-17_adversarial_verification.md`, `results/gates/gate_results.json`.
+Companion records: `docs/plans/2026-08-17_interior_investigation.md` (Phase 1,
+all measurements), `docs/plans/2026-08-17_interior_literature_survey.md`,
+`docs/plans/2026-08-18_interior_preregistration.md` (frozen + Amendment A1),
+`docs/plans/2026-08-17_adversarial_verification.md`, `results/gates/gate_results.json`.
 
 ---
 
@@ -417,7 +417,7 @@ Bake-off cost geometry: the full 317-band window at 256³ projects to 10–15
 GPU-days → the pre-registered descope fired **at registration** (192³ +
 128-band gap-edge window + I6 anchors at 160³/256³), not mid-run.
 
-## 3. Gates (pre-registered `plans/2026-08-18_interior_preregistration.md`; ledger `results/gates/gate_results.json`)
+## 3. Gates (pre-registered `docs/plans/2026-08-18_interior_preregistration.md`; ledger `results/gates/gate_results.json`)
 
 | gate | status | measured |
 |---|---|---|
@@ -597,8 +597,8 @@ investigation §6):
 
 ## 7. References
 
-As in `REPORT.md` §7 plus the interior-method survey (full citations in
-`plans/2026-08-17_interior_literature_survey.md`): Wang & Zunger JCP 100,
+As in `docs/REPORT_N1000.md` §7 plus the interior-method survey (full citations in
+`docs/plans/2026-08-17_interior_literature_survey.md`): Wang & Zunger JCP 100,
 2394 (1994); Canning et al. PARA'08; Fang & Saad SISC 34, A2220 (2012);
 Pieper et al. JCP 325, 226 (2016) [ChebFD]; Li, Xi, Erlandson, Saad SISC 41,
 C393 (2019) [EVSL]; Winkelmann, Springer, Di Napoli ACM TOMS 45, 21 (2019)

@@ -1,7 +1,7 @@
 """Deflated block LOBPCG for the transverse Maxwell operator.
 
 Numerically-hardened design (each point was a measured failure mode at fp32,
-see plans/2026-08-12_orientation_and_experiments_log.md):
+see docs/plans/2026-08-12_orientation_and_experiments_log.md):
 
 - all small dense algebra (Gram eigendecompositions, Rayleigh-Ritz) on host fp64;
 - SVQB drop thresholds above the fp32 Gram noise floor (1e-5 relative);

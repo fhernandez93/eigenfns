@@ -66,7 +66,7 @@ Deflated block LOBPCG~\cite{Knyazev2001,Duersch2018} (\texttt{eigenfns/solver.py
 \emph{TF32.} On Ada GPUs XLA's default runs fp32 matmuls in TF32 (10-bit mantissa); measured at $64^3$ the Gram/rotation accuracy floors at $\sim10^{-3}$ and block residuals plateau at $\sim7\times10^{-3}$. Every matmul/tensordot carries \texttt{precision=HIGHEST}. FFTs are unaffected. A second precision trap, found in adversarial round 3 of the interior project, is described in Sec.~\ref{sec:rayleigh}.
 
 \subsection{Gates G1--G9}
-Pre-registered on 2026-08-13 (thresholds verbatim in \path{plans/2026-08-13_preregistered_plan.md}); outcomes in Table~\ref{tab:gatesG}. The judge protocol for parity is: MPB 1.11.1 reads our $\varepsilon$ grid from file (\texttt{epsilon-input-file}), we read back MPB's \texttt{-epsilon.h5} and solve on \emph{that} grid, so the two codes see the identical discrete problem.
+Pre-registered on 2026-08-13 (thresholds verbatim in \path{docs/plans/2026-08-13_preregistered_plan.md}); outcomes in Table~\ref{tab:gatesG}. The judge protocol for parity is: MPB 1.11.1 reads our $\varepsilon$ grid from file (\texttt{epsilon-input-file}), we read back MPB's \texttt{-epsilon.h5} and solve on \emph{that} grid, so the two codes see the identical discrete problem.
 
 \begin{table}
 \caption{$N=1000$ gates (pre-registered criteria; recomputed values where the data allow).}
@@ -170,7 +170,7 @@ The registered estimator (I2 v1: two independent \texttt{kpm\_count\_below} call
 Registered 2026-08-18 with Amendments A1 (polish cap $4\to6$ after the first I1 run found 49/50: a near-degenerate pair with $\Delta\lambda=7\times10^{-4}$ needed outers 5--6), A2 (in-gap states: the ``gap empty'' clause of I5 will be reported failed; $S_{\rm gap}$ added), A3 (completeness estimator, above). Outcomes in Table~\ref{tab:gatesI}: I1, I2 (v2), I4, I6, I7 and I8 PASS; the seam test is partial; I2 (v1), I3 and I5 FAIL; I9 done.
 
 \begin{table}
-\caption{$N=10^4$ interior gates (criteria verbatim from \texttt{plans/2026-08-18\_interior\_preregistration.md}).}
+\caption{$N=10^4$ interior gates (criteria verbatim from \texttt{docs/plans/2026-08-18\_interior\_preregistration.md}).}
 \label{tab:gatesI}
 \begin{tabular}{@{}p{1.9cm}p{4.8cm}p{1.8cm}p{7.1cm}@{}}
 \hline\hline
@@ -324,7 +324,7 @@ Table~\ref{tab:states} lists all 133 certified $N=10^4$ states. The 210-row $N=1
 \end{figure}
 \begin{figure}
 \includegraphics[width=0.75\textwidth]{figS_montage_sbs}
-\caption{Left: the original cluster montage \protect\path{band_montage_398_607_15_non_ideal.png}; right: our regeneration (same layout). The grey/bright row pattern (localized band-edge rows, extended deep-window rows) is reproduced tile for tile in character; the $\pm2$ labelling ambiguity is not resolved by this comparison.}
+\caption{Left: the original cluster montage \protect\path{docs/reference/band_montage_398_607_15_non_ideal.png}; right: our regeneration (same layout). The grey/bright row pattern (localized band-edge rows, extended deep-window rows) is reproduced tile for tile in character; the $\pm2$ labelling ambiguity is not resolved by this comparison.}
 \label{figS_montage_sbs}
 \end{figure}
 \begin{figure}

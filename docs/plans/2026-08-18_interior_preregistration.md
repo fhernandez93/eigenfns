@@ -3,7 +3,7 @@
 Frozen before build-out, per methodology. Supersedes the 2026-08-17 DRAFT
 (kept for the record). No gate below may be weakened after this point; a FAIL
 + explanation beats a massaged PASS. Basis: measured Phase 1 numbers
-(`plans/2026-08-17_interior_investigation.md`) and the completed bake-off.
+(`docs/plans/2026-08-17_interior_investigation.md`) and the completed bake-off.
 
 ## 1. Problem (final)
 

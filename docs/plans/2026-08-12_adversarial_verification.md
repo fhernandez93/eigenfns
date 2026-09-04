@@ -65,7 +65,7 @@ Independent recomputation CONFIRMED to all printed digits: G3w (3.5458e-5 max,
 (band-500 spread = 55× the Weyl bound, 1800× the measured solver error —
 rasterization, not solver).
 
-REFUTED/OVERBROAD, all corrected in REPORT.md: §0 "all gates passed" (G5
+REFUTED/OVERBROAD, all corrected in docs/REPORT_N1000.md: §0 "all gates passed" (G5
 failed); "50×" headline (measured pairings: 4.3× CPU-matched / ~18× GPU
 time-to-300 / 34× full-window; tolerance+precision+threading confounds now
 stated); G1 presented as folded (in truth: not run; no k≠Γ validation

@@ -6,4 +6,5 @@ Structures/
 __pycache__/
 .ipynb_checkpoints/
 *.png
-!band_montage_398_607_15_non_ideal.png
+!docs/reference/band_montage_398_607_15_non_ideal.png
+.pytest_cache/

@@ -3,9 +3,9 @@
 **Project report — 2026-08 · RTX 4080 Laptop (12 GB), 62 GB RAM · env `lsu_ml`
 (JAX 0.10.0 cuda12) · judge: MPB 1.11.1 (CPU)**
 
-Companion documents: `plans/2026-08-12_investigation_report.md` (Phase 1),
-`plans/2026-08-13_preregistered_plan.md` (frozen gates), `plans/
-2026-08-12_adversarial_verification.md` (refutation records), `plans/
+Companion documents: `docs/plans/2026-08-12_investigation_report.md` (Phase 1),
+`docs/plans/2026-08-13_preregistered_plan.md` (frozen gates), `docs/plans/
+2026-08-12_adversarial_verification.md` (refutation records), `docs/plans/
 2026-08-12_orientation_and_experiments_log.md` (every measurement + failure).
 
 ---
@@ -14,7 +14,7 @@ Companion documents: `plans/2026-08-12_investigation_report.md` (Phase 1),
 
 We built a **local GPU Maxwell eigensolver** that reproduces, on a 12 GB
 laptop card, the cluster-class computation behind
-`band_montage_398_607_15_non_ideal.png`: the Γ-point electromagnetic
+`docs/reference/band_montage_398_607_15_non_ideal.png`: the Γ-point electromagnetic
 eigenmodes (bands 398–607) of a 3-D disordered LSU photonic network (N = 1000
 vertices, periodic supercell, "non-ideal" DLW-style elliptical rods, ε = 8.57).
 

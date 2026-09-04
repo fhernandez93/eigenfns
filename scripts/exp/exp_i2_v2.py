@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Gate I2 v2 — completeness audit with an edge-leakage-corrected estimator.
 
-Why v2 (v1 recorded as a failed design, see plans/):
+Why v2 (v1 recorded as a failed design, see docs/plans/):
   v1 counted N(λ_hi) − N(λ_lo) with two independent `kpm_count_below` calls.
   Each counts ~5,000 states, so its stochastic error is ~√(2·5000/n_probe) ≈ 26
   bands, and the two calls were combined as if independent — an error bar 50×

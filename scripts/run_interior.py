@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """Interior gap-window eigenmodes via two-stage bandpass ChebSI (pre-registered
-method, plans/2026-08-18_interior_preregistration.md).
+method, docs/plans/2026-08-18_interior_preregistration.md).
 
     conda run --no-capture-output -n lsu_ml python scripts/run_interior.py \
         <ends.txt> --grid 192 --lam-lo 1.757 --lam-hi 1.930 --m 104 \

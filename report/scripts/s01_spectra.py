@@ -34,7 +34,7 @@ led.add("n1k_ell_gap_hi_128", b501, "um^-2", rel(USB / "eigenvalues_all.npy"),
         "MPB band 501 (bottom of upper band), 128^3")
 gap128 = rel_gap(b500, b501)
 led.add("n1k_ell_gap_pct_128", 100 * gap128, "%", rel(USB / "eigenvalues_all.npy"),
-        "Delta nu / nu_mid = 2 (w501 - w500)/(w501 + w500); REPORT.md quotes 2.08%")
+        "Delta nu / nu_mid = 2 (w501 - w500)/(w501 + w500); docs/REPORT_N1000.md quotes 2.08%")
 led.add("n1k_ell_gap_center_nu", float(nu_from_lam(0.5 * (b500 + b501))), "dimensionless",
         rel(USB / "eigenvalues_all.npy"), "nu = omega a / 2 pi c with a = L/5 = 2.288 um")
 # largest interior spacing check: is 500|501 the largest gap in the window?
@@ -47,7 +47,7 @@ led.add("n1k_ell_largest_spacing_rel_gap_pct", 100 * rel_gap(ev_ell[imax], ev_el
 # the 114|115 shell jump disclosed in G8
 j = 114 - 3
 led.add("n1k_ell_jump_114_115_rel", 100 * rel_gap(ev_ell[j], ev_ell[j + 1]), "%",
-        rel(USB / "eigenvalues_all.npy"), "low-band shell-structure jump disclosed in REPORT.md G8")
+        rel(USB / "eigenvalues_all.npy"), "low-band shell-structure jump disclosed in docs/REPORT_N1000.md G8")
 # window bands 398-607
 wv = np.load(USB / "window_eigenvalues.npy").astype(np.float64)
 assert wv.shape == (210,)
@@ -65,7 +65,7 @@ for G in (64, 96, 128):
     series[G] = 100 * 2 * (w501 - w500) / (w501 + w500)
 led.add("n1k_ell_gap_pct_series_64_96_128", [series[64], series[96], series[128]], "%",
         rel(RES / "gates" / "gate_results.json"),
-        "G5 ledger sqrt(lambda) of bands 500/501; REPORT.md quotes 2.35 -> 1.93 -> 2.08%")
+        "G5 ledger sqrt(lambda) of bands 500/501; docs/REPORT_N1000.md quotes 2.35 -> 1.93 -> 2.08%")
 assert abs(series[128] - 100 * gap128) < 0.01, (series[128], gap128)
 # 64^3 gap from the full 680-band 64^3 spectrum (independent file)
 e64 = np.load(RES / "exp" / "e3_vals_G64.npy")
@@ -75,7 +75,7 @@ led.add("n1k_ell_gap_edges_64", [e64[500 - 3], e64[501 - 3]], "um^-2", rel(RES /
 # G5 non-monotone spread on band 500 and Richardson-type residuals
 spread500 = 100 * (max(w[500][f"w{G}"] for G in (64, 96, 128)) - min(w[500][f"w{G}"] for G in (64, 96, 128))) / w[500]["w128"]
 led.add("n1k_ell_g5_band500_spread_pct", spread500, "%", rel(RES / "gates" / "gate_results.json"),
-        "max-min of sqrt(lambda) over 64/96/128 relative to 128^3; REPORT.md quotes 0.27%")
+        "max-min of sqrt(lambda) over 64/96/128 relative to 128^3; docs/REPORT_N1000.md quotes 0.27%")
 led.add("n1k_ell_g5_worst_est_resid_128_pct", 100 * g5["worst_est_resid_128_rel"], "%",
         rel(RES / "gates" / "gate_results.json"), "worst Richardson residual among the 5 monotone bands")
 led.add("n1k_ell_g5_monotone_bands", [b["mpb_band"] for b in g5["bands"] if b["monotone"]], "MPB band",
@@ -142,7 +142,7 @@ led.add("n10k_bulk_median_spacing", float(np.median(np.diff(lam[lam < GAP_LO_10K
                                                      + np.diff(lam[lam > GAP_HI_10K]).tolist())),
         "um^-2", rel(W / "window_eigenvalues.npy"), "median spacing outside the KPM bracket; REPORT_N10K 1.35e-3")
 led.add("n10k_median_spacing_all", float(np.median(d10)), "um^-2", rel(W / "window_eigenvalues.npy"))
-led.add("n10k_ingap_kpm_bracket", [GAP_LO_10K, GAP_HI_10K], "um^-2", "REPORT_N10K.md",
+led.add("n10k_ingap_kpm_bracket", [GAP_LO_10K, GAP_HI_10K], "um^-2", "docs/REPORT_N10K.md",
         "KPM 10%-criterion bracket; s04_kpm.py recomputes")
 led.add("n10k_ingap_states_lam", lam[ingap_mask], "um^-2", rel(W / "window_eigenvalues.npy"),
         "all certified states inside [1.864, 1.996]")
@@ -333,7 +333,7 @@ c64 = np.load(RES / "exp" / "prec48_c64.npy")
 c128 = np.load(RES / "exp" / "prec48_c128.npy")
 dww9 = np.abs(np.sqrt(c64) - np.sqrt(c128)) / np.sqrt(c128)
 led.add("g9_n_bands", len(c64), "bands", rel(RES / "exp" / "prec48_c64.npy"))
-led.add("g9_max_dw_w", float(dww9.max()), "relative", rel(RES / "exp" / "prec48_c128.npy"), "REPORT.md: 2.4e-7 over 96 bands")
+led.add("g9_max_dw_w", float(dww9.max()), "relative", rel(RES / "exp" / "prec48_c128.npy"), "docs/REPORT_N1000.md: 2.4e-7 over 96 bands")
 
 # ---------------------------------------------------------------- MPB parity
 def mpb_freqs(path):
@@ -357,11 +357,11 @@ led.add("mpb_parity_32_n_bands", n32, "bands", rel(RES / "exp" / "mpb32.out"))
 led.add("mpb_parity_32_max_dw_w", mx32, "relative", rel(RES / "exp" / "parity32_ours.npy"), f"worst at MPB band {b32}")
 led.add("mpb_parity_32_median_dw_w", md32, "relative", rel(RES / "exp" / "parity32_ours.npy"))
 n64, mx64, md64, b64 = parity(np.load(RES / "gates" / "parity64_ours.npy"), RES / "gates" / "mpb64.out", L_N1K)
-led.add("mpb_parity_64_n_bands", n64, "bands", rel(RES / "gates" / "mpb64.out"), "G3: REPORT.md 298 bands, 8.95e-6")
+led.add("mpb_parity_64_n_bands", n64, "bands", rel(RES / "gates" / "mpb64.out"), "G3: docs/REPORT_N1000.md 298 bands, 8.95e-6")
 led.add("mpb_parity_64_max_dw_w", mx64, "relative", rel(RES / "gates" / "parity64_ours.npy"), f"worst at MPB band {b64}")
 led.add("mpb_parity_64_median_dw_w", md64, "relative", rel(RES / "gates" / "parity64_ours.npy"))
 n64w, mx64w, md64w, b64w = parity(np.load(RES / "gates" / "parity64w_ours.npy"), RES / "gates" / "mpb64w.out", L_N1K)
-led.add("mpb_parity_64w_n_bands", n64w, "bands", rel(RES / "gates" / "mpb64w.out"), "G3w: REPORT.md 658 bands, 3.5e-5")
+led.add("mpb_parity_64w_n_bands", n64w, "bands", rel(RES / "gates" / "mpb64w.out"), "G3w: docs/REPORT_N1000.md 658 bands, 3.5e-5")
 led.add("mpb_parity_64w_max_dw_w", mx64w, "relative", rel(RES / "gates" / "parity64w_ours.npy"), f"worst at MPB band {b64w}")
 led.add("mpb_parity_64w_median_dw_w", md64w, "relative", rel(RES / "gates" / "parity64w_ours.npy"))
 # MPB reported fill fraction at 32^3 (epsilon line)
@@ -398,7 +398,7 @@ led.add("i2_subgap_missed", [i2["missed_subgap"], i2["missed_subgap_se"]], "stat
         "certifying sub-interval [1.9063, 1.9606]")
 led.add("i2_window_missed", [i2["missed_window"], i2["missed_window_se"]], "states", rel(RES / "gates" / "gate_results.json"),
         "consistency check only (leakage model biased by >= 1.23 +- 0.23, N=1000 calibration)")
-led.add("i2_subgap_interval", [1.9063, 1.9606], "um^-2", "REPORT_N10K.md", "")
+led.add("i2_subgap_interval", [1.9063, 1.9606], "um^-2", "docs/REPORT_N10K.md", "")
 i2c = g["I2 calibration (N=1000 I1 slice, v2 estimator)"]
 led.add("i2_calibration_missed", [i2c["missed_window"], i2c["missed_window_se"]], "states", rel(RES / "gates" / "gate_results.json"))
 i2p = g["I2 completeness (N=10k periodic gap window, v2 estimator)"]

@@ -7,7 +7,7 @@ nothing"). Fix status tracked inline.
 
 ## Round 1 — 2026-08-17, Phase 1 investigation claims
 
-Scope: `plans/2026-08-17_interior_investigation.md` + `scripts/exp/exp_kpm_dos.py`,
+Scope: `docs/plans/2026-08-17_interior_investigation.md` + `scripts/exp/exp_kpm_dos.py`,
 `exp_kpm_analyze.py`, `exp_ff_calibration_n10k.py`, `eigenfns/interior.py`,
 `eigenfns/localization.py`, saved KPM moments, calibration JSON, bake-off logs.
 Reviewer recomputed from artifacts (CPU-only) — all recomputable figures
@@ -143,7 +143,7 @@ genuine rare-region states must survive. Reported either way.
 The report claimed KPM/eigensolver agreement on the in-gap count (11.18 ± 0.58
 vs 10) "ruled out an artifact". It does not: the KPM DOS is computed from the
 *same rasterized ε(r)* and therefore sees the same seam. It rules out an
-**eigensolver** artifact only. Corrected in REPORT_N10K.md, with the flawed
+**eigensolver** artifact only. Corrected in docs/REPORT_N10K.md, with the flawed
 reasoning retained and marked, not deleted.
 
 ### Note on scope

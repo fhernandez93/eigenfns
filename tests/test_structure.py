@@ -56,7 +56,7 @@ def test_binary_values_only(gold):
     assert len(u) == 2 and u[0] == 1.0 and abs(u[1] - 2.9275**2) < 1e-4
 
 
-# --- periodic wrapping (2026-08-24; see plans/ round-2 adversarial record) ---
+# --- periodic wrapping (2026-08-24; see docs/plans/ round-2 adversarial record) ---
 
 def test_periodic_wraps_a_face_straddling_rod():
     """A short rod centred on the +x face must appear on BOTH sides.

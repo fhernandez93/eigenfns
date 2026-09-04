@@ -1,6 +1,6 @@
 """E-parity-32: our solver vs MPB on MPB's own effective 32^3 grid (disordered N=1000).
 
-Protocol (see plans/2026-08-12 log): rasterize binary eps -> h5 -> MPB CLI run
+Protocol (see docs/plans/2026-08-12 log): rasterize binary eps -> h5 -> MPB CLI run
 (file input => scalar eps, no tensor smoothing) -> read back <tag>-epsilon.h5:data
 (the exact grid MPB used) -> run our solver on that grid -> compare eigenvalues.
 

@@ -9,7 +9,7 @@
  "a_norm_um": {
   "notes": "a = L_1000/5 = 2.288 um; identical for N=10k (density-matched: L_10k/1250^(1/3))",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
-  "source_file": "REPORT.md",
+  "source_file": "docs/REPORT_N1000.md",
   "unit": "um",
   "value": 2.288
  },
@@ -171,7 +171,7 @@
  "matvec_ms_G128_n1k": {
   "notes": "batched, 128^3 c64 (log-quoted; no JSON)",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
-  "source_file": "REPORT.md / plans log",
+  "source_file": "docs/REPORT_N1000.md / plans log",
   "unit": "ms/vector",
   "value": 2.7
  },
@@ -199,7 +199,7 @@
  "matvec_ms_G256_n1k_log": {
   "notes": "N=1000 256^3, chunks <= 4 (log-quoted)",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
-  "source_file": "REPORT.md",
+  "source_file": "docs/REPORT_N1000.md",
   "unit": "ms/vector",
   "value": 28.6
  },
@@ -268,7 +268,7 @@
  "n1k_prod_wall_s": {
   "notes": "5 h 32 m, 611 bands, 128^3",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s06_tables.py",
-  "source_file": "REPORT.md / results/prod_N1000_G128.log",
+  "source_file": "docs/REPORT_N1000.md / results/prod_N1000_G128.log",
   "unit": "s",
   "value": 19908
  },

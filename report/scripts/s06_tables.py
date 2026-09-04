@@ -18,7 +18,7 @@ from common import (A_NORM_N1K, GAP_HI_10K, GAP_LO_10K, L_N1K, L_N10K, RES, TAB,
 
 led = Ledger(__file__)
 TAB.mkdir(parents=True, exist_ok=True)
-led.add("a_norm_um", A_NORM_N1K, "um", "REPORT.md", "a = L_1000/5 = 2.288 um; identical for N=10k (density-matched: L_10k/1250^(1/3))")
+led.add("a_norm_um", A_NORM_N1K, "um", "docs/REPORT_N1000.md", "a = L_1000/5 = 2.288 um; identical for N=10k (density-matched: L_10k/1250^(1/3))")
 led.add("a_norm_n10k_check", L_N10K / 1250 ** (1 / 3), "um", "geometry")
 
 
@@ -96,8 +96,8 @@ for G in (192, 224, 256, 288):
     led.add(f"matvec_ms_G{G}", t["ms_per_vec"], "ms/vector", rel(RES / "exp" / f"n10k_G{G}_timing.json"), f"chunk {t['chunk']}, degree {t['degree']} x {t['probes']} probes")
     led.add(f"lam_max_G{G}", t["lam_max"], "um^-2", rel(RES / "exp" / f"n10k_G{G}_timing.json"))
     led.add(f"vector_GB_G{G}", 2 * G ** 3 * 8 / 1e9, "GB", "geometry", "two complex64 transverse components")
-led.add("matvec_ms_G128_n1k", 2.7, "ms/vector", "REPORT.md / plans log", "batched, 128^3 c64 (log-quoted; no JSON)")
-led.add("matvec_ms_G256_n1k_log", 28.6, "ms/vector", "REPORT.md", "N=1000 256^3, chunks <= 4 (log-quoted)")
+led.add("matvec_ms_G128_n1k", 2.7, "ms/vector", "docs/REPORT_N1000.md / plans log", "batched, 128^3 c64 (log-quoted; no JSON)")
+led.add("matvec_ms_G256_n1k_log", 28.6, "ms/vector", "docs/REPORT_N1000.md", "N=1000 256^3, chunks <= 4 (log-quoted)")
 with open(TAB / "timing.tex", "w") as f:
     f.write("\\begin{tabular}{@{}lrrrr@{}}\n\\hline\\hline\n grid & vox/$\\mu$m & $\\Theta$ apply (ms/vector) & $\\lambda_{\\max}$ ($\\mu$m$^{-2}$) & vector (GB) \\\\\n\\hline\n")
     for G in (192, 224, 256, 288):
@@ -124,8 +124,8 @@ led.add("runs_table_rows", [{"run": p[0], "grid": p[1], "window": p[2], "m": p[3
 tot_h = sum(p[9] for p in prod[:3]) / 3600
 led.add("n10k_production_total_wall_h", tot_h, "h", "results/n10k_G192_S*/interior_report.json", "three slices")
 led.add("n10k_production_total_theta_apps", sum(p[8] for p in prod[:3]), "applications", "results/n10k_G192_S*/interior_report.json")
-# N=1000 bottom-up production figures (log-quoted in REPORT.md)
-led.add("n1k_prod_wall_s", 19908, "s", "REPORT.md / results/prod_N1000_G128.log", "5 h 32 m, 611 bands, 128^3")
+# N=1000 bottom-up production figures (log-quoted in docs/REPORT_N1000.md)
+led.add("n1k_prod_wall_s", 19908, "s", "docs/REPORT_N1000.md / results/prod_N1000_G128.log", "5 h 32 m, 611 bands, 128^3")
 log = (RES / "prod_N1000_G128.log").read_text()
 mm = re.findall(r"solve wall (\d+)s, theta applications (\d+)", log)
 if mm:
