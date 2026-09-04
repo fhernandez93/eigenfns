@@ -32,7 +32,7 @@
  "fig2_top_bands": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/fig2_tiles.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/tiles",
+  "source_file": "/home/francisco/Documents/Eigenfuntions/results/prod_N1000_G128/tiles",
   "unit": "MPB band",
   "value": [
    398,

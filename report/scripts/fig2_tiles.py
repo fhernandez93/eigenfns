@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """Fig. 2: eigenfunction tiles (eps|E|^2, montage convention) -- top row the
-N=1000 elliptical production window around the gap (USB tiles, bands
+N=1000 elliptical production window around the gap (PROD_N1K tiles, bands
 398 / 498 / 499 / 500 | 501 / 502 / 607); bottom row seven N=10^4 states from
 extended (window bottom) through edge and in-gap localized states to extended
 (window top). Tiles are the project's renders (pyvista volume render of
@@ -14,7 +14,7 @@ import json
 import numpy as np
 from PIL import Image
 
-from common import FIG, RES, TAB, USB, Ledger, load_json
+from common import FIG, RES, TAB, PROD_N1K, Ledger, load_json
 from figstyle import DOUBLE, plt, save
 
 led = Ledger(__file__)
@@ -47,7 +47,7 @@ fig, axs = plt.subplots(2, 7, figsize=(DOUBLE, 2.2))
 fig.subplots_adjust(left=0.035, right=0.995, top=0.91, bottom=0.005, wspace=0.03, hspace=0.30)
 for j, b in enumerate(top_bands):
     ax = axs[0, j]
-    im = crop(Image.open(USB / "tiles" / f"band_{b:04d}.png").convert("RGB"))
+    im = crop(Image.open(PROD_N1K / "tiles" / f"band_{b:04d}.png").convert("RGB"))
     ax.imshow(im, interpolation="lanczos")
     ax.set_axis_off()
     r = loce[b - 398]
@@ -64,7 +64,7 @@ axs[0, 0].text(-0.03, 0.5, "(a) " r"$N=10^3$" "\n" r"$L=11.4\,\mu$m", transform=
 axs[1, 0].text(-0.03, 0.5, "(b) " r"$N=10^4$" "\n" r"$L=24.6\,\mu$m", transform=axs[1, 0].transAxes, rotation=90, va="center", ha="right", fontsize=7)
 # mark gap position
 save(fig, str(FIG / "fig2_tiles"))
-led.add("fig2_top_bands", top_bands, "MPB band", str(USB / "tiles"))
+led.add("fig2_top_bands", top_bands, "MPB band", str(PROD_N1K / "tiles"))
 led.add("fig2_bottom_lams", [float(lam10[i]) for i in bot_idx], "um^-2", "results/n10k_G192_window/tiles")
 led.add("fig2_bottom_tiles", [f"band_{4942 + i:04d}.png" for i in bot_idx], "file", "results/n10k_G192_window/tiles")
 

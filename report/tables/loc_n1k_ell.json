@@ -4,8 +4,8 @@
  "G": 128,
  "dx": 0.089375,
  "shell_volume_fraction": 0.090850830078125,
- "source_energy_density": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
- "source_lam": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_eigenvalues.npy",
+ "source_energy_density": "results/prod_N1000_G128/window_energy_density.npy",
+ "source_lam": "results/prod_N1000_G128/window_eigenvalues.npy",
  "rows": [
   {
    "i": 0,

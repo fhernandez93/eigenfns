@@ -7,7 +7,7 @@ Runs (mmap, CPU):
   n10k_G192_window      133 modes @192^3  (N=10k, circular decoration)
   i4_n1000_circ_G128    210 modes @128^3  (N=1000, circular, bottom-up)
   i4int_n1000_below/above 216 modes @128^3 (N=1000, circular, interior solver)
-  USB prod_N1000_G128   210 modes @128^3  (N=1000, elliptical, bottom-up)
+  results/prod_N1000_G128   210 modes @128^3  (N=1000, elliptical, bottom-up)
   n10k_G192_gap_periodic_v2  7 modes @192^3 (seam-free re-solve)
 
 Also: fit-range sensitivity (r_hi_frac 0.95 -> 0.60), a PR-based length
@@ -23,7 +23,7 @@ import time
 
 import numpy as np
 
-from common import (GAP_HI_10K, GAP_LO_10K, L_N1K, L_N10K, RES, TAB, USB,
+from common import (GAP_HI_10K, GAP_LO_10K, L_N1K, L_N10K, RES, TAB, PROD_N1K,
                     Ledger, load_json, rel)
 from eigenfns.localization import fit_xi, participation  # numpy-only module
 
@@ -291,13 +291,13 @@ led.add("i8_recompute_gap_edge_max_median", [float(max(diffs_edge)), float(np.me
         rel(B / "window_energy_density.npy"), "ledger: max 8.7e-4, median 6.4e-5")
 led.add("i8_recompute_all_max_median", [float(max(diffs)), float(np.median(diffs))] if diffs else None, "relative", rel(B / "window_energy_density.npy"))
 
-# ------------------------------------------------------------------ N=1000 elliptical (USB production)
-rowse, _ = analyse("n1k_ell", USB / "window_energy_density.npy", USB / "window_eigenvalues.npy", L_N1K, sens=False)
+# ------------------------------------------------------------------ N=1000 elliptical (PROD_N1K production)
+rowse, _ = analyse("n1k_ell", PROD_N1K / "window_energy_density.npy", PROD_N1K / "window_eigenvalues.npy", L_N1K, sens=False)
 lame = np.array([r["lam"] for r in rowse])
 xie = np.array([r["xi_um"] if r["xi_um"] else np.nan for r in rowse])
 une = np.array([r["unresolved"] for r in rowse])
 pre = np.array([r["pr_fraction"] for r in rowse])
-srce = rel(USB / "window_energy_density.npy")
+srce = rel(PROD_N1K / "window_energy_density.npy")
 led.add("n1k_ell_n_unresolved", int(une.sum()), "modes", srce)
 led.add("n1k_ell_band500", {k: rowse[i500][k] for k in ("lam", "xi_um", "r2", "pr_fraction", "pr_volume_um3", "unresolved", "dyn_range_dec")}, "mixed", srce,
         "INV17 / ADV17 round 1: band 500 xi = 1.82 um, r2 0.97")

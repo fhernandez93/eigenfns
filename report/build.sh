@@ -8,7 +8,7 @@ PY=/home/francisco/miniconda3/envs/lsu_ml/bin/python
 TECTONIC=/home/francisco/miniconda3/bin/tectonic
 
 if [[ "${1:-}" == "--figures" ]]; then
-  for s in s01_spectra s02_localization s03_structure s04_kpm s05_levelstats s06_tables \
+  for s in s01_spectra s02_localization s03_structure s04_kpm s05_levelstats s06_tables s07_text_numbers \
            fig1_structure_dos fig2_tiles fig3_xi_pr fig4_localization_stats figs_sm build_numbers; do
     echo "== $s"; (cd scripts && "$PY" "$s.py")
   done

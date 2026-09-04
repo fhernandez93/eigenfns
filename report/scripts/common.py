@@ -18,7 +18,7 @@ NUMBERS_DIR = REPORT / "numbers"
 FIG = REPORT / "figures"
 TAB = REPORT / "tables"
 RES = ROOT / "results"
-USB = Path("/media/francisco/EXTERNAL_USB/prod_N1000_G128")
+PROD_N1K = RES / "prod_N1000_G128"                   # N=1000 elliptical production run (611 bands)
 STRUCT_N1K = Path("/home/francisco/Documents/Create LSU Structures  - Claude/"
                   "Example/N1000_lsu_example_ends.txt")
 STRUCT_N10K = ROOT / "Structures" / "20260701_N10000_lsu_generated.txt"

@@ -11,7 +11,7 @@ import json
 
 import numpy as np
 
-from common import FIG, RES, USB, Ledger, rel, rel_gap
+from common import FIG, RES, PROD_N1K, Ledger, rel, rel_gap
 
 led = Ledger(__file__)
 SRC = FIG / "src"
@@ -186,7 +186,7 @@ z1 = np.load(RES / "exp" / "kpm_n1000_G128_prod_kpm.npz", allow_pickle=True)
 mom1, lmax1 = z1["moments"], float(z1["lam_max"])
 p1 = mom1.shape[1] - 1
 src1 = rel(RES / "exp" / "kpm_n1000_G128_prod_kpm.npz")
-ev = np.load(USB / "eigenvalues_all.npy").astype(np.float64)
+ev = np.load(PROD_N1K / "eigenvalues_all.npy").astype(np.float64)
 led.add("kpm1k_degree_probes", [p1, mom1.shape[0]], "degree, probes", src1)
 led.add("kpm1k_lam_max", lmax1, "um^-2", src1)
 e = counting(mom1, lmax1, [ev[398 - 3] - 1e-6, ev[607 - 3] + 1e-6, 0.5 * (ev[500 - 3] + ev[501 - 3])])

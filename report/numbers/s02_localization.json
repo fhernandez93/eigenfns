@@ -985,7 +985,7 @@
  "n1k_ell_band500": {
   "notes": "INV17 / ADV17 round 1: band 500 xi = 1.82 um, r2 0.97",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "source_file": "results/prod_N1000_G128/window_energy_density.npy",
   "unit": "mixed",
   "value": {
    "dyn_range_dec": 2.3472374565597285,
@@ -1000,7 +1000,7 @@
  "n1k_ell_band501": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "source_file": "results/prod_N1000_G128/window_energy_density.npy",
   "unit": "mixed",
   "value": {
    "dyn_range_dec": 1.3932851872804368,
@@ -1015,14 +1015,14 @@
  "n1k_ell_n_unresolved": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "source_file": "results/prod_N1000_G128/window_energy_density.npy",
   "unit": "modes",
   "value": 180
  },
  "n1k_ell_pr_fraction_band500_501": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "source_file": "results/prod_N1000_G128/window_energy_density.npy",
   "unit": "fraction",
   "value": [
    0.008126662995291668,
@@ -1032,21 +1032,21 @@
  "n1k_ell_pr_fraction_median_edge": {
   "notes": "bands 495-506",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "source_file": "results/prod_N1000_G128/window_energy_density.npy",
   "unit": "fraction",
   "value": 0.06622822173146947
  },
  "n1k_ell_pr_fraction_median_far": {
   "notes": "bands 398-437 and 568-607",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "source_file": "results/prod_N1000_G128/window_energy_density.npy",
   "unit": "fraction",
   "value": 0.18543273745773142
  },
  "n1k_ell_pr_fraction_range": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "source_file": "results/prod_N1000_G128/window_energy_density.npy",
   "unit": "fraction",
   "value": [
    0.008126662995291668,
@@ -1056,7 +1056,7 @@
  "n1k_ell_shell2_enhancement_range": {
   "notes": "seam diagnostic on the N=1000 elliptical window",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "source_file": "results/prod_N1000_G128/window_energy_density.npy",
   "unit": "ratio",
   "value": [
    0.5835783131769597,

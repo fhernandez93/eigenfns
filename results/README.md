@@ -1,4 +1,4 @@
-# results/ — computed data (gitignored, ~66 GB)
+# results/ — computed data (gitignored, ~75 GB)
 
 Each directory is one solver run and `<name>.log` beside it is that run's
 stdout. The manuscript's number ledger (`report/numbers.json`) cites these
@@ -15,7 +15,7 @@ and `PRUNED.md` record post-hoc edits to a directory.
 
 | directory | what | grid | window | converged | wall | size |
 |---|---|---|---|---|---|---|
-| `prod_N1000_G128` | phase-1 production, bottom-up bands 398–607, elliptical rods (aspect 2.5, ε=8.57). **Data on the external drive** `/media/francisco/EXTERNAL_USB/prod_N1000_G128`; only the log is here | 128³ | 611 bands | 611 | 5.5 h | — |
+| `prod_N1000_G128` | phase-1 production, bottom-up bands 398–607, elliptical rods (aspect 2.5, ε=8.57): all 611 eigenvalues, the 210 window modes (vectors + ε\|E\|²), tiles, regenerated montage and side-by-side. Moved back from the external drive 2026-09-04; its 20 G of solve blocks were removed then, see `PRUNED.md` | 128³ | bands 398–607 | 611 | 5.5 h | 8.4 G |
 | `conv_N1000_G96` | phase-1 resolution check; data not kept in this tree, log only | 96³ | bands 398–607 | | | — |
 | `i4_n1000_circ_G128` | bottom-up reference with the N=10k decoration (circular rods r=0.331836 µm, ε=8.41): all 611 eigenvalues, window modes, tiles, regenerated montage, localization. Solve blocks pruned, see `PRUNED.md` | 128³ | bands 398–607 | 611 | 5.5 h | 8.3 G |
 | `i1_n1000_slice` | gate I1: interior solver on a 50-band slice vs the production ground truth — PASS | 128³ | λ∈[1.701, 2.156], m=80 | 55 (+1 unconv.) | 2.6 h | 2.2 G |

@@ -1523,7 +1523,7 @@
    0.6131386861313869,
    0.527504105090312
   ],
-  "source": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy"
+  "source": "results/prod_N1000_G128/eigenvalues_all.npy"
  },
  "n1k_ell_mid_201_400": {
   "band": "n1k_ell_mid_201_400",
@@ -1952,7 +1952,7 @@
    0.8330524870498658,
    0.8533981203247875
   ],
-  "source": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy"
+  "source": "results/prod_N1000_G128/eigenvalues_all.npy"
  },
  "n1k_ell_below_edge_401_500": {
   "band": "n1k_ell_below_edge_401_500",
@@ -2181,7 +2181,7 @@
    0.6225615561238776,
    0.30186010605027525
   ],
-  "source": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy"
+  "source": "results/prod_N1000_G128/eigenvalues_all.npy"
  },
  "n1k_ell_below_edge_451_500": {
   "band": "n1k_ell_below_edge_451_500",
@@ -2310,7 +2310,7 @@
    0.6225615561238776,
    0.30186010605027525
   ],
-  "source": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy"
+  "source": "results/prod_N1000_G128/eigenvalues_all.npy"
  },
  "n1k_ell_above_edge_501_600": {
   "band": "n1k_ell_above_edge_501_600",
@@ -2539,7 +2539,7 @@
    0.99551035367418,
    0.7305709886873285
   ],
-  "source": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy"
+  "source": "results/prod_N1000_G128/eigenvalues_all.npy"
  },
  "n1k_ell_above_edge_501_550": {
   "band": "n1k_ell_above_edge_501_550",
@@ -2668,7 +2668,7 @@
    0.24309594927422312,
    0.9742686475723694
   ],
-  "source": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy"
+  "source": "results/prod_N1000_G128/eigenvalues_all.npy"
  },
  "n1k_ell_window_398_607": {
   "band": "n1k_ell_window_398_607",
@@ -3117,7 +3117,7 @@
    0.5801577418015774,
    0.7674903898956618
   ],
-  "source": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy"
+  "source": "results/prod_N1000_G128/eigenvalues_all.npy"
  },
  "n1k_ell_all_611": {
   "band": "n1k_ell_all_611",
@@ -4368,13 +4368,13 @@
    0.5253281477880408,
    0.6221787194841087
   ],
-  "source": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy"
+  "source": "results/prod_N1000_G128/eigenvalues_all.npy"
  },
  "n1k_ell_r_at_gap": {
   "band": "n1k_ell_r_at_gap",
   "r_500": 0.5301375060119672,
   "r_501": 0.2981965592130223,
-  "source": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source": "results/prod_N1000_G128/eigenvalues_all.npy",
   "gap_over_neighbour_spacing": 9.22427666023698
  },
  "n1k_circ_low_3_200": {
@@ -13291,7 +13291,7 @@
     "r_se": 0.039743662484174595
    }
   ],
-  "source": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy"
+  "source": "results/prod_N1000_G128/eigenvalues_all.npy"
  },
  "sliding_n1k_circ_w41": {
   "window_levels": 41,

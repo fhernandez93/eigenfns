@@ -109,6 +109,8 @@ print(f"256^3 done {time.time()-t0:.0f}s")
 del eps256
 eps160 = rasterize_penlike(rods10, 160, L10, R_CIRC, ASPECT_CIRC, EPS_CIRC, periodic=False)
 led.add("n10k_ff_160_montage", filling_fraction(eps160), "fraction", rel(STRUCT_N10K), "interior_report (G160): 0.22006")
+s160 = shell_ff(eps160, depths=(0,))
+led.add("n10k_shell_deficit_pct_160", 100 * (1 - s160["0"] / s160["interior_ge10"]), "%", rel(STRUCT_N10K), "outermost-layer ff deficit at 160^3")
 del eps160
 
 # --------------------------------------------------------------- N=1000

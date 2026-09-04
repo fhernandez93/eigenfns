@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Supplemental Material figures (all from saved data, CPU):
   figS_montage_n1k_ell       full 210-tile N=1000 elliptical montage (regenerated, downscaled)
-  figS_montage_sbs           original cluster montage vs our regeneration (USB side-by-side)
+  figS_montage_sbs           original cluster montage vs our regeneration (PROD_N1K side-by-side)
   figS_montage_n10k          133-tile N=10^4 gap-edge montage
   figS_montage_n1k_circ      210-tile N=1000 circular montage
   figS_seam                  outer-shell energy fraction per mode (N=10^4 and both N=1000 windows)
@@ -23,7 +23,7 @@ import json
 import numpy as np
 from PIL import Image
 
-from common import FIG, GAP_HI_10K, GAP_LO_10K, L_N1K, L_N10K, RES, TAB, USB, Ledger, load_json
+from common import FIG, GAP_HI_10K, GAP_LO_10K, L_N1K, L_N10K, RES, TAB, PROD_N1K, Ledger, load_json
 from figstyle import BLACK, BLUE, DOUBLE, GREEN, GREY, LGREY, ORANGE, PURPLE, SINGLE, SKY, VERM, panel_label, plt, save
 
 Image.MAX_IMAGE_PIXELS = None
@@ -40,10 +40,10 @@ def downscale(path, out, width=2400):
 
 
 # ---- montages (PNG only; embedded raster) -------------------------------------
-sz = downscale(USB / "band_montage_398_607_15_non_ideal_regen.png", FIG / "figS_montage_n1k_ell.png")
-led.add("figS_montage_n1k_ell_src", str(USB / "band_montage_398_607_15_non_ideal_regen.png"), "file", "USB", f"downscaled to {sz}")
-sz = downscale(USB / "montage_side_by_side.png", FIG / "figS_montage_sbs.png", width=1800)
-led.add("figS_montage_sbs_src", str(USB / "montage_side_by_side.png"), "file", "USB", f"downscaled to {sz}")
+sz = downscale(PROD_N1K / "band_montage_398_607_15_non_ideal_regen.png", FIG / "figS_montage_n1k_ell.png")
+led.add("figS_montage_n1k_ell_src", str(PROD_N1K / "band_montage_398_607_15_non_ideal_regen.png"), "file", "results/prod_N1000_G128", f"downscaled to {sz}")
+sz = downscale(PROD_N1K / "montage_side_by_side.png", FIG / "figS_montage_sbs.png", width=1800)
+led.add("figS_montage_sbs_src", str(PROD_N1K / "montage_side_by_side.png"), "file", "results/prod_N1000_G128", f"downscaled to {sz}")
 sz = downscale(RES / "n10k_G192_window" / "band_montage_n10k_gapedge_15.png", FIG / "figS_montage_n10k.png")
 sz = downscale(RES / "i4_n1000_circ_G128" / "band_montage_398_607_15_non_ideal_regen.png", FIG / "figS_montage_n1k_circ.png")
 # PDF wrappers for the montages so \includegraphics can use either
@@ -118,7 +118,7 @@ ax.set_xlabel(r"$\|x\|^2-1$ ($\times10^{-5}$)"); ax.set_ylabel(r"$(\lambda_\math
 ax.set_title("Rayleigh-normalisation correction, 133 modes", fontsize=7); panel_label(ax, "(b)", x=-0.2)
 ax = axs[2]
 # I1 parity per state, corrected vs raw
-ev = np.load(USB / "eigenvalues_all.npy").astype(np.float64)
+ev = np.load(PROD_N1K / "eigenvalues_all.npy").astype(np.float64)
 li = np.load(RES / "i1_n1000_slice" / "window_eigenvalues.npy"); lir = np.load(RES / "i1_n1000_slice" / "window_eigenvalues_raw.npy")
 idx = np.array([int(np.argmin(np.abs(ev - l0))) for l0 in li])
 ax.semilogy(li, np.abs(ev[idx] - lir) / lir, "s", ms=3, color=GREY, mec="none", label="raw (unnormalised quotient)")

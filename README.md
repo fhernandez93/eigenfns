@@ -78,10 +78,10 @@ conda run -n lsu_ml python scripts/validate.py --all
 ```
 
 Band indices are MPB-numbered (bands 1–2 at Γ are the ω=0 modes). All long
-runs checkpoint and auto-resume (`--resume`). The phase-1 production run
-(`prod_N1000_G128`, 611 bands) is on the external drive at
-`/media/francisco/EXTERNAL_USB/prod_N1000_G128` (path in `report/scripts/common.py`);
-only its log remains under `results/`.
+runs checkpoint and auto-resume (`--resume`). The phase-1 production run is
+`results/prod_N1000_G128` (all 611 eigenvalues, the 210 window modes with
+fields, tiles, regenerated montage); its 20 GB of solver checkpoints were
+removed on 2026-09-04, see `PRUNED.md` there.
 
 ### Interior gap window (phase 2, N=10k)
 
@@ -108,7 +108,7 @@ conda run --no-capture-output -n lsu_ml python scripts/run_interior.py \
 conda run -n lsu_ml python scripts/exp/exp_i2_completeness.py \
   --rundir results/n10k_G192_Sbelow --gate-name "I2 (S_below)"
 conda run -n lsu_ml python scripts/exp/exp_i1_score.py --interior results/<tag> \
-  --reference /media/francisco/EXTERNAL_USB/prod_N1000_G128 --ref-lo 395 \
+  --reference results/prod_N1000_G128 --ref-lo 395 \
   --slice-lo 473 --slice-hi 523 --gate-name I1
 
 # same solve on a PERIODICALLY WRAPPED structure (convention change — see below):
@@ -137,8 +137,7 @@ bash report/build.sh             # both PDFs via tectonic (~1 min); LaTeX interm
 bash report/build.sh --figures   # first regenerate every number, table and figure from the saved data (CPU, ~4 min)
 ```
 
-`--figures` needs the external drive with `prod_N1000_G128` mounted. Inside
-`report/`: `PROGRESS.md` is the decision log, `FACTCHECK.md` the claim-by-claim
+Inside `report/`: `PROGRESS.md` is the decision log, `FACTCHECK.md` the claim-by-claim
 ledger, `references_verified.md` the DOI check, `numbers.json` every quoted
 number with the file and script it came from.
 

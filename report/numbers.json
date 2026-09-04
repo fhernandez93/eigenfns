@@ -253,7 +253,7 @@
  "fig2_top_bands": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/fig2_tiles.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/tiles",
+  "source_file": "/home/francisco/Documents/Eigenfuntions/results/prod_N1000_G128/tiles",
   "unit": "MPB band",
   "value": [
    398,
@@ -315,16 +315,16 @@
  "figS_montage_n1k_ell_src": {
   "notes": "downscaled to (2400, 2329)",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/figs_sm.py",
-  "source_file": "USB",
+  "source_file": "results/prod_N1000_G128",
   "unit": "file",
-  "value": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/band_montage_398_607_15_non_ideal_regen.png"
+  "value": "/home/francisco/Documents/Eigenfuntions/results/prod_N1000_G128/band_montage_398_607_15_non_ideal_regen.png"
  },
  "figS_montage_sbs_src": {
   "notes": "downscaled to (1800, 3561)",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/figs_sm.py",
-  "source_file": "USB",
+  "source_file": "results/prod_N1000_G128",
   "unit": "file",
-  "value": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/montage_side_by_side.png"
+  "value": "/home/francisco/Documents/Eigenfuntions/results/prod_N1000_G128/montage_side_by_side.png"
  },
  "figS_seam_n1k_shell_volume_fraction": {
   "notes": "",
@@ -350,7 +350,7 @@
  "frac_unfolded_s_lt_0p05_n1k_ell_all_611": {
   "notes": "GOE expects ~0.4% (P(s)~ (pi/2) s), Poisson ~4.9%",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "fraction",
   "value": 0.018032786885245903
  },
@@ -437,7 +437,7 @@
  "i1_matched_ref_index_range_mpb": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "MPB band",
   "value": [
    473,
@@ -482,14 +482,14 @@
  "i1_ref_dtype": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dtype",
   "value": "float32"
  },
  "i1_targets_in_slice_473_522_found": {
   "notes": "registered slice: MPB bands 473..522 (50 bands)",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "states",
   "value": 50
  },
@@ -3314,7 +3314,7 @@
  },
  "n10k_shell_deficit_pct_160": {
   "notes": "outermost-layer ff deficit at 160^3",
-  "script": "s03_structure.py (addendum via s07)",
+  "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s03_structure.py",
   "source_file": "Structures/20260701_N10000_lsu_generated.txt",
   "unit": "%",
   "value": 9.607355346781832
@@ -3649,7 +3649,7 @@
  "n1k_ell_band500": {
   "notes": "INV17 / ADV17 round 1: band 500 xi = 1.82 um, r2 0.97",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "source_file": "results/prod_N1000_G128/window_energy_density.npy",
   "unit": "mixed",
   "value": {
    "dyn_range_dec": 2.3472374565597285,
@@ -3664,7 +3664,7 @@
  "n1k_ell_band501": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "source_file": "results/prod_N1000_G128/window_energy_density.npy",
   "unit": "mixed",
   "value": {
    "dyn_range_dec": 1.3932851872804368,
@@ -3706,7 +3706,7 @@
  "n1k_ell_gap_center_nu": {
   "notes": "nu = omega a / 2 pi c with a = L/5 = 2.288 um",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
   "value": 0.5049520606894846
  },
@@ -3723,28 +3723,28 @@
  "n1k_ell_gap_hi_128": {
   "notes": "MPB band 501 (bottom of upper band), 128^3",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "um^-2",
   "value": 1.9627666473388672
  },
  "n1k_ell_gap_lo_128": {
   "notes": "MPB band 500 (top of lower band), 128^3, elliptical decoration",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "um^-2",
   "value": 1.8829562664031982
  },
  "n1k_ell_gap_over_neighbour_spacing_128": {
   "notes": "gap spacing / median of the 20 neighbouring spacings",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "ratio",
   "value": 9.613699023549684
  },
  "n1k_ell_gap_pct_128": {
   "notes": "Delta nu / nu_mid = 2 (w501 - w500)/(w501 + w500); docs/REPORT_N1000.md quotes 2.08%",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "%",
   "value": 2.0755259263512764
  },
@@ -3769,28 +3769,28 @@
  "n1k_ell_jump_114_115_rel": {
   "notes": "low-band shell-structure jump disclosed in docs/REPORT_N1000.md G8",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "%",
   "value": 2.369717872775965
  },
  "n1k_ell_lam_max": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "um^-2",
   "value": 2.4245762825012207
  },
  "n1k_ell_lam_min": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "um^-2",
   "value": 0.14752191305160522
  },
  "n1k_ell_largest_spacing_between_mpb_bands": {
   "notes": "largest lambda spacing over all 611 bands",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "MPB band",
   "value": [
    14,
@@ -3800,28 +3800,28 @@
  "n1k_ell_largest_spacing_rel_gap_pct": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "%",
   "value": 31.003705091035894
  },
  "n1k_ell_n_bands": {
   "notes": "611 eigenvalues = MPB bands 3..613 (bands 1-2 are omega=0 at Gamma)",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "bands",
   "value": 611
  },
  "n1k_ell_n_unresolved": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "source_file": "results/prod_N1000_G128/window_energy_density.npy",
   "unit": "modes",
   "value": 180
  },
  "n1k_ell_pr_fraction_band500_501": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "source_file": "results/prod_N1000_G128/window_energy_density.npy",
   "unit": "fraction",
   "value": [
    0.008126662995291668,
@@ -3831,21 +3831,21 @@
  "n1k_ell_pr_fraction_median_edge": {
   "notes": "bands 495-506",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "source_file": "results/prod_N1000_G128/window_energy_density.npy",
   "unit": "fraction",
   "value": 0.06622822173146947
  },
  "n1k_ell_pr_fraction_median_far": {
   "notes": "bands 398-437 and 568-607",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "source_file": "results/prod_N1000_G128/window_energy_density.npy",
   "unit": "fraction",
   "value": 0.18543273745773142
  },
  "n1k_ell_pr_fraction_range": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "source_file": "results/prod_N1000_G128/window_energy_density.npy",
   "unit": "fraction",
   "value": [
    0.008126662995291668,
@@ -3855,7 +3855,7 @@
  "n1k_ell_shell2_enhancement_range": {
   "notes": "seam diagnostic on the N=1000 elliptical window",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s02_localization.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_energy_density.npy",
+  "source_file": "results/prod_N1000_G128/window_energy_density.npy",
   "unit": "ratio",
   "value": [
    0.5835783131769597,
@@ -3865,7 +3865,7 @@
  "n1k_ell_window_bands": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_eigenvalues.npy",
+  "source_file": "results/prod_N1000_G128/window_eigenvalues.npy",
   "unit": "MPB band",
   "value": [
    398,
@@ -3875,7 +3875,7 @@
  "n1k_ell_window_lam": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_eigenvalues.npy",
+  "source_file": "results/prod_N1000_G128/window_eigenvalues.npy",
   "unit": "um^-2",
   "value": [
    1.5070726871490479,
@@ -4630,7 +4630,7 @@
  "r_n1k_ell_above_edge_501_550": {
   "notes": "n_levels=50, n_r=48; LLR(GOE-Poisson)=8.81; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
   "value": [
    0.5335362672927927,
@@ -4640,7 +4640,7 @@
  "r_n1k_ell_above_edge_501_600": {
   "notes": "n_levels=100, n_r=98; LLR(GOE-Poisson)=19.21; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
   "value": [
    0.5415834864733697,
@@ -4650,7 +4650,7 @@
  "r_n1k_ell_all_611": {
   "notes": "n_levels=611, n_r=609; LLR(GOE-Poisson)=63.62; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
   "value": [
    0.5079659900818283,
@@ -4660,20 +4660,20 @@
  "r_n1k_ell_at_gap": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "mixed",
   "value": {
    "band": "n1k_ell_r_at_gap",
    "gap_over_neighbour_spacing": 9.22427666023698,
    "r_500": 0.5301375060119672,
    "r_501": 0.2981965592130223,
-   "source": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy"
+   "source": "results/prod_N1000_G128/eigenvalues_all.npy"
   }
  },
  "r_n1k_ell_below_edge_401_500": {
   "notes": "n_levels=100, n_r=98; LLR(GOE-Poisson)=19.04; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
   "value": [
    0.5259679622843977,
@@ -4683,7 +4683,7 @@
  "r_n1k_ell_below_edge_451_500": {
   "notes": "n_levels=50, n_r=48; LLR(GOE-Poisson)=7.90; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
   "value": [
    0.5209570368625537,
@@ -4693,7 +4693,7 @@
  "r_n1k_ell_low_3_200": {
   "notes": "n_levels=198, n_r=196; LLR(GOE-Poisson)=0.93; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
   "value": [
    0.48599310802517404,
@@ -4703,7 +4703,7 @@
  "r_n1k_ell_mid_201_400": {
   "notes": "n_levels=200, n_r=198; LLR(GOE-Poisson)=17.42; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
   "value": [
    0.49499027858699246,
@@ -4713,7 +4713,7 @@
  "r_n1k_ell_window_398_607": {
   "notes": "n_levels=210, n_r=208; LLR(GOE-Poisson)=42.49; ",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s05_levelstats.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
   "value": [
    0.5376659639125325,

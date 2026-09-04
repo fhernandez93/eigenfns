@@ -26,7 +26,7 @@ import json
 import numpy as np
 from scipy import stats
 
-from common import GAP_HI_10K, GAP_LO_10K, RES, TAB, USB, Ledger, rel
+from common import GAP_HI_10K, GAP_LO_10K, RES, TAB, PROD_N1K, Ledger, rel
 
 led = Ledger(__file__)
 rng = np.random.default_rng(20260831)
@@ -128,9 +128,9 @@ lp = np.load(RES / "n10k_G192_gap_periodic_v2" / "window_eigenvalues.npy")
 out["periodic_v2_7"] = band_stats(lp, "periodic_v2_7")
 
 # ------------------------------------------------------------------ N=1000 elliptical (611) and circular (611)
-ev_e = np.load(USB / "eigenvalues_all.npy").astype(np.float64)
+ev_e = np.load(PROD_N1K / "eigenvalues_all.npy").astype(np.float64)
 ev_c = np.load(RES / "i4_n1000_circ_G128" / "eigenvalues_all.npy")
-srce = rel(USB / "eigenvalues_all.npy")
+srce = rel(PROD_N1K / "eigenvalues_all.npy")
 srcc = rel(RES / "i4_n1000_circ_G128" / "eigenvalues_all.npy")
 # MPB band b is index b-3. Gap between 500|501 -> indices 497|498.
 for tag, ev, src in (("n1k_ell", ev_e, srce), ("n1k_circ", ev_c, srcc)):

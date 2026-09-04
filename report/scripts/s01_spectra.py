@@ -2,7 +2,7 @@
 """Recompute every eigenvalue-level number quoted in the paper from the saved
 spectra (CPU). Writes report/numbers/s01_spectra.json.
 
-Covers: N=1000 elliptical (USB) and circular (i4) spectra and gaps; the 64^3 /
+Covers: N=1000 elliptical (PROD_N1K) and circular (i4) spectra and gaps; the 64^3 /
 96^3 / 128^3 gap-width series; N=10k 133-mode window statistics, in-gap list,
 largest interior spacing, residuals, Rayleigh correction statistics; the
 periodic re-solve; cross-grid (I6) per-band shifts; I1 / I4 eigenvalue parity
@@ -14,46 +14,46 @@ import re
 
 import numpy as np
 
-from common import (GAP_HI_10K, GAP_LO_10K, L_N1K, L_N10K, RES, USB, Ledger,
+from common import (GAP_HI_10K, GAP_LO_10K, L_N1K, L_N10K, RES, PROD_N1K, Ledger,
                     load_json, nu_from_lam, rel, rel_gap)
 
 led = Ledger(__file__)
 
 # ---------------------------------------------------------------- N=1000 ell
-ev_ell = np.load(USB / "eigenvalues_all.npy").astype(np.float64)
+ev_ell = np.load(PROD_N1K / "eigenvalues_all.npy").astype(np.float64)
 assert ev_ell.shape == (611,) and np.all(np.diff(ev_ell) > 0)
 # solver index i (0-based) is MPB band i+3; MPB band b -> index b-3
 b500, b501 = ev_ell[500 - 3], ev_ell[501 - 3]
-led.add("n1k_ell_n_bands", 611, "bands", rel(USB / "eigenvalues_all.npy"),
+led.add("n1k_ell_n_bands", 611, "bands", rel(PROD_N1K / "eigenvalues_all.npy"),
         "611 eigenvalues = MPB bands 3..613 (bands 1-2 are omega=0 at Gamma)")
-led.add("n1k_ell_lam_min", ev_ell[0], "um^-2", rel(USB / "eigenvalues_all.npy"))
-led.add("n1k_ell_lam_max", ev_ell[-1], "um^-2", rel(USB / "eigenvalues_all.npy"))
-led.add("n1k_ell_gap_lo_128", b500, "um^-2", rel(USB / "eigenvalues_all.npy"),
+led.add("n1k_ell_lam_min", ev_ell[0], "um^-2", rel(PROD_N1K / "eigenvalues_all.npy"))
+led.add("n1k_ell_lam_max", ev_ell[-1], "um^-2", rel(PROD_N1K / "eigenvalues_all.npy"))
+led.add("n1k_ell_gap_lo_128", b500, "um^-2", rel(PROD_N1K / "eigenvalues_all.npy"),
         "MPB band 500 (top of lower band), 128^3, elliptical decoration")
-led.add("n1k_ell_gap_hi_128", b501, "um^-2", rel(USB / "eigenvalues_all.npy"),
+led.add("n1k_ell_gap_hi_128", b501, "um^-2", rel(PROD_N1K / "eigenvalues_all.npy"),
         "MPB band 501 (bottom of upper band), 128^3")
 gap128 = rel_gap(b500, b501)
-led.add("n1k_ell_gap_pct_128", 100 * gap128, "%", rel(USB / "eigenvalues_all.npy"),
+led.add("n1k_ell_gap_pct_128", 100 * gap128, "%", rel(PROD_N1K / "eigenvalues_all.npy"),
         "Delta nu / nu_mid = 2 (w501 - w500)/(w501 + w500); docs/REPORT_N1000.md quotes 2.08%")
 led.add("n1k_ell_gap_center_nu", float(nu_from_lam(0.5 * (b500 + b501))), "dimensionless",
-        rel(USB / "eigenvalues_all.npy"), "nu = omega a / 2 pi c with a = L/5 = 2.288 um")
+        rel(PROD_N1K / "eigenvalues_all.npy"), "nu = omega a / 2 pi c with a = L/5 = 2.288 um")
 # largest interior spacing check: is 500|501 the largest gap in the window?
 d = np.diff(ev_ell)
 imax = int(np.argmax(d))
 led.add("n1k_ell_largest_spacing_between_mpb_bands", [imax + 3, imax + 4], "MPB band",
-        rel(USB / "eigenvalues_all.npy"), "largest lambda spacing over all 611 bands")
+        rel(PROD_N1K / "eigenvalues_all.npy"), "largest lambda spacing over all 611 bands")
 led.add("n1k_ell_largest_spacing_rel_gap_pct", 100 * rel_gap(ev_ell[imax], ev_ell[imax + 1]), "%",
-        rel(USB / "eigenvalues_all.npy"))
+        rel(PROD_N1K / "eigenvalues_all.npy"))
 # the 114|115 shell jump disclosed in G8
 j = 114 - 3
 led.add("n1k_ell_jump_114_115_rel", 100 * rel_gap(ev_ell[j], ev_ell[j + 1]), "%",
-        rel(USB / "eigenvalues_all.npy"), "low-band shell-structure jump disclosed in docs/REPORT_N1000.md G8")
+        rel(PROD_N1K / "eigenvalues_all.npy"), "low-band shell-structure jump disclosed in docs/REPORT_N1000.md G8")
 # window bands 398-607
-wv = np.load(USB / "window_eigenvalues.npy").astype(np.float64)
+wv = np.load(PROD_N1K / "window_eigenvalues.npy").astype(np.float64)
 assert wv.shape == (210,)
 assert np.allclose(wv, ev_ell[398 - 3:608 - 3], rtol=1e-6)
-led.add("n1k_ell_window_bands", [398, 607], "MPB band", rel(USB / "window_eigenvalues.npy"))
-led.add("n1k_ell_window_lam", [wv[0], wv[-1]], "um^-2", rel(USB / "window_eigenvalues.npy"))
+led.add("n1k_ell_window_bands", [398, 607], "MPB band", rel(PROD_N1K / "window_eigenvalues.npy"))
+led.add("n1k_ell_window_lam", [wv[0], wv[-1]], "um^-2", rel(PROD_N1K / "window_eigenvalues.npy"))
 
 # resolution series 64/96/128 from the G5 ledger (sqrt(lambda) stored as w)
 g = load_json(RES / "gates" / "gate_results.json")
@@ -284,8 +284,8 @@ dl_raw = np.abs(ev_ell[idx] - li1_raw) / li1_raw
 inwin = (li1 >= ri1["window"][0]) & (li1 <= ri1["window"][1])
 led.add("i1_n_reported", len(li1), "states", rel(RES / "i1_n1000_slice" / "window_eigenvalues.npy"))
 led.add("i1_window", ri1["window"], "um^-2", rel(RES / "i1_n1000_slice" / "interior_report.json"))
-led.add("i1_matched_ref_index_range_mpb", [int(idx.min()) + 3, int(idx.max()) + 3], "MPB band", rel(USB / "eigenvalues_all.npy"))
-led.add("i1_targets_in_slice_473_522_found", int(np.sum((idx + 3 >= 473) & (idx + 3 <= 522))), "states", rel(USB / "eigenvalues_all.npy"),
+led.add("i1_matched_ref_index_range_mpb", [int(idx.min()) + 3, int(idx.max()) + 3], "MPB band", rel(PROD_N1K / "eigenvalues_all.npy"))
+led.add("i1_targets_in_slice_473_522_found", int(np.sum((idx + 3 >= 473) & (idx + 3 <= 522))), "states", rel(PROD_N1K / "eigenvalues_all.npy"),
         "registered slice: MPB bands 473..522 (50 bands)")
 led.add("i1_max_dlam_lam_corrected", float(dl.max()), "relative", rel(RES / "i1_n1000_slice" / "window_eigenvalues.npy"),
         "eigenvalue parity vs the bottom-up reference (float32 on disk, ~6e-8 quantisation); ledger recomputation 2.35e-7 over 55")
@@ -299,7 +299,7 @@ led.add("i1_unconverged_lams", ri1["unconverged_lams"], "um^-2", rel(RES / "i1_n
         "1.7314 lies outside the registered 473..522 slice (below the window's interior)")
 led.add("i1_worst_res", ri1["worst_res_reported"], "relative", rel(RES / "i1_n1000_slice" / "interior_report.json"))
 led.add("i1_theta_apps", ri1["theta_applications"], "applications", rel(RES / "i1_n1000_slice" / "interior_report.json"))
-led.add("i1_ref_dtype", str(np.load(USB / "eigenvalues_all.npy").dtype), "dtype", rel(USB / "eigenvalues_all.npy"))
+led.add("i1_ref_dtype", str(np.load(PROD_N1K / "eigenvalues_all.npy").dtype), "dtype", rel(PROD_N1K / "eigenvalues_all.npy"))
 
 # ---------------------------------------------------------------- I4 parity
 for tag in ("below", "above"):
@@ -447,7 +447,7 @@ led.add("judge64_gap_500_501_pct", 100 * 2 * (nuo[498] - nuo[497]) / (nuo[498] +
 led.add("judge64_gap_501_502_pct", 100 * 2 * (nuo[499] - nuo[498]) / (nuo[499] + nuo[498]), "%", rel(RES / "gates" / "parity64w_ours.npy"))
 led.add("binary64_gap_501_502_pct", 100 * 2 * (nue[499] - nue[498]) / (nue[499] + nue[498]), "%", rel(RES / "exp" / "e3_vals_G64.npy"))
 # (iii) gap spacing relative to neighbouring level spacings at 128^3 (robustness of the '500|501' statement)
-led.add("n1k_ell_gap_over_neighbour_spacing_128", float(d[497] / np.median(np.r_[d[487:497], d[498:508]])), "ratio", rel(USB / "eigenvalues_all.npy"),
+led.add("n1k_ell_gap_over_neighbour_spacing_128", float(d[497] / np.median(np.r_[d[487:497], d[498:508]])), "ratio", rel(PROD_N1K / "eigenvalues_all.npy"),
         "gap spacing / median of the 20 neighbouring spacings")
 led.add("n1k_circ_gap_over_neighbour_spacing_128", float(dc[497] / np.median(np.r_[dc[487:497], dc[498:508]])), "ratio", rel(RES / "i4_n1000_circ_G128" / "eigenvalues_all.npy"))
 led.save()

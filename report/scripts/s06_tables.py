@@ -13,7 +13,7 @@ import re
 
 import numpy as np
 
-from common import (A_NORM_N1K, GAP_HI_10K, GAP_LO_10K, L_N1K, L_N10K, RES, TAB, USB,
+from common import (A_NORM_N1K, GAP_HI_10K, GAP_LO_10K, L_N1K, L_N10K, RES, TAB, PROD_N1K,
                     Ledger, load_json, nu_from_lam, rel)
 
 led = Ledger(__file__)
@@ -204,7 +204,7 @@ with open(TAB / "ingap.tex", "w") as f:
     f.write("\\hline\\hline\n\\end{tabular}\n")
 
 # ------------------------------------------------------------------ N=1000 windows (CSV) + band 495-506 table
-for tag, d, evp, lamw in (("n1k_ell", USB, USB / "eigenvalues_all.npy", USB / "window_eigenvalues.npy"),
+for tag, d, evp, lamw in (("n1k_ell", PROD_N1K, PROD_N1K / "eigenvalues_all.npy", PROD_N1K / "window_eigenvalues.npy"),
                           ("n1k_circ", RES / "i4_n1000_circ_G128", RES / "i4_n1000_circ_G128" / "eigenvalues_all.npy", RES / "i4_n1000_circ_G128" / "window_eigenvalues.npy")):
     locw = load_json(TAB / f"loc_{tag}.json")["rows"]
     ev = np.load(evp).astype(np.float64)

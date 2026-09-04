@@ -89,7 +89,7 @@
  "i1_matched_ref_index_range_mpb": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "MPB band",
   "value": [
    473,
@@ -134,14 +134,14 @@
  "i1_ref_dtype": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dtype",
   "value": "float32"
  },
  "i1_targets_in_slice_473_522_found": {
   "notes": "registered slice: MPB bands 473..522 (50 bands)",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "states",
   "value": 50
  },
@@ -1299,7 +1299,7 @@
  "n1k_ell_gap_center_nu": {
   "notes": "nu = omega a / 2 pi c with a = L/5 = 2.288 um",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "dimensionless",
   "value": 0.5049520606894846
  },
@@ -1316,28 +1316,28 @@
  "n1k_ell_gap_hi_128": {
   "notes": "MPB band 501 (bottom of upper band), 128^3",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "um^-2",
   "value": 1.9627666473388672
  },
  "n1k_ell_gap_lo_128": {
   "notes": "MPB band 500 (top of lower band), 128^3, elliptical decoration",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "um^-2",
   "value": 1.8829562664031982
  },
  "n1k_ell_gap_over_neighbour_spacing_128": {
   "notes": "gap spacing / median of the 20 neighbouring spacings",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "ratio",
   "value": 9.613699023549684
  },
  "n1k_ell_gap_pct_128": {
   "notes": "Delta nu / nu_mid = 2 (w501 - w500)/(w501 + w500); docs/REPORT_N1000.md quotes 2.08%",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "%",
   "value": 2.0755259263512764
  },
@@ -1362,28 +1362,28 @@
  "n1k_ell_jump_114_115_rel": {
   "notes": "low-band shell-structure jump disclosed in docs/REPORT_N1000.md G8",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "%",
   "value": 2.369717872775965
  },
  "n1k_ell_lam_max": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "um^-2",
   "value": 2.4245762825012207
  },
  "n1k_ell_lam_min": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "um^-2",
   "value": 0.14752191305160522
  },
  "n1k_ell_largest_spacing_between_mpb_bands": {
   "notes": "largest lambda spacing over all 611 bands",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "MPB band",
   "value": [
    14,
@@ -1393,21 +1393,21 @@
  "n1k_ell_largest_spacing_rel_gap_pct": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "%",
   "value": 31.003705091035894
  },
  "n1k_ell_n_bands": {
   "notes": "611 eigenvalues = MPB bands 3..613 (bands 1-2 are omega=0 at Gamma)",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/eigenvalues_all.npy",
+  "source_file": "results/prod_N1000_G128/eigenvalues_all.npy",
   "unit": "bands",
   "value": 611
  },
  "n1k_ell_window_bands": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_eigenvalues.npy",
+  "source_file": "results/prod_N1000_G128/window_eigenvalues.npy",
   "unit": "MPB band",
   "value": [
    398,
@@ -1417,7 +1417,7 @@
  "n1k_ell_window_lam": {
   "notes": "",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/s01_spectra.py",
-  "source_file": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/window_eigenvalues.npy",
+  "source_file": "results/prod_N1000_G128/window_eigenvalues.npy",
   "unit": "um^-2",
   "value": [
    1.5070726871490479,

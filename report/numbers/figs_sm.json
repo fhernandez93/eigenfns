@@ -13,16 +13,16 @@
  "figS_montage_n1k_ell_src": {
   "notes": "downscaled to (2400, 2329)",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/figs_sm.py",
-  "source_file": "USB",
+  "source_file": "results/prod_N1000_G128",
   "unit": "file",
-  "value": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/band_montage_398_607_15_non_ideal_regen.png"
+  "value": "/home/francisco/Documents/Eigenfuntions/results/prod_N1000_G128/band_montage_398_607_15_non_ideal_regen.png"
  },
  "figS_montage_sbs_src": {
   "notes": "downscaled to (1800, 3561)",
   "script": "/home/francisco/Documents/Eigenfuntions/report/scripts/figs_sm.py",
-  "source_file": "USB",
+  "source_file": "results/prod_N1000_G128",
   "unit": "file",
-  "value": "/media/francisco/EXTERNAL_USB/prod_N1000_G128/montage_side_by_side.png"
+  "value": "/home/francisco/Documents/Eigenfuntions/results/prod_N1000_G128/montage_side_by_side.png"
  },
  "figS_seam_n1k_shell_volume_fraction": {
   "notes": "",
